@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if('tiaobiao'){
+            if (prompt('��������������') !== 'tiaobiao'){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="为什么 Redis 一定要用跳表来实现有序集合？而不是红黑树？">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之美【跳表1】">
+<meta property="og:url" content="http://yoursite.com/2018/12/15/数据结构与算法之美【跳表】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="为什么 Redis 一定要用跳表来实现有序集合？而不是红黑树？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/跳表.png">
+<meta property="og:image" content="http://yoursite.com/images/跳表示意图.png">
+<meta property="og:image" content="http://yoursite.com/images/跳表举例子.png">
+<meta property="og:image" content="http://yoursite.com/images/跳表中m.png">
+<meta property="og:image" content="http://yoursite.com/images/跳表的空间复杂度.png">
+<meta property="og:image" content="http://yoursite.com/images/跳表的随机函数.png">
+<meta property="og:updated_time" content="2019-02-04T13:38:51.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之美【跳表1】">
+<meta name="twitter:description" content="为什么 Redis 一定要用跳表来实现有序集合？而不是红黑树？">
+<meta name="twitter:image" content="http://yoursite.com/images/跳表.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/12/15/数据结构与算法之美【跳表】/"/>
+
+
+
+
+
+  <title>数据结构与算法之美【跳表1】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/15/数据结构与算法之美【跳表】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之美【跳表1】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T18:46:30+08:00">
+                2018-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/15/数据结构与算法之美【跳表】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/12/15/数据结构与算法之美【跳表】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,668
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/跳表.png" alt=""></p>
+<p>为什么 Redis 一定要用跳表来实现有序集合？而不是红黑树？</p>
+<a id="more"></a>
+<h2 id="跳表的实现"><a href="#跳表的实现" class="headerlink" title="跳表的实现"></a>跳表的实现</h2><p><img src="/images/跳表示意图.png" alt=""></p>
+<h3 id="一、什么是跳表？"><a href="#一、什么是跳表？" class="headerlink" title="一、什么是跳表？"></a>一、什么是跳表？</h3><blockquote>
+<p>用单链表来实现二分查找进行稍加修改，支持类似于“二分”的查找算法。我们把改造之后的数据结构叫做跳表。</p>
+</blockquote>
+<h3 id="二、优点是什么？"><a href="#二、优点是什么？" class="headerlink" title="二、优点是什么？"></a>二、优点是什么？</h3><blockquote>
+<p><strong>支持快速的增、删、改、查</strong>，写起来也不复杂，可以完全代替红黑树。</p>
+</blockquote>
+<h3 id="三、怎么实现跳表？"><a href="#三、怎么实现跳表？" class="headerlink" title="三、怎么实现跳表？"></a>三、怎么实现跳表？</h3><blockquote>
+<p>对单链表进行添加索引层，能够快速的实现查找某一个结点。</p>
+</blockquote>
+<h4 id="1、快速查找的原因"><a href="#1、快速查找的原因" class="headerlink" title="1、快速查找的原因"></a>1、快速查找的原因</h4><blockquote>
+<p>加上一层索引之后，查找一个结点需要遍历的结点个数减少了，也就是说查询效率提高了不少。</p>
+</blockquote>
+<h4 id="2、改进"><a href="#2、改进" class="headerlink" title="2、改进"></a>2、改进</h4><blockquote>
+<p>为了再改进查询效率，我们会再添加二级索引、三级索引…</p>
+</blockquote>
+<h4 id="3、举例"><a href="#3、举例" class="headerlink" title="3、举例"></a>3、举例</h4><p><img src="/images/跳表举例子.png" alt=""></p>
+<blockquote>
+<p>原本 65 个结点需要遍历 65 次进行查找，现在建立了五层索引，查找次数只用了 11 次。数据越多，效果越来越明显。</p>
+</blockquote>
+<h3 id="三、跳表的时间复杂度"><a href="#三、跳表的时间复杂度" class="headerlink" title="三、跳表的时间复杂度"></a>三、跳表的时间复杂度</h3><blockquote>
+<p>跳表的时间复杂度。</p>
+</blockquote>
+<h4 id="1、-索引个数的计算"><a href="#1、-索引个数的计算" class="headerlink" title="1、 索引个数的计算"></a>1、 索引个数的计算</h4><blockquote>
+<p>假设每两个结点设置一个索引，第 k 级索引的结点个数是第 k-1 级索引的结点个数的 1级索引的结点个数的 1/2，那第 k级索引结点的个数就是 n/(2^k)。</p>
+</blockquote>
+<h4 id="2、时间复杂度分析"><a href="#2、时间复杂度分析" class="headerlink" title="2、时间复杂度分析"></a>2、时间复杂度分析</h4><blockquote>
+<p>1、假设索引有 h 级，最高级的索引有 2 个结点，可得 n/(2^h)=2，h=log2n - 1如果包含原来的这一层，跳表的高度就是 log2n 。</p>
+<p>2、查询某个数据的时候，如果每一层都要遍历 m 个结点，那在跳表中查询一个数据的时间复杂度就是 O(m*logn）。</p>
+<p>3、按照前边的错音，只需要遍历 3 个就可以了，也就是 m=3</p>
+</blockquote>
+<h4 id="3、m-3-是怎么来的？"><a href="#3、m-3-是怎么来的？" class="headerlink" title="3、m = 3 是怎么来的？"></a>3、m = 3 是怎么来的？</h4><p>我们规定每层索引的节点与节点之间的只有三个结点。</p>
+<p><img src="/images/跳表中m.png" alt=""></p>
+<h4 id="4、时间复杂度"><a href="#4、时间复杂度" class="headerlink" title="4、时间复杂度"></a>4、时间复杂度</h4><blockquote>
+<p>跳表的时间复杂度为 O(logn) ,和二分查找的时间复杂度是相同的。</p>
+</blockquote>
+<h3 id="四、跳表的空间复杂度"><a href="#四、跳表的空间复杂度" class="headerlink" title="四、跳表的空间复杂度"></a>四、跳表的空间复杂度</h3><blockquote>
+<p>跳表的实现，需要存储多级索引，会消耗掉更多的存储空间。</p>
+</blockquote>
+<h4 id="1、结点空间分析"><a href="#1、结点空间分析" class="headerlink" title="1、结点空间分析"></a>1、结点空间分析</h4><blockquote>
+<p>每个索引层需要额外的存储空间，以三个结点为例，一级索引需要 n/3 ,二级索引需要 n/9 ,以此类推。</p>
+</blockquote>
+<p><img src="/images/跳表的空间复杂度.png" alt=""></p>
+<blockquote>
+<p><strong>跳表的时间复杂度为：O(n) 。</strong></p>
+</blockquote>
+<h4 id="2、怎么降低跳表的空间复杂度？"><a href="#2、怎么降低跳表的空间复杂度？" class="headerlink" title="2、怎么降低跳表的空间复杂度？"></a>2、怎么降低跳表的空间复杂度？</h4><blockquote>
+<p>增加结点之间的间距，尽管时间复杂度没有改变，但是索引的存储空间减少了一半。不用过多的在乎这些，当单链表中的存储有很大对象的时候，索引额外的空间就可以忽略了。</p>
+</blockquote>
+<h3 id="五、跳表高效的动态插入和删除"><a href="#五、跳表高效的动态插入和删除" class="headerlink" title="五、跳表高效的动态插入和删除"></a>五、跳表高效的动态插入和删除</h3><h4 id="1、插入数据"><a href="#1、插入数据" class="headerlink" title="1、插入数据"></a>1、插入数据</h4><blockquote>
+<p>会以时间复杂度为 O(logn) 进行查找，然后以 O(1) 进行插入数据。</p>
+</blockquote>
+<h4 id="2、删除数据"><a href="#2、删除数据" class="headerlink" title="2、删除数据"></a>2、删除数据</h4><blockquote>
+<p>删除也是使用同样的方法来解决，删除的同时一定要获取前驱结点，但是记住，<strong>删除数据的同时要删除索引</strong>。</p>
+</blockquote>
+<h3 id="六、跳表索引动态更新"><a href="#六、跳表索引动态更新" class="headerlink" title="六、跳表索引动态更新"></a>六、跳表索引动态更新</h3><blockquote>
+<p>我们不断的往跳表中添加数据，导致某一个结点数据很多。极端情况下，会退化成单链表。</p>
+</blockquote>
+<h4 id="1、动态更新"><a href="#1、动态更新" class="headerlink" title="1、动态更新"></a>1、动态更新</h4><blockquote>
+<p>通过一个随机函数，来决定将这个结点插入到哪几级索引中，比如随机函数生成了值 K，那我们就将这个结点添加到第一级到第K 级这 K 级索引中。</p>
+</blockquote>
+<p><img src="/images/跳表的随机函数.png" alt=""></p>
+<h4 id="2、代码实现"><a href="#2、代码实现" class="headerlink" title="2、代码实现"></a>2、代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跳表的一种实现方法。</span></span><br><span class="line"><span class="comment"> * 跳表中存储的是正整数，并且存储的是不重复的。</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * Author：ZHENG</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SkipList</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> MAX_LEVEL = <span class="number">16</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> <span class="keyword">int</span> levelCount = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Node head = <span class="keyword">new</span> Node();  <span class="comment">// 带头链表</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">private</span> Random r = <span class="keyword">new</span> Random();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> Node <span class="title">find</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    Node p = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = levelCount - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">      <span class="keyword">while</span> (p.forwards[i] != <span class="keyword">null</span> &amp;&amp; p.forwards[i].data &lt; value) &#123;</span><br><span class="line">        p = p.forwards[i];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (p.forwards[<span class="number">0</span>] != <span class="keyword">null</span> &amp;&amp; p.forwards[<span class="number">0</span>].data == value) &#123;</span><br><span class="line">      <span class="keyword">return</span> p.forwards[<span class="number">0</span>];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> level = randomLevel();</span><br><span class="line">    Node newNode = <span class="keyword">new</span> Node();</span><br><span class="line">    newNode.data = value;</span><br><span class="line">    newNode.maxLevel = level;</span><br><span class="line">    Node update[] = <span class="keyword">new</span> Node[level];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; level; ++i) &#123;</span><br><span class="line">      update[i] = head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// record every level largest value which smaller than insert value in update[]</span></span><br><span class="line">    Node p = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = level - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">      <span class="keyword">while</span> (p.forwards[i] != <span class="keyword">null</span> &amp;&amp; p.forwards[i].data &lt; value) &#123;</span><br><span class="line">        p = p.forwards[i];</span><br><span class="line">      &#125;</span><br><span class="line">      update[i] = p;<span class="comment">// use update save node in search path</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// in search path node next node become new node forwords(next)</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; level; ++i) &#123;</span><br><span class="line">      newNode.forwards[i] = update[i].forwards[i];</span><br><span class="line">      update[i].forwards[i] = newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// update node hight</span></span><br><span class="line">    <span class="keyword">if</span> (levelCount &lt; level) levelCount = level;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">    Node[] update = <span class="keyword">new</span> Node[levelCount];</span><br><span class="line">    Node p = head;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = levelCount - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">      <span class="keyword">while</span> (p.forwards[i] != <span class="keyword">null</span> &amp;&amp; p.forwards[i].data &lt; value) &#123;</span><br><span class="line">        p = p.forwards[i];</span><br><span class="line">      &#125;</span><br><span class="line">      update[i] = p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (p.forwards[<span class="number">0</span>] != <span class="keyword">null</span> &amp;&amp; p.forwards[<span class="number">0</span>].data == value) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">int</span> i = levelCount - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (update[i].forwards[i] != <span class="keyword">null</span> &amp;&amp; update[i].forwards[i].data == value) &#123;</span><br><span class="line">          update[i].forwards[i] = update[i].forwards[i].forwards[i];</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 随机 level 次，如果是奇数层数 +1，防止伪随机</span></span><br><span class="line"> <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">randomLevel</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> level = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; MAX_LEVEL; ++i) &#123;</span><br><span class="line">      <span class="keyword">if</span> (r.nextInt() % <span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">        level++;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> level;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">printAll</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Node p = head;</span><br><span class="line">    <span class="keyword">while</span> (p.forwards[<span class="number">0</span>] != <span class="keyword">null</span>) &#123;</span><br><span class="line">      System.out.print(p.forwards[<span class="number">0</span>] + <span class="string">" "</span>);</span><br><span class="line">      p = p.forwards[<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> data = -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">private</span> Node forwards[] = <span class="keyword">new</span> Node[MAX_LEVEL];</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> maxLevel = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">toString</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      builder.append(<span class="string">"&#123; data: "</span>);</span><br><span class="line">      builder.append(data);</span><br><span class="line">      builder.append(<span class="string">"; levels: "</span>);</span><br><span class="line">      builder.append(maxLevel);</span><br><span class="line">      builder.append(<span class="string">" &#125;"</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> builder.toString();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="七、为什么-Redis-要用跳表来实现有序集合，而不是红黑树？"><a href="#七、为什么-Redis-要用跳表来实现有序集合，而不是红黑树？" class="headerlink" title="七、为什么 Redis 要用跳表来实现有序集合，而不是红黑树？"></a>七、为什么 Redis 要用跳表来实现有序集合，而不是红黑树？</h3><h4 id="1、Redis-中的有序集合支持的核心操作主要有下面这几个"><a href="#1、Redis-中的有序集合支持的核心操作主要有下面这几个" class="headerlink" title="1、Redis 中的有序集合支持的核心操作主要有下面这几个"></a>1、Redis 中的有序集合支持的核心操作主要有下面这几个</h4><ul>
+<li>插入一个数据；</li>
+<li>删除一个数据；</li>
+<li>查找一个数据；</li>
+<li>按照区间查找数据（比如查找值在 [100, 356] 之间的数据）；</li>
+<li>迭代输出有序序列。</li>
+</ul>
+<h4 id="2、跳表比红黑树的优势"><a href="#2、跳表比红黑树的优势" class="headerlink" title="2、跳表比红黑树的优势"></a>2、跳表比红黑树的优势</h4><blockquote>
+<p>1、查找操作比红黑树要快。</p>
+<p>2、插入、删除和红黑树差不多，但是<strong>按照区间查找</strong>O(logn)就能完成。</p>
+<p>2、跳表更容易代码实现，意味着可读性好，不容易出错。</p>
+<p>3、跳表更加灵活，它可以通过改变索引构建策略，<strong>有效平衡执行效率和内存消耗。</strong></p>
+</blockquote>
+<h4 id="3、红黑树的优势"><a href="#3、红黑树的优势" class="headerlink" title="3、红黑树的优势"></a>3、红黑树的优势</h4><blockquote>
+<p>红黑树直接拿来用就可以了，跳表必须自己实现。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/28/数据结构与算法之美【散列表】/" rel="next" title="数据结构与算法之美【散列表】">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法之美【散列表】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/19/数据结构与算法之美【二叉树】/" rel="prev" title="数据结构与算法之美【二叉树】">
+                数据结构与算法之美【二叉树】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#跳表的实现"><span class="nav-number">1.</span> <span class="nav-text">跳表的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是跳表？"><span class="nav-number">1.1.</span> <span class="nav-text">一、什么是跳表？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、优点是什么？"><span class="nav-number">1.2.</span> <span class="nav-text">二、优点是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、怎么实现跳表？"><span class="nav-number">1.3.</span> <span class="nav-text">三、怎么实现跳表？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、快速查找的原因"><span class="nav-number">1.3.1.</span> <span class="nav-text">1、快速查找的原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、改进"><span class="nav-number">1.3.2.</span> <span class="nav-text">2、改进</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、举例"><span class="nav-number">1.3.3.</span> <span class="nav-text">3、举例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、跳表的时间复杂度"><span class="nav-number">1.4.</span> <span class="nav-text">三、跳表的时间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-索引个数的计算"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、 索引个数的计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、时间复杂度分析"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、时间复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、m-3-是怎么来的？"><span class="nav-number">1.4.3.</span> <span class="nav-text">3、m = 3 是怎么来的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、时间复杂度"><span class="nav-number">1.4.4.</span> <span class="nav-text">4、时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、跳表的空间复杂度"><span class="nav-number">1.5.</span> <span class="nav-text">四、跳表的空间复杂度</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、结点空间分析"><span class="nav-number">1.5.1.</span> <span class="nav-text">1、结点空间分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、怎么降低跳表的空间复杂度？"><span class="nav-number">1.5.2.</span> <span class="nav-text">2、怎么降低跳表的空间复杂度？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、跳表高效的动态插入和删除"><span class="nav-number">1.6.</span> <span class="nav-text">五、跳表高效的动态插入和删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、插入数据"><span class="nav-number">1.6.1.</span> <span class="nav-text">1、插入数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、删除数据"><span class="nav-number">1.6.2.</span> <span class="nav-text">2、删除数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、跳表索引动态更新"><span class="nav-number">1.7.</span> <span class="nav-text">六、跳表索引动态更新</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、动态更新"><span class="nav-number">1.7.1.</span> <span class="nav-text">1、动态更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、代码实现"><span class="nav-number">1.7.2.</span> <span class="nav-text">2、代码实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、为什么-Redis-要用跳表来实现有序集合，而不是红黑树？"><span class="nav-number">1.8.</span> <span class="nav-text">七、为什么 Redis 要用跳表来实现有序集合，而不是红黑树？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Redis-中的有序集合支持的核心操作主要有下面这几个"><span class="nav-number">1.8.1.</span> <span class="nav-text">1、Redis 中的有序集合支持的核心操作主要有下面这几个</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、跳表比红黑树的优势"><span class="nav-number">1.8.2.</span> <span class="nav-text">2、跳表比红黑树的优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、红黑树的优势"><span class="nav-number">1.8.3.</span> <span class="nav-text">3、红黑树的优势</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/12/15/数据结构与算法之美【跳表】/';
+          this.page.identifier = '2018/12/15/数据结构与算法之美【跳表】/';
+          this.page.title = '数据结构与算法之美【跳表1】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

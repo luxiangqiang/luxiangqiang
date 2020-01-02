@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,javascript,前端深入系列," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="AJAX 以及跨域问题完整详细解析，面试、日常项目常用点。">
+<meta name="keywords" content="前端,javascript,前端深入系列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端进阶深入系列之【跨域问题】">
+<meta property="og:url" content="http://yoursite.com/2019/04/10/前端进阶深入系列之【跨域问题】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="AJAX 以及跨域问题完整详细解析，面试、日常项目常用点。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-10T03:18:11.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端进阶深入系列之【跨域问题】">
+<meta name="twitter:description" content="AJAX 以及跨域问题完整详细解析，面试、日常项目常用点。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/10/前端进阶深入系列之【跨域问题】/"/>
+
+
+
+
+
+  <title>前端进阶深入系列之【跨域问题】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/前端进阶深入系列之【跨域问题】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端进阶深入系列之【跨域问题】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T10:56:08+08:00">
+                2019-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/javascript/前端深入系列/" itemprop="url" rel="index">
+                    <span itemprop="name">前端深入系列</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/10/前端进阶深入系列之【跨域问题】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/10/前端进阶深入系列之【跨域问题】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,094
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>AJAX 以及跨域问题完整详细解析，面试、日常项目常用点。</p>
+<a id="more"></a>
+<p>[TOC]</p>
+<h1 id="跨域问题"><a href="#跨域问题" class="headerlink" title="跨域问题"></a>跨域问题</h1><h2 id="一、同源策略"><a href="#一、同源策略" class="headerlink" title="一、同源策略"></a>一、同源策略</h2><h4 id="1-1-同源策略的由来"><a href="#1-1-同源策略的由来" class="headerlink" title="1.1 同源策略的由来"></a>1.1 同源策略的由来</h4><blockquote>
+<p>为了防止网站遭到恶意攻击，这里所谓恶意攻击就是从自己服务器的页面代码 js 中通过别人的 URL 去请求别人的服务器资源，这样通俗一点。这会导致信息被窃取，所以浏览器设计了同源策略。</p>
+</blockquote>
+<p>例如：A 网站的服务器存有 A 网站用户的登录、账户等信息，该信息通常是由 A 网站的用户可获取的，但是如果没有同源策略，那么 B 网站的用户可以通过 AJAX 请求 A 网站服务器的资源，从而获取到用户的信息，导致用户信息被窃取。</p>
+<h4 id="2-2-什么是同源策略"><a href="#2-2-什么是同源策略" class="headerlink" title="2.2 什么是同源策略"></a>2.2 什么是同源策略</h4><blockquote>
+<p>1995年，同源政策由 Netscape 公司引入浏览器。 所谓的「同源」，浏览器规定 AJAX 做请求时，请求的服务器的 URL 的域名必须和当前页面的 URL 「域名相同」浏览器才会让你做请求（同源才会进行通信）。相同包括三个部分：</p>
+</blockquote>
+<ul>
+<li>域名相同</li>
+<li>协议相同</li>
+<li>端口号相同</li>
+</ul>
+<p>举例：假设网址为 <a href="http://www.xiaolu.com/example/index.html" target="_blank" rel="noopener">http://www.xiaolu.com/example/index.html</a> ，请求的服务器 URL 必须在一下三个方面做到相同才可以请求：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//协议</span></span><br><span class="line">如果服务器使用 https 的协议： https:<span class="comment">//www.xiaolu.com/example/index.html （不同源，不能请求）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//端口号</span></span><br><span class="line">如果服务器使用 <span class="number">8016</span> 端口号：http:<span class="comment">//www.xiaolu.com：8016/example/index.html （不同源，不能请求）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//域名</span></span><br><span class="line">如果服务器使用其他域名：http:<span class="comment">//www.lu.xiaolu.com：8016/example/index.html （不同源，不能请求）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//三者必须都相同</span></span><br><span class="line">http:<span class="comment">//www.xiaolu.com/example/index.html （同源，可以请求）</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-3-同源策略的问题"><a href="#2-3-同源策略的问题" class="headerlink" title="2.3 同源策略的问题"></a>2.3 同源策略的问题</h4><blockquote>
+<p>虽然浏览器引入了同源策略，防止了恶意网站获取资源导致信息泄露。但是，会导致一下几个问题。</p>
+</blockquote>
+<ul>
+<li>Cookie、LocalStorage 和 IndexDB 无法读取。 </li>
+<li>DOM 无法获得。 </li>
+<li>AJAX 请求不能发送。 </li>
+</ul>
+<h5 id="1、不同源获取-Cookie"><a href="#1、不同源获取-Cookie" class="headerlink" title="1、不同源获取 Cookie"></a>1、不同源获取 Cookie</h5><blockquote>
+<p>同源策略导致不同源的页面是不可以获取 Cookie 值的，如果有存在不同源的两个页面（一级域名相同，二级域名不同），想要共享 Cookie ，怎么做呢？</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假设两个共享 Cookie 的网址</span></span><br><span class="line">A 网址：http:<span class="comment">//v1.xiaolu.com/index.html</span></span><br><span class="line">B 网址：http:<span class="comment">//v2.xiaolu.com/index.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同源策略导致不同源的页面是不可以获取 Cookie 值的</span></span><br><span class="line"><span class="comment">// 注意：只是适用于二级域名不同 Cookie 和 iframe,对于 LocalStorage 和 IndexDB 不适用。 </span></span><br><span class="line"><span class="built_in">document</span>.domain = <span class="string">'.xiaolu.com'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//方法二：服务器设置 Cookie 的时候，指定 Cookie 所属一级域名，上述如果一级域名不同也不会存在限制</span></span><br><span class="line"><span class="built_in">Set</span>-Cookie: key=value; domain=.xiaolu.com; path=<span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+<h2 id="二、AJAX-跨域共享"><a href="#二、AJAX-跨域共享" class="headerlink" title="二、AJAX 跨域共享"></a>二、AJAX 跨域共享</h2><h3 id="2-1-架设代理服务器"><a href="#2-1-架设代理服务器" class="headerlink" title="2.1 架设代理服务器"></a>2.1 架设代理服务器</h3><blockquote>
+<p>同源域名下架设代理服务器，JavaScript负责把请求发送到代理服务器，代理服务器将结果返回，准守了浏览器的同源策略。</p>
+<p><strong>缺点：需要额外的服务器做开发</strong></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;/proxy?url=http://www.baidu.com.cn&apos;</span><br></pre></td></tr></table></figure>
+<h3 id="2-2-domain"><a href="#2-2-domain" class="headerlink" title="2.2 domain"></a>2.2 domain</h3><blockquote>
+<p>同一主域的不同子域可以设置 document.domain 为主域来让他们同域,并且子域的协议和端口都要一致。</p>
+<p>document.domain 只能设置往上设置域名,需要载入 iframe 来相互操作。</p>
+</blockquote>
+<h3 id="2-3-JSONP"><a href="#2-3-JSONP" class="headerlink" title="2.3 JSONP"></a>2.3 JSONP</h3><blockquote>
+<p>一些带 src 的 html 标签都可以实现跨域，link、font-face、img、video、audio、script等。 </p>
+</blockquote>
+<h4 id="1、本质"><a href="#1、本质" class="headerlink" title="1、本质"></a>1、本质</h4><blockquote>
+<p>利用浏览器允许跨域引用  JavaScript 资源的功能。</p>
+</blockquote>
+<h4 id="2、缺点"><a href="#2、缺点" class="headerlink" title="2、缺点"></a>2、缺点</h4><blockquote>
+<p>只能用 Get 请求，并且返回 javascript。</p>
+</blockquote>
+<h4 id="3、优点"><a href="#3、优点" class="headerlink" title="3、优点"></a>3、优点</h4><blockquote>
+<p>简单适用，老式浏览器全部支持，服务器改造非常小 </p>
+</blockquote>
+<h4 id="4、基本流程"><a href="#4、基本流程" class="headerlink" title="4、基本流程"></a>4、基本流程</h4><blockquote>
+<p>JSONP 通常以函数的形式返回，需要在页面写好返回的函数，页面动态的添加一个<code>&lt;script&gt;</code>节点，动态读取外域的 javascript 资源，然接受回调。（在外域的 javascript 文件中返回一个函数，函数中有我们需要的数据，我们在本地触发该函数就可以完成跨域）。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addScriptTag</span>(<span class="params">src</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">var</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</span><br><span class="line">      script.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);</span><br><span class="line">      script.src = src;</span><br><span class="line">      <span class="built_in">document</span>.body.appendChild(script);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      addScriptTag(<span class="string">'http://ip.jsontest.com/?callback=ip'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 触发外域函数</span></span><br><span class="line">    ip();</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="5、安全性"><a href="#5、安全性" class="headerlink" title="5、安全性"></a>5、安全性</h4><blockquote>
+<p>当这个接口没有验证Referer头的时候,就存在JSONP劫持漏洞,即在任何域下都能窃取到传输的数据。</p>
+<p>当接口返回的是一些敏感数据时(如 CSRF TOKEN,用户个人信息等),危害是很大的。</p>
+</blockquote>
+<h3 id="2-4-WebSocket"><a href="#2-4-WebSocket" class="headerlink" title="2.4 WebSocket"></a>2.4 WebSocket</h3><h4 id="1、概念"><a href="#1、概念" class="headerlink" title="1、概念"></a>1、概念</h4><blockquote>
+<p>WebSocket是一种通信协议，使用<code>ws://</code>（非加密）和<code>wss://</code>（加密）作为协议前缀。该协议不实行同源政策，<strong>只要服务器支持</strong>，就可以通过它进行跨源通信。 </p>
+</blockquote>
+<h4 id="2、基本流程"><a href="#2、基本流程" class="headerlink" title="2、基本流程"></a>2、基本流程</h4><blockquote>
+<p>浏览器发出的WebSocket请求的头信息。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">GET /chat HTTP/<span class="number">1.1</span></span><br><span class="line">Host: server.example.com</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Key: x3JJHMbDL1EzLkh9GBhXDw==</span><br><span class="line">Sec-WebSocket-Protocol: chat, superchat</span><br><span class="line">Sec-WebSocket-Version: <span class="number">13</span></span><br><span class="line">Origin: http:<span class="comment">//example.com</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>因为请求头部信息中的 origin 字段，所以 websocket 没有同源策略。服务器根据这个字段进行相应。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">101</span> Switching Protocols</span><br><span class="line">Upgrade: websocket</span><br><span class="line">Connection: Upgrade</span><br><span class="line">Sec-WebSocket-Accept: HSmrc0sMlYUkAGmm5OPpG2HaGWk=</span><br><span class="line">Sec-WebSocket-Protocol: chat</span><br></pre></td></tr></table></figure>
+<h3 id="2-5-CORS"><a href="#2-5-CORS" class="headerlink" title="2.5 CORS"></a>2.5 CORS</h3><blockquote>
+<p>CORS 是 “跨域资源共享” （Cross-origin resource sharing ）的缩写，解决 AJAX 只能同源通信的限制问题。</p>
+</blockquote>
+<h4 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h4><blockquote>
+<p><strong>1）基本流程 ：</strong>整个 CORS 是浏览器自动完成的，浏览器一旦发现 AJAX 是跨域请求，自动添加一些信息在头部，只要服务器端能够识别在头部的信息，就可以完成跨域通信。</p>
+<p><strong>2）设计思想：</strong>CORS 的设计思想就是使用自定义 HTTP 头部让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还应该是失败。</p>
+</blockquote>
+<h4 id="2、兼容性"><a href="#2、兼容性" class="headerlink" title="2、兼容性"></a>2、兼容性</h4><blockquote>
+<p>CORS 需要浏览器和服务器同时支持，IE 不能低于 IE10。</p>
+</blockquote>
+<h4 id="3、CORS-两种请求方式"><a href="#3、CORS-两种请求方式" class="headerlink" title="3、CORS 两种请求方式"></a>3、CORS 两种请求方式</h4><blockquote>
+<p>CORS 分为两种请求方式：</p>
+</blockquote>
+<ul>
+<li><strong>普通请求:</strong> 简单的进行 AJAX 跨域请求，不需要服务器设置对请求的一些限制条件。</li>
+<li><strong>高级请求 :</strong> 服务器对 AJAX 跨域请求设置限制条件，如：请求方法必须使用 Get 或者 Post、SSL 认证等。</li>
+</ul>
+<h4 id="4、请求流程"><a href="#4、请求流程" class="headerlink" title="4、请求流程"></a>4、请求流程</h4><blockquote>
+<p>当浏览器发现是 AJAX 跨域请求时，就会识别此次跨域请求是普通请求还是高级请求，怎么识别普通请求和高级请求呢？根据浏览器发现 ajax 进行跨域请求时自动添加上的头部信息进行识别，如果头部信息符合一下两个条件就为「普通请求」，如果不符合一下两个条件，就判断为「高级请求」。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1）普通请求使用一下请求方法之一</span></span><br><span class="line">● HEAD </span><br><span class="line">● GET</span><br><span class="line">● POST</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2）自动添加的头部信息小于等于一下几个字段</span></span><br><span class="line">● Accept</span><br><span class="line">● Accept-Language</span><br><span class="line">● Content-Language</span><br><span class="line">● Last-Event-ID</span><br><span class="line">● Content-Type：application/x-www-form-urlencoded、multipart/form-data、text/plain 三个类型之一</span><br></pre></td></tr></table></figure>
+<h5 id="4-1-普通请求"><a href="#4-1-普通请求" class="headerlink" title="4.1 普通请求"></a>4.1 普通请求</h5><h6 id="▉-判断请求方式"><a href="#▉-判断请求方式" class="headerlink" title="▉ 判断请求方式"></a>▉ 判断请求方式</h6><blockquote>
+<p>AJAX 发送跨域请求，通过以上几个条件判断该请求是否为普通请求，如果满足条件，此次跨域请求为普通求请求。</p>
+</blockquote>
+<h6 id="▉-普通请求的基本流程"><a href="#▉-普通请求的基本流程" class="headerlink" title="▉ 普通请求的基本流程"></a>▉ 普通请求的基本流程</h6><blockquote>
+<p>浏览器发现 AJAX 是跨域请求，然后再请求的头部添加一个 <code>Origin</code> 字段信息（发出请求的源地址）。然后浏览器检查请求信息确定此次的跨域的请求方式，如果为普通请求，请求信息相关字段如下：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET /cors HTTP/<span class="number">1.1</span>         <span class="comment">//请求方法</span></span><br><span class="line">Origin: http:<span class="comment">//xiaolu.com  //跨域字段（该字段的值为请求的源地址信息，包括域名、端口号、协议）</span></span><br><span class="line">Host: api.alice.com        <span class="comment">//主机地址</span></span><br><span class="line">Accept-Language: en-US     <span class="comment">//语言类型</span></span><br><span class="line">Connection: keep-alive     <span class="comment">//连接方式</span></span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>... <span class="comment">//浏览器版本</span></span><br></pre></td></tr></table></figure>
+<h6 id="▉-服务器端"><a href="#▉-服务器端" class="headerlink" title="▉ 服务器端"></a>▉ 服务器端</h6><blockquote>
+<p>请求到达服务器，服务器提取 <code>Origin</code>信息，看是谁给我发来的请求信息，判断 <code>Origin</code> 是否为之前在服务器设置好的 <code>Origin</code> 字段信息，如果没有此信息，就返回一个正常的 HTTP 响应。如果有此信息，就在 HTTP 回应的头部添加几个字段，让浏览器根据服务器添加的几个字段再判断此次跨域请求是否同意了。</p>
+</blockquote>
+<p>如果此次请求被允许，HTTP 响应的头部添加一下几个字段：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1) 用来让浏览器判断该信息服务器是否允许了此次请求。</span></span><br><span class="line"><span class="comment">// 2) 如果值为 * ，表示服务器可以接收任意域名的请求。</span></span><br><span class="line"><span class="comment">// 3）否则，代表服务器之允许设置好的域名进行跨域请求。</span></span><br><span class="line">Access-Control-Allow-Origin:  http:<span class="comment">//xiaolu.com </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1）该字段表示浏览器是否可以向服务器发送 Cookie，默认情况 Cookie 不存在 CORS 请求中的。</span></span><br><span class="line"><span class="comment">// 2) 设置为 true，允许 Cookie 信息包含在请求中的。</span></span><br><span class="line"><span class="comment">// 3) 如果服务器不要浏览器发送Cookie，删除该字段即可</span></span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1）如果不设置此字段，浏览器接受到请求之后，只能通过 XMLHttpRequest 对象的 getResponseHeader()拿到最基本的 6 个字段。</span></span><br><span class="line"><span class="comment">// 2）如果想要拿到其他字段，需要在下面字段中指定。(下面设置了允许获取取 name 字段信息,通过 getResponseHeader('FooBar') 获取字段的值)</span></span><br><span class="line">Access-Control-Expose-Headers: name</span><br><span class="line"></span><br><span class="line"><span class="comment">//1）响应类型和字符编码</span></span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br></pre></td></tr></table></figure>
+<h6 id="▉-客户端（AJAX-请求端）"><a href="#▉-客户端（AJAX-请求端）" class="headerlink" title="▉ 客户端（AJAX 请求端）"></a>▉ 客户端（AJAX 请求端）</h6><blockquote>
+<p>当浏览器接收到服务器的响应信息后，判断响应头中是否包含 <code>Access-Control-Allow-Origin</code> 字段，如果没有包含，浏览器就不会将响应信息让开发人员做处理，直接抛出一个错误，回调 <code>XMLHttpRequest</code>的<code>onerror</code> 方法（虽然服务器返回的状态码可能是 200，但是被浏览器拦截了，就会被 onerror 所捕获）。</p>
+</blockquote>
+<h6 id="▉-withCredentials-属性"><a href="#▉-withCredentials-属性" class="headerlink" title="▉ withCredentials 属性"></a>▉ withCredentials 属性</h6><blockquote>
+<p>CORS 请求默认不发送 Cookie 等认证信息。如果要发送 Cookie 信息，需要分别在服务器和 AJAX 请求中设置。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//服务器端响应头部添加一下字段</span></span><br><span class="line"><span class="comment">//注意：发送 Cookie ,服务器的 Access-Control-Allow-Origin 的字段不能设置为 * 。必须指定明确的、与请求网页一致的域名。只有这样，服务器域名设置的 Cookie 才会上传，其他域名的 Cookie 并不会上传。</span></span><br><span class="line">Access-Control-Allow-Credentials: <span class="literal">true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//客户端在 AJAX 请求中设置（即使服务器统一发送 Cookie ，但是浏览器不统一发送 Cookie 必须设置下字段）</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<h5 id="4-2-高级请求"><a href="#4-2-高级请求" class="headerlink" title="4.2 高级请求"></a>4.2 高级请求</h5><h6 id="▉-判断请求方式-1"><a href="#▉-判断请求方式-1" class="headerlink" title="▉ 判断请求方式"></a>▉ 判断请求方式</h6><blockquote>
+<p>发送 AJAX 跨域请求，浏览器检测请求信息中存在 PUT 或 DELETE 方法，或者 <code>Content-Type</code>字段的类型是<code>application/json</code>  ，就将此次跨域请求定义为「高级请求」。</p>
+</blockquote>
+<h6 id="▉-高级请求的基本流程"><a href="#▉-高级请求的基本流程" class="headerlink" title="▉ 高级请求的基本流程"></a>▉ 高级请求的基本流程</h6><blockquote>
+<p>高级请求会在真正的请求之前，先和服务器“打电话”，问一下服务器当前网页的域名，以及请求方法能够进行此次通信。服务器说，这次通信可以使用 PUT 或 DELETE 方法，那么浏览器才会发出 AJAX 的正式请求，否则就会报错。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Ajax 跨域请求的正式内容：</span></span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://xiaolu.com '</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'PUT'</span>, url, <span class="literal">true</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">'X-Custom-Header'</span>, <span class="string">'value'</span>);</span><br><span class="line">xhr.send();</span><br></pre></td></tr></table></figure>
+<h6 id="▉-preflight-预请求"><a href="#▉-preflight-预请求" class="headerlink" title="▉ preflight 预请求"></a>▉ preflight 预请求</h6><blockquote>
+<p>上述中，在真正的请求之前，「浏览器」先和服务器“打电话”，打电话的过程称为 “preflight 请求“。preflight 预请求的内容如下：</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OPTIONS /cors HTTP/<span class="number">1.1</span></span><br><span class="line">Origin: <span class="string">'http://xiaolu.com '</span>    <span class="comment">// 源地址 </span></span><br><span class="line">Access-Control-Request-Method: PUT  <span class="comment">//请求方法</span></span><br><span class="line">Access-Control-Request-Headers: X-Custom-Header</span><br><span class="line">Host: api.alice.com</span><br><span class="line">Accept-Language: en-US</span><br><span class="line">Connection: keep-alive</span><br><span class="line">User-Agent: Mozilla/<span class="number">5.0</span>...</span><br></pre></td></tr></table></figure>
+<p><strong>步骤一：浏览器发出请求</strong></p>
+<blockquote>
+<p>该预请求信息通过浏览器的 OPTIONS 方法来询问服务器，发送该预请求的内容，就是用来让服务器接受判断这些信息是否符合服务器端的要求。</p>
+</blockquote>
+<p><strong>步骤二：服务器响应请求</strong></p>
+<blockquote>
+<p>服务器接受到信息之后，取出字段进行以预先设置好的字段值进行判断，然后做出回应。如果与服务器设置的不符合条件，此次拒绝了 preflight 预先请求，就会返回一个正常的 HTTP 响应给浏览器。否则响应以下信息给浏览器。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">HTTP/<span class="number">1.1</span> <span class="number">200</span> OK</span><br><span class="line"><span class="built_in">Date</span>: Mon, <span class="number">01</span> Dec <span class="number">2008</span> <span class="number">01</span>:<span class="number">15</span>:<span class="number">39</span> GMT</span><br><span class="line">Server: Apache/<span class="number">2.0</span><span class="number">.61</span> (Unix)</span><br><span class="line">Access-Control-Allow-Origin:  <span class="string">'http://xiaolu.com '</span></span><br><span class="line">Access-Control-Allow-Methods: GET, POST, PUT</span><br><span class="line">Access-Control-Allow-Headers: X-Custom-Header</span><br><span class="line">Access-Control-Max-Age: <span class="number">1728000</span> <span class="comment">//服务器运行此源地址请求的时间，一旦超过这个时间，就重新进行预请求</span></span><br><span class="line">Content-Type: text/html; charset=utf<span class="number">-8</span></span><br><span class="line">Content-Encoding: gzip</span><br><span class="line">Content-Length: <span class="number">0</span></span><br><span class="line">Keep-Alive: timeout=<span class="number">2</span>, max=<span class="number">100</span></span><br><span class="line">Connection: Keep-Alive</span><br><span class="line">Content-Type: text/plain</span><br></pre></td></tr></table></figure>
+<p><strong>步骤三：浏览器接收请求 </strong></p>
+<blockquote>
+<p>1）浏览器接收到服务器的响应之后，发现只有简单的 HTPP 响应头部，没有任何的 CORS 请求信息，浏览器就知道了服务器拒绝这次 preflight 预请求，然后返回给开发人员一个错误信息，被 <code>XMLHttpRequest</code>对象的<code>onerror</code> 回调函数捕获 。</p>
+<p>2）如果浏览器发现服务器返回的请求带有 CORS 请求头部，就获取字段判断，此次服务器允许了此次请求。</p>
+</blockquote>
+<p><strong>步骤四：AJAX 正常请求和回应</strong></p>
+<blockquote>
+<p>preflight 预请求一旦通过，浏览器就会向服务器发送正式的 AJAX 请求，以后每次浏览器正常的CORS请求，就都跟简单请求一样。</p>
+</blockquote>
+<h4 id="5、安全性-1"><a href="#5、安全性-1" class="headerlink" title="5、安全性"></a>5、安全性</h4><blockquote>
+<p><strong>安全漏洞：</strong>因为 <code>Access-Control-Allow-Origin</code>  设置成通配符”*”时,表示允许任何域名跨源，如果再把 <code>Access-Control-Allow-Credentials</code> 设置为 true,允许客户端带上 cookie 的话,无疑此时是非常危险的.因为攻击者很容易就能窃取到用户个人的数据。 </p>
+<p><strong>保护机制：</strong>客户端不带 cookie 请求的话还是会正常呈现的,因为 cookie 是一种身份标识,一旦浏览器标识了用户身份,那么返回的数据必然属于用户个人,所以浏览器设计了这种措施来保护用户数据不被泄露。 </p>
+</blockquote>
+<h6 id="▉-配置错误"><a href="#▉-配置错误" class="headerlink" title="▉ 配置错误"></a>▉ 配置错误</h6><blockquote>
+<p>尽管 CORS 在设计上考虑到安全问题，但是在用户配置时经常出现很多错误，如设置 ”Access-Control-Allow-Origin”的白名单时,正则写的不正确,导致预期外的域名可以跨域。 </p>
+</blockquote>
+<h3 id="2-5-CORS-与-JSONP-比较"><a href="#2-5-CORS-与-JSONP-比较" class="headerlink" title="2.5 CORS 与 JSONP 比较"></a>2.5 CORS 与 JSONP 比较</h3><blockquote>
+<p>1、JSONP 只支持 GET 请求。CORS 支持所有的 HTTP 请求。</p>
+<p>2、JSONP 支持老式浏览器以及向不支持 CORS 的服务器请求数据。CORS 只支持 IE10 版本以上浏览器。</p>
+</blockquote>
+<h3 id="2-6-IE-对-CORS-的实现"><a href="#2-6-IE-对-CORS-的实现" class="headerlink" title="2.6 IE 对 CORS 的实现"></a>2.6 IE 对 CORS 的实现</h3><blockquote>
+<p>通过 XHR 实现 AJAX 通信是一个主要限制，默认情况下，XHR 对象只能访问与包含它页面在同一域下的资源</p>
+</blockquote>
+<h4 id="1、简介-1"><a href="#1、简介-1" class="headerlink" title="1、简介"></a>1、简介</h4><blockquote>
+<p>微软在 IE8 中引入了 XDR 类型，部分实现了 CORS 的规范，使得 IE 可以完成跨域处理。             </p>
+</blockquote>
+<h4 id="2、XDR-与-XHR-的不同"><a href="#2、XDR-与-XHR-的不同" class="headerlink" title="2、XDR 与 XHR 的不同"></a>2、XDR 与 XHR 的不同</h4><ul>
+<li>Cookie 不能随请求发送，也不会随响应返回。</li>
+<li>只能设置请求头部的 Content-Type 字段。</li>
+<li>不能访问响应头部的信息。</li>
+<li>只支持 GET 和 POST 请求。</li>
+</ul>
+<h4 id="3、XDR-的使用"><a href="#3、XDR-的使用" class="headerlink" title="3、XDR 的使用"></a>3、XDR 的使用</h4><blockquote>
+<p>1、XDR 与 XHR 的 open 方法稍有不同，XDR 的 open 函数只有两个参数（只有异步操作），请求返回后，会触发 onload 事件，可以获取到返回的文本内容。</p>
+<p>2、响应只能访问文本文件，没有状态码可用，如果缺少 Access-Control-Allow-Origin 头部就会触发 onerror 事件。（所有的请求错误只能用 onerror 来捕获） </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xdr = <span class="keyword">new</span> XDomainRequest();</span><br><span class="line">xdr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(xdr.responseText);</span><br><span class="line">&#125;;</span><br><span class="line">xdr.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'响应错误'</span>);</span><br><span class="line">&#125;</span><br><span class="line">xdr.open(<span class="string">'get'</span>,<span class="string">'http://xiaolu.com/index.html'</span>);</span><br><span class="line">xdr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="4、POST-请求"><a href="#4、POST-请求" class="headerlink" title="4、POST 请求"></a>4、POST 请求</h4><blockquote>
+<p>XDR 为了支持 post 请求，XDR 提供了 contentType 属性，用来表示发送数据的格式，</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xdr.Content-Type = <span class="string">"application/x-www-form-urlencoded"</span></span><br><span class="line">xdr.send(<span class="string">"name1=value1&amp;name2=value2"</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-其他浏览器对-CORS-的实现"><a href="#2-7-其他浏览器对-CORS-的实现" class="headerlink" title="2.7 其他浏览器对 CORS 的实现"></a>2.7 其他浏览器对 CORS 的实现</h3><blockquote>
+<p>Firefox 3.5+、Safari 4+、Chrome、iso 和 Android 平台中的 webKit 都通过了 XMLHttpRequest 对象实现了对 CORS 的原生支持。</p>
+</blockquote>
+<h4 id="1、XHR"><a href="#1、XHR" class="headerlink" title="1、XHR"></a>1、XHR</h4><blockquote>
+<p>在尝试打开不同来源的资源时，无序额外的编码触发这个行为，只需在 open 中传入绝对的 URL 就可以触发浏览器的跨域。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跨域的绝对 URL 路径</span></span><br><span class="line">xhr.open(<span class="string">"get"</span>,<span class="string">"http://www.xiaolu2.com/page/index.html"</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="2、XHR-的限制"><a href="#2、XHR-的限制" class="headerlink" title="2、XHR 的限制"></a>2、XHR 的限制</h4><ul>
+<li>不能使用 setRequestHeader() 设置自定义的头部。</li>
+<li>不能发送和接受 Cookie。</li>
+<li>调用 getAllResponseHeaders() 方法总返回空字符串。</li>
+</ul>
+<h3 id="2-7-跨浏览器的-CORS"><a href="#2-7-跨浏览器的-CORS" class="headerlink" title="2.7 跨浏览器的 CORS"></a>2.7 跨浏览器的 CORS</h3><blockquote>
+<p>浏览器对 CORS 的支持程度不一样，但是都能实现简单（不带 preflight）的请求，所以要实现一个跨浏览器的方案。</p>
+<p>1、检测 XHR 是否支持 CORS ：检测是否存在 <code>withCredentials</code> 属性(该属性只存在 IE 10 以上版本)。</p>
+<p>2、检测 XDomain 对象是否存在：该属性只存在 IE 8 以上浏览器中。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCORSRequest</span>(<span class="params">method,url</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">    <span class="keyword">if</span>(<span class="string">"withCredentials"</span> <span class="keyword">in</span> xhr)&#123; <span class="comment">// IE 10+</span></span><br><span class="line">       xhr.open(method,url,<span class="literal">true</span>)</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="keyword">typeof</span> XDomainRequest != <span class="string">"undefined"</span>)&#123; <span class="comment">// IE 8+</span></span><br><span class="line">        <span class="keyword">var</span> xhr = <span class="keyword">new</span> XDomainRequest();</span><br><span class="line">        xhr.open(<span class="string">'get'</span>,<span class="string">'http://xiaolu.com/index.html'</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        xhr = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> xhr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> request = createCORSRequest(<span class="string">"get"</span>,<span class="string">"http://www.xiaolu.com"</span>);</span><br><span class="line"><span class="keyword">if</span>(request)&#123;</span><br><span class="line">    request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 对 request.responseText 进行处理</span></span><br><span class="line">    &#125;</span><br><span class="line">     request.send</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>无论是 Firefox 3.5+、Safari 4+、Chrome 中的 XMLHttpRequest 对象还是 IE 中的XDomainRequest 对象，都可以使用以上的方法。</p>
+</blockquote>
+<ul>
+<li>onerror：用于替代 <code>onreadystatechange</code> 检测错误。</li>
+<li>onload：用于替代 <code>onreadystatechange</code> 检测成功。</li>
+</ul>
+<h2 id="三、跨域存在的两种攻击（XSS-CSRF）"><a href="#三、跨域存在的两种攻击（XSS-CSRF）" class="headerlink" title="三、跨域存在的两种攻击（XSS/CSRF）"></a>三、跨域存在的两种攻击（XSS/CSRF）</h2><h3 id="3-1-跨站请求伪造（CSRF）"><a href="#3-1-跨站请求伪造（CSRF）" class="headerlink" title="3.1 跨站请求伪造（CSRF）"></a>3.1 跨站请求伪造（CSRF）</h3><blockquote>
+<p>跨站伪造请求（Cross-site request forgery ），缩写为 CSRF。CSRF 利用的是网站对用户网页浏览器的信任来进行恶意攻击的。</p>
+</blockquote>
+<h4 id="1、攻击原理"><a href="#1、攻击原理" class="headerlink" title="1、攻击原理"></a>1、攻击原理</h4><blockquote>
+<p>攻击者通过技术手段欺骗用户的浏览器去访问一个曾经认证过的网站，所以用户不用进行重新认证，这是一个用户身份验证的一个漏洞：<strong>简单身份认证只保证请求来自某个用户的浏览器，确不能保证请求的本身是用户自愿发出的。</strong>攻击者诱导用户在刚访问不久的网站中点击设定的链接（本页的论坛、博客等自动生成的链接内容）。</p>
+</blockquote>
+<h4 id="2、防御措施"><a href="#2、防御措施" class="headerlink" title="2、防御措施"></a>2、防御措施</h4><h6 id="▉-检查-Referer-字段"><a href="#▉-检查-Referer-字段" class="headerlink" title="▉ 检查 Referer 字段"></a>▉ 检查 Referer 字段</h6><blockquote>
+<p>HTTP 头有一个 Referer 字段，用来标记请求来源于哪个地址。Referer字段应和请求的地址位于同一域名下。 服务器在处理请求的时候，可以判断该字段是否位于正确的源地址下发送的请求。如果是 CSRF 攻击，该字段会包含恶意的网址。</p>
+<p><strong>局限性：</strong>设置 Referer 有本身的局限性，攻击者可以篡改 Referer 字段来达到攻击的目的。</p>
+</blockquote>
+<h6 id="▉-添加校验-token"><a href="#▉-添加校验-token" class="headerlink" title="▉ 添加校验 token"></a>▉ 添加校验 token</h6><blockquote>
+<p><strong>本质：</strong>CSRF 的本质是在于攻击者欺骗自己去访问设置的地址，如果在请求数据的时候，用户不把信息保存到浏览器的 Cookie 中，那么攻击者无法获取数据校验，从而不能进行 CSRF 攻击。</p>
+<p><strong>随机校验：</strong>服务器为客户端的窗体设置一个伪随机数，客户端在提交请求的时候，将随机数与请求内容一并提交服务器，正常访问时，客户端将会收到正确得到并传回这个伪随机数。CSRF 攻击无从事先知道这个伪随机数，所以导致 token 值为空，拒绝请求。</p>
+</blockquote>
+<h6 id="▉-JSONP-劫持漏洞"><a href="#▉-JSONP-劫持漏洞" class="headerlink" title="▉ JSONP 劫持漏洞"></a>▉ JSONP 劫持漏洞</h6><blockquote>
+<p>如果 JSONP 没有验证 Referer 头的时候,就存在JSONP劫持漏洞,即在任何域下都能窃取到传输的数据。 </p>
+</blockquote>
+<h4 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h4><ul>
+<li>Javascript 高级程序设计</li>
+<li><a href="https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000" target="_blank" rel="noopener">https://www.liaoxuefeng.com/wiki/001434446689867b27157e896e74d51a89c25cc8b43bdb3000/001434499861493e7c35be5e0864769a2c06afb4754acc6000</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/javascript/" rel="tag"># javascript</a>
+          
+            <a href="/tags/前端深入系列/" rel="tag"># 前端深入系列</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/02/前端 CSS3 之基础篇【转换】/" rel="next" title="前端 CSS3 之基础篇【转换】">
+                <i class="fa fa-chevron-left"></i> 前端 CSS3 之基础篇【转换】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/13/数据结构与算法之题型篇【链表】/" rel="prev" title="数据结构与算法之题型篇【链表】">
+                数据结构与算法之题型篇【链表】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#跨域问题"><span class="nav-number">1.</span> <span class="nav-text">跨域问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、同源策略"><span class="nav-number">1.1.</span> <span class="nav-text">一、同源策略</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-同源策略的由来"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">1.1 同源策略的由来</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-什么是同源策略"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">2.2 什么是同源策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-同源策略的问题"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">2.3 同源策略的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、不同源获取-Cookie"><span class="nav-number">1.1.0.3.1.</span> <span class="nav-text">1、不同源获取 Cookie</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、AJAX-跨域共享"><span class="nav-number">1.2.</span> <span class="nav-text">二、AJAX 跨域共享</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-架设代理服务器"><span class="nav-number">1.2.1.</span> <span class="nav-text">2.1 架设代理服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-domain"><span class="nav-number">1.2.2.</span> <span class="nav-text">2.2 domain</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-JSONP"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 JSONP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、本质"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1、本质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、缺点"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">2、缺点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、优点"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">3、优点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、基本流程"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">4、基本流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、安全性"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">5、安全性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-WebSocket"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.4 WebSocket</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、概念"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">1、概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、基本流程"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">2、基本流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-CORS"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.5 CORS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、简介"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">1、简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、兼容性"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">2、兼容性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、CORS-两种请求方式"><span class="nav-number">1.2.5.3.</span> <span class="nav-text">3、CORS 两种请求方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、请求流程"><span class="nav-number">1.2.5.4.</span> <span class="nav-text">4、请求流程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-普通请求"><span class="nav-number">1.2.5.4.1.</span> <span class="nav-text">4.1 普通请求</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-判断请求方式"><span class="nav-number">1.2.5.4.1.1.</span> <span class="nav-text">▉ 判断请求方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-普通请求的基本流程"><span class="nav-number">1.2.5.4.1.2.</span> <span class="nav-text">▉ 普通请求的基本流程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-服务器端"><span class="nav-number">1.2.5.4.1.3.</span> <span class="nav-text">▉ 服务器端</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-客户端（AJAX-请求端）"><span class="nav-number">1.2.5.4.1.4.</span> <span class="nav-text">▉ 客户端（AJAX 请求端）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-withCredentials-属性"><span class="nav-number">1.2.5.4.1.5.</span> <span class="nav-text">▉ withCredentials 属性</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-高级请求"><span class="nav-number">1.2.5.4.2.</span> <span class="nav-text">4.2 高级请求</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-判断请求方式-1"><span class="nav-number">1.2.5.4.2.1.</span> <span class="nav-text">▉ 判断请求方式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-高级请求的基本流程"><span class="nav-number">1.2.5.4.2.2.</span> <span class="nav-text">▉ 高级请求的基本流程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-preflight-预请求"><span class="nav-number">1.2.5.4.2.3.</span> <span class="nav-text">▉ preflight 预请求</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、安全性-1"><span class="nav-number">1.2.5.5.</span> <span class="nav-text">5、安全性</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-配置错误"><span class="nav-number">1.2.5.5.0.1.</span> <span class="nav-text">▉ 配置错误</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-CORS-与-JSONP-比较"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.5 CORS 与 JSONP 比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-IE-对-CORS-的实现"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.6 IE 对 CORS 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、简介-1"><span class="nav-number">1.2.7.1.</span> <span class="nav-text">1、简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、XDR-与-XHR-的不同"><span class="nav-number">1.2.7.2.</span> <span class="nav-text">2、XDR 与 XHR 的不同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、XDR-的使用"><span class="nav-number">1.2.7.3.</span> <span class="nav-text">3、XDR 的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、POST-请求"><span class="nav-number">1.2.7.4.</span> <span class="nav-text">4、POST 请求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-其他浏览器对-CORS-的实现"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.7 其他浏览器对 CORS 的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、XHR"><span class="nav-number">1.2.8.1.</span> <span class="nav-text">1、XHR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、XHR-的限制"><span class="nav-number">1.2.8.2.</span> <span class="nav-text">2、XHR 的限制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-跨浏览器的-CORS"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.7 跨浏览器的 CORS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、跨域存在的两种攻击（XSS-CSRF）"><span class="nav-number">1.3.</span> <span class="nav-text">三、跨域存在的两种攻击（XSS/CSRF）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-跨站请求伪造（CSRF）"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1 跨站请求伪造（CSRF）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、攻击原理"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">1、攻击原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、防御措施"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">2、防御措施</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-检查-Referer-字段"><span class="nav-number">1.3.1.2.0.1.</span> <span class="nav-text">▉ 检查 Referer 字段</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-添加校验-token"><span class="nav-number">1.3.1.2.0.2.</span> <span class="nav-text">▉ 添加校验 token</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-JSONP-劫持漏洞"><span class="nav-number">1.3.1.2.0.3.</span> <span class="nav-text">▉ JSONP 劫持漏洞</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考资料："><span class="nav-number">1.3.1.3.</span> <span class="nav-text">参考资料：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/04/10/前端进阶深入系列之【跨域问题】/';
+          this.page.identifier = '2019/04/10/前端进阶深入系列之【跨域问题】/';
+          this.page.title = '前端进阶深入系列之【跨域问题】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

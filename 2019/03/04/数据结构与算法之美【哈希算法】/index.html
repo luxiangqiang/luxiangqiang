@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="如何防止数据库中的用户信息被脱库？">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之美【哈希算法】">
+<meta property="og:url" content="http://yoursite.com/2019/03/04/数据结构与算法之美【哈希算法】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="如何防止数据库中的用户信息被脱库？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-04T09:07:50.875Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之美【哈希算法】">
+<meta name="twitter:description" content="如何防止数据库中的用户信息被脱库？">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/04/数据结构与算法之美【哈希算法】/"/>
+
+
+
+
+
+  <title>数据结构与算法之美【哈希算法】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/04/数据结构与算法之美【哈希算法】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之美【哈希算法】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-04T17:08:21+08:00">
+                2019-03-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/04/数据结构与算法之美【哈希算法】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/04/数据结构与算法之美【哈希算法】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,784
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如何防止数据库中的用户信息被脱库？</p>
+<a id="more"></a>
+<h2 id="一、哈希基本常识"><a href="#一、哈希基本常识" class="headerlink" title="一、哈希基本常识"></a>一、哈希基本常识</h2><h3 id="1、什么是哈希算法？"><a href="#1、什么是哈希算法？" class="headerlink" title="1、什么是哈希算法？"></a>1、什么是哈希算法？</h3><blockquote>
+<p>将<strong>任意长度</strong>的二进制串映射为<strong>固定长度</strong>的二进制串，这个映射规则就是哈希算法。从原始数据映射之后的二进制串就是<strong>哈希值</strong>。</p>
+</blockquote>
+<h3 id="2、哈希算法满足的条件？"><a href="#2、哈希算法满足的条件？" class="headerlink" title="2、哈希算法满足的条件？"></a>2、哈希算法满足的条件？</h3><blockquote>
+<p>1）从哈希值<strong>不能反向推导</strong>出原始数据（单向哈希算法）；</p>
+<p>2）对原始<strong>数据敏感</strong>，哪怕只改了一个bit，得到的哈希值大不形同；</p>
+<p>3）<strong>散列冲突</strong>的概率要小，对于不同原始的数据，哈希值相同的概率非常小；</p>
+<p>4）哈希算法执行效率要高效，对于较长的文本，也能快速的计算出哈希值。</p>
+</blockquote>
+<h3 id="3、实际用途（MD5-算法）"><a href="#3、实际用途（MD5-算法）" class="headerlink" title="3、实际用途（MD5 算法）"></a>3、实际用途（MD5 算法）</h3><blockquote>
+<p>MD5 的哈希值是 128 位的 Bit 长度，为了方便表示转化成了 16 进制编码。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MD5(&quot; 我今天讲哈希算法！&quot;) = 425f0d5a917188d2c3c3dc85b5e4f2cb</span><br><span class="line">MD5(&quot; 我今天讲哈希算法 &quot;) = a1fb91ac128e6aa37fe42c663971ac3d</span><br></pre></td></tr></table></figure>
+<h2 id="二、哈希算法最常见的七大应用"><a href="#二、哈希算法最常见的七大应用" class="headerlink" title="二、哈希算法最常见的七大应用"></a>二、哈希算法最常见的七大应用</h2><blockquote>
+<p>安全加密、唯一标识、数据校验、散列函数、负载均衡、数据分片、分布式存储。</p>
+</blockquote>
+<h3 id="应用一：安全加密"><a href="#应用一：安全加密" class="headerlink" title="应用一：安全加密"></a>应用一：安全加密</h3><blockquote>
+<p>最常用的两种加密算法 <strong>MD5</strong>（Message-Digest Algorithm，消息摘要算法） 加密算法和 <strong>SHA</strong>（Secure Hash Algorithm，安全散列算法）。</p>
+</blockquote>
+<h4 id="1、加密的哈希特性有哪些？"><a href="#1、加密的哈希特性有哪些？" class="headerlink" title="1、加密的哈希特性有哪些？"></a>1、加密的哈希特性有哪些？</h4><h6 id="■-对于加密，不能通过哈希值反向推导。"><a href="#■-对于加密，不能通过哈希值反向推导。" class="headerlink" title="■ 对于加密，不能通过哈希值反向推导。"></a>■ 对于加密，不能通过哈希值反向推导。</h6><blockquote>
+<p>加密为了防止原始数据泄漏，所以很难通过哈希值反向推倒原始数据。</p>
+</blockquote>
+<h6 id="■-散列冲突要小"><a href="#■-散列冲突要小" class="headerlink" title="■ 散列冲突要小"></a>■ 散列冲突要小</h6><blockquote>
+<p>无论什么哈希算法，我们只能尽量减少冲突的概率，理论上没有办法做到完全不冲突 —— 鸽巢原理（也叫抽屉原理）。</p>
+</blockquote>
+<h4 id="2、为什么哈希无法做到零冲突？"><a href="#2、为什么哈希无法做到零冲突？" class="headerlink" title="2、为什么哈希无法做到零冲突？"></a>2、为什么哈希无法做到零冲突？</h4><blockquote>
+<p>哈希算法产生的哈希值长度是固定值有限的。</p>
+<p><strong>比如：</strong> MD5 算法，哈希值是固定的 128 位二进制串，能表示的数据是有限的，最多能表示 2^128 个数据。而我们的原始数据是无限的，就必然会存在哈希值冲突现象。</p>
+</blockquote>
+<h3 id="应用二：唯一标识"><a href="#应用二：唯一标识" class="headerlink" title="应用二：唯一标识"></a>应用二：唯一标识</h3><p><strong>1、问题</strong></p>
+<blockquote>
+<p>在海量的图库中，搜索到一张图片是否存在，最常用的解决办法就是对比图像的名称，有可能出现名称相同，图像内容不符的情况，所以应该怎么来解决？</p>
+</blockquote>
+<p><strong>2、解决方法</strong></p>
+<blockquote>
+<p>图片在计算机中的存储是以二进制码串的形式，就是用查找图片的码串和图库中的所有码串进行对比。但是由于每张图片几十 kb 转化成二进制码串非常长，怎么进行优化？</p>
+</blockquote>
+<p><strong>3、方法优化</strong></p>
+<blockquote>
+<p>给每个字符串取唯一标识，取二进制码头100字节，中间100字节，尾100字节，将这 100 字节放到一块，通过哈希算法得到一个哈希字符串当做图片的唯一标识。</p>
+</blockquote>
+<p><strong>4、进一步优化</strong></p>
+<blockquote>
+<p>通过图片的<strong>唯一标识</strong>和图片相应的<strong>路径信息</strong>都对应的存在<strong>散列表</strong>中。直接通过对比哈希字符串定位到图片的唯一标识，然后通过散列表得到该图片再进行比较，如果完全相同，说明存在该图片，如果不相同，就说明存在图片名称相同，内容不同的两张图片。</p>
+</blockquote>
+<h3 id="应用三：数据校验"><a href="#应用三：数据校验" class="headerlink" title="应用三：数据校验"></a>应用三：数据校验</h3><p><strong>1、问题</strong></p>
+<blockquote>
+<p>基于 p2p 协议的 BT 下载软件，在多个机器并行下载，电影被分割成多块进行同步下载，然后下载完成进行整合。由于不能确定每块文件的完整性，可能被恶意篡改、下载错误等，导致最后整合无法观看，那么如何校验文件块的正确性呢？</p>
+</blockquote>
+<p><strong>2、校验的哈希特性</strong></p>
+<blockquote>
+<p>哈希算法对数据很敏感，一旦文件快内容一丁点的改变，最后的哈希值就完全不同。</p>
+</blockquote>
+<p><strong>3、解决方法</strong> </p>
+<blockquote>
+<p>用哈希算法检验下载文件块是否完整，可以对下好的文件块的哈希值与完整的文件块进行一一对比，如果不相同，就说明该文件快损坏，需要重新下载。</p>
+</blockquote>
+<h3 id="应用四：散列函数"><a href="#应用四：散列函数" class="headerlink" title="应用四：散列函数"></a>应用四：散列函数</h3><blockquote>
+<p>散列函数也是哈希算法的一种应用。</p>
+</blockquote>
+<h5 id="1、散列函数的哈希要求"><a href="#1、散列函数的哈希要求" class="headerlink" title="1、散列函数的哈希要求"></a>1、散列函数的哈希要求</h5><blockquote>
+<p>1）散列函数对<strong>散列冲突要求比较低</strong>，只要不过于严重，通过开发<strong>寻址法</strong>或者<strong>链表法</strong>解决。</p>
+<p>2）散列函数计算出的值<strong>能否反向解密不关心</strong>，反而更加关注<strong>是否能平均分布</strong>，也就是一组数据能否均匀的在各个槽中。</p>
+<p>3）散列函数的快慢影响散列表的性能，所以说散列函数要求比较简单，比较追求性能。</p>
+</blockquote>
+<blockquote>
+<h2 id="哈希算法在分布式系统中有哪些应用？"><a href="#哈希算法在分布式系统中有哪些应用？" class="headerlink" title="哈希算法在分布式系统中有哪些应用？"></a>哈希算法在分布式系统中有哪些应用？</h2></blockquote>
+<h3 id="应用五：负载均衡"><a href="#应用五：负载均衡" class="headerlink" title="应用五：负载均衡"></a>应用五：负载均衡</h3><blockquote>
+<p>负载均衡算法有很多，比如轮询、随机、加权轮询等。</p>
+</blockquote>
+<h5 id="1、问题"><a href="#1、问题" class="headerlink" title="1、问题"></a>1、问题</h5><blockquote>
+<p>那如何才能实现一个会话粘滞（session sticky）的负载均衡算法呢。也就是说，需要在同一个客户端上，在一次会话中的所有请求都路由到一个同一个服务器上。</p>
+</blockquote>
+<h5 id="2、常规解决"><a href="#2、常规解决" class="headerlink" title="2、常规解决"></a>2、常规解决</h5><blockquote>
+<p>维护一张映射关系表，这张表的内容是客户端 <strong>IP 地址</strong>或者<strong>会话 ID</strong> 与服<strong>务器编号</strong>的映射关系。客户端发出的每次请求，都要先在映射表中查找应该路由到的服务器编号，然后再请求编号对应的服务器。</p>
+</blockquote>
+<h5 id="3、存在弊端"><a href="#3、存在弊端" class="headerlink" title="3、存在弊端"></a>3、存在弊端</h5><blockquote>
+<p>1、如果客户端很多，映射表可能会很大，比较浪费内存空间；</p>
+<p>2、客户端下线、上线，服务器扩容、缩容都会导致映射失效，这样维护映射表的成本就会很大；</p>
+</blockquote>
+<h5 id="4、哈希解决"><a href="#4、哈希解决" class="headerlink" title="4、哈希解决"></a>4、哈希解决</h5><blockquote>
+<p>对客户端 IP 地址或者会话 ID 计算哈希值，将取得的哈希值与服务器列表的大小进行取模运算。最终得到的值就是应该被路由到的服务器编号。就可以把同一个 IP 过来的所有请求，都路由到同一个后端服务器上。</p>
+</blockquote>
+<h3 id="应用六：数据分片"><a href="#应用六：数据分片" class="headerlink" title="应用六：数据分片"></a>应用六：数据分片</h3><h4 id="▉-示例一：如何统计“搜索关键词”出现的次数？"><a href="#▉-示例一：如何统计“搜索关键词”出现的次数？" class="headerlink" title="▉ 示例一：如何统计“搜索关键词”出现的次数？"></a>▉ 示例一：如何统计“搜索关键词”出现的次数？</h4><h5 id="1、问题-1"><a href="#1、问题-1" class="headerlink" title="1、问题"></a>1、问题</h5><blockquote>
+<p>假如有 1T 的日志文件，这里面记录了用户的搜索关键词，想要快速统计出每个关键词被搜索的次数，该怎么做呢？</p>
+</blockquote>
+<h5 id="2、思路分析"><a href="#2、思路分析" class="headerlink" title="2、思路分析"></a>2、思路分析</h5><blockquote>
+<p>1） 搜索日志很大，没办法放到一台机器的内存中。</p>
+<p>2）如果只用一台机器来处理这么巨大的数据，处理时间会很长。</p>
+</blockquote>
+<h5 id="3、解决办法"><a href="#3、解决办法" class="headerlink" title="3、解决办法"></a>3、解决办法</h5><blockquote>
+<p><strong>MapReduce </strong> 的基本设计思想，先进行数据分片，然后采用多台机器的方法处理，来提高处理效率。</p>
+<p>1）从搜索记录的日志文件中，依次读出每个搜索关键词。</p>
+<p>2）并且通过哈希函数计算哈希值，然后再跟 n 取模。</p>
+<p>3）  最终得到的值，就是应该被分配到的机器编号。</p>
+</blockquote>
+<h5 id="4、条件限制"><a href="#4、条件限制" class="headerlink" title="4、条件限制"></a>4、条件限制</h5><blockquote>
+<p>有另一种方法可以解决，用到散列表，详细章节情跳转：<a href="">《堆》的求前 k 大搜索关键词求所有关键字的次数。 </a></p>
+</blockquote>
+<h4 id="▉-示例二：如何快速判断图片是否在图库中？"><a href="#▉-示例二：如何快速判断图片是否在图库中？" class="headerlink" title="▉ 示例二：如何快速判断图片是否在图库中？"></a>▉ 示例二：如何快速判断图片是否在图库中？</h4><h5 id="1、问题-2"><a href="#1、问题-2" class="headerlink" title="1、问题"></a>1、问题</h5><blockquote>
+<p>假设现在我们的图库中有 1 亿张图片，如何快速判断图片是否在图库中？</p>
+</blockquote>
+<h5 id="2、思路分析-1"><a href="#2、思路分析-1" class="headerlink" title="2、思路分析"></a>2、思路分析</h5><blockquote>
+<p>1）在单台机器上构建散列表是行不通的。因为单台机器的内存有限，而 1 亿张图片构建散列表显然远远超过了单台机器的内存上限。</p>
+<p>2）用多台机器进行计算。</p>
+</blockquote>
+<h5 id="3、解决"><a href="#3、解决" class="headerlink" title="3、解决"></a>3、解决</h5><blockquote>
+<p>当判断一个图片是否在图库中的时候，用同样的哈希算法，计算唯一标识，然后与机器个数n求余取模。假设得到的值是k，那就去标号k的机器构建的散列表中查。</p>
+</blockquote>
+<h3 id="应用七：分布式存储"><a href="#应用七：分布式存储" class="headerlink" title="应用七：分布式存储"></a>应用七：分布式存储</h3><h5 id="1、问题-3"><a href="#1、问题-3" class="headerlink" title="1、问题"></a>1、问题</h5><blockquote>
+<p>当拥有海量的用户和数据的时候，为了提高数据的读写、写入能力，一般采用分布式来存储数据。</p>
+</blockquote>
+<h5 id="2、思想"><a href="#2、思想" class="headerlink" title="2、思想"></a>2、思想</h5><blockquote>
+<p>利用数据分片思想，通过计算哈希算法，对数据去哈希值，然后对机器的个数进行取余，最终的就是存储缓存机器的标号。</p>
+</blockquote>
+<h5 id="3、数据太大如何扩容？"><a href="#3、数据太大如何扩容？" class="headerlink" title="3、数据太大如何扩容？"></a>3、数据太大如何扩容？</h5><blockquote>
+<p>变化最大就是机器的数量增加了，导致取模使得哈希值变化很大。</p>
+</blockquote>
+<h5 id="4、导致问题"><a href="#4、导致问题" class="headerlink" title="4、导致问题"></a>4、导致问题</h5><blockquote>
+<p>1）进行大规模数据迁移，所有的数据都要进行重新计算哈希值，重新搬移到正确的机器上。</p>
+<p>2）当量的数据在缓存中就失效了，所有的数据请求都会穿透缓存，直接去请求数据库。会发生雪崩效应，压垮数据库。</p>
+</blockquote>
+<h5 id="5、解决方法"><a href="#5、解决方法" class="headerlink" title="5、解决方法"></a>5、解决方法</h5><blockquote>
+<p>假设有k个机器，数据的哈希值范围是【0，MAX】。我们将整个范围划分为m个小区间（m远大于k），</p>
+<p>每个机器负责m/k个小区间。当有新机器加入的时候，我们在几个小区间里搬移数据到新机器中，即不用重</p>
+<p>搬移数据，又保持了各个机器上数据的均衡。</p>
+</blockquote>
+<h3 id="三、本节思考：如何防止数据库的用户信息被脱库？"><a href="#三、本节思考：如何防止数据库的用户信息被脱库？" class="headerlink" title="三、本节思考：如何防止数据库的用户信息被脱库？"></a>三、本节思考：如何防止数据库的用户信息被脱库？</h3><blockquote>
+<p>安全和攻击是一种博弈关系，不存在绝对的安全。所有的安全措施，只是增加了攻击的成本而已。</p>
+</blockquote>
+<h5 id="■-问题"><a href="#■-问题" class="headerlink" title="■ 问题"></a>■ 问题</h5><blockquote>
+<p>用户的密码通过哈希算法都能转化成哈希值，所有的用户信息形成一个数据字典，一旦数据字典被攻击，黑客就会拿到加密后的密文之后和数据字典中的数据进行比对，一般对比相同的就是数据字典中的明文。</p>
+</blockquote>
+<h5 id="■-优化"><a href="#■-优化" class="headerlink" title="■ 优化"></a>■ 优化</h5><blockquote>
+<p>引入一个盐（salt）概念，跟用户的密码进行组合到一起，增加密码的复杂度，拿到组合后的字符串进行哈希加密，将它存储到数据库，进一步增加破解的难度。</p>
+</blockquote>
+<h2 id="四、扩展思考"><a href="#四、扩展思考" class="headerlink" title="四、扩展思考"></a>四、扩展思考</h2><h5 id="▉-问题："><a href="#▉-问题：" class="headerlink" title="▉ 问题："></a>▉ 问题：</h5><blockquote>
+<p>区块链是怎么用哈希算法进行解决问题的？</p>
+</blockquote>
+<h5 id="▉-区块链的组成"><a href="#▉-区块链的组成" class="headerlink" title="▉ 区块链的组成"></a>▉ 区块链的组成</h5><blockquote>
+<p>区块链分为区块头和区块体。区块头保存着自己区块体和上一区块头的哈希值。</p>
+</blockquote>
+<h5 id="▉-区块链的哈希特性"><a href="#▉-区块链的哈希特性" class="headerlink" title="▉ 区块链的哈希特性"></a>▉ 区块链的哈希特性</h5><blockquote>
+<p><strong>唯一性：</strong>链式关系用到了哈希值的唯一性，只要区块链上任意一个区块被修改过，后面所有区块保存的哈希值就不对了。 </p>
+</blockquote>
+<h5 id="▉-区块链的算法"><a href="#▉-区块链的算法" class="headerlink" title="▉ 区块链的算法"></a>▉ 区块链的算法</h5><blockquote>
+<p>区块链使用的是 <strong>SHA256 哈希算法</strong>，计算哈希值非常耗时，如果要篡改一个区块，就必须重新计算该区块后面所有的区块的哈希值，短时间内几乎不可能做到。 </p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/27/数据结构与算法之美【队列】/" rel="next" title="数据结构与算法之美【队列】">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法之美【队列】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/05/玩转 ES6 之【环境搭建】/" rel="prev" title="玩转 ES6 之【环境搭建】">
+                玩转 ES6 之【环境搭建】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、哈希基本常识"><span class="nav-number">1.</span> <span class="nav-text">一、哈希基本常识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、什么是哈希算法？"><span class="nav-number">1.1.</span> <span class="nav-text">1、什么是哈希算法？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、哈希算法满足的条件？"><span class="nav-number">1.2.</span> <span class="nav-text">2、哈希算法满足的条件？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、实际用途（MD5-算法）"><span class="nav-number">1.3.</span> <span class="nav-text">3、实际用途（MD5 算法）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、哈希算法最常见的七大应用"><span class="nav-number">2.</span> <span class="nav-text">二、哈希算法最常见的七大应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用一：安全加密"><span class="nav-number">2.1.</span> <span class="nav-text">应用一：安全加密</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、加密的哈希特性有哪些？"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、加密的哈希特性有哪些？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#■-对于加密，不能通过哈希值反向推导。"><span class="nav-number">2.1.1.0.1.</span> <span class="nav-text">■ 对于加密，不能通过哈希值反向推导。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#■-散列冲突要小"><span class="nav-number">2.1.1.0.2.</span> <span class="nav-text">■ 散列冲突要小</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、为什么哈希无法做到零冲突？"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、为什么哈希无法做到零冲突？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用二：唯一标识"><span class="nav-number">2.2.</span> <span class="nav-text">应用二：唯一标识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用三：数据校验"><span class="nav-number">2.3.</span> <span class="nav-text">应用三：数据校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用四：散列函数"><span class="nav-number">2.4.</span> <span class="nav-text">应用四：散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、散列函数的哈希要求"><span class="nav-number">2.4.0.1.</span> <span class="nav-text">1、散列函数的哈希要求</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希算法在分布式系统中有哪些应用？"><span class="nav-number">3.</span> <span class="nav-text">哈希算法在分布式系统中有哪些应用？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用五：负载均衡"><span class="nav-number">3.1.</span> <span class="nav-text">应用五：负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、问题"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">1、问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、常规解决"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">2、常规解决</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、存在弊端"><span class="nav-number">3.1.0.3.</span> <span class="nav-text">3、存在弊端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、哈希解决"><span class="nav-number">3.1.0.4.</span> <span class="nav-text">4、哈希解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用六：数据分片"><span class="nav-number">3.2.</span> <span class="nav-text">应用六：数据分片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#▉-示例一：如何统计“搜索关键词”出现的次数？"><span class="nav-number">3.2.1.</span> <span class="nav-text">▉ 示例一：如何统计“搜索关键词”出现的次数？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、问题-1"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">1、问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、思路分析"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">2、思路分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、解决办法"><span class="nav-number">3.2.1.3.</span> <span class="nav-text">3、解决办法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、条件限制"><span class="nav-number">3.2.1.4.</span> <span class="nav-text">4、条件限制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#▉-示例二：如何快速判断图片是否在图库中？"><span class="nav-number">3.2.2.</span> <span class="nav-text">▉ 示例二：如何快速判断图片是否在图库中？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、问题-2"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">1、问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、思路分析-1"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">2、思路分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、解决"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">3、解决</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用七：分布式存储"><span class="nav-number">3.3.</span> <span class="nav-text">应用七：分布式存储</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、问题-3"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">1、问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、思想"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">2、思想</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、数据太大如何扩容？"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">3、数据太大如何扩容？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、导致问题"><span class="nav-number">3.3.0.4.</span> <span class="nav-text">4、导致问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5、解决方法"><span class="nav-number">3.3.0.5.</span> <span class="nav-text">5、解决方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、本节思考：如何防止数据库的用户信息被脱库？"><span class="nav-number">3.4.</span> <span class="nav-text">三、本节思考：如何防止数据库的用户信息被脱库？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#■-问题"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">■ 问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#■-优化"><span class="nav-number">3.4.0.2.</span> <span class="nav-text">■ 优化</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、扩展思考"><span class="nav-number">4.</span> <span class="nav-text">四、扩展思考</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#▉-问题："><span class="nav-number">4.0.0.1.</span> <span class="nav-text">▉ 问题：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#▉-区块链的组成"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">▉ 区块链的组成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#▉-区块链的哈希特性"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">▉ 区块链的哈希特性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#▉-区块链的算法"><span class="nav-number">4.0.0.4.</span> <span class="nav-text">▉ 区块链的算法</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/04/数据结构与算法之美【哈希算法】/';
+          this.page.identifier = '2019/03/04/数据结构与算法之美【哈希算法】/';
+          this.page.title = '数据结构与算法之美【哈希算法】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

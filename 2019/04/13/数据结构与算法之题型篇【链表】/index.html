@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if('小鹿'){
+            if (prompt('��������������') !== '小鹿'){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,算法," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="有关链表的所有操作和题型的详细解析和扩展。">
+<meta name="keywords" content="数据结构,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之题型篇【链表】">
+<meta property="og:url" content="http://yoursite.com/2019/04/13/数据结构与算法之题型篇【链表】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="有关链表的所有操作和题型的详细解析和扩展。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-14T07:36:04.197Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之题型篇【链表】">
+<meta name="twitter:description" content="有关链表的所有操作和题型的详细解析和扩展。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/13/数据结构与算法之题型篇【链表】/"/>
+
+
+
+
+
+  <title>数据结构与算法之题型篇【链表】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/13/数据结构与算法之题型篇【链表】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之题型篇【链表】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-13T10:58:26+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/13/数据结构与算法之题型篇【链表】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/04/13/数据结构与算法之题型篇【链表】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  7,648
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  30
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>有关链表的所有操作和题型的详细解析和扩展。</p>
+<a id="more"></a>
+<p>[TOC]</p>
+<h2 id="写在前边"><a href="#写在前边" class="headerlink" title="写在前边"></a>写在前边</h2><blockquote>
+<p>如果你和小鹿一样，刚开始对链表的操作代码实现很懵的话，不妨按照小鹿经过一个月的时间对链表相关操作以及题型的整理总结，由浅入深进行适当的练习，我相信，当你真正的练习完这些题目，不但会让你放下对链表心理上的困惑，而且对你学习其他数据结构有很大的信心和帮助！</p>
+</blockquote>
+<h4 id="1、学习建议"><a href="#1、学习建议" class="headerlink" title="1、学习建议"></a>1、学习建议</h4><blockquote>
+<p>小鹿不建议你一口气去看完这篇所有的题目和练习，给自己制定一个小计划，我当初整理该题目的时候，每天都计划认真整理一到题目，把每道题分析透，这样才能达到最好的吸收效果。</p>
+</blockquote>
+<h4 id="2、学习路径"><a href="#2、学习路径" class="headerlink" title="2、学习路径"></a>2、学习路径</h4><blockquote>
+<p>本篇分为三个阶段，基础练习阶段、进阶练习阶段、加强练习阶段。</p>
+<p>1）基础练习阶段</p>
+<p>首先进行第一个阶段之前，你已经对链表的基础知识能够熟练掌握，但是对于没有动手写过链表代码，那么你从第一阶段最基础的开始进行。确保每一个基础点要亲自动手用自己熟悉的语言写出来，虽然本篇中基本都是 javascript 代码实现的，但是算法思路是一成不变的，如果遇到困难可以自行百度或谷歌，也可以下方给我进行留言。</p>
+<p>2）进阶练习阶段</p>
+<p>如果你对上述的链表基本代码已经完全熟练掌握了，那么恭喜你可以进行下一个阶段，进阶阶段，这一阶段增加的难度就是链表的操作是对于实际问题来解决的，所以非常锻炼你对问题的分析能力和解决能力，也考验你对代码的全面性、鲁棒性。这一阶段非常的重要，下面的每道题我都做出了详细的分析。</p>
+<p>3）加强练习阶段</p>
+<p>如果上述的进阶练习阶段的题型你都了如指掌了，那么不妨我们实战一下，LeetCode 汇聚了很多面试的题型，所以我在上边整理了几个经典的题目，你可以尝试着解答它们，相关题目的代码以及解题思路我都整理好了。这一阶段的题目小鹿会在后期不断的更新，这些题目你能够完全掌握，链表对你来说小菜一碟了。</p>
+</blockquote>
+<h2 id="一、链表基础练习（阶段一）"><a href="#一、链表基础练习（阶段一）" class="headerlink" title="一、链表基础练习（阶段一）"></a>一、链表基础练习（阶段一）</h2><blockquote>
+<p>自己首相尝试着一个个攻破下方的链表中最基础的操作，相关代码我也整理好了（先自己尝试着去解决哦）。</p>
+</blockquote>
+<ul>
+<li>单链表的插入、删除、查找操作（<a href="https://github.com/luxiangqiang/Data-Structure-Coding/blob/master/Link_List/javascript/SinglyLinkedList.md" target="_blank" rel="noopener">点击查看代码实现</a>）。</li>
+<li><p>循环链表的插入、删除、查找操作 (<a href="https://github.com/luxiangqiang/Data-Structure-Coding/blob/master/Link_List/javascript/CircularLinkedList.md" target="_blank" rel="noopener">点击查看代码实现</a>)。</p>
+</li>
+<li><p>双向链表的插入、删除、查找操作 (<a href="https://github.com/luxiangqiang/Data-Structure-Coding/blob/master/Link_List/javascript/DoubleLinkedList.md" target="_blank" rel="noopener">点击查看代码实现</a>)。</p>
+</li>
+</ul>
+<h2 id="二、链表进阶练习（阶段二）"><a href="#二、链表进阶练习（阶段二）" class="headerlink" title="二、链表进阶练习（阶段二）"></a>二、链表进阶练习（阶段二）</h2><h3 id="1、单链表从尾到头打印"><a href="#1、单链表从尾到头打印" class="headerlink" title="1、单链表从尾到头打印"></a>1、单链表从尾到头打印</h3><blockquote>
+<p>题目：输入一个链表的头结点，从尾到头反过来打印出每个节点的值。</p>
+</blockquote>
+<h4 id="1-1-问题分析与解决"><a href="#1-1-问题分析与解决" class="headerlink" title="1.1 问题分析与解决"></a>1.1 问题分析与解决</h4><h6 id="▉-问题分析"><a href="#▉-问题分析" class="headerlink" title="▉ 问题分析"></a>▉ 问题分析</h6><blockquote>
+<p>1）看到题目第一想到的就是反转链表在打印输出，一种反转链表的方法，但是这种方法改变了原有的链表结构。</p>
+<p>缺点：使得链表的结构发生改变了。如果不改变链表结构应该怎么解决？</p>
+<p>2）从问题中可以得出，我们想要从尾到头打印链表，正常情况下是从头到尾打印的，我们就会想到最后的数据先打印，开始的数据最后打印，有种“先进后出”的特点，我们就能想到用“栈”这种结构，用栈来实现。</p>
+<p>缺点：代码不够简洁。</p>
+<p>优点：鲁棒性好（在不确定的情况下，程序仍然可以正确的执行）。</p>
+<p>3）提到栈这种数据结构，我们就会想到“递归”的实现就是用栈这种数据结构实现的。既然栈能实现，那么递归也能实现。</p>
+<p>缺点：如果链表很长，递归深度很深，导致堆栈溢出。</p>
+<p>优点：代码简洁、明了。</p>
+</blockquote>
+<h6 id="▉-算法思路"><a href="#▉-算法思路" class="headerlink" title="▉ 算法思路"></a>▉ 算法思路</h6><blockquote>
+<p>得出以下几种实现方式：</p>
+<ul>
+<li>反转链表法</li>
+<li>栈实现</li>
+<li>递归实现</li>
+</ul>
+<p>1）反转链表实现：</p>
+<p>从尾到头输出链表的内容，一般的思路就是将链表反转过来，然后从头到尾输出数据。</p>
+<p>2）栈实现</p>
+<p>从头到尾遍历单链表，将数据存储按照顺序存储到栈中。然后遍历整个栈，打印输出数据。</p>
+<p>2）递归实现：</p>
+<p>可以通过递归的方式来实现单链表从尾到头依次输出，递归过程涉及到“递”和“归”，反转链表输出数据，正式利用了循环“递”的过程，所以数据先从头部输出，那么递归采用的是“归”的过程来输出内容，输出当前结点先要输出当前节点的下一节点。</p>
+</blockquote>
+<h6 id="▉-测试用例"><a href="#▉-测试用例" class="headerlink" title="▉ 测试用例"></a>▉ 测试用例</h6><blockquote>
+<p>在写代码之前，要想好测试用例才能写出健全、鲁棒性的代码，也是为了考虑到边界情况，往往也是整个程序最致命的地方，如果考虑不全面，就会出现 bug，导致程序崩溃。</p>
+<p>测试用例：</p>
+<p>1）输入空链表；</p>
+<p>2）输入的链表只有一个结点；</p>
+<p>3）输入的链表有多个结点。</p>
+</blockquote>
+<h6 id="▉-代码实现：反转链表法"><a href="#▉-代码实现：反转链表法" class="headerlink" title="▉ 代码实现：反转链表法"></a>▉ 代码实现：反转链表法</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//定义结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(data)&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">        <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 功能：单链表反转</span></span><br><span class="line">    <span class="comment">// 步骤:</span></span><br><span class="line">    <span class="comment">// 1、定义三个指针(pre=null/next/current)</span></span><br><span class="line">    <span class="comment">// 2、判断链表是否可反转(头节点是否为空、是否有第二个结点)</span></span><br><span class="line">    <span class="comment">// 3、尾指针指向第一个结点的 next</span></span><br><span class="line">    <span class="comment">// 4、尾指针向前移动</span></span><br><span class="line">    <span class="comment">// 5、当前指针(current)向后移动</span></span><br><span class="line">    <span class="comment">// 6、将 head 指向单转好的结点</span></span><br><span class="line">    reverseList = <span class="function"><span class="params">()</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//声明三个指针</span></span><br><span class="line">        <span class="keyword">let</span> current = <span class="keyword">this</span>.head; <span class="comment">//当前指针指向头节点</span></span><br><span class="line">        <span class="keyword">let</span> pre = <span class="literal">null</span>;<span class="comment">//尾指针</span></span><br><span class="line">        <span class="keyword">let</span> next;<span class="comment">//指向当前指针的下一个指针</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断单链表是否符合反转的条件(一个结点以上)？</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.head == <span class="literal">null</span> || <span class="keyword">this</span>.head.next == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//开始反转</span></span><br><span class="line">        <span class="keyword">while</span>(current !== <span class="literal">null</span>)&#123;</span><br><span class="line">            next = current.next;</span><br><span class="line">            current.next = pre;</span><br><span class="line">            pre = current;</span><br><span class="line">            current = next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.head = pre;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//输出结点</span></span><br><span class="line">    print = <span class="function"><span class="params">()</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head</span><br><span class="line">        <span class="comment">//如果结点不为空</span></span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(currentNode.data)</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-代码实现：循环栈"><a href="#▉-代码实现：循环栈" class="headerlink" title="▉ 代码实现：循环栈"></a>▉ 代码实现：循环栈</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//方法三：栈实现</span></span><br><span class="line"><span class="keyword">const</span> tailToHeadOutput = <span class="function">(<span class="params">currentNode</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> stack = [];</span><br><span class="line">    <span class="comment">//遍历链表，将数据入栈</span></span><br><span class="line">    <span class="keyword">while</span>(currentNode !== <span class="literal">null</span>)&#123;</span><br><span class="line">        stack.push(currentNode.data);</span><br><span class="line">        currentNode = currentNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//遍历栈，数据出栈</span></span><br><span class="line">    <span class="keyword">while</span>(stack.length !== <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(stack.pop());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-代码实现：递归"><a href="#▉-代码实现：递归" class="headerlink" title="▉ 代码实现：递归"></a>▉ 代码实现：递归</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 步骤:</span></span><br><span class="line"><span class="comment">// 1、判断是否为空链表</span></span><br><span class="line"><span class="comment">// 2、终止条件（下一结点为空）</span></span><br><span class="line"><span class="comment">// 3、递归打印下一结点信息</span></span><br><span class="line"><span class="keyword">const</span> tailToHeadOutput = <span class="function">(<span class="params">head</span>)=&gt;</span>&#123;</span><br><span class="line">	<span class="comment">// 判断是否空链表</span></span><br><span class="line">	<span class="keyword">if</span>(head !== <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">// 判断下一结点是否为空</span></span><br><span class="line">	    <span class="keyword">if</span>(head.next !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">// 下一结点不为空，先输出下一结点</span></span><br><span class="line">	        tailToHeadOutput(head.next)</span><br><span class="line">	    &#125;</span><br><span class="line">	    <span class="built_in">console</span>.log(head.data);</span><br><span class="line">	&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">	    <span class="built_in">console</span>.log(<span class="string">"空链表"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-性能分析"><a href="#▉-性能分析" class="headerlink" title="▉ 性能分析"></a>▉ 性能分析</h6><blockquote>
+<p>反转链表实现：</p>
+<ul>
+<li>时间复杂度：O(n)。需要遍历整个链表，时间复杂度为 O(n)。</li>
+<li>空间复杂度：O(1)。不需要额外的栈存储空间，空间复杂度为 O(1)。</li>
+</ul>
+<p>循环栈实现：</p>
+<ul>
+<li>时间复杂度：O(n)。需要遍历整个链表，时间复杂度为 O(n)。</li>
+<li>空间复杂度：O(n)。需要额外的栈存储空间，空间复杂度为 O(n)。</li>
+</ul>
+<p>递归实现：</p>
+<ul>
+<li>时间复杂度：O(n)。需要遍历整个链表，时间复杂度为 O(n)。</li>
+<li>空间复杂度：O(n)。需要额外的栈存储空间，空间复杂度为 O(n)。</li>
+</ul>
+</blockquote>
+<h4 id="2-2-小结"><a href="#2-2-小结" class="headerlink" title="2.2 小结"></a>2.2 小结</h4><h6 id="▉-考察内容"><a href="#▉-考察内容" class="headerlink" title="▉ 考察内容"></a>▉ 考察内容</h6><blockquote>
+<p>1）对单链表的基本操作。</p>
+<p>2）代码的鲁棒性。</p>
+<p>3）循环、递归、栈的灵活运用。</p>
+</blockquote>
+<h6 id="▉-扩展思考：循环和递归"><a href="#▉-扩展思考：循环和递归" class="headerlink" title="▉ 扩展思考：循环和递归"></a>▉ 扩展思考：循环和递归</h6><blockquote>
+<p>适用条件：如果需要进行多次计算相同的问题，将采用循环或递归的方式。</p>
+<p>递归的优点：代码简洁。</p>
+<p>递归的缺点：</p>
+<p>1）堆栈溢出：函数调用自身，函数的临时变量是压栈的操作，当函数执行完，栈才清空，如果递归的规模过大，在函数内部一直执行函数的自身调用，临时变量一直压栈，系统栈或虚拟机栈内存小，导致堆栈溢出。</p>
+<p>2）重复计算：递归会出现很多的重复计算问题，重复计算对程序的性能有很大影响，导致消耗时间成指数增长，但是可以通过散列表的方式解决。</p>
+<p>3）高空间复杂度：递归的每次函数调用都要涉及到在内存开辟空间，压栈、出栈等操作，即耗时又耗费空间，导致递归的效率并不如循环的效率。</p>
+<p>扩展：</p>
+<p>1）递归—栈：递归的本质是栈，通常用栈循环解决的问题适合于递归。</p>
+<p>2）递归-动态规划：动态规划解决问题经常用递归的思路分析问题。关于递归重复计算问题，我们通常使用自下而上的解决思路（动态规划）来解决递归重复计算的问题。</p>
+</blockquote>
+<h6 id="▉-注意事项："><a href="#▉-注意事项：" class="headerlink" title="▉ 注意事项："></a>▉ 注意事项：</h6><blockquote>
+<p>1）涉及到循环解决的问题，可以想一想能不能使用递归来解决。</p>
+<p>2）用递归解决一定要铭记递归的缺点带来的性能问题。</p>
+<p>3）递归解决的问题，能不能用动态规划来解决，使得性能更高。</p>
+<p>4）用到栈这种数据结构，想一想递归是否可以实现呢。</p>
+</blockquote>
+<h3 id="2、删除链表结点"><a href="#2、删除链表结点" class="headerlink" title="2、删除链表结点"></a>2、删除链表结点</h3><blockquote>
+<p>题目：在 O（1）的时间复杂度内删除链表节点。</p>
+<p>给定单向链表的头指针和一个节点指针，定义一个函数在 O（1）时间内删除该节点。</p>
+</blockquote>
+<h4 id="2-1-问题分析与解决"><a href="#2-1-问题分析与解决" class="headerlink" title="2.1 问题分析与解决"></a>2.1 问题分析与解决</h4><h6 id="▉-问题分析-1"><a href="#▉-问题分析-1" class="headerlink" title="▉ 问题分析"></a>▉ 问题分析</h6><blockquote>
+<p>1）想必看到单链表删除节点的题，第一想到的就是删除链表结点需要以 O（n）时间复杂度遍历链表找到该结点的前结点，然后以 O（1）时间复杂度进行删除，时间复杂度为O（n）。而题目中的确实整体要求时间复杂度为 O（1）。</p>
+<p>2）怎么才能达到 O（1）的时间复杂度删除链表？如果不遍历不就可以了？如果直接删除的时间复杂度为 O（1），前提是我们需要知道前结点才能做到。我们就会想怎么做到不用遍历数据才能获取到前结点呢？而且必须保证时间复杂度为 O（1）。</p>
+<p>3）但是必须让自己多想一步就是如果删除的结点是尾结点怎么操作，如果删除的链表结点只有一个结点，即是尾结点又是头结点怎么办？</p>
+</blockquote>
+<h6 id="▉-算法思路-1"><a href="#▉-算法思路-1" class="headerlink" title="▉ 算法思路"></a>▉ 算法思路</h6><blockquote>
+<p>得出以下几种实现方式：</p>
+<ul>
+<li>交换结点法</li>
+</ul>
+<p>1）这一有种技巧很难想到，就是我把当前结点的数据与下一结点的数据进行交换，删除下一结点不就可以达到时间复杂度为O（1）了吗。而且我们知道当前结点就是下一结点的前节点，perfect。</p>
+<p>2）针对以上两种特殊情况，如果是尾结点，没有下一结点，我们就从头遍历链表删除节点；如果即是尾结点又是头结点，那么删除头结点，并置于 null。</p>
+</blockquote>
+<h6 id="▉-测试用例-1"><a href="#▉-测试用例-1" class="headerlink" title="▉ 测试用例"></a>▉ 测试用例</h6><blockquote>
+<p>1)  输入空链表；</p>
+<p>2）在多个结点链表中删除中间结点；</p>
+<p>3）在多个链表中删除头结点；</p>
+<p>4）在多个链表总删除尾结点；</p>
+<p>5）在只有一个结点链表中删除唯一结点；</p>
+</blockquote>
+<h6 id="▉-代码实现"><a href="#▉-代码实现" class="headerlink" title="▉ 代码实现"></a>▉ 代码实现</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(data)&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">        <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据 value 查找结点</span></span><br><span class="line">    findByValue = <span class="function">(<span class="params">value</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span> &amp;&amp; currentNode.data !== value)&#123;</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断该结点是否找到</span></span><br><span class="line">        <span class="built_in">console</span>.log(currentNode)</span><br><span class="line">        <span class="keyword">return</span> currentNode === <span class="literal">null</span> ? <span class="number">-1</span> : currentNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插入元素(指定元素向后插入)</span></span><br><span class="line">    insert = <span class="function">(<span class="params">value,element</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//先查找该元素</span></span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.findByValue(element);</span><br><span class="line">        <span class="comment">//如果没有找到</span></span><br><span class="line">        <span class="keyword">if</span>(currentNode == <span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"未找到插入位置!"</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> newNode = <span class="keyword">new</span> Node(value);</span><br><span class="line">        newNode.next = currentNode.next;</span><br><span class="line">        currentNode.next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历所有结点</span></span><br><span class="line">    print = <span class="function"><span class="params">()</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head</span><br><span class="line">        <span class="comment">//如果结点不为空</span></span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(currentNode.data)</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除节点(核心代码)</span></span><br><span class="line">    deleteNode = <span class="function"><span class="params">node</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">// 判断当前查找的结点是否为 null</span></span><br><span class="line">        <span class="keyword">if</span>(node == <span class="literal">null</span>) <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">        <span class="comment">// 1、查找删除的结点</span></span><br><span class="line">        <span class="keyword">let</span> d_node = <span class="keyword">this</span>.findByValue(<span class="built_in">parseInt</span>(node.data))</span><br><span class="line">        <span class="comment">// 2、判断该结点是否为尾结点</span></span><br><span class="line">        <span class="keyword">if</span>(d_node.next == <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">// 重新遍历链表</span></span><br><span class="line">            <span class="keyword">let</span> p = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">            <span class="keyword">while</span>(current.next !== <span class="literal">null</span>)&#123;</span><br><span class="line">                p = current;</span><br><span class="line">                current = current.next;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 尾结点置为 null</span></span><br><span class="line">            p.next = <span class="literal">null</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">// 3、将删除结点的值与下一结点交换</span></span><br><span class="line">            d_node.data = d_node.next.data;</span><br><span class="line">            <span class="comment">// 4、删除下一结点</span></span><br><span class="line">            d_node.next = d_node.next.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试 </span></span><br><span class="line">sortedList1 = <span class="keyword">new</span> LinkedList()</span><br><span class="line">sortedList1.insert(<span class="number">1</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList1.insert(<span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">sortedList1.insert(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">sortedList1.insert(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">sortedList1.print();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'------------------------------删除指定结点----------------------------'</span>)</span><br><span class="line"><span class="keyword">let</span> dnode = <span class="keyword">new</span> Node(<span class="string">'1'</span>)</span><br><span class="line">sortedList1.deleteNode(dnode)</span><br><span class="line">sortedList1.print();</span><br></pre></td></tr></table></figure>
+<h6 id="▉-性能分析-1"><a href="#▉-性能分析-1" class="headerlink" title="▉ 性能分析"></a>▉ 性能分析</h6><blockquote>
+<ul>
+<li><p>时间复杂度：O（1）。经过上述的方法，删除一个链表的结点，除了删除一个链表的尾结点之外，其他删除节点的时间复杂度为 O（1），获取删除的结点的前一结点，时间复杂度为 O（1），删除节点的时间复杂度为 O（1）。只有删除尾结点才需要遍历整个链表，但大部分删除节点是 O（1）的。使用分析时间复杂度的一个方法摊还分析，将删除节点的时间复杂度平均分到其他大部分情况下，所以平均时间复杂度为 O（1）。</p>
+</li>
+<li><p>空间复杂度：O（1）。不需要额外的内存空间。</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="2-2-小结-1"><a href="#2-2-小结-1" class="headerlink" title="2.2 小结"></a>2.2 小结</h4><h6 id="▉-内容考察"><a href="#▉-内容考察" class="headerlink" title="▉ 内容考察"></a>▉ 内容考察</h6><blockquote>
+<p>1）对单链表的删除基本操作。</p>
+<p>2）对问题的有创新思维的解决能力：能不能将复杂问题的根源用另一种思维去优化。</p>
+<p>3）问题考虑的全面性：考虑到问题出现的各种特殊情况，以及边界问题。</p>
+</blockquote>
+<h3 id="3、链表中的倒数第-K-个结点"><a href="#3、链表中的倒数第-K-个结点" class="headerlink" title="3、链表中的倒数第 K 个结点"></a>3、链表中的倒数第 K 个结点</h3><blockquote>
+<p>题目：输入一个链表，输出该链表中倒数第 K 个节点。为符合大多数人的习惯，从 1 开始计数，即链表的尾结点是倒数第一个节点。</p>
+</blockquote>
+<h4 id="3-1-问题分析与解决"><a href="#3-1-问题分析与解决" class="headerlink" title="3.1 问题分析与解决"></a>3.1 问题分析与解决</h4><h6 id="▉-问题分析-2"><a href="#▉-问题分析-2" class="headerlink" title="▉ 问题分析"></a>▉ 问题分析</h6><blockquote>
+<p>1）看到这个题的第一想法就是从链表头遍历到链表尾部，然后尾部倒数 k 个数，因为是单链表，所以倒数并不能实现，想法行不通。</p>
+<p>2）那我们只能将思路转移到头结点开始，怎么才能从头结点开始遍历到倒数第 k 个结点呢？大体我们可以得出至少需要遍历两次链表。</p>
+<p>3）上述能不能再优化呢？遍历一次链表就可以完成查找？</p>
+</blockquote>
+<h6 id="▉-算法思路-2"><a href="#▉-算法思路-2" class="headerlink" title="▉ 算法思路"></a>▉ 算法思路</h6><blockquote>
+<p>得出以下几种实现方式：</p>
+<ul>
+<li>两次遍历法</li>
+<li>一次遍历法</li>
+</ul>
+<p>前提条件：</p>
+<p>1）<strong>不要忘记判断单链表是否为环型结构</strong></p>
+<p>两次遍历法：</p>
+<p>1）有一个规律就是链表的长度 n 减去 k 加 1 就是倒数第 k 个数据。所以需要遍历链表得到链表的长度，然后再遍历两次找到链表的倒数第 k 个数据。整个过程需要遍历两遍链表。</p>
+<p>一次遍历法：</p>
+<p>1）那我们就用到双指针，第一个指针指向第一个结点，第二个指针指向 k - 1 个结点，同时向前移动，直到第二个节点指向尾结点位置，第一个节点就指向了倒数第 k 结点。遍历一遍链表就完成查找。</p>
+</blockquote>
+<h6 id="▉-测试用例-2"><a href="#▉-测试用例-2" class="headerlink" title="▉ 测试用例"></a>▉ 测试用例</h6><blockquote>
+<p>1）k 的取值范围（0 &lt; k &lt; n）;输入不在范围内的数据。</p>
+<p>2）输入空链表。</p>
+<p>3）查找倒数第 k 结点为头结点/尾结点。    </p>
+</blockquote>
+<h6 id="▉-代码实现-1"><a href="#▉-代码实现-1" class="headerlink" title="▉ 代码实现"></a>▉ 代码实现</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(data)&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">        <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 定义链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据 value 查找结点</span></span><br><span class="line">    findByValue = <span class="function">(<span class="params">value</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span> &amp;&amp; currentNode.data !== value)&#123;</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断该结点是否找到</span></span><br><span class="line">        <span class="built_in">console</span>.log(currentNode)</span><br><span class="line">        <span class="keyword">return</span> currentNode === <span class="literal">null</span> ? <span class="number">-1</span> : currentNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插入元素(指定元素向后插入)</span></span><br><span class="line">    insert = <span class="function">(<span class="params">value,element</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//先查找该元素</span></span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.findByValue(element);</span><br><span class="line">        <span class="comment">//如果没有找到</span></span><br><span class="line">        <span class="keyword">if</span>(currentNode == <span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"未找到插入位置!"</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> newNode = <span class="keyword">new</span> Node(value);</span><br><span class="line">        newNode.next = currentNode.next;</span><br><span class="line">        currentNode.next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历所有结点</span></span><br><span class="line">    print = <span class="function"><span class="params">()</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head</span><br><span class="line">        <span class="comment">//如果结点不为空</span></span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(currentNode.data)</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 检测单链表是否为环</span></span><br><span class="line">    checkCircle = <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="comment">// 判断是否为空链表</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.head == <span class="literal">null</span>) <span class="keyword">return</span> fast;</span><br><span class="line">        <span class="comment">// 定义快慢指针</span></span><br><span class="line">        <span class="keyword">let</span> fast = <span class="keyword">this</span>.head.next;</span><br><span class="line">        <span class="keyword">let</span> low = <span class="keyword">this</span>.head;</span><br><span class="line">        <span class="comment">//进行循环判断(当前 fast 结点/fast 移动两步后的结点是否为 null)</span></span><br><span class="line">        <span class="keyword">while</span>(fast !== <span class="literal">null</span> &amp;&amp; fast.next !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="comment">// fast 指针向前移动两步</span></span><br><span class="line">            fast = fast.next.next;</span><br><span class="line">            <span class="comment">// low 指针向前移动一步</span></span><br><span class="line">            low = low.next;</span><br><span class="line">            <span class="comment">// 如果为环，总有一天会相遇</span></span><br><span class="line">            <span class="keyword">if</span>(fast === low) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125; </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 查找倒数第 k 结点</span></span><br><span class="line">    findByIndexFromEnd = <span class="function"><span class="params">k</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//判断 k 是否大于0</span></span><br><span class="line">        <span class="keyword">if</span>(k &lt; <span class="number">1</span>) <span class="keyword">return</span> <span class="string">'k 的大小不在搜索范围内'</span>;</span><br><span class="line">        <span class="comment">// 检测是否为环</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.checkCircle()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 定义两个指针进行遍历</span></span><br><span class="line">        <span class="keyword">let</span> current = <span class="keyword">this</span>.head;</span><br><span class="line">        <span class="keyword">let</span> fast = current;</span><br><span class="line">        <span class="keyword">let</span> low = current;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> pos = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">1</span>;i &lt;= k - <span class="number">1</span>;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(fast.next !== <span class="literal">null</span>)&#123;</span><br><span class="line">                fast = fast.next;</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="comment">// k 的大小超出链表大小的范围</span></span><br><span class="line">                <span class="keyword">return</span> <span class="string">'k 的大小超出链表的范围'</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// low 和 fast 指针同时移动</span></span><br><span class="line">        <span class="keyword">while</span>(fast.next !== <span class="literal">null</span>)&#123;</span><br><span class="line">            fast = fast.next;</span><br><span class="line">            low = low.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 返回倒数第 k 结点</span></span><br><span class="line">        <span class="keyword">return</span> low;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">const</span> list = <span class="keyword">new</span> LinkedList();</span><br><span class="line">list.insert(<span class="string">'1'</span>,<span class="string">'head'</span>);</span><br><span class="line"><span class="comment">// list.insert('2','1');</span></span><br><span class="line"><span class="comment">// list.insert('3','2');</span></span><br><span class="line"><span class="comment">// list.insert('4','3');</span></span><br><span class="line"><span class="comment">// list.insert('5','4');</span></span><br><span class="line"><span class="comment">// list.insert('6','5');</span></span><br><span class="line">list.print();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'-------------------查找倒数第 k 结点----------------'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(list.findByIndexFromEnd(<span class="number">8</span>));</span><br></pre></td></tr></table></figure>
+<h6 id="▉-性能分析-2"><a href="#▉-性能分析-2" class="headerlink" title="▉ 性能分析"></a>▉ 性能分析</h6><blockquote>
+<p>两次遍历法：</p>
+<ul>
+<li>时间复杂度：O（k*n）。当 k 趋近于 n 时，最坏时间复杂度为 O（n^2）。</li>
+<li>空间复杂度：O（1）。不需要额外的内存空间。</li>
+</ul>
+<p>一次遍历法：</p>
+<ul>
+<li>时间复杂度：O（n）。只需要遍历一次单链表，所以时间复杂度为O（n）。</li>
+<li>空间复杂度：O（1）。不需要额外的内存空间。</li>
+</ul>
+</blockquote>
+<h4 id="3-2-小结"><a href="#3-2-小结" class="headerlink" title="3.2 小结"></a>3.2 小结</h4><h6 id="▉-内容考察-1"><a href="#▉-内容考察-1" class="headerlink" title="▉ 内容考察"></a>▉ 内容考察</h6><blockquote>
+<p>1）对单链表的基本操作。</p>
+<p>2）代码的全面性、鲁棒性。</p>
+</blockquote>
+<h6 id="▉-注意事项"><a href="#▉-注意事项" class="headerlink" title="▉ 注意事项"></a>▉ 注意事项</h6><blockquote>
+<p>1）当我们用一个指针不能解决时，想一想两个指针能否解决？</p>
+</blockquote>
+<h6 id="▉-相关题目"><a href="#▉-相关题目" class="headerlink" title="▉ 相关题目"></a>▉ 相关题目</h6><blockquote>
+<p>1）求中间结点</p>
+<p>2）求倒数第 k 个结点</p>
+<p>3）检测环的存在</p>
+</blockquote>
+<h3 id="4、反转链表"><a href="#4、反转链表" class="headerlink" title="4、反转链表"></a>4、反转链表</h3><blockquote>
+<p>题目：定义一个函数，输入一个链表的头结点，反转该链表并输出反转链表的头结点。</p>
+</blockquote>
+<h4 id="4-1-问题分析与解决"><a href="#4-1-问题分析与解决" class="headerlink" title="4.1 问题分析与解决"></a>4.1 问题分析与解决</h4><h6 id="▉-问题分析-3"><a href="#▉-问题分析-3" class="headerlink" title="▉ 问题分析"></a>▉ 问题分析</h6><blockquote>
+<p>1）反转链表的我们第一能够想到的方法就是最常用的方法，声明三个指针，把头结点变为尾结点，然后下一结点拼接到尾结点的头部，一次类推。说白了就是就是直接将链表指针反转就可以实现反转链表。</p>
+</blockquote>
+<h6 id="▉-算法思路-3"><a href="#▉-算法思路-3" class="headerlink" title="▉ 算法思路"></a>▉ 算法思路</h6><blockquote>
+<p>1）定义三个指针，分别为 Pnext、pre、current，current 存储当前结点， pre 指向反转好的结点的头结点，Pnext 存储下一结点信息。</p>
+<p>2）判断当前结点是否可以反转（是否为空链表或链表大于 1 个结点）?</p>
+<p>步骤：</p>
+<p>1）Pnext 指针存储下一结点 。</p>
+<p>2）当前结点的 next 结点是否为 null (为 null 的话当前结点就是最后的一个结点)，如果为 null，将当前节点赋值为 head 头指针（断裂处）。</p>
+<p>3）将 pre 指针指向的结点赋值当前节点 current 的下一结点 next。</p>
+<p>4）然后让 pre 指针指向当前节点 current。</p>
+<p>5）current 继续遍历, 当前节点指向 current 指向 Pnext。</p>
+<p>递归法（重点分析）：</p>
+<p>1）先确定终止条件：当下一结点为  null  时，返回当前节点；</p>
+<p>2）判断当前的链表是否为  null；</p>
+<p>3）递归找到尾结点，将其存储为头结点。</p>
+<p>4）此时递归的层次是第二层递归，所以要设置为头结点的下一结点就是当前第二层结点，并且将第二节点的下一结点设置为 bull。</p>
+</blockquote>
+<h6 id="▉-测试用例-3"><a href="#▉-测试用例-3" class="headerlink" title="▉ 测试用例"></a>▉ 测试用例</h6><blockquote>
+<p>1）链表是空链表。</p>
+<p>2）当前链表的长度小于等于 1。</p>
+<p>3）输入长度大于 1 的链表。</p>
+</blockquote>
+<h6 id="▉-代码实现-2"><a href="#▉-代码实现-2" class="headerlink" title="▉ 代码实现"></a>▉ 代码实现</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reverseList = <span class="function"><span class="keyword">function</span>(<span class="params">head</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 判断当前链表是否为空链表</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义三个指针</span></span><br><span class="line">    <span class="keyword">let</span> [current,prev,next] = [head,<span class="literal">null</span>,<span class="literal">null</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(current !== <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="comment">//1、存储下一结点</span></span><br><span class="line">        next = current.next;</span><br><span class="line">        <span class="keyword">if</span>(next == <span class="literal">null</span>)&#123;</span><br><span class="line">            head = current;</span><br><span class="line">        &#125;</span><br><span class="line">        current.next = prev;</span><br><span class="line">        prev = current;</span><br><span class="line">        current = next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-递归法"><a href="#▉-递归法" class="headerlink" title="▉ 递归法"></a>▉ 递归法</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> reverseList = <span class="function">(<span class="params">head</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//如果链表为空或者链表中只有一个元素</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">null</span> || head.next == <span class="literal">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="comment">//先反转后面的链表，走到链表的末端结点</span></span><br><span class="line">        <span class="keyword">let</span> newhead = reverseList(head.next);</span><br><span class="line">        <span class="comment">//再将当前节点设置为后面节点的后续节点</span></span><br><span class="line">        head.next.next = head;</span><br><span class="line">        head.next = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">return</span> newhead;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-性能分析-3"><a href="#▉-性能分析-3" class="headerlink" title="▉ 性能分析"></a>▉ 性能分析</h6><blockquote>
+<ul>
+<li>时间复杂度：O(n)。只需遍历整个链表就可以完成反转，时间复杂度为 O(n)。</li>
+<li>空间复杂度：O(1)。只需要常量级的空间，空间复杂度为 O(1)。</li>
+</ul>
+</blockquote>
+<h4 id="4-2-小结"><a href="#4-2-小结" class="headerlink" title="4.2 小结"></a>4.2 小结</h4><h6 id="▉-内容考察-2"><a href="#▉-内容考察-2" class="headerlink" title="▉ 内容考察"></a>▉ 内容考察</h6><blockquote>
+<p>1）对单链表的基本操作。</p>
+<p>2）对指针操作顺序的逻辑性考察。</p>
+<p>3）考察思维的全面性以及代码的鲁棒性。</p>
+</blockquote>
+<h6 id="▉-注意事项-1"><a href="#▉-注意事项-1" class="headerlink" title="▉ 注意事项"></a>▉ 注意事项</h6><blockquote>
+<p>1）边界条件。</p>
+<p>2）写代码之前想好测试用例，写完代码一一验证测试用例的正确性。</p>
+</blockquote>
+<h3 id="5、合并两个有序链表"><a href="#5、合并两个有序链表" class="headerlink" title="5、合并两个有序链表"></a>5、合并两个有序链表</h3><blockquote>
+<p>题目：输入两个递增排序的链表，合并这两个链表并使新链表中的节点仍然是递增排序的。</p>
+</blockquote>
+<h4 id="5-1-问题分析与解决"><a href="#5-1-问题分析与解决" class="headerlink" title="5.1 问题分析与解决"></a>5.1 问题分析与解决</h4><h6 id="▉-问题分析-4"><a href="#▉-问题分析-4" class="headerlink" title="▉ 问题分析"></a>▉ 问题分析</h6><blockquote>
+<p>1）合并两个链表，经常犯的错误就是没有弄清除指针的指向，导致链表合并的时候断裂以及代码全面性考虑的不全，也就是代码的鲁棒性存在问题。</p>
+<p>2）递归。每次都要比较两个结点大小，是否可以使用递归来解决呢？</p>
+</blockquote>
+<h6 id="▉-算法思路-4"><a href="#▉-算法思路-4" class="headerlink" title="▉ 算法思路"></a>▉ 算法思路</h6><blockquote>
+<p>一般解决法：</p>
+<p>1）合并两个链表，首先需要两个指针，分别指向两个链表。</p>
+<p>2）比较两个指针指向结点元素的大小，小的结点添加到新链表，然后指针向后移动继续比较。</p>
+<p>3）直到其中一个链表没有结点了，另一个链表存在结点，将剩余的结点加入到新链表的尾部，完成合并。</p>
+<p>递归法：（满足递归的三个条件）</p>
+<p>比较当前结点大小先比较下一结点的大小。</p>
+<p>1）结点之间的比较可以分的子问题为每个节点的比较。</p>
+<p>2）终止条件：其中一个链表结点为 null。</p>
+<p>3）子问题和总问题具有相同的解决思路。</p>
+</blockquote>
+<h6 id="▉-测试用例-4"><a href="#▉-测试用例-4" class="headerlink" title="▉ 测试用例"></a>▉ 测试用例</h6><blockquote>
+<p>1）输入两个空链表。</p>
+<p>2）其中一个链表为空链表。</p>
+<p>3）输入两个完整的链表。</p>
+</blockquote>
+<h6 id="▉-代码实现-3"><a href="#▉-代码实现-3" class="headerlink" title="▉ 代码实现"></a>▉ 代码实现</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 功能:两个有序链表的合并</span></span><br><span class="line"><span class="comment">// 步骤:</span></span><br><span class="line"><span class="comment">// 1、判断两个链表是否为 null,并将链表赋予临时变量</span></span><br><span class="line"><span class="comment">// 2、声明合并链表,通过 currentNode 指向当前结点</span></span><br><span class="line"><span class="comment">// 3、两个链表比较大小,数值小的添加到合并链表中,合并链表进行指针移动</span></span><br><span class="line"><span class="comment">// 4、将链表剩余数据添加到合并链表后边</span></span><br><span class="line"><span class="keyword">const</span> mergeSortList = <span class="function">(<span class="params">listA,listB</span>) =&gt;</span>&#123;</span><br><span class="line">    <span class="comment">//判断链表是否为空</span></span><br><span class="line">    <span class="keyword">if</span>(listA === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(listB === <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">let</span> a = listA;</span><br><span class="line">    <span class="keyword">let</span> b = listB;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//声明合并链表,通过 currentNode 指向当前结点</span></span><br><span class="line">    <span class="keyword">let</span> resultList = <span class="literal">undefined</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//两个链表比较大小,数值小的添加到合并链表中,合并链表进行指针移动</span></span><br><span class="line">    <span class="keyword">if</span> (a.data &lt; b.data) &#123;</span><br><span class="line">        resultList = a</span><br><span class="line">        a = a.next</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        resultList = b</span><br><span class="line">        b = b.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> currentNode = resultList;</span><br><span class="line">    <span class="keyword">while</span> (a !== <span class="literal">null</span> &amp;&amp; b !== <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.data &lt; b.data) &#123;</span><br><span class="line">            currentNode.next = a</span><br><span class="line">            a = a.next</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            currentNode.next = b</span><br><span class="line">            b = b.next</span><br><span class="line">        &#125;</span><br><span class="line">        currentNode = currentNode.next</span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将链表剩余数据添加到合并链表后边 </span></span><br><span class="line">    <span class="keyword">if</span>(a !== <span class="literal">null</span>)&#123;</span><br><span class="line">        currentNode.next = a;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        currentNode.next = b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//返回合并链表</span></span><br><span class="line">    <span class="keyword">return</span> resultList;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-递归实现"><a href="#▉-递归实现" class="headerlink" title="▉ 递归实现"></a>▉ 递归实现</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mergeTwoLists = <span class="function"><span class="keyword">function</span>(<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//终止条件</span></span><br><span class="line">    <span class="keyword">if</span>(l1 == <span class="literal">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">    <span class="keyword">if</span>(l2 == <span class="literal">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断数值大小递归</span></span><br><span class="line">    <span class="keyword">if</span>(l1.val &lt; l2.val)&#123;</span><br><span class="line">        result = l1;</span><br><span class="line">        result.next = mergeTwoLists(l1.next,l2);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        result = l2;</span><br><span class="line">        result.next = mergeTwoLists(l2.next,l1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回结果</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-代码测试"><a href="#▉-代码测试" class="headerlink" title="▉ 代码测试"></a>▉ 代码测试</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//定义结点</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(data)&#123;</span><br><span class="line">        <span class="keyword">this</span>.data = data;</span><br><span class="line">        <span class="keyword">this</span>.next = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//定义链表</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LinkedList</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>()&#123;</span><br><span class="line">        <span class="keyword">this</span>.head = <span class="keyword">new</span> Node(<span class="string">'head'</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//根据 value 查找结点</span></span><br><span class="line">    findByValue = <span class="function">(<span class="params">value</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head;</span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span> &amp;&amp; currentNode.data !== value)&#123;</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//判断该结点是否找到</span></span><br><span class="line">        <span class="built_in">console</span>.log(currentNode)</span><br><span class="line">        <span class="keyword">return</span> currentNode === <span class="literal">null</span> ? <span class="number">-1</span> : currentNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//插入元素(指定元素向后插入)</span></span><br><span class="line">    insert = <span class="function">(<span class="params">value,element</span>) =&gt;</span>&#123;</span><br><span class="line">        <span class="comment">//先查找该元素</span></span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.findByValue(element);</span><br><span class="line">        <span class="comment">//如果没有找到</span></span><br><span class="line">        <span class="keyword">if</span>(currentNode == <span class="number">-1</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"未找到插入位置!"</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">let</span> newNode = <span class="keyword">new</span> Node(value);</span><br><span class="line">        newNode.next = currentNode.next;</span><br><span class="line">        currentNode.next = newNode;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//遍历所有结点</span></span><br><span class="line">    print = <span class="function"><span class="params">()</span> =&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> currentNode = <span class="keyword">this</span>.head</span><br><span class="line">        <span class="comment">//如果结点不为空</span></span><br><span class="line">        <span class="keyword">while</span>(currentNode !== <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(currentNode.data)</span><br><span class="line">            currentNode = currentNode.next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 合并两个链表</span></span><br><span class="line"><span class="keyword">var</span> mergeSortList = <span class="function"><span class="keyword">function</span>(<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> result = <span class="literal">null</span>;</span><br><span class="line">    <span class="comment">//终止条件</span></span><br><span class="line">    <span class="keyword">if</span>(l1 == <span class="literal">null</span>) <span class="keyword">return</span> l2;</span><br><span class="line">    <span class="keyword">if</span>(l2 == <span class="literal">null</span>) <span class="keyword">return</span> l1;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//判断数值大小递归</span></span><br><span class="line">    <span class="keyword">if</span>(l1.val &lt; l2.val)&#123;</span><br><span class="line">        result = l1;</span><br><span class="line">        result.next = mergeSortList(l1.next,l2);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        result = l2;</span><br><span class="line">        result.next = mergeSortList(l2.next,l1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回结果</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line">sortedList1 = <span class="keyword">new</span> LinkedList()</span><br><span class="line">sortedList1.insert(<span class="number">9</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList1.insert(<span class="number">8</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList1.insert(<span class="number">7</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList1.insert(<span class="number">6</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList1.print();</span><br><span class="line">sortedList2 = <span class="keyword">new</span> LinkedList()</span><br><span class="line">sortedList2.insert(<span class="number">21</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList2.insert(<span class="number">20</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList2.insert(<span class="number">19</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList2.insert(<span class="number">18</span>, <span class="string">'head'</span>)</span><br><span class="line">sortedList2.print();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'----------------合并两个有序的链表----------------'</span>)</span><br><span class="line"><span class="keyword">let</span> resultList = mergeSortList(sortedList1.head.next,sortedList2.head.next)</span><br><span class="line"><span class="keyword">while</span> (resultList !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(resultList.date);</span><br><span class="line">    resultList = resultList.next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="▉-性能分析-4"><a href="#▉-性能分析-4" class="headerlink" title="▉ 性能分析"></a>▉ 性能分析</h6><blockquote>
+<ul>
+<li>时间复杂度：O（n）。n 为较短的链表的长度。</li>
+<li>空间复杂度：O（n+m）。需要额外的 n+m(两个链表长度之和) 大小的空间来存储合并的结点。</li>
+</ul>
+</blockquote>
+<h4 id="5-2-小结"><a href="#5-2-小结" class="headerlink" title="5.2 小结"></a>5.2 小结</h4><h6 id="▉-内容考察-3"><a href="#▉-内容考察-3" class="headerlink" title="▉ 内容考察"></a>▉ 内容考察</h6><blockquote>
+<p>1）对链表的基本操作。</p>
+<p>2）写代码考虑问题的全面性和鲁棒性。</p>
+</blockquote>
+<h6 id="▉-注意事项-2"><a href="#▉-注意事项-2" class="headerlink" title="▉ 注意事项"></a>▉ 注意事项</h6><blockquote>
+<p>1）递归实现，注意递归解决问题的三个缺点。</p>
+<ul>
+<li>堆栈溢出</li>
+<li>重复数据</li>
+<li>高空间复杂度</li>
+</ul>
+</blockquote>
+<h2 id="三、LeetCode-加强练习阶段（阶段三）"><a href="#三、LeetCode-加强练习阶段（阶段三）" class="headerlink" title="三、LeetCode 加强练习阶段（阶段三）"></a>三、LeetCode 加强练习阶段（阶段三）</h2><blockquote>
+<p>如果你对基本的链表操作已经掌握，想进一步提高对链表熟练度的操作，可以练习一下 LeetCode 题目。每道题我都做了详细的解析，如：问题分析、算法思路、代码实现、考查内容等，有关链表的相关题目会不断更新……</p>
+</blockquote>
+<ul>
+<li><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener">环形链表 I</a> (<a href="https://github.com/luxiangqiang/JS-LeetCode/blob/master/LinkedListCycle.md" target="_blank" rel="noopener">题目解析</a> )</li>
+<li><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener">环形链表 II</a> (<a href="https://github.com/luxiangqiang/JS-LeetCode/blob/master/LinkedListCycle2.md" target="_blank" rel="noopener">题目解析</a> )</li>
+<li><a href="https://leetcode-cn.com/problems/merge-k-sorted-lists/" target="_blank" rel="noopener">合并K个排序链表</a> (<a href="https://github.com/luxiangqiang/JS-LeetCode/blob/master/MergekSortedLists.md" target="_blank" rel="noopener">题目解析</a> )</li>
+</ul>
+<h2 id="四、链表总结"><a href="#四、链表总结" class="headerlink" title="四、链表总结"></a>四、链表总结</h2><blockquote>
+<p>做了大量有关链表的题型之后，对链表的操作做一个总结和复盘，对链表有一个整体的把握和重新的认识。</p>
+</blockquote>
+<h4 id="1、结构上"><a href="#1、结构上" class="headerlink" title="1、结构上"></a>1、结构上</h4><blockquote>
+<p>1）存储链表的内存空间是不连续的，所有需要使用指针将这些零碎内存空间连接起来，导致需要通过指针来进行操作，这也是为什么链表中大多数都是关于指针的操作的原因。</p>
+<p>2）链表在结构上有两个特殊的地方就是链表头和链表尾，很多操作都要对链表头和链表尾进行特殊处理，所以我们可以借助哨兵思想（在链表头添加一个哨兵），这样带头的链表可以简化问题的解决。</p>
+</blockquote>
+<h4 id="2、操作上"><a href="#2、操作上" class="headerlink" title="2、操作上"></a>2、操作上</h4><blockquote>
+<p>1）递归：链表中的很多操作都是可以用递归来进行解决的，因为链表的每个结点都有着相同的结构，再加上解决的问题可以分解为子问题进行解决。所以在链表中递归编程技巧还是非常常用的。如：从尾到头打印链表、合并两个有序链表、反转链表等。</p>
+<p>2）双指针：链表中大部分都是进行指针操作，链表属于线性表结构（形如一条线的结构），很多问题可以使用双指针来解决，也是非常常用到的。如：查找倒数第K 结点、求链表的中间结点等。</p>
+</blockquote>
+<h4 id="3、性能上"><a href="#3、性能上" class="headerlink" title="3、性能上"></a>3、性能上</h4><blockquote>
+<p>1）链表正是因为存储空间不连续，对 CPU 缓存不友好，随时访问只能从头遍历链表，时间复杂度为 O（n），但是链表的这种结构也有个好处就是。可以动态的申请内存空间，不需要提前申请。</p>
+<p>2）指针的存储是需要额外的内存空间的，如果存储的数据远大于存储指针的内存空间，可以进行忽略。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/前端进阶深入系列之【跨域问题】/" rel="next" title="前端进阶深入系列之【跨域问题】">
+                <i class="fa fa-chevron-left"></i> 前端进阶深入系列之【跨域问题】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/13/前端框架之 JQuery 【完整篇】/" rel="prev" title="吃透 JQuery 之【完整篇】">
+                吃透 JQuery 之【完整篇】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前边"><span class="nav-number">1.</span> <span class="nav-text">写在前边</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、学习建议"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、学习建议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、学习路径"><span class="nav-number">1.0.2.</span> <span class="nav-text">2、学习路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、链表基础练习（阶段一）"><span class="nav-number">2.</span> <span class="nav-text">一、链表基础练习（阶段一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、链表进阶练习（阶段二）"><span class="nav-number">3.</span> <span class="nav-text">二、链表进阶练习（阶段二）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、单链表从尾到头打印"><span class="nav-number">3.1.</span> <span class="nav-text">1、单链表从尾到头打印</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-问题分析与解决"><span class="nav-number">3.1.1.</span> <span class="nav-text">1.1 问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-问题分析"><span class="nav-number">3.1.1.0.1.</span> <span class="nav-text">▉ 问题分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-算法思路"><span class="nav-number">3.1.1.0.2.</span> <span class="nav-text">▉ 算法思路</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-测试用例"><span class="nav-number">3.1.1.0.3.</span> <span class="nav-text">▉ 测试用例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现：反转链表法"><span class="nav-number">3.1.1.0.4.</span> <span class="nav-text">▉ 代码实现：反转链表法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现：循环栈"><span class="nav-number">3.1.1.0.5.</span> <span class="nav-text">▉ 代码实现：循环栈</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现：递归"><span class="nav-number">3.1.1.0.6.</span> <span class="nav-text">▉ 代码实现：递归</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-性能分析"><span class="nav-number">3.1.1.0.7.</span> <span class="nav-text">▉ 性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-小结"><span class="nav-number">3.1.2.</span> <span class="nav-text">2.2 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-考察内容"><span class="nav-number">3.1.2.0.1.</span> <span class="nav-text">▉ 考察内容</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-扩展思考：循环和递归"><span class="nav-number">3.1.2.0.2.</span> <span class="nav-text">▉ 扩展思考：循环和递归</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-注意事项："><span class="nav-number">3.1.2.0.3.</span> <span class="nav-text">▉ 注意事项：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、删除链表结点"><span class="nav-number">3.2.</span> <span class="nav-text">2、删除链表结点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-问题分析与解决"><span class="nav-number">3.2.1.</span> <span class="nav-text">2.1 问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-问题分析-1"><span class="nav-number">3.2.1.0.1.</span> <span class="nav-text">▉ 问题分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-算法思路-1"><span class="nav-number">3.2.1.0.2.</span> <span class="nav-text">▉ 算法思路</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-测试用例-1"><span class="nav-number">3.2.1.0.3.</span> <span class="nav-text">▉ 测试用例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现"><span class="nav-number">3.2.1.0.4.</span> <span class="nav-text">▉ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-性能分析-1"><span class="nav-number">3.2.1.0.5.</span> <span class="nav-text">▉ 性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-小结-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">2.2 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-内容考察"><span class="nav-number">3.2.2.0.1.</span> <span class="nav-text">▉ 内容考察</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、链表中的倒数第-K-个结点"><span class="nav-number">3.3.</span> <span class="nav-text">3、链表中的倒数第 K 个结点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-问题分析与解决"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-问题分析-2"><span class="nav-number">3.3.1.0.1.</span> <span class="nav-text">▉ 问题分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-算法思路-2"><span class="nav-number">3.3.1.0.2.</span> <span class="nav-text">▉ 算法思路</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-测试用例-2"><span class="nav-number">3.3.1.0.3.</span> <span class="nav-text">▉ 测试用例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现-1"><span class="nav-number">3.3.1.0.4.</span> <span class="nav-text">▉ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-性能分析-2"><span class="nav-number">3.3.1.0.5.</span> <span class="nav-text">▉ 性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-小结"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-内容考察-1"><span class="nav-number">3.3.2.0.1.</span> <span class="nav-text">▉ 内容考察</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-注意事项"><span class="nav-number">3.3.2.0.2.</span> <span class="nav-text">▉ 注意事项</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-相关题目"><span class="nav-number">3.3.2.0.3.</span> <span class="nav-text">▉ 相关题目</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、反转链表"><span class="nav-number">3.4.</span> <span class="nav-text">4、反转链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-问题分析与解决"><span class="nav-number">3.4.1.</span> <span class="nav-text">4.1 问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-问题分析-3"><span class="nav-number">3.4.1.0.1.</span> <span class="nav-text">▉ 问题分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-算法思路-3"><span class="nav-number">3.4.1.0.2.</span> <span class="nav-text">▉ 算法思路</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-测试用例-3"><span class="nav-number">3.4.1.0.3.</span> <span class="nav-text">▉ 测试用例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现-2"><span class="nav-number">3.4.1.0.4.</span> <span class="nav-text">▉ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-递归法"><span class="nav-number">3.4.1.0.5.</span> <span class="nav-text">▉ 递归法</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-性能分析-3"><span class="nav-number">3.4.1.0.6.</span> <span class="nav-text">▉ 性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-小结"><span class="nav-number">3.4.2.</span> <span class="nav-text">4.2 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-内容考察-2"><span class="nav-number">3.4.2.0.1.</span> <span class="nav-text">▉ 内容考察</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-注意事项-1"><span class="nav-number">3.4.2.0.2.</span> <span class="nav-text">▉ 注意事项</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、合并两个有序链表"><span class="nav-number">3.5.</span> <span class="nav-text">5、合并两个有序链表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-问题分析与解决"><span class="nav-number">3.5.1.</span> <span class="nav-text">5.1 问题分析与解决</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-问题分析-4"><span class="nav-number">3.5.1.0.1.</span> <span class="nav-text">▉ 问题分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-算法思路-4"><span class="nav-number">3.5.1.0.2.</span> <span class="nav-text">▉ 算法思路</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-测试用例-4"><span class="nav-number">3.5.1.0.3.</span> <span class="nav-text">▉ 测试用例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码实现-3"><span class="nav-number">3.5.1.0.4.</span> <span class="nav-text">▉ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-递归实现"><span class="nav-number">3.5.1.0.5.</span> <span class="nav-text">▉ 递归实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-代码测试"><span class="nav-number">3.5.1.0.6.</span> <span class="nav-text">▉ 代码测试</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-性能分析-4"><span class="nav-number">3.5.1.0.7.</span> <span class="nav-text">▉ 性能分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-小结"><span class="nav-number">3.5.2.</span> <span class="nav-text">5.2 小结</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-内容考察-3"><span class="nav-number">3.5.2.0.1.</span> <span class="nav-text">▉ 内容考察</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-注意事项-2"><span class="nav-number">3.5.2.0.2.</span> <span class="nav-text">▉ 注意事项</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、LeetCode-加强练习阶段（阶段三）"><span class="nav-number">4.</span> <span class="nav-text">三、LeetCode 加强练习阶段（阶段三）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、链表总结"><span class="nav-number">5.</span> <span class="nav-text">四、链表总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、结构上"><span class="nav-number">5.0.1.</span> <span class="nav-text">1、结构上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、操作上"><span class="nav-number">5.0.2.</span> <span class="nav-text">2、操作上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、性能上"><span class="nav-number">5.0.3.</span> <span class="nav-text">3、性能上</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/04/13/数据结构与算法之题型篇【链表】/';
+          this.page.identifier = '2019/04/13/数据结构与算法之题型篇【链表】/';
+          this.page.title = '数据结构与算法之题型篇【链表】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

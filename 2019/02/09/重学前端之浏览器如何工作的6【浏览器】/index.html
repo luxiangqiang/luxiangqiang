@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,浏览器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="浏览器是如何工作的？">
+<meta name="keywords" content="前端,浏览器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重学前端之浏览器如何工作的【浏览器】">
+<meta property="og:url" content="http://yoursite.com/2019/02/09/重学前端之浏览器如何工作的6【浏览器】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="浏览器是如何工作的？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/HTTP格式.png">
+<meta property="og:image" content="http://yoursite.com/images/requestheader.png">
+<meta property="og:image" content="http://yoursite.com/images/responseheader.png">
+<meta property="og:image" content="http://yoursite.com/images/构建DOM树.png">
+<meta property="og:image" content="http://yoursite.com/images/状态机.png">
+<meta property="og:image" content="http://yoursite.com/images/横向文字排版.png">
+<meta property="og:updated_time" content="2019-02-24T05:32:14.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="重学前端之浏览器如何工作的【浏览器】">
+<meta name="twitter:description" content="浏览器是如何工作的？">
+<meta name="twitter:image" content="http://yoursite.com/images/HTTP格式.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/02/09/重学前端之浏览器如何工作的6【浏览器】/"/>
+
+
+
+
+
+  <title>重学前端之浏览器如何工作的【浏览器】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/09/重学前端之浏览器如何工作的6【浏览器】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">重学前端之浏览器如何工作的【浏览器】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-09T19:17:15+08:00">
+                2019-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/浏览器/" itemprop="url" rel="index">
+                    <span itemprop="name">浏览器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/09/重学前端之浏览器如何工作的6【浏览器】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/02/09/重学前端之浏览器如何工作的6【浏览器】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,788
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>浏览器是如何工作的？</p>
+<a id="more"></a> 
+<h1 id="浏览器是如何工作的？"><a href="#浏览器是如何工作的？" class="headerlink" title="浏览器是如何工作的？"></a>浏览器是如何工作的？</h1><h2 id="第一阶段：（通讯部分）HTTP-的请求过程"><a href="#第一阶段：（通讯部分）HTTP-的请求过程" class="headerlink" title="第一阶段：（通讯部分）HTTP 的请求过程"></a>第一阶段：（通讯部分）HTTP 的请求过程</h2><h3 id="一、浏览器的请求过程"><a href="#一、浏览器的请求过程" class="headerlink" title="一、浏览器的请求过程"></a>一、浏览器的请求过程</h3><blockquote>
+<p>DOM 树构建、CSS 计算、渲染、合成、绘制。</p>
+</blockquote>
+<ul>
+<li>浏览器使用 HTTP 协议或者 HTTPS  协议，向服务器发送请求。</li>
+<li>把请求回来的 HTML 代码经过解析，<strong>构成 DOM 树</strong>；</li>
+<li>最后根据 CSS 属性对元素进行逐个<strong>渲染</strong>，得到内存中的位图。</li>
+<li>一个可选的步骤是对位图进行<strong>合成</strong>，极大地增加后续绘制的速度；</li>
+<li>合成之后，再<strong>绘制</strong>到界面上。</li>
+</ul>
+<h3 id="二、HTTP-协议"><a href="#二、HTTP-协议" class="headerlink" title="二、HTTP 协议"></a>二、HTTP 协议</h3><blockquote>
+<p>1、HTTP 是纯粹的文本协议，基于 TCP 协议出现的。TCP 是双向通信通道，HTTP 规定了 Request-Response 的模式，必须是由客户端首先发起。</p>
+<p>2、浏览器是只需要 tcp 库或者现成的 http 库就能搞定网络通讯部分。</p>
+</blockquote>
+<h4 id="1、HTTP-请求"><a href="#1、HTTP-请求" class="headerlink" title="1、HTTP 请求"></a>1、HTTP 请求</h4><ul>
+<li>请求的方法</li>
+<li>请求的路径</li>
+<li>请求的协议</li>
+<li>请求的版本</li>
+</ul>
+<h4 id="2、HTTP-响应"><a href="#2、HTTP-响应" class="headerlink" title="2、HTTP 响应"></a>2、HTTP 响应</h4><ul>
+<li>响应的协议</li>
+<li>响应的版本</li>
+<li>响应的状态</li>
+<li>响应的文本</li>
+</ul>
+<h3 id="三、HTTP-协议格式"><a href="#三、HTTP-协议格式" class="headerlink" title="三、HTTP 协议格式"></a>三、HTTP 协议格式</h3><p><img src="/images/HTTP格式.png" alt=""></p>
+<h4 id="1、Method（方法）"><a href="#1、Method（方法）" class="headerlink" title="1、Method（方法）"></a>1、Method（方法）</h4><ul>
+<li><h5 id="GET"><a href="#GET" class="headerlink" title="GET"></a>GET</h5></li>
+</ul>
+<blockquote>
+<p>通过浏览器访问的都是 GET 方法。</p>
+</blockquote>
+<ul>
+<li><h5 id="POST"><a href="#POST" class="headerlink" title="POST"></a>POST</h5></li>
+</ul>
+<blockquote>
+<p>表单提交使用 POST 方法。</p>
+</blockquote>
+<ul>
+<li><h5 id="HEAD"><a href="#HEAD" class="headerlink" title="HEAD"></a>HEAD</h5></li>
+</ul>
+<blockquote>
+<p>HEAD 则是跟 GET 类似，只返回请求头，多数由 Js 发起。</p>
+</blockquote>
+<ul>
+<li><h5 id="PUT"><a href="#PUT" class="headerlink" title="PUT"></a>PUT</h5></li>
+<li><h5 id="DELETE"><a href="#DELETE" class="headerlink" title="DELETE"></a>DELETE</h5></li>
+</ul>
+<blockquote>
+<p>PUT 和 DELETE 分别表示<strong>添加</strong>资源和<strong>删除</strong>资源。</p>
+</blockquote>
+<ul>
+<li><h5 id="CONNECT"><a href="#CONNECT" class="headerlink" title="CONNECT"></a>CONNECT</h5></li>
+</ul>
+<blockquote>
+<p>现在多用于 HTTPS 和 WebSocket。</p>
+</blockquote>
+<ul>
+<li><h5 id="OPTIONS"><a href="#OPTIONS" class="headerlink" title="OPTIONS"></a>OPTIONS</h5></li>
+<li><h5 id="TRACE"><a href="#TRACE" class="headerlink" title="TRACE"></a>TRACE</h5></li>
+</ul>
+<blockquote>
+<p>OPTIONS 和 TRACE 一般用于调试，多数线上服务都不支持。</p>
+</blockquote>
+<h4 id="2、Status-code-状态码-和-Status-text-状态文本"><a href="#2、Status-code-状态码-和-Status-text-状态文本" class="headerlink" title="2、Status code(状态码) 和 Status text(状态文本)"></a>2、Status code(状态码) 和 Status text(状态文本)</h4><ul>
+<li><h5 id="1XX-：临时回应，表示客户端请继续。"><a href="#1XX-：临时回应，表示客户端请继续。" class="headerlink" title="1XX ：临时回应，表示客户端请继续。"></a>1XX ：临时回应，表示客户端请继续。</h5></li>
+</ul>
+<blockquote>
+<p>1xx 的状态被浏览器 http 库直接处理掉了，不会让上层应用知晓。</p>
+</blockquote>
+<ul>
+<li><h5 id="2XX-：请求成功。"><a href="#2XX-：请求成功。" class="headerlink" title="2XX ：请求成功。"></a>2XX ：请求成功。</h5><ul>
+<li>200 ：请求成功</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="3XX-：表示请求的目标有变化，希望客户端进一步处理。"><a href="#3XX-：表示请求的目标有变化，希望客户端进一步处理。" class="headerlink" title="3XX ：表示请求的目标有变化，希望客户端进一步处理。"></a>3XX ：表示请求的目标有变化，希望客户端进一步处理。</h5><ul>
+<li>301 &amp;&amp; 302：永久性与临时性跳转。</li>
+</ul>
+<blockquote>
+<p>实际上 301 更接近于一种报错，提示客户端下次别来了。</p>
+</blockquote>
+<ul>
+<li><strong>304 ：跟客户端缓存没有更新。</strong></li>
+</ul>
+<blockquote>
+<p>客户端本地已缓存资源，发送条件请求判断是否为最新版本，如果为最新版本，返回 304 状态码，读取本地缓存。</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><h5 id="4XX-：客户端请求错误。"><a href="#4XX-：客户端请求错误。" class="headerlink" title="4XX ：客户端请求错误。"></a>4XX ：客户端请求错误。</h5><ul>
+<li>403 : 无权限。</li>
+<li>404：表示请求的页面不存在。</li>
+<li>418：超文本咖啡壶控制协议。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><h5 id="5XX-服务端请求错误。"><a href="#5XX-服务端请求错误。" class="headerlink" title="5XX :服务端请求错误。"></a>5XX :服务端请求错误。</h5><ul>
+<li>500：服务端错误。</li>
+<li>503：服务器暂时性错误，可以一会再试。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、HTTP-Head-HTTP-头"><a href="#3、HTTP-Head-HTTP-头" class="headerlink" title="3、HTTP Head(HTTP 头)"></a>3、HTTP Head(HTTP 头)</h4><ul>
+<li><h5 id="Request-Header。"><a href="#Request-Header。" class="headerlink" title="Request Header。"></a>Request Header。</h5></li>
+</ul>
+<p><img src="/images/requestheader.png" alt=""></p>
+<ul>
+<li><h5 id="Response-Header。"><a href="#Response-Header。" class="headerlink" title="Response Header。"></a>Response Header。</h5></li>
+</ul>
+<p><img src="/images/responseheader.png" alt=""></p>
+<h4 id="4、HTTP-Request-Body"><a href="#4、HTTP-Request-Body" class="headerlink" title="4、HTTP Request Body"></a>4、HTTP Request Body</h4><blockquote>
+<p>HTTP 请求的 body 主要用于提交表单场景。</p>
+</blockquote>
+<ul>
+<li>application/json</li>
+<li>application/x-www-form-urlencoded  (form 标签提交默认格式)</li>
+<li>multipart/form-data （文件上传）</li>
+<li>text/xml</li>
+</ul>
+<h2 id="第二阶段：DOM树是如何构建的？"><a href="#第二阶段：DOM树是如何构建的？" class="headerlink" title="第二阶段：DOM树是如何构建的？"></a>第二阶段：DOM树是如何构建的？</h2><blockquote>
+<p>第一阶段用 HTTP/HTTPS 请求服务器，服务器返回数据进行第二阶段构建 DOM 树。</p>
+</blockquote>
+<p><img src="/images/构建DOM树.png" alt=""></p>
+<h3 id="一、词（token）的拆分"><a href="#一、词（token）的拆分" class="headerlink" title="一、词（token）的拆分"></a>一、词（token）的拆分</h3><blockquote>
+<p>这部分内容正是 HTTP 的 Response 的 body 部分内容，词（token）是最小的有意义的单元。就是将各类标签和属性拆分。</p>
+</blockquote>
+<p>我们就收到字符串之后并不知道那个词，每读入一个字符都要进行决策，要想把字符流解析成词，我们就是用状态机。</p>
+<h3 id="二、状态机"><a href="#二、状态机" class="headerlink" title="二、状态机"></a>二、状态机</h3><h4 id="1、状态机的定义"><a href="#1、状态机的定义" class="headerlink" title="1、状态机的定义"></a>1、状态机的定义</h4><blockquote>
+<p>大部分语言的<strong>词法部分</strong>都是使用状态机实现的。</p>
+</blockquote>
+<p><img src="/images/状态机.png" alt=""></p>
+<blockquote>
+<p>HTML 共规定 80 个状态：<a href="https://html.spec.whatwg.org/multipage/parsing.html#tokenization" target="_blank" rel="noopener">https://html.spec.whatwg.org/multipage/parsing.html#tokenization</a></p>
+</blockquote>
+<h4 id="2、状态机的原理"><a href="#2、状态机的原理" class="headerlink" title="2、状态机的原理"></a>2、状态机的原理</h4><blockquote>
+<p>状态机把每个词的特征字符逐个拆分开，然后再把所有词的特征字符链合并起来，形成联通图结构。</p>
+</blockquote>
+<ul>
+<li>如果获得的是一个非 &lt; 字符，那么可以认为进入了一个文本节点；</li>
+<li>如果获得的是一个 &lt; 字符，那么进入一个标签状态。</li>
+<li>比如下一个字符是“ ! ” ，那么很可能是进入了注释节点或者 CDATA 节点。</li>
+<li>如果下一个字符是 “/ ”，那么可以确定进入了一个结束标签。</li>
+<li>如果下一个字符是字母，那么可以确定进入了一个开始标签。</li>
+<li>如果我们要完整处理各种 HTML 标准中定义的东西，那么还要考虑“ ? ”“% ”等内容。</li>
+</ul>
+<h4 id="3、状态机的实现"><a href="#3、状态机的实现" class="headerlink" title="3、状态机的实现"></a>3、状态机的实现</h4><blockquote>
+<p>每个函数就是一种状态，参数是接受的字符，返回值是下一个状态函数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(c==<span class="string">"&amp;"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> characterReferenceInData;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(c==<span class="string">"&lt;"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> tagOpen;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(c==<span class="string">"\0"</span>) &#123;</span><br><span class="line">        error();</span><br><span class="line">        emitToken(c);</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(c==EOF) &#123;</span><br><span class="line">        emitToken(EOF);</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        emitToken(c);</span><br><span class="line">        <span class="keyword">return</span> data;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> tagOpenState = <span class="function"><span class="keyword">function</span> <span class="title">tagOpenState</span>(<span class="params">c</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(c==<span class="string">"/"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> endTagOpenState;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(c.match(<span class="regexp">/[A-Z]/</span>)) &#123;</span><br><span class="line">        token = <span class="keyword">new</span> StartTagToken();</span><br><span class="line">        token.name = c.toLowerCase();</span><br><span class="line">        <span class="keyword">return</span> tagNameState;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(c.match(<span class="regexp">/[a-z]/</span>)) &#123;</span><br><span class="line">        token = <span class="keyword">new</span> StartTagToken();</span><br><span class="line">        token.name = c;</span><br><span class="line">        <span class="keyword">return</span> tagNameState;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(c==<span class="string">"?"</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> bogusCommentState;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        error();</span><br><span class="line">        <span class="keyword">return</span> dataState;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="4、字符流转换成词"><a href="#4、字符流转换成词" class="headerlink" title="4、字符流转换成词"></a>4、字符流转换成词</h4><blockquote>
+<p>每一个状态是一个函数，通过 “if else” 来区分下一个字符做状态迁移。状态迁移，将当前状态函数返回下一个状态函数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">HTMLLexicalParser</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 状态函数们……</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">data</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">tagOpen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// ……</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// ……</span></span><br><span class="line">    <span class="keyword">var</span> state = data;</span><br><span class="line">    <span class="keyword">this</span>.receiveInput = <span class="function"><span class="keyword">function</span>(<span class="params">char</span>) </span>&#123;</span><br><span class="line">        state = state(char);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、构建-DOM-树"><a href="#三、构建-DOM-树" class="headerlink" title="三、构建 DOM 树"></a>三、构建 DOM 树</h3><blockquote>
+<p>DOM 树的构建，利用数据结构中的栈来实现。</p>
+</blockquote>
+<ul>
+<li>接受字符串，转换成词，开始构建 DOM 树；</li>
+<li>栈顶的最后为根元素，DOM 树的第一项就是 stack[0]；</li>
+<li>不同的 HTML 节点对应不同的  Node 子类。</li>
+</ul>
+<h4 id="1、利用栈来构建-DOM-树"><a href="#1、利用栈来构建-DOM-树" class="headerlink" title="1、利用栈来构建 DOM 树"></a>1、利用栈来构建 DOM 树</h4><blockquote>
+<p>源代码完全遵守 xhtml，html 具有很强的容错能力，当栈顶和栈尾不匹配的时候，又有一套复杂的规则。</p>
+<p>链接：<a href="http://w3c.github.io/html/syntax.html#tree-construction" target="_blank" rel="noopener">http://w3c.github.io/html/syntax.html#tree-construction</a></p>
+</blockquote>
+<ul>
+<li><p>栈顶元素就是当前节点；</p>
+</li>
+<li><p>遇到属性，就添加到当前节点；</p>
+</li>
+<li><p>遇到文本节点，如果当前节点是文本节点，则跟文本节点合并，否则入栈成为当前节点的子节点；</p>
+</li>
+<li><p>遇到注释节点，作为当前节点的子节点；</p>
+</li>
+<li><p>遇到 tag start 就入栈一个节点，当前节点就是这个节…</p>
+</li>
+<li><p>遇到 tag end 就出栈一个节点（还可以检查是否匹配）。</p>
+</li>
+</ul>
+<h2 id="第三阶段：CSS-的计算"><a href="#第三阶段：CSS-的计算" class="headerlink" title="第三阶段：CSS 的计算"></a>第三阶段：CSS 的计算</h2><blockquote>
+<p>当我们构建 DOM 树的时候，这个过程会被浏览器流式的处理，从父到子，从先到后，一个一个节点构造，并且挂载到 DOM 树上，CSS属性也会同步计算。这一过程拿到元素会一次匹配规则，根据规则的优先级进行覆盖和调整，</p>
+</blockquote>
+<h3 id="一、选择器的各种符号"><a href="#一、选择器的各种符号" class="headerlink" title="一、选择器的各种符号"></a>一、选择器的各种符号</h3><blockquote>
+<p>那就是选择器的出现顺序，必定跟构建 DOM 树的顺序一致。即保证选择器在 DOM 树构建到当前节点时，已经可以准确判断是否匹配，不需要后续节点信息。</p>
+</blockquote>
+<ul>
+<li><p>空格</p>
+</li>
+<li><p>&lt; </p>
+</li>
+<li><p>+ </p>
+</li>
+<li><p>~ </p>
+</li>
+<li><p>||</p>
+</li>
+</ul>
+<h4 id="二、匹配规则"><a href="#二、匹配规则" class="headerlink" title="二、匹配规则"></a>二、匹配规则</h4><h4 id="1、后代选择器“空格”"><a href="#1、后代选择器“空格”" class="headerlink" title="1、后代选择器“空格”"></a>1、后代选择器“空格”</h4><blockquote>
+<p><strong>匹配规则：</strong>后代选择器的作用范围是父节点的所有子节点，因此规则是在匹配到本标签的结束标签时回退。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a#b .cls &#123;</span><br><span class="line">    width: <span class="number">100</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">id</span>=<span class="string">b</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>1<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">cls</span>&gt;</span>2<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">cls</span>&gt;</span>3<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、后继选择器“-”"><a href="#2、后继选择器“-”" class="headerlink" title="2、后继选择器“~”"></a>2、后继选择器“~”</h4><blockquote>
+<p><strong>匹配规则：</strong>后继选择器只作用于一层，上述的激活或者关闭规则不适用了。所以给选择器的激活，带上一个条件：父元素。这里的父元素是 <div>。</div></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">.cls~* &#123;</span><br><span class="line">    border:solid 1px green;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>1<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">cls</span>&gt;</span>2<span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">        3</span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>4<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span>&gt;</span>5<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>“后继”：cls 的后继有 2, 3, 5。</p>
+</blockquote>
+<h4 id="3、子代选择器“-gt-”"><a href="#3、子代选择器“-gt-”" class="headerlink" title="3、子代选择器“&gt;”"></a>3、子代选择器“&gt;”</h4><blockquote>
+<p>拿当前节点作为父元素，然后激活后边的 .cls 选择条件，并且指定了父元素必须是当前div，后续的构建 DOM 中就选中了相应的标签。</p>
+</blockquote>
+<h4 id="4、直接后继选择器“-”"><a href="#4、直接后继选择器“-”" class="headerlink" title="4、直接后继选择器“+”"></a>4、直接后继选择器“+”</h4><blockquote>
+<p>直接对唯一元素生效，不用反复的激活和关闭规则。匹配到之后让其失效。</p>
+</blockquote>
+<h4 id="5、逗号分隔"><a href="#5、逗号分隔" class="headerlink" title="5、逗号分隔"></a>5、逗号分隔</h4><blockquote>
+<p>逗号分隔看做是两条规则来处理。为了提高效率，可以把选择器构造成一课树：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#a .cls &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#a span &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">#a&gt;span &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>#a</p>
+<ul>
+<li><p>&lt;空格&gt;.cls</p>
+</li>
+<li><p>&lt;空格&gt;span</p>
+</li>
+<li><blockquote>
+<p>span</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="第四阶段：排版（确定元素位置）"><a href="#第四阶段：排版（确定元素位置）" class="headerlink" title="第四阶段：排版（确定元素位置）"></a>第四阶段：排版（确定元素位置）</h2><blockquote>
+<p>所谓的排版，就是确定每一个文字的位置。</p>
+</blockquote>
+<h3 id="一、浏览器的排版"><a href="#一、浏览器的排版" class="headerlink" title="一、浏览器的排版"></a>一、浏览器的排版</h3><blockquote>
+<p>浏览器最基本的排版就是<strong>正常流排版</strong>（跟平时书写文字一样，所以叫正常溜），包括<strong>顺次排版</strong>和<strong>折行排版</strong>。</p>
+</blockquote>
+<h4 id="1、正常流排版"><a href="#1、正常流排版" class="headerlink" title="1、正常流排版"></a>1、正常流排版</h4><blockquote>
+<p>文字排版遵循公认的文字排版模型，包括<strong>行模型</strong>（行顶、行底、文字区域、基线）和<strong>文字在行模型中的排布</strong>。</p>
+</blockquote>
+<p>■ <strong>浏览器所支持的元素</strong></p>
+<ul>
+<li>双向文字系统（不同语言文字书写顺序不同）</li>
+<li>盒模型（元素和文字混排）—— 元素被定义为长方形区域（边框、留白、边距）</li>
+<li>绝对定位元素 —— 不参加排版计算，直接由 top 和 left 等属性确定自身的位置，<strong>position</strong> 属性控制</li>
+<li>浮动元素元素 —— 在正常流的位置向左或向右移动到边界，并占据一块排版空间，float 元素控制</li>
+</ul>
+<p>■ <strong>正常流 —— 文字和盒混排</strong></p>
+<p><strong>① 文字</strong></p>
+<blockquote>
+<p>浏览器支持文字书写的方向为主轴，跟主轴垂直的叫做交叉轴。</p>
+</blockquote>
+<p><img src="/images/横向文字排版.png" alt=""></p>
+<ul>
+<li><p>advance 代表每一个文字排布后在主轴上的前进距离，文字之间的间距，文字中的重要属性。</p>
+</li>
+<li><p>多数元素被当做长方形盒来排版的，而 dispaly 为 inline 的元素，是被拆分成文本来排版的。</p>
+</li>
+</ul>
+<p><strong>■ 正常流中的盒</strong></p>
+<p>■ <strong>绝对定位元素</strong></p>
+<p>■ <strong>浮动元素排版</strong></p>
+<h3 id="二、思考：打造自己的排版方式"><a href="#二、思考：打造自己的排版方式" class="headerlink" title="二、思考：打造自己的排版方式"></a>二、思考：打造自己的排版方式</h3><blockquote>
+<p>课后练习。</p>
+</blockquote>
+<h2 id="第五阶段：在内存中进行渲染、合成、绘制"><a href="#第五阶段：在内存中进行渲染、合成、绘制" class="headerlink" title="第五阶段：在内存中进行渲染、合成、绘制"></a>第五阶段：在内存中进行渲染、合成、绘制</h2><h3 id="一、渲染"><a href="#一、渲染" class="headerlink" title="一、渲染"></a>一、渲染</h3><blockquote>
+<p><strong>渲染（render）</strong>:特指把模型变成位图的过程。</p>
+</blockquote>
+<p>■ <strong>位图</strong></p>
+<blockquote>
+<p>内存中的一张二维表格，把一张图片每个像素的颜色值保存进去（位图是 DOM 树中占据浏览器内存中最多的信息，做内存优化应优先考虑）。</p>
+</blockquote>
+<p>■ <strong>渲染过程</strong></p>
+<blockquote>
+<p>把每个元素对应的盒变成位图，元素包括 HTML元素 和伪元素，每一个盒对应一张位图。</p>
+</blockquote>
+<ul>
+<li><strong>图形</strong></li>
+</ul>
+<blockquote>
+<p>盒的背景、边框、SVG 元素、阴影等特性，都是需要绘制的图形类，需要一个底层库来支持。</p>
+</blockquote>
+<ul>
+<li><strong>文字</strong></li>
+</ul>
+<blockquote>
+<p>盒中的文字也需要底层库来支持，叫做字体库，最常用的字体库（Freetype）。</p>
+</blockquote>
+<h3 id="二、-合成"><a href="#二、-合成" class="headerlink" title="二、 合成"></a>二、 <strong>合成</strong></h3><blockquote>
+<p>渲染过程不会把子元素渲染到位图上面，合成的过程，就是为元素创建一个 “合成后的位图”，也称为合成层。</p>
+</blockquote>
+<h3 id="三、-绘制"><a href="#三、-绘制" class="headerlink" title="三、 绘制"></a>三、 <strong>绘制</strong></h3><blockquote>
+<p>绘制就是把位图按照 z-index 绘制到屏幕上，变成页面上的图像的过程。</p>
+</blockquote>
+<ul>
+<li><strong>过程</strong></li>
+</ul>
+<blockquote>
+<p>① 重绘的频率过快，性能会下降，应该部分区域 重绘。</p>
+<p>② 脏矩形算法：就是把屏幕均匀的分为若干个矩形区域。</p>
+<p>③ 重绘部分的矩形区域就可以。</p>
+</blockquote>
+<h3 id="四、思考：js-实现一个浏览器"><a href="#四、思考：js-实现一个浏览器" class="headerlink" title="四、思考：js 实现一个浏览器"></a>四、思考：js 实现一个浏览器</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/浏览器/" rel="tag"># 浏览器</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/07/重学前端之CSS结构5【css语法】/" rel="next" title="重学前端之CSS结构5【css语法】">
+                <i class="fa fa-chevron-left"></i> 重学前端之CSS结构5【css语法】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/20/数据结构与算法之美【二分查找】/" rel="prev" title="数据结构与算法之美【二分查找】">
+                数据结构与算法之美【二分查找】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#浏览器是如何工作的？"><span class="nav-number">1.</span> <span class="nav-text">浏览器是如何工作的？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一阶段：（通讯部分）HTTP-的请求过程"><span class="nav-number">1.1.</span> <span class="nav-text">第一阶段：（通讯部分）HTTP 的请求过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、浏览器的请求过程"><span class="nav-number">1.1.1.</span> <span class="nav-text">一、浏览器的请求过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、HTTP-协议"><span class="nav-number">1.1.2.</span> <span class="nav-text">二、HTTP 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、HTTP-请求"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">1、HTTP 请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、HTTP-响应"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2、HTTP 响应</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、HTTP-协议格式"><span class="nav-number">1.1.3.</span> <span class="nav-text">三、HTTP 协议格式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Method（方法）"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">1、Method（方法）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GET"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">GET</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#POST"><span class="nav-number">1.1.3.1.2.</span> <span class="nav-text">POST</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HEAD"><span class="nav-number">1.1.3.1.3.</span> <span class="nav-text">HEAD</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PUT"><span class="nav-number">1.1.3.1.4.</span> <span class="nav-text">PUT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DELETE"><span class="nav-number">1.1.3.1.5.</span> <span class="nav-text">DELETE</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CONNECT"><span class="nav-number">1.1.3.1.6.</span> <span class="nav-text">CONNECT</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OPTIONS"><span class="nav-number">1.1.3.1.7.</span> <span class="nav-text">OPTIONS</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TRACE"><span class="nav-number">1.1.3.1.8.</span> <span class="nav-text">TRACE</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Status-code-状态码-和-Status-text-状态文本"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">2、Status code(状态码) 和 Status text(状态文本)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1XX-：临时回应，表示客户端请继续。"><span class="nav-number">1.1.3.2.1.</span> <span class="nav-text">1XX ：临时回应，表示客户端请继续。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2XX-：请求成功。"><span class="nav-number">1.1.3.2.2.</span> <span class="nav-text">2XX ：请求成功。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3XX-：表示请求的目标有变化，希望客户端进一步处理。"><span class="nav-number">1.1.3.2.3.</span> <span class="nav-text">3XX ：表示请求的目标有变化，希望客户端进一步处理。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4XX-：客户端请求错误。"><span class="nav-number">1.1.3.2.4.</span> <span class="nav-text">4XX ：客户端请求错误。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5XX-服务端请求错误。"><span class="nav-number">1.1.3.2.5.</span> <span class="nav-text">5XX :服务端请求错误。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、HTTP-Head-HTTP-头"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">3、HTTP Head(HTTP 头)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Request-Header。"><span class="nav-number">1.1.3.3.1.</span> <span class="nav-text">Request Header。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Response-Header。"><span class="nav-number">1.1.3.3.2.</span> <span class="nav-text">Response Header。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、HTTP-Request-Body"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">4、HTTP Request Body</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二阶段：DOM树是如何构建的？"><span class="nav-number">1.2.</span> <span class="nav-text">第二阶段：DOM树是如何构建的？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、词（token）的拆分"><span class="nav-number">1.2.1.</span> <span class="nav-text">一、词（token）的拆分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、状态机"><span class="nav-number">1.2.2.</span> <span class="nav-text">二、状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、状态机的定义"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">1、状态机的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、状态机的原理"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">2、状态机的原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、状态机的实现"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">3、状态机的实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、字符流转换成词"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">4、字符流转换成词</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、构建-DOM-树"><span class="nav-number">1.2.3.</span> <span class="nav-text">三、构建 DOM 树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、利用栈来构建-DOM-树"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">1、利用栈来构建 DOM 树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三阶段：CSS-的计算"><span class="nav-number">1.3.</span> <span class="nav-text">第三阶段：CSS 的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、选择器的各种符号"><span class="nav-number">1.3.1.</span> <span class="nav-text">一、选择器的各种符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二、匹配规则"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">二、匹配规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1、后代选择器“空格”"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">1、后代选择器“空格”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、后继选择器“-”"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">2、后继选择器“~”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、子代选择器“-gt-”"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">3、子代选择器“&gt;”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、直接后继选择器“-”"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">4、直接后继选择器“+”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、逗号分隔"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">5、逗号分隔</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四阶段：排版（确定元素位置）"><span class="nav-number">1.4.</span> <span class="nav-text">第四阶段：排版（确定元素位置）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、浏览器的排版"><span class="nav-number">1.4.1.</span> <span class="nav-text">一、浏览器的排版</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、正常流排版"><span class="nav-number">1.4.1.1.</span> <span class="nav-text">1、正常流排版</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、思考：打造自己的排版方式"><span class="nav-number">1.4.2.</span> <span class="nav-text">二、思考：打造自己的排版方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五阶段：在内存中进行渲染、合成、绘制"><span class="nav-number">1.5.</span> <span class="nav-text">第五阶段：在内存中进行渲染、合成、绘制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、渲染"><span class="nav-number">1.5.1.</span> <span class="nav-text">一、渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、-合成"><span class="nav-number">1.5.2.</span> <span class="nav-text">二、 合成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、-绘制"><span class="nav-number">1.5.3.</span> <span class="nav-text">三、 绘制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、思考：js-实现一个浏览器"><span class="nav-number">1.5.4.</span> <span class="nav-text">四、思考：js 实现一个浏览器</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/02/09/重学前端之浏览器如何工作的6【浏览器】/';
+          this.page.identifier = '2019/02/09/重学前端之浏览器如何工作的6【浏览器】/';
+          this.page.title = '重学前端之浏览器如何工作的【浏览器】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

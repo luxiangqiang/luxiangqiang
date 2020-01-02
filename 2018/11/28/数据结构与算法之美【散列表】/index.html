@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if('sanliebiao'){
+            if (prompt('��������������') !== 'sanliebiao'){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,散列表," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Word文档中的单词拼写检查功能是如何实现的？">
+<meta name="keywords" content="数据结构,散列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之美【散列表】">
+<meta property="og:url" content="http://yoursite.com/2018/11/28/数据结构与算法之美【散列表】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="Word文档中的单词拼写检查功能是如何实现的？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/散列表上.png">
+<meta property="og:image" content="http://yoursite.com/images/散列表和链表的结合.png">
+<meta property="og:updated_time" content="2019-07-24T03:48:27.039Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之美【散列表】">
+<meta name="twitter:description" content="Word文档中的单词拼写检查功能是如何实现的？">
+<meta name="twitter:image" content="http://yoursite.com/images/散列表上.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/28/数据结构与算法之美【散列表】/"/>
+
+
+
+
+
+  <title>数据结构与算法之美【散列表】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/28/数据结构与算法之美【散列表】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之美【散列表】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-28T14:43:46+08:00">
+                2018-11-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/28/数据结构与算法之美【散列表】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/11/28/数据结构与算法之美【散列表】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,596
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/散列表上.png" alt=""></p>
+<p>Word文档中的单词拼写检查功能是如何实现的？</p>
+<a id="more"></a>
+<h2 id="散列表（一）"><a href="#散列表（一）" class="headerlink" title="散列表（一）"></a>散列表（一）</h2><h3 id="一、什么是散列表"><a href="#一、什么是散列表" class="headerlink" title="一、什么是散列表"></a>一、什么是散列表</h3><blockquote>
+<p>散列表的英文也叫做 “Hash Table”,平时我们叫他 “哈希表” 或者 “Hash表”。散列表用的是<strong>「数组支持下标随机访问的特性」</strong>，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说没有数组就没有散列表。</p>
+</blockquote>
+<h3 id="二、散列表的特点"><a href="#二、散列表的特点" class="headerlink" title="二、散列表的特点"></a>二、散列表的特点</h3><blockquote>
+<p><strong>散列思想：</strong>把数组下标叫做<strong>键（key）</strong>或者<strong>关键字</strong>，把数组中的值转化为数组的下标的映射方法叫做<strong>散列函数（”Hash”函数或者“哈希函数”），通过散列函数计算得到的值叫做</strong>散列值（“Hash值” “哈希值”）。</p>
+</blockquote>
+<h3 id="三、散列表的优点（随机访问）"><a href="#三、散列表的优点（随机访问）" class="headerlink" title="三、散列表的优点（随机访问）"></a>三、散列表的优点（随机访问）</h3><blockquote>
+<p>1、散列表就是利用数组支持下标随机访问，时间复杂的O（1）的特性，通过散列函数把元素的键值映射为下标，然后将数据存储在数组中对应的下标位置。</p>
+<p>2、通过键值查询数据元素的时用同样的散列函数，将键值转化为数组下标，从对应的数组下标的位置取数据。</p>
+</blockquote>
+<h3 id="四、散列表的缺点（散列冲突）"><a href="#四、散列表的缺点（散列冲突）" class="headerlink" title="四、散列表的缺点（散列冲突）"></a>四、散列表的缺点（散列冲突）</h3><h4 id="1、散列冲突"><a href="#1、散列冲突" class="headerlink" title="1、散列冲突"></a>1、散列冲突</h4><blockquote>
+<p>即使再完美的散列表也会出现散列冲突的情况。</p>
+</blockquote>
+<h4 id="2、开放寻址法"><a href="#2、开放寻址法" class="headerlink" title="2、开放寻址法"></a>2、开放寻址法</h4><blockquote>
+<p>当我们遇到散列冲突的时候，就<strong>重新探测</strong>一个空闲位置，将其插入。</p>
+</blockquote>
+<p>■ <strong>优点</strong></p>
+<p>① 散列表都存储在数组中，可以有效的利用 CPU 缓存加快查询速度。</p>
+<p>② 序列化起来简单，链表包含指针，序列化起来没那么容易。（？）</p>
+<p>■ <strong>缺点</strong></p>
+<p>① 删除数据的时候比较麻烦，需要特殊的标记已经删除的数据。</p>
+<p>② 开放寻址所有的数据存储到一个数组中，比起链表法来说，冲突的代价更高。</p>
+<p>③ 使用开放寻址的散列表，转载因子不能太大，这种方法比链表法更浪费内存空间。</p>
+<p>■ <strong>两种探测方法</strong></p>
+<h5 id="1、线性探测"><a href="#1、线性探测" class="headerlink" title="1、线性探测"></a>1、线性探测</h5><ul>
+<li><strong>插入操作</strong></li>
+</ul>
+<blockquote>
+<p>​    插入数据，若位置被占用，则从当前位置开始往后依次寻找空闲位置，直到插入。</p>
+</blockquote>
+<ul>
+<li><strong>查找操作</strong></li>
+</ul>
+<blockquote>
+<p>查找元素，如果求得的元素不相等，我们就依次向后查找。</p>
+</blockquote>
+<ul>
+<li><strong>删除操作</strong></li>
+</ul>
+<blockquote>
+<p><strong>前提：</strong>通过线性探测，找到一个空闲位置，我们就认定散列表不存在该值。</p>
+<p><strong>方法：</strong>将删除的元素标记为 deleted。当线性探测查找的时候，遇到标记为 deleted 的空间，并不是停下来，而是继续往下测。</p>
+</blockquote>
+<h5 id="2、二次探测和双重散列"><a href="#2、二次探测和双重散列" class="headerlink" title="2、二次探测和双重散列"></a>2、二次探测和双重散列</h5><blockquote>
+<p>① 所谓的二次探测，跟线性探测很像，线性探测每次探测步长为1，而二次探测是原来的二次方。它探测的下标序列就是 hash(key)+0，hash(key)+1²hash(key)+2²…</p>
+<p>② 所谓的双重散列，不仅要使用一个散列函数，我们要使用一组散列函数，先用一组散列函数计算得到存储位置，如果已经被占用，就再用第二个散列函数，以此类推，直到找到空闲存储位置。</p>
+</blockquote>
+<h5 id="3、装载因子"><a href="#3、装载因子" class="headerlink" title="3、装载因子"></a>3、装载因子</h5><blockquote>
+<p>表示散列表空位的多少。装载因子越大，空闲位置越少，冲突越多，散列表的性能就会下降。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">散列表的装载因子 = 填入表中的元素个数 / 散列表的长度</span><br></pre></td></tr></table></figure>
+<h4 id="3、链表法"><a href="#3、链表法" class="headerlink" title="3、链表法"></a>3、链表法</h4><blockquote>
+<p>当插入数据的时候，计算出散列表的槽位，将其插入到槽位后对应的链表中。</p>
+<p>1、插入的时间复杂度为 O(1)。</p>
+<p>2、查找、删除的时间复杂度为O(k)   。</p>
+</blockquote>
+<p>■ <strong>优点</strong></p>
+<p>① 链表法对内存的利用率比开放寻址法要高。因为链表结点可以在需要的时候再创键，并不需要提前申请好。</p>
+<p>② 链表法比起开放寻址法，对大装载因子的容忍度更高。开放寻址法只能适合装载因子小于1 的情况。接近1时就会有可能大量的散列冲突，导致大量的探测、再散列等。链表法只不过是链表变长了，查找效率有所下降，比起顺序查找还是快很多。</p>
+<p>■ <strong>缺点</strong></p>
+<p>① 链表的因为需要存储指针，所以对于比较小的对象存储，是比较消耗内的。可能让内存进行翻倍。</p>
+<p>② 因为链表的结点是散列的分布到内存的，不是连续的，对 CPU 不友好。</p>
+<h3 id="五、散列函数"><a href="#五、散列函数" class="headerlink" title="五、散列函数"></a>五、散列函数</h3><h4 id="1、定义"><a href="#1、定义" class="headerlink" title="1、定义"></a>1、定义</h4><blockquote>
+<p>散列函数，把它定义成 hash（key）,其中 key 表示元素的键值，hash（key）的值表示经过散列函数计算得到的散列值。</p>
+</blockquote>
+<h4 id="2、散列函数的设计要求"><a href="#2、散列函数的设计要求" class="headerlink" title="2、散列函数的设计要求"></a>2、散列函数的设计要求</h4><p>① 散列函数计算得到的散列值是一个<strong>非负整数</strong>；</p>
+<blockquote>
+<p>解释：数组下标是从 0 开始的。  </p>
+</blockquote>
+<p>② 如果 key1 = key2,那 hash（key） == hash（key2）;</p>
+<blockquote>
+<p>解释：相同的 key 的到的散列值也相同。</p>
+</blockquote>
+<p>③ 如果 key1 ≠ key2,那 hash（key）  ≠  hash（key2）;</p>
+<blockquote>
+<p>解释：有可能不能达到此要求，因为会有散列冲突现象。</p>
+</blockquote>
+<h3 id="六、应用思考：Word文档中的单词拼写检查功能是如何实现的？"><a href="#六、应用思考：Word文档中的单词拼写检查功能是如何实现的？" class="headerlink" title="六、应用思考：Word文档中的单词拼写检查功能是如何实现的？"></a>六、应用思考：Word文档中的单词拼写检查功能是如何实现的？</h3><blockquote>
+<p><strong>答：</strong>常见的英文单词有 20 万个左右，假设单词的平均长度是 10 个单词，平均一个单词占用 10 个字节的内存空间，20 万大约占用 2 MB，这个大小完全可以存储的开，我们用散列表来实现。当用户输入单词的时候，我们拿着单词去散列表中查找，如果查找到了，则说明拼写正确，如果没有，则拼写错误，基于提示。</p>
+</blockquote>
+<h3 id="七、扩展思考"><a href="#七、扩展思考" class="headerlink" title="七、扩展思考"></a>七、扩展思考</h3><h4 id="1、假设我们有-10-万条-URL-访问日志，如何按照访问次数给URL-排序？"><a href="#1、假设我们有-10-万条-URL-访问日志，如何按照访问次数给URL-排序？" class="headerlink" title="1、假设我们有 10 万条 URL 访问日志，如何按照访问次数给URL 排序？"></a>1、假设我们有 10 万条 URL 访问日志，如何按照访问次数给URL 排序？</h4><blockquote>
+<p><strong>答：</strong>首先，我们遍历这 10 万条数据，URL 为 key，访问次数是value，将他们存入散列表。然后借助排序算法中的快排。</p>
+</blockquote>
+<h4 id="2、有两个字符串数组，每个数组大约有-10-万条字符串，如何快速找出两个数组中相同的字符串？"><a href="#2、有两个字符串数组，每个数组大约有-10-万条字符串，如何快速找出两个数组中相同的字符串？" class="headerlink" title="2、有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？"></a>2、有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？</h4><blockquote>
+<p><strong>答：</strong>先以第一个数组为例建立一个散列表，key 字符串，value 全部设置为 0，另一个数组中的字符串作为 key 在散列表中进行查找，如果可以找到，则为两个数组共同的字符串。</p>
+</blockquote>
+<h2 id="散列表（二）"><a href="#散列表（二）" class="headerlink" title="散列表（二）"></a>散列表（二）</h2><h3 id="一、何为工业级的散列表"><a href="#一、何为工业级的散列表" class="headerlink" title="一、何为工业级的散列表"></a>一、何为工业级的散列表</h3><ul>
+<li>支持快速的查询、插入、删除操作；</li>
+<li>内存占用合理。不能浪费过多的内存空间；</li>
+<li>性能稳定，在极端情况下，散列表的性能也不会退化到无法接受的情况。</li>
+</ul>
+<h3 id="二、如何实现这样一个散列表？"><a href="#二、如何实现这样一个散列表？" class="headerlink" title="二、如何实现这样一个散列表？"></a>二、如何实现这样一个散列表？</h3><ul>
+<li>设计一个合适的散列函数</li>
+<li>定义装载因子阈值，并且设计动态扩容策略</li>
+<li>选择合适的散列冲突解决方法</li>
+</ul>
+<h4 id="1、如何设计散列函数？"><a href="#1、如何设计散列函数？" class="headerlink" title="1、如何设计散列函数？"></a>1、如何设计散列函数？</h4><blockquote>
+<p>散列表设计不能太复杂；散列函数生成的值尽可能的随机并且均匀分布。</p>
+</blockquote>
+<ul>
+<li>数据分析（重点）</li>
+<li>直接寻址法</li>
+<li>平方取中法</li>
+<li>折叠法</li>
+<li>随机数法</li>
+</ul>
+<h4 id="2、如何根据装载因子动态扩容"><a href="#2、如何根据装载因子动态扩容" class="headerlink" title="2、如何根据装载因子动态扩容"></a>2、如何根据装载因子动态扩容</h4><blockquote>
+<p>散列表的装载因子越大，散列表中的元素越多，空闲位置越少，散列冲突的概率越大。多次寻址导致消耗很长时间，链表法导致拉很长的链，查找过程非常慢。</p>
+</blockquote>
+<p>■ <strong>静态数据</strong></p>
+<blockquote>
+<p>很容易根据特点设计出合适的散列表。</p>
+</blockquote>
+<p>■ <strong>动态数据</strong></p>
+<blockquote>
+<p>随着数据不断的插入，装载因子不断的慢慢变大，到达一定程度的时候，散列冲突不得不发生。</p>
+</blockquote>
+<h5 id="动态扩容"><a href="#动态扩容" class="headerlink" title="动态扩容"></a>动态扩容</h5><blockquote>
+<p>我设置一定的阈值来进行散列空间的扩容，在装载因子小于某个值的时候进行缩容，超过某个阈值进行扩容。</p>
+</blockquote>
+<h5 id="两个问题"><a href="#两个问题" class="headerlink" title="两个问题"></a>两个问题</h5><ul>
+<li>扩容过大，导致内存浪费。</li>
+<li>散列空间过小，导致散列冲突。</li>
+</ul>
+<h5 id="两个方法"><a href="#两个方法" class="headerlink" title="两个方法"></a>两个方法</h5><ul>
+<li>如果内存空间不紧张，对执行效率要求很高，可以降低负载因子的阈值；</li>
+<li>如果内存空间紧张，对执行效率要求又不高，可以增加负载因子的值，甚至可以大于 1。</li>
+</ul>
+<h3 id="二、如何避免低效地扩容？"><a href="#二、如何避免低效地扩容？" class="headerlink" title="二、如何避免低效地扩容？"></a>二、如何避免低效地扩容？</h3><h4 id="1、什么是低效的扩容？"><a href="#1、什么是低效的扩容？" class="headerlink" title="1、什么是低效的扩容？"></a>1、什么是低效的扩容？</h4><blockquote>
+<p>当装载因子到达阈值时，需要先进行扩容，再插入数据，在这个种极端的情况下插入数据会非常慢。</p>
+</blockquote>
+<h4 id="2、怎么解决低效的扩容？"><a href="#2、怎么解决低效的扩容？" class="headerlink" title="2、怎么解决低效的扩容？"></a>2、怎么解决低效的扩容？</h4><blockquote>
+<p>当达到装载因子阈值之后，申请新空间，但是不进行数据搬移，当有新数据插入的时候，从老散列表拿出数据往新的散列表进行插入。重复此过程，在极端的情况下复杂度也是O（1）。</p>
+</blockquote>
+<h3 id="三、如何选择冲突解决方法？"><a href="#三、如何选择冲突解决方法？" class="headerlink" title="三、如何选择冲突解决方法？"></a>三、如何选择冲突解决方法？</h3><blockquote>
+<p>最常用解决冲突的方法为链表法和开放寻址法。 java中的 LinkedHashMap 就采用了链表法解决冲突。</p>
+<p>而 ThreadLocalMap 就采用了线性探测的开放寻址法来解决冲突。</p>
+</blockquote>
+<h4 id="1、开放寻址法"><a href="#1、开放寻址法" class="headerlink" title="1、开放寻址法"></a>1、开放寻址法</h4><p><strong>■ 优势：</strong></p>
+<p>① 散列表都存储在数组中，可以有效的利用 CPU 缓存加快查询速度。</p>
+<p>② 序列化起来简单，链表包含指针，序列化起来没那么容易。（？）</p>
+<p><strong>■ 缺点：</strong></p>
+<p>① 删除数据的时候比较麻烦，需要特殊的标记已经删除的数据。</p>
+<p>② 开放寻址所有的数据存储到一个数组中，比起链表法来说，冲突的代价更高。</p>
+<p>③ 使用开放寻址的散列表，转载因子不能太大，这种方法比链表法更浪费内存空间。</p>
+<p><strong>■ 适用条件：</strong></p>
+<blockquote>
+<p>当数据量比较小、装载因子小的时候，适合采用开放寻址法。</p>
+</blockquote>
+<h4 id="2、链表法"><a href="#2、链表法" class="headerlink" title="2、链表法"></a>2、链表法</h4><p><strong>■ 优势：</strong></p>
+<p>① 链表法对内存的利用率比开放寻址法要高。因为链表结点可以在需要的时候再创键，并不需要提前申请好。</p>
+<p>② 链表法比起开放寻址法，对大装载因子的容忍度更高。开放寻址法只能适合装载因子小于1 的情况。接近1时就会有可能大量的散列冲突，导致大量的探测、再散列等。链表法只不过是链表变长了，查找效率有所下降，比起顺村查找还是快很多。</p>
+<p><strong>■ 缺点：</strong></p>
+<p>① 链表的因为需要存储指针，所以对于比较小的对象存储，是比较消耗内的。可能让内存进行翻倍。</p>
+<p>② 因为链表的结点是散列的分布到内存的，不是连续的，对 CPU 不友好。</p>
+<p><strong>■ 改进：</strong></p>
+<blockquote>
+<p>我们将链表法中的链表改造为其他高效动态的数据结构，比如跳表、红黑树。这样，即便出现的散列冲突，极端情况下，所有数据都散列到同一个桶内，最终退化成的散列表的查询时间也只不过是O(logn)。</p>
+</blockquote>
+<p><strong>■ 适用条件：</strong></p>
+<blockquote>
+<p>基于链表的散列冲突处理方法比较适合存储大对象、大数据量的散列表，比起开放寻址法，它更加灵活，支持更多的优化策略，比如用红黑树代替链表。</p>
+</blockquote>
+<h3 id="五、举例：工业级散列表-HashMap"><a href="#五、举例：工业级散列表-HashMap" class="headerlink" title="五、举例：工业级散列表 HashMap"></a>五、举例：工业级散列表 HashMap</h3><h4 id="1、初始化大小"><a href="#1、初始化大小" class="headerlink" title="1、初始化大小"></a>1、初始化大小</h4><blockquote>
+<p>HashMap默认的初始化大小16，当然这个默认值可以设置的，如果事先知道大概的数据量有多大，可以通过修改默认初始化大小，减少动态扩容的次数，这样大大提高HashMap的性能。</p>
+</blockquote>
+<h4 id="2、装载因子和动态扩容"><a href="#2、装载因子和动态扩容" class="headerlink" title="2、装载因子和动态扩容"></a>2、装载因子和动态扩容</h4><blockquote>
+<p>最大转载因子是0.75，当 HashMap 中的元素个数超过0.75 * capacity（capacity 表示散列表的容量）的时候，就会启动扩容，每次扩容都是原来的<strong>两倍大小</strong>。 </p>
+</blockquote>
+<h4 id="3、散列冲突解决方法"><a href="#3、散列冲突解决方法" class="headerlink" title="3、散列冲突解决方法"></a>3、散列冲突解决方法</h4><blockquote>
+<p>使用链表法来解决冲突的。负载因子和散列函数设计的再合理，也避免不了会出现拉链过长的情况，一旦拉链过长，则会影响 HashMap 的性能。</p>
+</blockquote>
+<h4 id="4、对链表法的优化"><a href="#4、对链表法的优化" class="headerlink" title="4、对链表法的优化"></a>4、对链表法的优化</h4><blockquote>
+<p>当链表长度太长（默认超过8）时，链表就转化成了红黑树，利用红黑树快速增删改查的特点，提高HashMap的性能。当红黑树结点个数少于 8 个的时候，又会将红黑树转化为链表。因为在数据量较小的情况下，红黑树要维护平衡，比起链表来，性能上的优势并不明显。</p>
+</blockquote>
+<h2 id="散列表（三）"><a href="#散列表（三）" class="headerlink" title="散列表（三）"></a>散列表（三）</h2><h3 id="一、LRU-缓存淘汰算法"><a href="#一、LRU-缓存淘汰算法" class="headerlink" title="一、LRU 缓存淘汰算法"></a>一、LRU 缓存淘汰算法</h3><h4 id="1、淘汰数据"><a href="#1、淘汰数据" class="headerlink" title="1、淘汰数据"></a>1、淘汰数据</h4><blockquote>
+<p>维护一个按照访问时间从大到小有序排序的链表结构。因为缓存大小有限，我们遍历整个链表，当缓存空间不足时，需要淘汰一个数据，直接将头部的结点删除。</p>
+</blockquote>
+<h4 id="2、缓存数据"><a href="#2、缓存数据" class="headerlink" title="2、缓存数据"></a>2、缓存数据</h4><blockquote>
+<p>当缓存某个数据的时候，先在链表中查找这个数据，如果没有找到，直接将数据添加到尾部，如果找到了，将它移动到尾部。再遍历链表的时候需要遍历整个链表，时间复杂度为O(n)。</p>
+</blockquote>
+<h4 id="3、主要操作"><a href="#3、主要操作" class="headerlink" title="3、主要操作"></a>3、主要操作</h4><blockquote>
+<p>一下三种操作都涉及“<strong>查找</strong>”操作，时间复杂度为 O(n)，我们将链表和散列表两种数据结构组合到一起，将复杂度降为O(1)。</p>
+</blockquote>
+<ul>
+<li><strong>往缓存添加一个数据</strong> </li>
+<li><strong>从缓存删除一个数据</strong></li>
+<li><strong>在缓存查找一个数据</strong></li>
+</ul>
+<h4 id="4、散列表和-双向-链表结合"><a href="#4、散列表和-双向-链表结合" class="headerlink" title="4、散列表和(双向)链表结合"></a>4、散列表和(双向)链表结合</h4><p><img src="/images/散列表和链表的结合.png" alt=""></p>
+<blockquote>
+<p>除了双向链表存储数据之外，我们还有一个 hnext 指针，一个链是在我们的双向链表中，另一个hnext是我们散列表的<strong>拉链</strong>。hnext指针将我们的链表串在散列表中。</p>
+</blockquote>
+<p><strong>①  查找一个数据 </strong></p>
+<blockquote>
+<p>散列表查找数据的时间复杂度为 O(1)，查找到之后，我们将其移动到双链表的为尾部。</p>
+</blockquote>
+<p><strong>② 删除一个数据 </strong></p>
+<blockquote>
+<p>我们通过散列表在O(1)的时间复杂度之内找到数据之后，然后通过前驱指针O(1)的时间复杂度，直接获取双向链表前驱结点，删除只需要O(1)的时间复杂度。</p>
+</blockquote>
+<p><strong>③ 添加一个数据</strong></p>
+<blockquote>
+<p>添加数据先要查看缓存中有没有该数据，如果没有就添加到双链表的尾部，添加的时候判断缓存有没有满，如果满了，需要先删除链表头部的数据，然后将数据插入到链表的尾部。如果没有满，就直接插到链表的尾部。</p>
+</blockquote>
+<h3 id="二、Redis-有序集合"><a href="#二、Redis-有序集合" class="headerlink" title="二、Redis 有序集合"></a>二、Redis 有序集合</h3><blockquote>
+<p>为什么 Redis 要用跳表来实现有序集合，而不是红黑树？</p>
+</blockquote>
+<h4 id="1、Redis-中的有序集合支持的核心操作主要有下面这几个"><a href="#1、Redis-中的有序集合支持的核心操作主要有下面这几个" class="headerlink" title="1、Redis 中的有序集合支持的核心操作主要有下面这几个"></a>1、Redis 中的有序集合支持的核心操作主要有下面这几个</h4><ul>
+<li>插入一个数据；</li>
+<li>删除一个数据；</li>
+<li>查找一个数据；</li>
+<li>按照区间查找数据（比如查找值在 [100, 356] 之间的数据）；</li>
+<li>迭代输出有序序列。</li>
+</ul>
+<h4 id="2、跳表比红黑树的优势"><a href="#2、跳表比红黑树的优势" class="headerlink" title="2、跳表比红黑树的优势"></a>2、跳表比红黑树的优势</h4><blockquote>
+<p>1、查找操作比红黑树要快。</p>
+<p>2、插入、删除和红黑树差不多，但是<strong>按照区间查找</strong>O(logn)就能完成。</p>
+<p>2、跳表更容易代码实现，意味着可读性好，不容易出错。</p>
+<p>3、跳表更加灵活，它可以通过改变索引构建策略，<strong>有效平衡执行效率和内存消耗。</strong></p>
+</blockquote>
+<h4 id="3、红黑树的优势"><a href="#3、红黑树的优势" class="headerlink" title="3、红黑树的优势"></a>3、红黑树的优势</h4><blockquote>
+<p>红黑树直接拿来用就可以了，跳表必须自己实现。</p>
+</blockquote>
+<h3 id="三、LinkedHashMap"><a href="#三、LinkedHashMap" class="headerlink" title="三、LinkedHashMap"></a>三、LinkedHashMap</h3><blockquote>
+<p>LinkedHashMap 是通过双向链表和散列表这两种数据结构组合实现的。LinkedHashMap 中的“LinkedHashMap 中的“Linked”实际上是指的是双向链表，并非指用链表法解决散列冲突。</p>
+</blockquote>
+<h4 id="代码实例："><a href="#代码实例：" class="headerlink" title="代码实例："></a>代码实例：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 10 是初始大小，0.75 是装载因子，true 是表示按照访问时间排序</span></span><br><span class="line">HashMap&lt;Integer, Integer&gt; m = <span class="keyword">new</span> LinkedHashMap&lt;&gt;(<span class="number">10</span>, <span class="number">0.75f</span>, <span class="keyword">true</span>);</span><br><span class="line">m.put(<span class="number">3</span>, <span class="number">11</span>);</span><br><span class="line">m.put(<span class="number">1</span>, <span class="number">12</span>);</span><br><span class="line">m.put(<span class="number">5</span>, <span class="number">23</span>);</span><br><span class="line">m.put(<span class="number">2</span>, <span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">m.put(<span class="number">3</span>, <span class="number">26</span>);</span><br><span class="line">m.get(<span class="number">5</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Map.Entry e : m.entrySet()) &#123;</span><br><span class="line">  System.out.println(e.getKey());    <span class="comment">//打印顺序为 1235</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>实现原理与LRU 缓存淘汰策略一样的，按照此分析。</p>
+</blockquote>
+<h3 id="四、为什么散列表经常和链表使用"><a href="#四、为什么散列表经常和链表使用" class="headerlink" title="四、为什么散列表经常和链表使用"></a>四、为什么散列表经常和链表使用</h3><h4 id="原因一："><a href="#原因一：" class="headerlink" title="原因一："></a>原因一：</h4><blockquote>
+<p>1、虽然散列表可以非常高效的数据插入、删除、查找操作，但是散列表中的数据都是通过散列函数打乱之后无规律存储的。</p>
+<p>2、它无法按照某种顺序快速的遍历数据，如果希望按照顺序遍历散列表中的数据，那我们就将散列表中的数据拷贝到数组中，然后排序，再遍历。</p>
+</blockquote>
+<h4 id="原因二："><a href="#原因二：" class="headerlink" title="原因二："></a>原因二：</h4><blockquote>
+<p>因为散列表是动态数据结构，不停的进行插入、删除。每当我们进行遍历数据的时候，先要进行排序，那效率就会很低。</p>
+</blockquote>
+<h3 id="五、思考"><a href="#五、思考" class="headerlink" title="五、思考"></a>五、思考</h3><p>1、如果把双向链表改成单链表，还能否正常工作呢？为什么呢？</p>
+<blockquote>
+<p><strong>答:</strong> 可以，但是删除操作时间复杂度会降到 O（n）。</p>
+</blockquote>
+<p>2、假设猎聘网有 10 万名猎头，每个猎头都可以通过做任务（比如发布职位）来积累积分，然后通过积分来下载简历。假设你是猎聘网的一名工程师，如何在内存中存储这 10 万个猎头 ID 和积分信息，让它能够支持这样几个操作：</p>
+<ul>
+<li>根据猎头的 ID 快速查找、删除、更新这个猎头的积分信息；</li>
+</ul>
+<blockquote>
+<p>答：散列表实现，时间复杂度为 O（1）。</p>
+</blockquote>
+<ul>
+<li>查找积分在某个区间的猎头 ID 列表；</li>
+</ul>
+<blockquote>
+<p>答：跳表。</p>
+</blockquote>
+<ul>
+<li>查找按照积分从小到大排名在第 x 位到第 y 位之间的猎头 ID 列表。</li>
+</ul>
+<blockquote>
+<p>答：需要排序，暂时无法实现。（？？？？？）</p>
+</blockquote>
+<h3 id="六、疑问"><a href="#六、疑问" class="headerlink" title="六、疑问"></a>六、疑问</h3><blockquote>
+<p>1、散列表和链表是怎么关联起来的？</p>
+<p>2、散列表怎么直接定位到结点的？答：散列表中存储少量的链表。</p>
+<p>3、查找数据将其移动到尾部？答：需要维护一个指向尾部的指针。</p>
+<p>4、插入的时候，内存已满，需要在链表头部插入数据，散列表对应的值是否也应该改变？</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+            <a href="/tags/散列表/" rel="tag"># 散列表</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/21/数据结构与算法之美【排序】/" rel="next" title="数据结构与算法之美【排序】">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法之美【排序】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/15/数据结构与算法之美【跳表】/" rel="prev" title="数据结构与算法之美【跳表1】">
+                数据结构与算法之美【跳表1】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#散列表（一）"><span class="nav-number">1.</span> <span class="nav-text">散列表（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是散列表"><span class="nav-number">1.1.</span> <span class="nav-text">一、什么是散列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、散列表的特点"><span class="nav-number">1.2.</span> <span class="nav-text">二、散列表的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、散列表的优点（随机访问）"><span class="nav-number">1.3.</span> <span class="nav-text">三、散列表的优点（随机访问）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、散列表的缺点（散列冲突）"><span class="nav-number">1.4.</span> <span class="nav-text">四、散列表的缺点（散列冲突）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、散列冲突"><span class="nav-number">1.4.1.</span> <span class="nav-text">1、散列冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、开放寻址法"><span class="nav-number">1.4.2.</span> <span class="nav-text">2、开放寻址法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、线性探测"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">1、线性探测</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、二次探测和双重散列"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">2、二次探测和双重散列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、装载因子"><span class="nav-number">1.4.2.3.</span> <span class="nav-text">3、装载因子</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、链表法"><span class="nav-number">1.4.3.</span> <span class="nav-text">3、链表法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、散列函数"><span class="nav-number">1.5.</span> <span class="nav-text">五、散列函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、定义"><span class="nav-number">1.5.1.</span> <span class="nav-text">1、定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、散列函数的设计要求"><span class="nav-number">1.5.2.</span> <span class="nav-text">2、散列函数的设计要求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、应用思考：Word文档中的单词拼写检查功能是如何实现的？"><span class="nav-number">1.6.</span> <span class="nav-text">六、应用思考：Word文档中的单词拼写检查功能是如何实现的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、扩展思考"><span class="nav-number">1.7.</span> <span class="nav-text">七、扩展思考</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、假设我们有-10-万条-URL-访问日志，如何按照访问次数给URL-排序？"><span class="nav-number">1.7.1.</span> <span class="nav-text">1、假设我们有 10 万条 URL 访问日志，如何按照访问次数给URL 排序？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、有两个字符串数组，每个数组大约有-10-万条字符串，如何快速找出两个数组中相同的字符串？"><span class="nav-number">1.7.2.</span> <span class="nav-text">2、有两个字符串数组，每个数组大约有 10 万条字符串，如何快速找出两个数组中相同的字符串？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列表（二）"><span class="nav-number">2.</span> <span class="nav-text">散列表（二）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、何为工业级的散列表"><span class="nav-number">2.1.</span> <span class="nav-text">一、何为工业级的散列表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、如何实现这样一个散列表？"><span class="nav-number">2.2.</span> <span class="nav-text">二、如何实现这样一个散列表？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、如何设计散列函数？"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、如何设计散列函数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、如何根据装载因子动态扩容"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、如何根据装载因子动态扩容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#动态扩容"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">动态扩容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两个问题"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">两个问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#两个方法"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">两个方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、如何避免低效地扩容？"><span class="nav-number">2.3.</span> <span class="nav-text">二、如何避免低效地扩容？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、什么是低效的扩容？"><span class="nav-number">2.3.1.</span> <span class="nav-text">1、什么是低效的扩容？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、怎么解决低效的扩容？"><span class="nav-number">2.3.2.</span> <span class="nav-text">2、怎么解决低效的扩容？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、如何选择冲突解决方法？"><span class="nav-number">2.4.</span> <span class="nav-text">三、如何选择冲突解决方法？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、开放寻址法"><span class="nav-number">2.4.1.</span> <span class="nav-text">1、开放寻址法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、链表法"><span class="nav-number">2.4.2.</span> <span class="nav-text">2、链表法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、举例：工业级散列表-HashMap"><span class="nav-number">2.5.</span> <span class="nav-text">五、举例：工业级散列表 HashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、初始化大小"><span class="nav-number">2.5.1.</span> <span class="nav-text">1、初始化大小</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、装载因子和动态扩容"><span class="nav-number">2.5.2.</span> <span class="nav-text">2、装载因子和动态扩容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、散列冲突解决方法"><span class="nav-number">2.5.3.</span> <span class="nav-text">3、散列冲突解决方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、对链表法的优化"><span class="nav-number">2.5.4.</span> <span class="nav-text">4、对链表法的优化</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列表（三）"><span class="nav-number">3.</span> <span class="nav-text">散列表（三）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、LRU-缓存淘汰算法"><span class="nav-number">3.1.</span> <span class="nav-text">一、LRU 缓存淘汰算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、淘汰数据"><span class="nav-number">3.1.1.</span> <span class="nav-text">1、淘汰数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、缓存数据"><span class="nav-number">3.1.2.</span> <span class="nav-text">2、缓存数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、主要操作"><span class="nav-number">3.1.3.</span> <span class="nav-text">3、主要操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、散列表和-双向-链表结合"><span class="nav-number">3.1.4.</span> <span class="nav-text">4、散列表和(双向)链表结合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Redis-有序集合"><span class="nav-number">3.2.</span> <span class="nav-text">二、Redis 有序集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Redis-中的有序集合支持的核心操作主要有下面这几个"><span class="nav-number">3.2.1.</span> <span class="nav-text">1、Redis 中的有序集合支持的核心操作主要有下面这几个</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、跳表比红黑树的优势"><span class="nav-number">3.2.2.</span> <span class="nav-text">2、跳表比红黑树的优势</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、红黑树的优势"><span class="nav-number">3.2.3.</span> <span class="nav-text">3、红黑树的优势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、LinkedHashMap"><span class="nav-number">3.3.</span> <span class="nav-text">三、LinkedHashMap</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实例："><span class="nav-number">3.3.1.</span> <span class="nav-text">代码实例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、为什么散列表经常和链表使用"><span class="nav-number">3.4.</span> <span class="nav-text">四、为什么散列表经常和链表使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#原因一："><span class="nav-number">3.4.1.</span> <span class="nav-text">原因一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#原因二："><span class="nav-number">3.4.2.</span> <span class="nav-text">原因二：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、思考"><span class="nav-number">3.5.</span> <span class="nav-text">五、思考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、疑问"><span class="nav-number">3.6.</span> <span class="nav-text">六、疑问</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/11/28/数据结构与算法之美【散列表】/';
+          this.page.identifier = '2018/11/28/数据结构与算法之美【散列表】/';
+          this.page.title = '数据结构与算法之美【散列表】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

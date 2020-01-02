@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端框架," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="去哪网 APP  项目记录！">
+<meta name="keywords" content="前端框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端框架之【去哪网APP】">
+<meta property="og:url" content="http://yoursite.com/2019/08/14/前端框架项目之Vue【去哪儿网】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="去哪网 APP  项目记录！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="c:/Users/10405/AppData/Roaming/Typora/typora-user-images/1564711196442.png">
+<meta property="og:updated_time" content="2019-11-01T13:37:48.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端框架之【去哪网APP】">
+<meta name="twitter:description" content="去哪网 APP  项目记录！">
+<meta name="twitter:image" content="c:/Users/10405/AppData/Roaming/Typora/typora-user-images/1564711196442.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/14/前端框架项目之Vue【去哪儿网】/"/>
+
+
+
+
+
+  <title>前端框架之【去哪网APP】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/14/前端框架项目之Vue【去哪儿网】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端框架之【去哪网APP】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-14T09:24:33+08:00">
+                2019-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端框架/" itemprop="url" rel="index">
+                    <span itemprop="name">前端框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/14/前端框架项目之Vue【去哪儿网】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/08/14/前端框架项目之Vue【去哪儿网】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,282
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>去哪网 APP  项目记录！</p>
+<a id="more"></a>
+<h2 id="去哪网App（Vue-VueRouter-Vuex）"><a href="#去哪网App（Vue-VueRouter-Vuex）" class="headerlink" title="去哪网App（Vue+VueRouter+Vuex）"></a>去哪网App（Vue+VueRouter+Vuex）</h2><p>[TOC]</p>
+<h3 id="一、页面配置"><a href="#一、页面配置" class="headerlink" title="一、页面配置"></a>一、页面配置</h3><h4 id="1、禁止用户手动放大缩小页面"><a href="#1、禁止用户手动放大缩小页面" class="headerlink" title="1、禁止用户手动放大缩小页面"></a>1、禁止用户手动放大缩小页面</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,minium-scale=1.0,maxinum-scale=1.0,user-scalable=no"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="2、ViewPort"><a href="#2、ViewPort" class="headerlink" title="2、ViewPort"></a>2、ViewPort</h4><blockquote>
+<p>viewPort被称为视口，是可以看到 Web 内容的窗口区域，一般会有滚动条便于查看。</p>
+</blockquote>
+<h6 id="▉-meta-标签"><a href="#▉-meta-标签" class="headerlink" title="▉ meta 标签"></a>▉ meta 标签</h6><blockquote>
+<p>为了能够为了使响应式的网页能够不触发 viewport ，所以就出现了 meta 标签，能够让开发者更好的控制视口的大小和比例</p>
+</blockquote>
+<ul>
+<li><code>width：</code>控制视口的宽度（如果为 device-width 代表缩放 100% 时，以 CSS 像素计量的屏幕宽度）；</li>
+<li><code>initial-scale：</code>控制页面最初加载时的缩放等级</li>
+<li><code>maximum-scale、minimum-scale及user-scalable：</code>控制允许用户以怎样的方式放大或缩小页面</li>
+</ul>
+<h4 id="3、移动端1px像素问题"><a href="#3、移动端1px像素问题" class="headerlink" title="3、移动端1px像素问题"></a>3、移动端1px像素问题</h4><blockquote>
+<p>在 PC 端的网页上 1px 的边框在移动端比较粗，这就是经典的移动端 1px 像素问题。</p>
+</blockquote>
+<h4 id="4、移动端-onClick-事件会延迟-300-毫秒"><a href="#4、移动端-onClick-事件会延迟-300-毫秒" class="headerlink" title="4、移动端 onClick 事件会延迟 300 毫秒"></a>4、移动端 onClick 事件会延迟 300 毫秒</h4><blockquote>
+<p>本地依赖安装 fastClick 包。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install fastclick --save</span><br></pre></td></tr></table></figure>
+<p>在 main.js 导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import fastClick from &apos;fastclick&apos;</span><br><span class="line">// 使用 fastClick(移动端300毫秒延迟问题)</span><br><span class="line">fastClick.attach(document.body)</span><br></pre></td></tr></table></figure>
+<h4 id="5、单位使用-rem"><a href="#5、单位使用-rem" class="headerlink" title="5、单位使用 rem"></a>5、单位使用 rem</h4><blockquote>
+<p>移动端的布局使用 rem 是相对于 html 根元素来算。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 rem = html font-size = 50px</span><br></pre></td></tr></table></figure>
+<h4 id="6、Flex-布局"><a href="#6、Flex-布局" class="headerlink" title="6、Flex 布局"></a>6、Flex 布局</h4><ul>
+<li>flex 属性：属性用于设置或检索弹性盒模型对象的子元素如何分配空间。</li>
+</ul>
+<h4 id="7、引入-iconfont-图标库"><a href="#7、引入-iconfont-图标库" class="headerlink" title="7、引入 iconfont 图标库"></a>7、引入 iconfont 图标库</h4><blockquote>
+<p>在阿里巴巴矢量图中下载到本地。</p>
+<p>1）将 css 文件放入 asset 文件中。</p>
+<p>2）将字体文件放到 styles文件的 iconfont 文件夹中。</p>
+<p>3）改变 css 文件中引入字体文件的路径。</p>
+<p>4）main.js 引入css 文件。</p>
+</blockquote>
+<h4 id="8、布局抖动问题"><a href="#8、布局抖动问题" class="headerlink" title="8、布局抖动问题"></a>8、布局抖动问题</h4><blockquote>
+<p>当网速慢时，Slow 3G 就会先加载文字，后加载图片，导致文字会被图片挤到下方抖动一下。</p>
+</blockquote>
+<p>解决：设置图片的比例，加载之前就占据位置。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.wrapper</span>&#123;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    padding-bottom: 26.6%;// 纵横比(相当于图片的宽度) </span><br><span class="line">    background-color: #ccc;//灰色背景占据</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="9、组件样式问题"><a href="#9、组件样式问题" class="headerlink" title="9、组件样式问题"></a>9、组件样式问题</h4><blockquote>
+<p>由于组件内 scoped 的样式只修饰当前组件，要想修饰当前组件引入的其他组件，必须进行样式穿透。</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// wrapper 样式下的所有 .swiper-pagination-bullet-active 样式都应用这个颜色</span><br><span class="line"><span class="selector-class">.wrapper</span> &gt;&gt;&gt; <span class="selector-class">.swiper-pagination-bullet-active</span>&#123;</span><br><span class="line">        <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="10、vue-的-for-循环遍历"><a href="#10、vue-的-for-循环遍历" class="headerlink" title="10、vue 的 for 循环遍历"></a>10、vue 的 for 循环遍历</h4><blockquote>
+<p>vue 的for循环遍历必须有个 key 值来用作唯一标识，。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;swiper-slide v-<span class="keyword">for</span>=<span class="string">"item of swiperList"</span> :key=<span class="string">"item.id"</span>&gt;</span><br><span class="line">    &lt;img <span class="class"><span class="keyword">class</span></span>=<span class="string">"swiper-image"</span> v-bind:src=<span class="string">"item.imgUrl"</span> alt=<span class="string">""</span>&gt;</span><br><span class="line">&lt;<span class="regexp">/swiper-slide&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="11、文字溢出省略号"><a href="#11、文字溢出省略号" class="headerlink" title="11、文字溢出省略号"></a>11、文字溢出省略号</h4><blockquote>
+<p>注意：如果不出现省略号，加 <code>min-width:0</code>。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">overflow: hidden;</span><br><span class="line">white-space:nowrap;</span><br><span class="line">text-overflow: ellipsis;</span><br></pre></td></tr></table></figure>
+<h4 id="12、盒模型"><a href="#12、盒模型" class="headerlink" title="12、盒模型"></a>12、盒模型</h4><blockquote>
+<p>如果设置了 padding 或 margin/border 布局溢出，设置盒模型为 border-box;</p>
+</blockquote>
+<h4 id="13、BFC"><a href="#13、BFC" class="headerlink" title="13、BFC"></a>13、BFC</h4><blockquote>
+<p>触发 BFC 的条件，float 浮动，使得外边框不能撑开，所以要触发一下 BFC。</p>
+</blockquote>
+<h4 id="14、使用-better-scroll-实现字母滑动"><a href="#14、使用-better-scroll-实现字母滑动" class="headerlink" title="14、使用 better-scroll 实现字母滑动"></a>14、使用 better-scroll 实现字母滑动</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install better-scroll --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;list&quot; ref=&quot;wrapper&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Bscroll from 'better-scroll'</span><br><span class="line">mounted () &#123;</span><br><span class="line">	this.scroll = new Bscroll(this.$refs.wrapper)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="15、v-for-循环遍历对象"><a href="#15、v-for-循环遍历对象" class="headerlink" title="15、v-for 循环遍历对象"></a>15、v-for 循环遍历对象</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"area"</span> <span class="attr">v-for</span>=<span class="string">"(item, key) of allCities"</span> <span class="attr">:key</span>=<span class="string">"key"</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"title"</span>&gt;</span>&#123;&#123;key&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">"item-list"</span> <span class="attr">v-for</span>=<span class="string">"innerItem of item"</span> <span class="attr">:key</span>=<span class="string">"innerItem.id"</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">li</span>&gt;</span>&#123;&#123;innerItem.city&#125;&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h4 id="16、计算值之更新一次"><a href="#16、计算值之更新一次" class="headerlink" title="16、计算值之更新一次"></a>16、计算值之更新一次</h4><blockquote>
+<p>写到 Updata 生命周期函数中，组件页面刷新后调用一次。</p>
+</blockquote>
+<h4 id="17、函滚动节流"><a href="#17、函滚动节流" class="headerlink" title="17、函滚动节流"></a>17、函滚动节流</h4><h4 id="18、背景渐变色"><a href="#18、背景渐变色" class="headerlink" title="18、背景渐变色"></a>18、背景渐变色</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">background-image: linear-gradient(top, rgba(0, 0, 0, 0),rgba(0,0,0,0.8))</span><br></pre></td></tr></table></figure>
+<h4 id="19、使用轮播插件（vue-awesome-swiper）"><a href="#19、使用轮播插件（vue-awesome-swiper）" class="headerlink" title="19、使用轮播插件（vue-awesome-swiper）"></a>19、使用轮播插件（vue-awesome-swiper）</h4><p>安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install vue-awesome-swiper --save</span><br></pre></td></tr></table></figure>
+<p>在 main.js 引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import VueAwesomeSwiper from &apos;vue-awesome-swiper&apos; </span><br><span class="line"></span><br><span class="line">// 使用轮播图</span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br></pre></td></tr></table></figure>
+<h4 id="20、样式绑定"><a href="#20、样式绑定" class="headerlink" title="20、样式绑定"></a>20、样式绑定</h4><blockquote>
+<p>样式可以设置变动的值。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">:style=&quot;opacityStyle&quot;</span><br><span class="line"></span><br><span class="line">data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">        opacityStyle: &#123;</span><br><span class="line">            opacity:0</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h4 id="21、解除全局绑定"><a href="#21、解除全局绑定" class="headerlink" title="21、解除全局绑定"></a>21、解除全局绑定</h4><blockquote>
+<p>如果某个事件绑定了某个组件，是没有问题的，如果绑定了整个 window 就需要在页面不显示的时候解除绑定，因为会在其它页面会触发，影响性能。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mounted () &#123;</span><br><span class="line">	window.addEventListener(&apos;scroll&apos;, this.handleScroll)</span><br><span class="line">&#125;,</span><br><span class="line">// 页面销毁要解除绑定</span><br><span class="line">destroyed () &#123;</span><br><span class="line">	window.removeEventListener(&apos;scroll&apos;, this.handleScroll)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="22、递归组件"><a href="#22、递归组件" class="headerlink" title="22、递归组件"></a>22、递归组件</h4><blockquote>
+<p>在组件内自己调用自己，并且注意爆栈，需要进行判断。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;div </span><br><span class="line">        class=&quot;item&quot; </span><br><span class="line">        v-for=&quot;(item, index) of list&quot;</span><br><span class="line">        :key=&quot;index&quot;&gt;</span><br><span class="line">            &lt;div class=&quot;item-title&quot;&gt;</span><br><span class="line">                &lt;span class=&quot;item-title-icon&quot;&gt;&lt;/span&gt;</span><br><span class="line">                &#123;&#123;item.title&#125;&#125;</span><br><span class="line">            &lt;/div&gt;  </span><br><span class="line">            &lt;div v-if=&quot;item.children&quot; class=&quot;item-children&quot;&gt;</span><br><span class="line">                &lt;DetailList :list=&quot;item.children&quot;&gt;&lt;/DetailList&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;DetailList&apos;,</span><br><span class="line">    props: &#123;</span><br><span class="line">        list: Array</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="23、异步组件"><a href="#23、异步组件" class="headerlink" title="23、异步组件"></a>23、异步组件</h4><blockquote>
+<p>为了能够实现只加载当前页面的数据，其它页面当打开时，数据才能够加载，这里用到的是异步组件。</p>
+<p>在路由配置中，设置为不立即加载所有页面的组件，而是当加载页面时，再加载组件获取数据。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">component: () =&gt; import(&apos;@/pages/Home/Home&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="二、父子组件数据传递"><a href="#二、父子组件数据传递" class="headerlink" title="二、父子组件数据传递"></a>二、父子组件数据传递</h3><blockquote>
+<p>父组件往子组件传值。</p>
+</blockquote>
+<h4 id="1、父组件向子组件传值"><a href="#1、父组件向子组件传值" class="headerlink" title="1、父组件向子组件传值"></a>1、父组件向子组件传值</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 传递值</span><br><span class="line"><span class="tag">&lt;<span class="name">HomeHeader</span> <span class="attr">:city</span>=<span class="string">"city"</span>&gt;</span><span class="tag">&lt;/<span class="name">HomeHeader</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 接受父组件的传值,并验证</span><br><span class="line">props: &#123;</span><br><span class="line">	city: String</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 带有默认值的</span><br><span class="line">props: &#123;</span><br><span class="line">    imgs: &#123;</span><br><span class="line">        type:Array,</span><br><span class="line">        default () &#123;</span><br><span class="line">        	return []</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>注意：会出现一个问题，请求是耗时的，所以在渲染的时候，传递的是空，所以需要 if 判断。一般需要放到计算属性中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    showSwiper () &#123;</span><br><span class="line">    	return this.list.length</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2、子组件向父组件传值"><a href="#2、子组件向父组件传值" class="headerlink" title="2、子组件向父组件传值"></a>2、子组件向父组件传值</h4><blockquote>
+<p>通过自定义函数 $emit(‘事件名’，传递的参数)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// 子组件</span><br><span class="line">&lt;template&gt;  </span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;ul class=&quot;Alist&quot;&gt;</span><br><span class="line">            &lt;li v-for=&quot;(item, key) of alphabet&quot; </span><br><span class="line">                :key=&quot;key&quot; </span><br><span class="line">                @click=&quot;handleLetterClick&quot;&gt;</span><br><span class="line">                &#123;&#123;key&#125;&#125;</span><br><span class="line">            &lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;CityAlphabet&apos;,</span><br><span class="line">    props: &#123;</span><br><span class="line">        alphabet: Object</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        handleLetterClick (e) &#123;</span><br><span class="line">            this.$emit(&apos;change&apos;,e.target.innerText)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 父组件: 通过 @事件名来接受值</span><br><span class="line">  &lt;City-alphabet</span><br><span class="line">         :alphabet=&quot;alphabet&quot;</span><br><span class="line">         @change=&quot;handleLetterChange&quot;</span><br><span class="line">         &gt;&lt;/City-alphabet&gt;</span><br><span class="line"></span><br><span class="line"> handleLetterChange (letter) &#123;</span><br><span class="line">	this.letter = letter;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、兄弟组件之间传值"><a href="#三、兄弟组件之间传值" class="headerlink" title="三、兄弟组件之间传值"></a>三、兄弟组件之间传值</h3><blockquote>
+<p>方法一：<strong>先子传父，再父传子</strong></p>
+</blockquote>
+<h3 id="四、页面设计"><a href="#四、页面设计" class="headerlink" title="四、页面设计"></a>四、页面设计</h3><ul>
+<li><code>pages</code> 目录：这个目录下主要是配置页面，每个页面单独一个文件夹，如:<ul>
+<li><code>city</code> 页面：s然后整个页面是由多个组件组成的，所有的组件在页面中新建文件夹，所有的组件都要在当前页面根目录下进行整合汇总。每个页面的所有数据请求也都是在这个页面进行的。<ul>
+<li>components:<ul>
+<li>Header</li>
+<li>List</li>
+<li>fotter</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="五、Vuex"><a href="#五、Vuex" class="headerlink" title="五、Vuex"></a>五、Vuex</h3><h4 id="1、定义"><a href="#1、定义" class="headerlink" title="1、定义"></a>1、定义</h4><blockquote>
+<p>vuex 为状态管理模式，主要集中管理状态。</p>
+</blockquote>
+<h4 id="2、什么情况下使用？"><a href="#2、什么情况下使用？" class="headerlink" title="2、什么情况下使用？"></a>2、什么情况下使用？</h4><p>① 如果您不打算开发大型单页应用，使用 Vuex 可能是繁琐冗余的。如果应用够简单，您最好不要使用 Vuex。一个简单的 store 模式简单状态管理起步使用)就足够所需了。</p>
+<p>② 需要构建一个中大型单页应用，您很可能会考虑如何更好地在组件外部管理状态，Vuex 将会成为自然而然的选择</p>
+<h4 id="3、Vuex-的思想"><a href="#3、Vuex-的思想" class="headerlink" title="3、Vuex 的思想"></a>3、Vuex 的思想</h4><blockquote>
+<p>State 主要存储数据的状态，并且界面所有的数据都是单向绑定的。</p>
+<p>Action: 主要写异步任务改变数据状态的。</p>
+<p>Mutations：主要是顺序改变数据状态的。</p>
+<p>整个流程是：在组件直接可以通过 <code>this.$store.state.属性名</code>  拿到状态值。然后通过 <code>this.$store.dispatch(&#39;Action 中的名&#39;，参数值)</code> 传递给 Actions。最后在 Actions 中 <code>context.commit(&#39;mutations中的名&#39;,参数值)</code> 改变 state 状态的值。</p>
+</blockquote>
+<p><img src="C:\Users\10405\AppData\Roaming\Typora\typora-user-images\1564711196442.png" alt="1564711196442"></p>
+<h4 id="4、Vuex-的使用"><a href="#4、Vuex-的使用" class="headerlink" title="4、Vuex 的使用"></a>4、Vuex 的使用</h4><blockquote>
+<p>1）在根目录下新建 store 文件夹，然后新建 index.js 文件。</p>
+<p>2）引入 vuex，定义 Vuex.Store。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import Vuex from &apos;vuex&apos;</span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">       </span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">       </span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">       </span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>3）在 main.js 中导入并实例化。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import store from &apos;./store&apos;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>4）组件获取数据。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;this.$store.state.city&#125;&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>5）传入数据</p>
+</blockquote>
+<p>先将数据传入 actions，然后再将数据通过 mutations 更新数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 将数据通过 dispath 传入actions</span><br><span class="line">this.$store.dispatch(&apos;changeCity&apos;,cityName)</span><br><span class="line"></span><br><span class="line">// 然后通过 commit 提交到 mutations 进行数据更新</span><br><span class="line"></span><br><span class="line">export default new Vuex.Store(&#123;</span><br><span class="line">    state: &#123;</span><br><span class="line">       city: &apos;上海&apos;</span><br><span class="line">    &#125;,</span><br><span class="line">    actions: &#123;</span><br><span class="line">        // 参数一：上下文 参数二：传递的参数</span><br><span class="line">        changeCity(context, city) &#123;</span><br><span class="line">            context.commit(&apos;changeCity&apos;,city)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    mutations: &#123;</span><br><span class="line">        // 参数一：state 对象 参数二：传递的参数</span><br><span class="line">        changeCity(state, city) &#123;</span><br><span class="line">            state.city = city</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="六、Router-路由"><a href="#六、Router-路由" class="headerlink" title="六、Router 路由"></a>六、Router 路由</h3><h4 id="1、页面跳转"><a href="#1、页面跳转" class="headerlink" title="1、页面跳转"></a>1、页面跳转</h4><blockquote>
+<p>可以通过以下 进行页面的跳转。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">this.$router.push(&apos;/&apos;)</span><br></pre></td></tr></table></figure>
+<h3 id="七、Vie-cli"><a href="#七、Vie-cli" class="headerlink" title="七、Vie-cli"></a>七、Vie-cli</h3><h4 id="1、在配置文件设置别名路径"><a href="#1、在配置文件设置别名路径" class="headerlink" title="1、在配置文件设置别名路径"></a>1、在配置文件设置别名路径</h4><blockquote>
+<p>打开 build 文件夹里边的 webpack.base.conf.js 文件，找到 resolve下的 alias 设置别名路径。修改完需要重启服务器</p>
+</blockquote>
+<h2 id="八、Vue-的后续学习"><a href="#八、Vue-的后续学习" class="headerlink" title="八、Vue 的后续学习"></a>八、Vue 的后续学习</h2><h4 id="1、官网文档（router、vuex、服务器端渲染都要过一遍）"><a href="#1、官网文档（router、vuex、服务器端渲染都要过一遍）" class="headerlink" title="1、官网文档（router、vuex、服务器端渲染都要过一遍）"></a>1、官网文档（router、vuex、服务器端渲染都要过一遍）</h4><h4 id="2、生态系统中的-vue-插件的使用"><a href="#2、生态系统中的-vue-插件的使用" class="headerlink" title="2、生态系统中的 vue 插件的使用"></a>2、生态系统中的 vue 插件的使用</h4><h4 id="3、源码的学习-commit-的追溯"><a href="#3、源码的学习-commit-的追溯" class="headerlink" title="3、源码的学习 commit 的追溯"></a>3、源码的学习 commit 的追溯</h4>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端框架/" rel="tag"># 前端框架</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/13/前端面试之总结【知识树】/" rel="next" title="前端面试知识体系树">
+                <i class="fa fa-chevron-left"></i> 前端面试知识体系树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/27/计算机网络原理之【OSITCPIP 七层、四层、五层协议】/" rel="prev" title="计算机网络原理之【OSI/TCP/IP七层、四层、五层分层协议】">
+                计算机网络原理之【OSI/TCP/IP七层、四层、五层分层协议】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#去哪网App（Vue-VueRouter-Vuex）"><span class="nav-number">1.</span> <span class="nav-text">去哪网App（Vue+VueRouter+Vuex）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、页面配置"><span class="nav-number">1.1.</span> <span class="nav-text">一、页面配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、禁止用户手动放大缩小页面"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、禁止用户手动放大缩小页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、ViewPort"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、ViewPort</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-meta-标签"><span class="nav-number">1.1.2.0.1.</span> <span class="nav-text">▉ meta 标签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、移动端1px像素问题"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、移动端1px像素问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、移动端-onClick-事件会延迟-300-毫秒"><span class="nav-number">1.1.4.</span> <span class="nav-text">4、移动端 onClick 事件会延迟 300 毫秒</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、单位使用-rem"><span class="nav-number">1.1.5.</span> <span class="nav-text">5、单位使用 rem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、Flex-布局"><span class="nav-number">1.1.6.</span> <span class="nav-text">6、Flex 布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、引入-iconfont-图标库"><span class="nav-number">1.1.7.</span> <span class="nav-text">7、引入 iconfont 图标库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、布局抖动问题"><span class="nav-number">1.1.8.</span> <span class="nav-text">8、布局抖动问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、组件样式问题"><span class="nav-number">1.1.9.</span> <span class="nav-text">9、组件样式问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10、vue-的-for-循环遍历"><span class="nav-number">1.1.10.</span> <span class="nav-text">10、vue 的 for 循环遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11、文字溢出省略号"><span class="nav-number">1.1.11.</span> <span class="nav-text">11、文字溢出省略号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12、盒模型"><span class="nav-number">1.1.12.</span> <span class="nav-text">12、盒模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13、BFC"><span class="nav-number">1.1.13.</span> <span class="nav-text">13、BFC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#14、使用-better-scroll-实现字母滑动"><span class="nav-number">1.1.14.</span> <span class="nav-text">14、使用 better-scroll 实现字母滑动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#15、v-for-循环遍历对象"><span class="nav-number">1.1.15.</span> <span class="nav-text">15、v-for 循环遍历对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#16、计算值之更新一次"><span class="nav-number">1.1.16.</span> <span class="nav-text">16、计算值之更新一次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#17、函滚动节流"><span class="nav-number">1.1.17.</span> <span class="nav-text">17、函滚动节流</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#18、背景渐变色"><span class="nav-number">1.1.18.</span> <span class="nav-text">18、背景渐变色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#19、使用轮播插件（vue-awesome-swiper）"><span class="nav-number">1.1.19.</span> <span class="nav-text">19、使用轮播插件（vue-awesome-swiper）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#20、样式绑定"><span class="nav-number">1.1.20.</span> <span class="nav-text">20、样式绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#21、解除全局绑定"><span class="nav-number">1.1.21.</span> <span class="nav-text">21、解除全局绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22、递归组件"><span class="nav-number">1.1.22.</span> <span class="nav-text">22、递归组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#23、异步组件"><span class="nav-number">1.1.23.</span> <span class="nav-text">23、异步组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、父子组件数据传递"><span class="nav-number">1.2.</span> <span class="nav-text">二、父子组件数据传递</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、父组件向子组件传值"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、父组件向子组件传值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、子组件向父组件传值"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、子组件向父组件传值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、兄弟组件之间传值"><span class="nav-number">1.3.</span> <span class="nav-text">三、兄弟组件之间传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、页面设计"><span class="nav-number">1.4.</span> <span class="nav-text">四、页面设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Vuex"><span class="nav-number">1.5.</span> <span class="nav-text">五、Vuex</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、定义"><span class="nav-number">1.5.1.</span> <span class="nav-text">1、定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、什么情况下使用？"><span class="nav-number">1.5.2.</span> <span class="nav-text">2、什么情况下使用？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Vuex-的思想"><span class="nav-number">1.5.3.</span> <span class="nav-text">3、Vuex 的思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Vuex-的使用"><span class="nav-number">1.5.4.</span> <span class="nav-text">4、Vuex 的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、Router-路由"><span class="nav-number">1.6.</span> <span class="nav-text">六、Router 路由</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、页面跳转"><span class="nav-number">1.6.1.</span> <span class="nav-text">1、页面跳转</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Vie-cli"><span class="nav-number">1.7.</span> <span class="nav-text">七、Vie-cli</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、在配置文件设置别名路径"><span class="nav-number">1.7.1.</span> <span class="nav-text">1、在配置文件设置别名路径</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、Vue-的后续学习"><span class="nav-number">2.</span> <span class="nav-text">八、Vue 的后续学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、官网文档（router、vuex、服务器端渲染都要过一遍）"><span class="nav-number">2.0.1.</span> <span class="nav-text">1、官网文档（router、vuex、服务器端渲染都要过一遍）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、生态系统中的-vue-插件的使用"><span class="nav-number">2.0.2.</span> <span class="nav-text">2、生态系统中的 vue 插件的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、源码的学习-commit-的追溯"><span class="nav-number">2.0.3.</span> <span class="nav-text">3、源码的学习 commit 的追溯</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/08/14/前端框架项目之Vue【去哪儿网】/';
+          this.page.identifier = '2019/08/14/前端框架项目之Vue【去哪儿网】/';
+          this.page.title = '前端框架之【去哪网APP】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

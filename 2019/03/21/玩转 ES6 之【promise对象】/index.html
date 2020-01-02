@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,ES6," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="深入了解 ES6 中的 Promise 的原理 。">
+<meta name="keywords" content="前端,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转 ES6 之【promise对象】">
+<meta property="og:url" content="http://yoursite.com/2019/03/21/玩转 ES6 之【promise对象】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="深入了解 ES6 中的 Promise 的原理 。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-04T07:00:47.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转 ES6 之【promise对象】">
+<meta name="twitter:description" content="深入了解 ES6 中的 Promise 的原理 。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/21/玩转 ES6 之【promise对象】/"/>
+
+
+
+
+
+  <title>玩转 ES6 之【promise对象】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/21/玩转 ES6 之【promise对象】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">玩转 ES6 之【promise对象】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T19:59:25+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/21/玩转 ES6 之【promise对象】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/21/玩转 ES6 之【promise对象】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,909
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  12
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>深入了解 ES6 中的 Promise 的原理 。</p>
+<a id="more"></a>
+<h3 id="一、使用-Promise-的原因"><a href="#一、使用-Promise-的原因" class="headerlink" title="一、使用 Promise 的原因"></a>一、使用 Promise 的原因</h3><h4 id="1、原因一"><a href="#1、原因一" class="headerlink" title="1、原因一"></a>1、原因一</h4><blockquote>
+<p>由于 JS 的运行时单线程的，所以当执行耗时的任务时，就会造成 UI 渲染的阻塞。当前的解决方法是使用回调函数来解决这个问题，当任务执行完毕会，会调用回调方法。</p>
+</blockquote>
+<h4 id="2、原因二"><a href="#2、原因二" class="headerlink" title="2、原因二"></a>2、原因二</h4><blockquote>
+<p>回调函数能解决上述的问题，但是有几个缺点：</p>
+</blockquote>
+<ul>
+<li>不能捕捉异常（错误处理困难）——回调函数的代码和开始任务代码不在同一事件循环中；</li>
+<li>回调地域问题（嵌套回调）；</li>
+<li>处理并行任务棘手（请求之间互不依赖）；</li>
+</ul>
+<h3 id="二、简单的-Promise"><a href="#二、简单的-Promise" class="headerlink" title="二、简单的 Promise"></a>二、简单的 Promise</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    resolve();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"回调成功！"</span>)</span><br><span class="line">&#125;,(err) =&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"回调失败！"</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>1、通过内置的 Promise 构造函数可以创建一个 Promise 对象，构造函数中传入两个函数参数：resolve，reject。两个参数的作用是，在函数内手动调用 resolve 的时候，就说明回调成功了；调用 reject 说明调用失败。通常在 promise 中进行耗时的异步操作，响应是否成功，我们根据判断就可以调用对应的函数。</p>
+<p>2、调用 Promise 对象内置的方法 then，传入两个函数，一个是成功回调的函数，一个失败回调的函数。当再 promise 内部调用 resolve 函数时，之后就会回调 then 方法里的第一个函数。当调用了 reject 方法时，就会调用 then 方法的第二个函数。</p>
+<p>3、promise 相当于是一个承诺，当承诺兑现的时候（调用了 resolve 函数），就会调用 then 中的第一个回调函数，在回调函数中做处理。当承诺出现未知的错误或异常的时候（调用了 reject 函数），就会调用 then 方法的第二个回调函数，提示开发者出现错误。</p>
+<h3 id="三、promise-的原理"><a href="#三、promise-的原理" class="headerlink" title="三、promise 的原理"></a>三、promise 的原理</h3><blockquote>
+<p>其实 Promise 对象用作异步任务的一个占位符，代表暂时还没有获得但在未来获得的值。</p>
+</blockquote>
+<h4 id="1、promise-的状态"><a href="#1、promise-的状态" class="headerlink" title="1、promise 的状态"></a>1、promise 的状态</h4><blockquote>
+<p>promise 共有三种状态，完成状态和拒绝状态状态都是由等待状态转变的。一旦 promise 进入了拒绝或完成状态，它的状态就不能切换了。</p>
+</blockquote>
+<ul>
+<li><strong>等待状态（pending）</strong></li>
+<li><strong>完成状态（resolve）</strong></li>
+<li><strong>拒绝状态（reject）</strong></li>
+</ul>
+<h4 id="2、promise-的拒绝状态"><a href="#2、promise-的拒绝状态" class="headerlink" title="2、promise 的拒绝状态"></a>2、promise 的拒绝状态</h4><blockquote>
+<p>promise 共有两种拒绝状态：显示拒绝（直接调用 reject）和隐式拒绝（抛出异常）。</p>
+</blockquote>
+<h3 id="四、一个-promise-实例"><a href="#四、一个-promise-实例" class="headerlink" title="四、一个 promise 实例"></a>四、一个 promise 实例</h3><blockquote>
+<p>客户端请求服务器是最常用的异步任务，下面实现一下。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getJson</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 返回一个 promise 对象</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve,reject</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">const</span> request = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">        request.open(<span class="string">"GET"</span>,url);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 服务器响应成功</span></span><br><span class="line">        request.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">//try-catch 考虑到 JSON 可能解析会出现错误</span></span><br><span class="line">            <span class="keyword">try</span>&#123;</span><br><span class="line">                <span class="comment">// 响应码正确且 JSON 解析正确</span></span><br><span class="line">                <span class="keyword">if</span>(<span class="keyword">this</span>.status == <span class="number">200</span>)&#123;</span><br><span class="line">                    <span class="comment">// 调用成功承诺</span></span><br><span class="line">                    resolve(<span class="built_in">JSON</span>.parse(<span class="keyword">this</span>.response))</span><br><span class="line">                &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="comment">// 调用失败承诺</span></span><br><span class="line">                    reject(<span class="keyword">this</span>.status + <span class="string">" "</span> +<span class="keyword">this</span>.statusText);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;<span class="keyword">catch</span>(e)&#123;</span><br><span class="line">                <span class="comment">// 调用失败承诺</span></span><br><span class="line">                reject(e.message)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 服务器响应失败</span></span><br><span class="line">        request.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="comment">// 调用失败承诺</span></span><br><span class="line">            reject(<span class="keyword">this</span>.status + <span class="string">" "</span> +<span class="keyword">this</span>.statusText);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 发送请求</span></span><br><span class="line">        request.send();</span><br><span class="line"></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用上述异步请求</span></span><br><span class="line">getJson(<span class="string">"url"</span>).then(<span class="function">(<span class="params">res</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"解析的JSON数据为:"</span>+res)</span><br><span class="line">&#125;,(res)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"错误信息："</span>+res)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="五、嵌套处理异步任务"><a href="#五、嵌套处理异步任务" class="headerlink" title="五、嵌套处理异步任务"></a>五、嵌套处理异步任务</h3><blockquote>
+<p>如果连续进行一连串异步请求，并且各个请求之间相互依赖，使用回调函数解决出现 “回到地狱” 现象，所以我们可以使用 promise 的链式回调。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链式回调</span></span><br><span class="line">getJson(<span class="string">"url"</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">n</span> =&gt;</span> &#123;getJson(n[<span class="number">0</span>].url)&#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">m</span> =&gt;</span> &#123;getJson(m[<span class="number">0</span>].url)&#125;)</span><br><span class="line">    .then(<span class="function"><span class="params">w</span> =&gt;</span> &#123;getJson(w[<span class="number">0</span>].url)&#125;)</span><br><span class="line">    .catch((<span class="function"><span class="params">error</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"异常错误！"</span>)&#125;))</span><br></pre></td></tr></table></figure>
+<p>1、因为 then 方法会返回一个 promise 对象，所以连续调用 then 方法可以进行链式调用 promise 。</p>
+<p>2、多个异步任务中可能出现错误，只需要调用一个 catch 方法并向其传入错误处理的回调函数。</p>
+<h3 id="六、并行处理异步任务"><a href="#六、并行处理异步任务" class="headerlink" title="六、并行处理异步任务"></a>六、并行处理异步任务</h3><blockquote>
+<p>上述的链式调用主要处理的是多个异步任务之间存在依赖性的，如果同时执行多个异步任务，就是用 promise 中的 all 方法。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">// 并行处理多个异步任务</span></span><br><span class="line"><span class="built_in">Promise</span>.all([getJson(url),</span><br><span class="line">             getJson(url),</span><br><span class="line">             getJson(url)]).then(<span class="function"><span class="params">resule</span> =&gt;</span> &#123;</span><br><span class="line">                 <span class="comment">// 如果三个请求都响应成功</span></span><br><span class="line">                 <span class="keyword">if</span>(result[<span class="number">0</span>] == <span class="number">1</span> &amp;&amp; result[<span class="number">1</span>] == <span class="number">1</span> &amp;&amp; result[<span class="number">2</span>] == <span class="number">1</span>)&#123;</span><br><span class="line">                     <span class="built_in">console</span>.log(<span class="string">"请求成功！"</span>)</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;).catch(<span class="function"><span class="params">error</span> =&gt;</span> &#123;<span class="built_in">console</span>.log(<span class="string">"异常错误！"</span>)&#125;)</span><br></pre></td></tr></table></figure>
+<p>1、使用 Promise.all() 方法进行异步请求，将多个请求任务封装数组进行同步请求。</p>
+<p>2、返回的结果值会打包成一个数组，可以通过数组的下标获取值对返回的结果进行判断。</p>
+<p>3、只有全部请求成功才会进入成功的方法，否则就会调用 catch 抛出异常。</p>
+<p>4、与 Promise.race() 方法不同的是，race 方法只要其中一个返回成功，就会调用成功的方法。</p>
+<h3 id="七、生成器和-Promise-相结合"><a href="#七、生成器和-Promise-相结合" class="headerlink" title="七、生成器和 Promise 相结合"></a>七、生成器和 Promise 相结合</h3><blockquote>
+<p>生成器和 promise 的结合可以实现更加优雅的异步代码，为了能够解决同步请求导致 UI 阻塞的问题。</p>
+</blockquote>
+<h4 id="1、结合的过程"><a href="#1、结合的过程" class="headerlink" title="1、结合的过程"></a>1、结合的过程</h4><blockquote>
+<p>将一个异步的任务放入到一个生成器中，然后执行生成器函数。每执行到一个异步任务，就创建一个 promise 用于代表异步的执行结果。因为不知道 promise 的承诺什么时候兑现，所以此时的执行权交给生成器，生成器挂起，从而不会导致 UI 阻塞。一旦承诺被兑现，就会立即执行生成器的 next 方法，一直重复执行这个过程。</p>
+</blockquote>
+<h4 id="2、async-函数"><a href="#2、async-函数" class="headerlink" title="2、async 函数"></a>2、async 函数</h4><blockquote>
+<p>生成器和 promise 的结合代码非常的糟糕，所以需要一个函数管理所有 promise 的调用，还要管理向生成器的发出的所有请求。所以 js 在关键字中新增加了两个关键字分别是 async 和 await 。</p>
+</blockquote>
+<p>① async 表明当前的函数依赖一个异步返回的值。</p>
+<p>② 每个异步请求的位置前都要返回一个 await 关键字，告诉浏览器引擎，请在不阻塞应用执行的情况下在这个位置上等待执行结果。</p>
+<h2 id="Promise-面试题"><a href="#Promise-面试题" class="headerlink" title="Promise 面试题"></a>Promise 面试题</h2><h5 id="※-答✔：promise-是什么？promise-的特点是什么？"><a href="#※-答✔：promise-是什么？promise-的特点是什么？" class="headerlink" title="※ 答✔：promise 是什么？promise 的特点是什么？"></a>※ 答✔：promise 是什么？promise 的特点是什么？</h5><blockquote>
+<p>promise 是承诺的意思，在未来会有一个确切的回复，并且该有三种状态：承诺一旦从等待状态变为其他状态就会不更改状态。</p>
+</blockquote>
+<ol>
+<li>等待状态 （pending）</li>
+<li>完成状态 （resolved）</li>
+<li>拒绝状态 （rejected）</li>
+</ol>
+<h5 id="※-答✔：解决了什么问题？"><a href="#※-答✔：解决了什么问题？" class="headerlink" title="※ 答✔：解决了什么问题？"></a>※ 答✔：解决了什么问题？</h5><blockquote>
+<p>promise 解决了函数回调地狱的问题。</p>
+</blockquote>
+<h5 id="※-答✔：如何使用-promise"><a href="#※-答✔：如何使用-promise" class="headerlink" title="※ 答✔：如何使用 promise ?"></a>※ 答✔：如何使用 promise ?</h5><blockquote>
+<p>通过构造函数创建一个 promise 对象并立即执行，在未来会有一个确切的回复，一旦承诺从等待状态转换为 resolve 或 reject 就不会再更改，通过 then 执行回调函数处理对应的任务。</p>
+</blockquote>
+<p>Promise 的两种使用方法：</p>
+<ul>
+<li>Promise.all() ：将多个请求任务封装数组进行同步请求。</li>
+<li>Promise.race()：race 方法只要其中一个返回成功，就会调用成功的方法。 </li>
+</ul>
+<h5 id="※-答✔：什么是-Promise-链？"><a href="#※-答✔：什么是-Promise-链？" class="headerlink" title="※ 答✔：什么是 Promise 链？"></a>※ 答✔：什么是 Promise 链？</h5><blockquote>
+<p>promise 可以实现链式调用，每次 then 之后返回的都是一个 promise 对象，可以紧接着使用 then 继续处理接下来的任务，这样就实现了链式调用。如果在 then 中使用了 return，那么 return 的值也会被 Promise.resove() 包装。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Promise</span>.resolve(<span class="number">1</span>)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res) <span class="comment">// =&gt; 1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">2</span> <span class="comment">// 包装成 Promise.resolve(2)</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res) <span class="comment">// =&gt; 2</span></span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="※-答✔：Promise-构造函数执行和-then-函数执行有什么区别？"><a href="#※-答✔：Promise-构造函数执行和-then-函数执行有什么区别？" class="headerlink" title="※ 答✔：Promise 构造函数执行和 then 函数执行有什么区别？"></a>※ 答✔：Promise 构造函数执行和 then 函数执行有什么区别？</h5><blockquote>
+<p>构造函数内部的代码是立即执行的，而 then 是回调之后执行的。</p>
+</blockquote>
+<h5 id="※-答✔：promise-的优缺点是什么？"><a href="#※-答✔：promise-的优缺点是什么？" class="headerlink" title="※ 答✔：promise 的优缺点是什么？"></a>※ 答✔：promise 的优缺点是什么？</h5><blockquote>
+<p>优点：</p>
+<p>1、链式调用。</p>
+<p>2、解决回调地狱的问题。</p>
+<p>3、代码实现简洁优雅。</p>
+<p>缺点：</p>
+<p>1、无法取消promise。</p>
+<p>2、promise 错误需要通过回调函数捕获。</p>
+</blockquote>
+<h5 id="※-答✔：Promise-在事件循环中的执行过程是怎样的？"><a href="#※-答✔：Promise-在事件循环中的执行过程是怎样的？" class="headerlink" title="※ 答✔：Promise 在事件循环中的执行过程是怎样的？"></a>※ 答✔：Promise 在事件循环中的执行过程是怎样的？</h5><h5 id="※-答✔：能不能手写一个-Promise"><a href="#※-答✔：能不能手写一个-Promise" class="headerlink" title="※ 答✔：能不能手写一个 Promise ?"></a>※ 答✔：能不能手写一个 Promise ?</h5><blockquote>
+<p>promise 的执行顺序：</p>
+<p>1、先执行 MyPromise 构造函数；</p>
+<p>2、注册 then 函数；</p>
+<p>3、此时的 promise 挂起，UI 非堵塞，执行其他的同步代码；</p>
+<p>4、执行回调函数。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 三种状态</span></span><br><span class="line"><span class="keyword">const</span> PENDING = <span class="string">"pending"</span>;</span><br><span class="line"><span class="keyword">const</span> RESOLVE = <span class="string">"resolve"</span>;</span><br><span class="line"><span class="keyword">const</span> REJECT = <span class="string">"reject"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// promise 函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyPromise</span>(<span class="params">fn</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span>;           <span class="comment">// 回调时用于保存正确的 this 对象</span></span><br><span class="line">    that.state = PENDING;        <span class="comment">// 初始化状态</span></span><br><span class="line">    that.value = <span class="literal">null</span>;           <span class="comment">// value 用于保存回调函数(resolve/reject 传递的参数值)</span></span><br><span class="line">    that.resolvedCallbacks = []; <span class="comment">// 用于保存 then 中的回调</span></span><br><span class="line">    that.rejectedCallbacks = [];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// resolve 和 reject 函数 </span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">resolve</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(that.state === PENDING)&#123;</span><br><span class="line">            that.state = <span class="string">'resolve'</span>;</span><br><span class="line">            that.value = value;</span><br><span class="line">            that.resolvedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">reject</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (that.state === PENDING) &#123;</span><br><span class="line">            that.state = <span class="string">'reject'</span></span><br><span class="line">            that.value = value</span><br><span class="line">            that.rejectedCallbacks.map(<span class="function"><span class="params">cb</span> =&gt;</span> cb(that.value))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 实现如何执行 Promise 中传入的函数</span></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        fn(resolve, reject)</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        reject(e)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现 then 函数</span></span><br><span class="line">MyPromise.prototype.then = <span class="function"><span class="keyword">function</span>(<span class="params">onResolved, onRejected</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> that = <span class="keyword">this</span>;</span><br><span class="line">    <span class="comment">// 判断两个参数是否为函数类型(如果不是函数，就创建一个函数赋值给对应的参数)</span></span><br><span class="line">    onResolved = <span class="keyword">typeof</span> onResolved === <span class="string">'function'</span> ? onResolved : <span class="function"><span class="params">v</span> =&gt;</span> v;</span><br><span class="line">    onRejected = <span class="keyword">typeof</span> onRejected === <span class="string">'function'</span> ? onRejected : <span class="function"><span class="params">r</span> =&gt;</span> &#123;<span class="keyword">throw</span> r&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断当前的状态</span></span><br><span class="line">    <span class="keyword">if</span> (that.state === <span class="string">'pending'</span>) &#123;</span><br><span class="line">        that.resolvedCallbacks.push(onResolved)</span><br><span class="line">        that.rejectedCallbacks.push(onRejected)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (that.state === <span class="string">'resolve'</span>) &#123;</span><br><span class="line">        onResolved(that.value)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (that.state === <span class="string">'reject'</span>) &#123;</span><br><span class="line">        onRejected(that.value)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> MyPromise(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">        resolve(<span class="number">1</span>)</span><br><span class="line">    &#125;, <span class="number">0</span>)</span><br><span class="line">&#125;).then(<span class="function"><span class="params">value</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="async-及-await"><a href="#async-及-await" class="headerlink" title="async 及 await"></a>async 及 await</h2><blockquote>
+<p>面试题：async 及 await 的特点，它们的优点和缺点分别是什么？await 原理是什么？</p>
+</blockquote>
+<h5 id="※-答✔：async-的特点？"><a href="#※-答✔：async-的特点？" class="headerlink" title="※ 答✔：async 的特点？"></a>※ 答✔：async 的特点？</h5><blockquote>
+<p>一个函数前加上 async 关键字，就将该函数返回一个 Promise，async  直接将返回值使用 Promise.resolve() 进行包裹（与 then 处理效果相同）。</p>
+</blockquote>
+<h5 id="※-答✔：await-的特点？"><a href="#※-答✔：await-的特点？" class="headerlink" title="※ 答✔：await 的特点？"></a>※ 答✔：await 的特点？</h5><blockquote>
+<p><code>await</code> 只能配套 <code>async</code> 使用，<code>await</code> 内部实现了 <code>generator</code>，<code>await</code> 就是 <code>generator</code> 加上 <code>Promise</code> 的语法糖，且内部实现了自动执行 <code>generator</code>。</p>
+</blockquote>
+<h5 id="※-答✔：async-和-await-的优缺点？"><a href="#※-答✔：async-和-await-的优缺点？" class="headerlink" title="※ 答✔：async  和 await 的优缺点？"></a>※ 答✔：async  和 await 的优缺点？</h5><p><strong>优点：</strong></p>
+<blockquote>
+<p>1、<strong>内置执行器。</strong> Generator 函数的执行必须靠执行器，所以才有了 co 函数库，而 async 函数自带执行器。也就是说，async 函数的执行，与普通函数一模一样，只要一行。</p>
+<p>2、<strong>更好的语义。</strong> async 和 await，比起星号和 yield，语义更清楚了。async 表示函数里有异步操作，await 表示紧跟在后面的表达式需要等待结果。</p>
+<p>3、<strong>更广的适用性。</strong> co 函数库约定，yield 命令后面只能是 Thunk 函数或 Promise 对象，而 async 函数的 await 命令后面，可以跟 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）。</p>
+</blockquote>
+<p><strong>缺点：</strong></p>
+<blockquote>
+<p>因为 <code>await</code> 将异步代码改造成了同步代码，如果多个异步代码没有依赖性却使用了 <code>await</code> 会导致性能上的降低。</p>
+</blockquote>
+<h5 id="※-答✔：await-原理是什么？"><a href="#※-答✔：await-原理是什么？" class="headerlink" title="※ 答✔：await 原理是什么？"></a>※ 答✔：await 原理是什么？</h5><blockquote>
+<p>async 函数的实现，就是将 Generator 函数和自动执行器，包装在一个函数里。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">spawn</span>(<span class="params">genF</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> gen = genF();</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">step</span>(<span class="params">nextF</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">var</span> next = nextF();</span><br><span class="line">      &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">        <span class="keyword">return</span> reject(e); </span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(next.done) &#123;</span><br><span class="line">        <span class="keyword">return</span> resolve(next.value);</span><br><span class="line">      &#125; </span><br><span class="line">      <span class="built_in">Promise</span>.resolve(next.value).then(<span class="function"><span class="keyword">function</span>(<span class="params">v</span>) </span>&#123;</span><br><span class="line">        step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.next(v); &#125;);      </span><br><span class="line">      &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.throw(e); &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    step(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> gen.next(<span class="literal">undefined</span>); &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/21/玩转 ES6 之【Proxy预处理】/" rel="next" title="玩转 ES6 之【对象代理】">
+                <i class="fa fa-chevron-left"></i> 玩转 ES6 之【对象代理】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/21/玩转 ES6 之【class类】/" rel="prev" title="玩转 ES6 之【promise对象】">
+                玩转 ES6 之【promise对象】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、使用-Promise-的原因"><span class="nav-number">1.</span> <span class="nav-text">一、使用 Promise 的原因</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、原因一"><span class="nav-number">1.1.</span> <span class="nav-text">1、原因一</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、原因二"><span class="nav-number">1.2.</span> <span class="nav-text">2、原因二</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、简单的-Promise"><span class="nav-number">2.</span> <span class="nav-text">二、简单的 Promise</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、promise-的原理"><span class="nav-number">3.</span> <span class="nav-text">三、promise 的原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、promise-的状态"><span class="nav-number">3.1.</span> <span class="nav-text">1、promise 的状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、promise-的拒绝状态"><span class="nav-number">3.2.</span> <span class="nav-text">2、promise 的拒绝状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、一个-promise-实例"><span class="nav-number">4.</span> <span class="nav-text">四、一个 promise 实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、嵌套处理异步任务"><span class="nav-number">5.</span> <span class="nav-text">五、嵌套处理异步任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、并行处理异步任务"><span class="nav-number">6.</span> <span class="nav-text">六、并行处理异步任务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、生成器和-Promise-相结合"><span class="nav-number">7.</span> <span class="nav-text">七、生成器和 Promise 相结合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、结合的过程"><span class="nav-number">7.1.</span> <span class="nav-text">1、结合的过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、async-函数"><span class="nav-number">7.2.</span> <span class="nav-text">2、async 函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promise-面试题"><span class="nav-number"></span> <span class="nav-text">Promise 面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：promise-是什么？promise-的特点是什么？"><span class="nav-number">0.0.1.</span> <span class="nav-text">※ 答✔：promise 是什么？promise 的特点是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：解决了什么问题？"><span class="nav-number">0.0.2.</span> <span class="nav-text">※ 答✔：解决了什么问题？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：如何使用-promise"><span class="nav-number">0.0.3.</span> <span class="nav-text">※ 答✔：如何使用 promise ?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：什么是-Promise-链？"><span class="nav-number">0.0.4.</span> <span class="nav-text">※ 答✔：什么是 Promise 链？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：Promise-构造函数执行和-then-函数执行有什么区别？"><span class="nav-number">0.0.5.</span> <span class="nav-text">※ 答✔：Promise 构造函数执行和 then 函数执行有什么区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：promise-的优缺点是什么？"><span class="nav-number">0.0.6.</span> <span class="nav-text">※ 答✔：promise 的优缺点是什么？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：Promise-在事件循环中的执行过程是怎样的？"><span class="nav-number">0.0.7.</span> <span class="nav-text">※ 答✔：Promise 在事件循环中的执行过程是怎样的？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：能不能手写一个-Promise"><span class="nav-number">0.0.8.</span> <span class="nav-text">※ 答✔：能不能手写一个 Promise ?</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#async-及-await"><span class="nav-number"></span> <span class="nav-text">async 及 await</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：async-的特点？"><span class="nav-number">0.0.1.</span> <span class="nav-text">※ 答✔：async 的特点？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：await-的特点？"><span class="nav-number">0.0.2.</span> <span class="nav-text">※ 答✔：await 的特点？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：async-和-await-的优缺点？"><span class="nav-number">0.0.3.</span> <span class="nav-text">※ 答✔：async  和 await 的优缺点？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#※-答✔：await-原理是什么？"><span class="nav-number">0.0.4.</span> <span class="nav-text">※ 答✔：await 原理是什么？</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/21/玩转 ES6 之【promise对象】/';
+          this.page.identifier = '2019/03/21/玩转 ES6 之【promise对象】/';
+          this.page.title = '玩转 ES6 之【promise对象】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

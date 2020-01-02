@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="前端,面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前端面试知识体系树！">
+<meta name="keywords" content="前端,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端面试知识体系树">
+<meta property="og:url" content="http://yoursite.com/2019/08/13/前端面试之总结【知识树】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="前端面试知识体系树！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/12/19/167c4a2627fe55f1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="c:/Users/10405/AppData/Roaming/Typora/typora-user-images/1565139171429.png">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/27/167542b09875a74a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/11/27/167542a9af5f193f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/201205/bg2012052910.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/201205/bg2012052913.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/201206/bg2012061102.png">
+<meta property="og:image" content="http://www.ruanyifeng.com/blogimg/asset/201206/bg2012061106.png">
+<meta property="og:updated_time" content="2019-11-13T11:52:46.035Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端面试知识体系树">
+<meta name="twitter:description" content="前端面试知识体系树！">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/12/19/167c4a2627fe55f1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/13/前端面试之总结【知识树】/"/>
+
+
+
+
+
+  <title>前端面试知识体系树 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/13/前端面试之总结【知识树】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端面试知识体系树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-13T07:57:25+08:00">
+                2019-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/面试/" itemprop="url" rel="index">
+                    <span itemprop="name">面试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/08/13/前端面试之总结【知识树】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/08/13/前端面试之总结【知识树】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  16,598
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  61
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>前端面试知识体系树！</p>
+<a id="more"></a>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>[TOC]</p>
+<h2 id="JS基础知识点"><a href="#JS基础知识点" class="headerlink" title="JS基础知识点"></a>JS基础知识点</h2><h3 id="一、JS中的基本类型问题"><a href="#一、JS中的基本类型问题" class="headerlink" title="一、JS中的基本类型问题"></a>一、JS中的基本类型问题</h3><blockquote>
+<p>js 的基本类型分为几大类？各是什么？</p>
+</blockquote>
+<p>答：两大类，分别为<strong>原始类型</strong>和<strong>对象类型</strong>。</p>
+<blockquote>
+<p>原始类型包括哪些类型？（6 种）</p>
+</blockquote>
+<p>答：String 、Number、Boolean、null、undefined、symbol</p>
+<blockquote>
+<p>补充：symbol 表示独一无二的值，为了防止对象的属性都是字符串类型而冲突引入的。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通常参数是字符串类型，如果为对象类型，就会调用 toString 方法</span></span><br><span class="line"><span class="keyword">let</span> s1 = <span class="built_in">Symbol</span>(参数);<span class="comment">// 这个参数可以认为是 Symbol 实例的一个描述,用于区分</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 第一种写法</span></span><br><span class="line"><span class="keyword">let</span> a = &#123;&#125;;</span><br><span class="line">a[s1] = <span class="string">'Hello!'</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二种写法</span></span><br><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">    [s1] = <span class="string">'Hello'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>原始类型的特点是什么？原始类型和对象类型的区别是什么？对象函数传参发生的问题？</p>
+</blockquote>
+<p>答：① 原始类型存储的都是值，而对象类型存储的是地址。（变量之间的赋值都是地址之间的赋值）</p>
+<p>​        ② 对象当做参数传递传递是副本。</p>
+<blockquote>
+<p>null 是对象类型吗？如果不是，为什么？</p>
+</blockquote>
+<p>答：虽然检测 typeof  null 是对象类型，其实这是一个 js 的bug。JS 的最初版本是 32 位系统的，为了性能考虑将用低位存储变量的类型信息，<code>000</code> 开头代表的是对象，然而 null 表示全零，所以错误的将 null 判断为对象。虽然内部的判断代码已经改变，但是这个 bug 就一直存在下来。</p>
+<blockquote>
+<p>总结：undefined 和 null 出现的情况。 </p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li><strong>undefined</strong></li>
+</ul>
+<p>1、变量提升: 只声明未定义默认值就是 undefined</p>
+<p>2、严格模式下：没有明确的执行主体，this 就是 undefined</p>
+<p>3、对象没有这个属性名，属性值是 undefined</p>
+<p>4、函数定义形参不传值，默认就是undefined</p>
+<p>5、函数没有返回值（没有return 或者return;），默认返回的就是 undefined</p>
+<ul>
+<li><strong>null</strong></li>
+</ul>
+<p>1、手动设置变量的值或者对象某一个属性值为 null（此时不赋值，后边会赋值）</p>
+<p>2、在 JS 的 DOM 元素获取中，如果没有获取到指定的元素对象，结果一般都是 null。</p>
+<p>3、Object.prototype.<em>proto\</em> 的值也是 null</p>
+<p>4、正则捕获的时候，如果没有获取到结果，默认的也是 null</p>
+<blockquote>
+<p>那为什么 0.1 + 0.2 &gt; 0.3 ?</p>
+</blockquote>
+<p>答：① 原因：js 采用的是 IEEE 754 双精度版本。</p>
+<p>​        ② 因为计算机是通过二进制来存储的，0.1 的二进制的表示是一个无限循环的小数，这也没有什么问题。但是js采用的浮点数标准需要裁减数字，所以循环的数字就会被裁剪掉，导致出现了精度丢失，造成了 0.1 不再是 0.1，而是变成了 0.1000…002 。同样 0.2 变成了 0.2000..002 ，所以两者相加的数大于 0.3。</p>
+<blockquote>
+<p>补充：为什么0.1 不是 0.1 ，为什么 console.log(0.1) 等于 0.1 呢？怎么解决这个问题？</p>
+</blockquote>
+<p>答：① 因为在输入内容进行转换的时候，二进制转换成十进制，然后十进制转换成字符串，在这个转换的过程中发生了取近似值，所以打印出来的是一个近似值。</p>
+<p>​        ②可以通过原生的取近似值（四舍五入）的方法解决就可以了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parseFloat((0.1 + 0.2).toFixed(10)) === 0.3 // true</span><br></pre></td></tr></table></figure>
+<p><strong>2、执行顺序</strong></p>
+<ul>
+<li>声明一个全局的作用域（词法环境）。</li>
+<li>进行函数和变量提升（上边的两个阶段）</li>
+<li>代码自上而下执行</li>
+<li>遇到函数执行循环此过程</li>
+</ul>
+<h3 id="二、JS-中的类型转换问题（笔试）"><a href="#二、JS-中的类型转换问题（笔试）" class="headerlink" title="二、JS 中的类型转换问题（笔试）"></a>二、JS 中的类型转换问题（笔试）</h3><h4 id="1、转化为-Boolean-类型"><a href="#1、转化为-Boolean-类型" class="headerlink" title="1、转化为 Boolean 类型"></a>1、转化为 Boolean 类型</h4><blockquote>
+<p>只有 <code>null</code>、<code>undefined</code>、<code>‘ ‘</code>、<code>0</code>、<code>NAN</code>、<code>false</code> 转化为 <code>false</code>。 </p>
+</blockquote>
+<h4 id="2、对象转原始类型"><a href="#2、对象转原始类型" class="headerlink" title="2、对象转原始类型"></a>2、对象转原始类型</h4><ul>
+<li><code>Object</code> 转字符串类型，直接调用 <code>toString()</code> 方法。</li>
+<li>除 <code>String</code> 类型外，<code>Object</code> 转其他类型的话，直接调用 <code>valueOf</code>方法。</li>
+<li>如果调用 <code>valueOf</code> 返回的不是原始类型的值，会调用 <code>toString()</code> 方法，toString() 如果返回的不是原始值，就会报错。</li>
+</ul>
+<h4 id="3、四则运算符"><a href="#3、四则运算符" class="headerlink" title="3、四则运算符"></a>3、四则运算符</h4><blockquote>
+<p>加法运算符</p>
+</blockquote>
+<ul>
+<li>只要运算符其中一方为字符串类型，另一方一会转换为字符串类型。</li>
+<li>如果双方都不是字符串，则将转化为数字（boolean）或字符串(数组)。</li>
+<li>对于无效格式，转化为 NaN。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1 + &apos;1&apos; // &apos;11&apos;</span><br><span class="line">true + true // 2</span><br><span class="line">4 + [1,2,3] // &quot;41,2,3&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&apos;a&apos; + + &apos;b&apos; // -&gt; &quot;aNaN&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其他运算（减/乘/除）</p>
+</blockquote>
+<ul>
+<li>只要一方为数字，另一方也会转化为数字。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">4 * &apos;3&apos; // 12</span><br><span class="line">4 * [] // 0</span><br><span class="line">4 * [1, 2] // NaN</span><br></pre></td></tr></table></figure>
+<h4 id="4、比较运算符"><a href="#4、比较运算符" class="headerlink" title="4、比较运算符"></a>4、比较运算符</h4><ul>
+<li>如果是对象和数字比较，则将对象通过 valueOf 转化为原始类型进行比较。</li>
+<li>如果是字符串，将其转化为 unicode 字符索引来比较。</li>
+</ul>
+<h4 id="5、逻辑运算符"><a href="#5、逻辑运算符" class="headerlink" title="5、逻辑运算符"></a>5、逻辑运算符</h4><blockquote>
+<p><strong>在条件判断中:</strong></p>
+</blockquote>
+<ul>
+<li>&amp;&amp; : 所有条件为真，整体才为真。</li>
+<li>|| ：只有一个条件为真，整体就为真。</li>
+</ul>
+<blockquote>
+<p><strong>在赋值操作中：</strong></p>
+</blockquote>
+<ul>
+<li>A &amp;&amp; B ：首先看 A 的真假，<strong>A 为假，返回 A 的值，A 为真返回 B 的值。</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 &amp;&amp; 1 =&gt; 0</span><br><span class="line">1 &amp;&amp; 2 =&gt; 2</span><br></pre></td></tr></table></figure>
+<ul>
+<li>A || B : 首先看 A 的真假，<strong>A 为真返回的是 A 的值，A 为假返回的是 B 的值（不管B 是啥）</strong></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">0 || 1 =&gt; 1</span><br><span class="line">1 || 2 =&gt; 1</span><br></pre></td></tr></table></figure>
+<h3 id="三、类型判断（typeOf-VS-instanceof）"><a href="#三、类型判断（typeOf-VS-instanceof）" class="headerlink" title="三、类型判断（typeOf  VS instanceof）"></a>三、类型判断（typeOf  VS instanceof）</h3><blockquote>
+<p>typeOf 能够正确的判断类型？</p>
+</blockquote>
+<p>答：除了 null 都显示正确的类型。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">typeOf 1   // &apos;number&apos;</span><br><span class="line">typeOf &apos;1&apos; // &apos;string&apos;</span><br><span class="line">typeOf undefined // &apos;undefined&apos;</span><br><span class="line">typeOf true // ‘boolean’</span><br><span class="line">typeOf Symbol() // ‘symbol’</span><br><span class="line"></span><br><span class="line">// 并不能准确的判断对象的具体类型</span><br><span class="line">typeOf [] // &apos;object&apos;</span><br><span class="line">typeOf &#123;&#125; // &apos;object&apos;</span><br><span class="line">typeOf null // &apos;object&apos;</span><br><span class="line">typeof console.log // &apos;function&apos;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>instanceof 能够正确判断对象的原理是什么？</p>
+</blockquote>
+<p>答：正确的判断一个对象类型，使用 instanceof 内部机制是通过原型链来判断的。</p>
+<blockquote>
+<p>补充：instanceof 不是百分之百可信任的。自定义一个 instanceof 行为的东西进行判断。</p>
+</blockquote>
+<blockquote>
+<p>== 和 === 有什么区别？</p>
+</blockquote>
+<p>答: </p>
+<p>① ==：如果双方的类型不相同，先进行类型转换。如果相同就比较大小。</p>
+<ul>
+<li>判断 null 和 undefined ，是的话就会返回 true。</li>
+<li>判断两者类型是否为 string 和 number，是的话将字符串为 number。</li>
+<li>如果一方为 boolean，就把boolean 转为 number 再判断。</li>
+<li>如果 object 与原始类型比较，先把 object 转化为原始类型再判断。</li>
+</ul>
+<p>② ===：只比较数值大小。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/12/19/167c4a2627fe55f1?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<h3 id="四、JS-中的相关-this-问题"><a href="#四、JS-中的相关-this-问题" class="headerlink" title="四、JS 中的相关 this 问题"></a>四、JS 中的相关 this 问题</h3><h4 id="1、判断-this"><a href="#1、判断-this" class="headerlink" title="1、判断 this"></a>1、判断 this</h4><blockquote>
+<p>如何正确的判断 this ?   </p>
+</blockquote>
+<p>答：  </p>
+<ul>
+<li>直接调用的函数，<code>this</code> 指向的是全局 <code>window</code> 对象。  </li>
+<li>对象调用，<code>this</code> 指向该对象（. 前边谁调用 <code>this</code> 就指向谁）。   </li>
+<li><code>new</code> 的方式，<code>this</code> 永远被绑定在新创建的对象上，任何方式都改变不了 <code>this</code> 的指向。  </li>
+</ul>
+<blockquote>
+<p>箭头函数的 this 指向谁?  </p>
+</blockquote>
+<p>答：① 箭头函数其实是没有 this 的，this 只取决于包裹箭头函数的第一个普通函数的 this。  </p>
+<p>​        ② 箭头函数使用 bind 改变 this 的指向是无效的。 </p>
+<h4 id="2、改变-this-的值"><a href="#2、改变-this-的值" class="headerlink" title="2、改变 this 的值"></a>2、改变 this 的值</h4><blockquote>
+<p>改变 this 的值的三种方式？  </p>
+</blockquote>
+<ul>
+<li>call  </li>
+<li>apply  </li>
+<li>bind (如果第一个参数上下文为空，这绑定在 window 上)  </li>
+</ul>
+<blockquote>
+<p>bind 对一个函数多次调用，那么上下文会指向谁呢？ </p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; <span class="built_in">console</span>.log(<span class="keyword">this</span>) &#125;</span><br><span class="line">fn.bind().bind(a)() <span class="comment">// =&gt; ?</span></span><br></pre></td></tr></table></figure>
+<p>答: 第二个 bind 绑定的函数是 bind ，所以 fn 绑定的 this 永远是第一个 bind 决定的，此处是 window。</p>
+<blockquote>
+<p>多种 this 的规则出现，应该怎么判断？</p>
+</blockquote>
+<p>答：this 的规则具有优先级，<code>new —&gt; bind/apply/call —&gt; obj.foo() —&gt; foo()</code></p>
+<blockquote>
+<p>apply、call、bind 之间的区别是什么？</p>
+</blockquote>
+<blockquote>
+<p>手写一个apply、call、bind。</p>
+</blockquote>
+<h3 id="五、闭包"><a href="#五、闭包" class="headerlink" title="五、闭包"></a>五、闭包</h3><blockquote>
+<p>什么是作用域？什么是作用域链？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li>作用域：规定<strong>变量和函数</strong>的可使用的范围叫做作用域。</li>
+<li>作用域链：每个函数都会有一个作用域，查找变量或函数时，由局部作用域到全局作用域依次查找，<strong>这些作用域的集合就称为作用域链。</strong></li>
+</ul>
+<blockquote>
+<p>什么是闭包？</p>
+</blockquote>
+<p>答：函数执行，形成一个私有的作用域，保护里边的私有变量不受外界的干扰，除了保护私有变量外，还可以存储一些内容，这样的模式叫做闭包。</p>
+<blockquote>
+<p>闭包的作用/应用有哪些？</p>
+</blockquote>
+<p>答：保护和保存。</p>
+<blockquote>
+<p>保护和保存在实际项目中哪里用到？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li><strong>保护作用</strong></li>
+</ul>
+<p>1）团队开发时，每个开发者把自己的代码放在一个私有的作用域中，防止相互之间的变量命名冲突；把需要提供给别人的方法，通过return 或 window.xxx 的方式暴露在全局下。</p>
+<p>2）jQuery 的源码中也是利用了这种保护机制。</p>
+<p>3）封装私有变量</p>
+<ul>
+<li><strong>保存作用</strong></li>
+</ul>
+<p>1）选项卡闭包的解决方案。</p>
+<blockquote>
+<p>循环绑定事件引发的索引什么问题？怎么解决这种问题？</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 事件绑定引发的索引问题</span></span><br><span class="line"><span class="keyword">var</span> btnBox = <span class="built_in">document</span>.getElementById(<span class="string">'btnBox'</span>),</span><br><span class="line">    inputs = btnBox.getElementsByTagName(<span class="string">'input'</span>)</span><br><span class="line"><span class="keyword">var</span> len = inputs.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++)&#123;</span><br><span class="line">    inputs[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>答：</p>
+<p><strong>1）原因</strong></p>
+<blockquote>
+<p>所有的事件绑定都是异步的，当触发点击事件，执行方法的时候，循环早就结束了。（js 是单线程的，浏览器是多线程的）</p>
+</blockquote>
+<ul>
+<li>同步：JS 中当前这个任务没有完成，下面的任务都不会执行，只有等当前彻底完成，才会执行下面的任务。</li>
+<li>异步：JS 中的当前任务没有完成，需要等一会在完成，此时我们可以继续执行下面的任务。</li>
+</ul>
+<p><strong>2）解决方案</strong></p>
+<blockquote>
+<p>当点击事件执行的时候，就会在私有作用域查找 i 的值，此时私有作用域没有 i ，就回去全局作用域查找，此时全局作用域的 i 已经被改变。所以说，要创建一个私有作用域的 i 。</p>
+</blockquote>
+<ul>
+<li><strong>方式一：自定义属性</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方式一:自定义属性</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++)&#123;</span><br><span class="line">    inputs[i].myIndex = i;</span><br><span class="line">    inputs[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(<span class="keyword">this</span>.myIndex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>方式二：闭包解决</strong></li>
+</ul>
+<blockquote>
+<p><strong>优点：</strong>通过创建私有作用域（闭包）方式解决，循环几次，就创建几个私有作用域（闭包），然后，每个私有作用域都有一个私有变量 i ，存的值分别是循环的值。</p>
+<p><strong>缺点：</strong>生成多个不销毁的私有作用域（堆内存），对性能有一定的影响。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++)&#123;</span><br><span class="line">    ~<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">        inputs[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            alert(<span class="keyword">this</span>.myIndex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>方式三：let 块级作用域</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> len = inputs.length;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span>; i++)&#123;</span><br><span class="line">    inputs[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        alert(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="六、原型和原型链"><a href="#六、原型和原型链" class="headerlink" title="六、原型和原型链"></a>六、原型和原型链</h3><p><img src="C:\Users\10405\AppData\Roaming\Typora\typora-user-images\1565139171429.png" alt="1565139171429"></p>
+<blockquote>
+<p>什么是原型？什么是原型链？如何理解？</p>
+</blockquote>
+<p>答:  </p>
+<p><strong>原型：</strong>每个 JS 对象都有 <code>__proto__</code> 属性，这个属性指向了原型。</p>
+<p><strong>原型链：</strong>原型链就是多个对象通过 <code>__proto__</code> 的方式连接了起来。</p>
+<p><strong>总结：</strong></p>
+<ul>
+<li>所有的实例的 <em>proto\</em> 都指向该构造函数的原型对象（prototype）。</li>
+<li>所有的函数（包括构造函数）是 Function() 的实例，所以所有函数的 <em>proto\</em> 的都指向 Function() 的原型对象。</li>
+<li>所有的原型对象（包括 Function 的原型对象）都是 Object 的实例，所以 <em>proto\</em> 都指向 Object （构造函数）的原型对象。而 Object 构造函数的 <em>proto\</em> 指向 null。</li>
+<li>Function 构造函数本身就是 Function 的实例，所以 <em>proto\</em> 指向 Function 的原型对象。</li>
+</ul>
+<h3 id="七、深拷贝和浅拷贝"><a href="#七、深拷贝和浅拷贝" class="headerlink" title="七、深拷贝和浅拷贝"></a>七、深拷贝和浅拷贝</h3><blockquote>
+<p>什么是浅拷贝？如何实现浅拷贝？什么是深拷贝？如何实现深拷贝？</p>
+</blockquote>
+<p>答：</p>
+<p>由于对象的赋值的是地址，会导致一方改变另一方，我们不想出现这种情况，所以出现了深浅拷贝。</p>
+<ul>
+<li><strong>浅拷贝</strong></li>
+</ul>
+<p><strong>方式一：</strong>浅拷贝会把对象的属性值拷贝到新的对象当中，如果属性值是对象的话，拷贝的是地址。所以浅拷贝只不过解决的是第一层。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">Object</span>.assign(&#123;&#125;, a)</span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p><strong>方式二：</strong>通过扩展运算符来解决。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = &#123;...a&#125;</span><br><span class="line">a.age = <span class="number">2</span></span><br><span class="line"><span class="built_in">console</span>.log(b.age) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>深拷贝</strong></li>
+</ul>
+<p>答：一般会通过 <code>JSON.parse(JSON.stringify(object))</code> 来解决。（一般可以解决大部分问题）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = &#123;</span><br><span class="line">  age: <span class="number">1</span>,</span><br><span class="line">  jobs: &#123;</span><br><span class="line">    first: <span class="string">'FE'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> b = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(a))</span><br><span class="line">a.jobs.first = <span class="string">'native'</span></span><br><span class="line"><span class="built_in">console</span>.log(b.jobs.first) <span class="comment">// FE</span></span><br></pre></td></tr></table></figure>
+<p>局限性：</p>
+<ul>
+<li>忽略 <code>undefined</code> =&gt; 忽略</li>
+<li>不能序列化函数 =&gt; 忽略</li>
+<li>会忽略 <code>symbol</code> =&gt; 忽略</li>
+<li>不能解决循环引用的对象 =&gt; 报错</li>
+</ul>
+<blockquote>
+<p>补充：因为手写深拷贝函数涉及到很多边界问题（原型链的处理、<code>DOM</code> 的处理等），通常推荐使用 <code>lodash</code> 来实现深拷贝函数。</p>
+</blockquote>
+<h2 id="ES6-知识点及常考面试题"><a href="#ES6-知识点及常考面试题" class="headerlink" title="ES6 知识点及常考面试题"></a>ES6 知识点及常考面试题</h2><h3 id="一、var、Let、Const"><a href="#一、var、Let、Const" class="headerlink" title="一、var、Let、Const"></a>一、var、Let、Const</h3><blockquote>
+<p>什么是变量提升？</p>
+</blockquote>
+<p>答：变量提升就是该变量还未被声明，但是却可以使用未声明的变量；虽然描述为提升，但不是真正的将代码提升到顶部，而是在代码执行前，先在词法环境中进行了注册。</p>
+<blockquote>
+<p>为什么会存在变量提升呢？</p>
+</blockquote>
+<p>答：根本原因就是为了解决函数之间互相调用的情况。</p>
+<blockquote>
+<p>变量和函数怎么进行提升的？优先级是怎么样的？</p>
+</blockquote>
+<p>答：<strong>1、提升规则：</strong></p>
+<ul>
+<li><strong>第一阶段：</strong>对所有函数声明进行提升（<strong>忽略表达式和箭头函数</strong>），引用类型的赋值（函数的声明，函数的提升代表着可执行，因为提升之后保持着引用）分为三步：<ul>
+<li>开辟堆空间</li>
+<li>存储内容</li>
+<li>将地址赋值给变量</li>
+</ul>
+</li>
+<li><strong>第二阶段：</strong>对所有的变量进行提升，全部赋值为 undefined（如果已经存在，不赋值为undefined）。然后依次顺序执行代码。</li>
+</ul>
+<blockquote>
+<p>什么是暂时性死区？</p>
+</blockquote>
+<p>答：使用 let 和 const 时，我们不能在声明之前使用变量，这叫做暂时性死区。</p>
+<blockquote>
+<p>var 和 let、const 的区别是什么？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li>var 存在变量提升，而 let、const 则不会。</li>
+<li>var 声明的变量会挂载到 window 上，而其他两者不会。</li>
+<li>let 和 const 的作用基本一致，后者声明的变量不能再次赋值（注意：但是能改变值）</li>
+</ul>
+<h4 id="1、rem-和其他单位之间的区别"><a href="#1、rem-和其他单位之间的区别" class="headerlink" title="1、rem 和其他单位之间的区别"></a>1、rem 和其他单位之间的区别</h4><h6 id="▉-定义"><a href="#▉-定义" class="headerlink" title="▉ 定义"></a>▉ 定义</h6><blockquote>
+<p><strong>px：</strong>像素 px 是相对于显示器屏幕分辨率而言的 。</p>
+<p><strong>em： </strong>当前对行内文本的字体尺寸未被人为设置，则相对于 [浏览器的默认字体] 尺寸。</p>
+<p><strong>rem：</strong>相对的只是 HTML <strong>根元素</strong>（根元素就是没有父节点的 dom 节点 ）大小。<code>html{font-size:10px}</code></p>
+</blockquote>
+<h6 id="▉-计算关系"><a href="#▉-计算关系" class="headerlink" title="▉ 计算关系"></a>▉ 计算关系</h6><blockquote>
+<p>浏览器默认字体 大小 16 px;</p>
+<p>1 em = 16px;</p>
+<p>1rem = 10px；</p>
+<p>10/16=0.625=62.5% </p>
+</blockquote>
+<h6 id="▉-区别"><a href="#▉-区别" class="headerlink" title="▉ 区别"></a>▉ 区别</h6><blockquote>
+<p>1）IE无法调整那些使用 px 作为单位的字体大小； </p>
+<p>2）Firefox 能够调整 px 和 em，rem，但是 96% 以上的中国网民使用IE浏览器(或内核) ；</p>
+<p>3) em的值并不是固定的； em 会继承父级元素的字体大小 。</p>
+<p>3）rem 可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应（兼容性除 IE8 之外）。</p>
+</blockquote>
+<h6 id="▉-使用"><a href="#▉-使用" class="headerlink" title="▉ 使用"></a>▉ 使用</h6><blockquote>
+<p>1、为了简化font-size的换算，需要在css 中的 body 选择器中声明<code>Font-size=62.5%</code>，这就使em值变为 <code>16px*62.5%=10px</code>, 这样<code>12px=1.2em</code>, <code>10px=1em</code>, 也就是说只需要将你的原来的 px 数值<strong>除以 10</strong>，然后换上em 作为单位就行了。 </p>
+<p>2、选择使用什么字体单位主要由你的项目来决定，如果你的用户群都使用最新版的浏览器，那推荐使用 rem，如果要考虑 [ <strong>兼容性</strong>]，那就使用 px,或者<strong>两者同时使用</strong>。 </p>
+</blockquote>
+<h4 id="2、Flex布局和传统布局有什么区别？"><a href="#2、Flex布局和传统布局有什么区别？" class="headerlink" title="2、Flex布局和传统布局有什么区别？"></a>2、Flex布局和传统布局有什么区别？</h4><blockquote>
+<p><strong>传统布局：</strong>基于盒模型，依赖于 display 属性、position 属性 、float 属性。对于一些特殊的布局非常不方面，比如垂直居中。</p>
+<p><strong>Flex 布局：</strong>可以简便、完整、响应式地实现各种页面布局,它已经得到了所有浏览器的支持。</p>
+</blockquote>
+<h4 id="3、圣杯布局和双飞翼布局"><a href="#3、圣杯布局和双飞翼布局" class="headerlink" title="3、圣杯布局和双飞翼布局"></a>3、圣杯布局和双飞翼布局</h4><h6 id="▉-为什么使用圣杯布局？"><a href="#▉-为什么使用圣杯布局？" class="headerlink" title="▉ 为什么使用圣杯布局？"></a>▉ 为什么使用圣杯布局？</h6><blockquote>
+<p>必须按照源顺序（在 DOM 中表现为先写 Left，然后 Middle，最后，Right）等，它将可能导致代码不够灵活，尤其是从 DOM 的载入顺序上来说，中间的内容不能被首先加载。 </p>
+</blockquote>
+<h3 id="二、模块化"><a href="#二、模块化" class="headerlink" title="二、模块化"></a>二、模块化</h3><blockquote>
+<p>为什么要使用模块化？</p>
+</blockquote>
+<p>答：模块化解决了命名冲突问题，可以提高代码的复用率，提高代码的可维护性。</p>
+<blockquote>
+<p>都有哪几种方式可以实现模块化，各有什么特点？</p>
+</blockquote>
+<p>答：</p>
+<p><strong>1、立即执行函数</strong></p>
+<p><strong>2、AMD 和 CMD</strong></p>
+<p><strong>3、CommonJS</strong></p>
+<blockquote>
+<p>最早是应用在 Node 的上边的，</p>
+</blockquote>
+<p><strong>4、ES Module</strong></p>
+<ul>
+<li>CommonJS 支持动态导入，也就是 <code>require(${path}/xx.js)</code>，后者目前不支持，但是已有提案</li>
+<li>CommonJS 是<strong>同步导入</strong>，因为用于服务端，文件都在本地，同步导入即使卡住主线程影响也不大。而后者是异步导入，因为用于浏览器，需要下载文件，如果也采用同步导入会对渲染有很大影响</li>
+<li>CommonJS 在导出时都是<strong>值拷贝</strong>，就算导出的值变了，导入的值也不会改变，所以如果想更新值，必须重新导入一次。但是 ES Module 采用<strong>实时绑</strong>定的方式，导入导出的值都<strong>指向同一个内存地址</strong>，所以导入值会跟随导出值变化</li>
+<li>ES Module 会编译成 <code>require/exports</code> 来执行的</li>
+</ul>
+<h3 id="三、循环遍历"><a href="#三、循环遍历" class="headerlink" title="三、循环遍历"></a>三、循环遍历</h3><blockquote>
+<p>forEach、for..in、for…of 之间的区别？</p>
+</blockquote>
+<p>答：</p>
+<h4 id="1、普通-for-循环"><a href="#1、普通-for-循环" class="headerlink" title="1、普通 for 循环"></a>1、普通 for 循环</h4><blockquote>
+<p>当数组长度在循环过程中不会改变时，我们应将数组长度用变量存储起来，这样会获得更好的效率 。</p>
+</blockquote>
+<h4 id="2、foreach-循环"><a href="#2、foreach-循环" class="headerlink" title="2、foreach 循环"></a>2、foreach 循环</h4><blockquote>
+<p><strong>功能：</strong>可以获取到 key 和 value 数组的本身。</p>
+</blockquote>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>不能用 break，continue 语句跳出循环。</li>
+<li>函数内不能使用 return 语句。</li>
+</ul>
+<p><strong>注意：</strong>在不同浏览器下测试的结果都是 forEach 的速度不如 for 。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//item 为数组元素</span></span><br><span class="line"><span class="comment">//index 为索引下标</span></span><br><span class="line">arr.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item,index,arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item,index,arr)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="3、for…in-循环"><a href="#3、for…in-循环" class="headerlink" title="3、for…in 循环"></a>3、for…in 循环</h4><blockquote>
+<p><strong>for-in 循环遍历的是对象的属性。 2</strong>数组的索引 ，除了遍历数组也可以遍历对象。</p>
+</blockquote>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>for-in 遍历的顺序并不是确定的。</li>
+<li>它不仅遍历数组中的元素，还会遍历自定义的属性，甚至原型链上的属性都被访问到。 </li>
+<li>for-in 只能遍历“可枚举的属性”， length 属于不可枚举属性 （Array 中的 length 不能遍历到），for-in 不适合遍历 Array 。【链接】：<a href="https://juejin.im/entry/5a1654e951882554b8373622" target="_blank" rel="noopener">https://juejin.im/entry/5a1654e951882554b8373622</a></li>
+</ul>
+<h4 id="4、for…of-循环"><a href="#4、for…of-循环" class="headerlink" title="4、for…of 循环"></a>4、for…of 循环</h4><blockquote>
+<p>ES6 新增语法。</p>
+</blockquote>
+<p><strong>优点：</strong></p>
+<ul>
+<li>以正确响应 break, continue, return。 </li>
+<li>for-of 循环不仅支持数组，还支持大多数类数组对象。</li>
+<li>for-of 循环也支持字符串遍历，它将字符串视为一系列 Unicode 字符来进行遍历。</li>
+<li>for-of 也支持 Map 和 Set （两者均为 ES6 中新增的类型）对象遍历 </li>
+</ul>
+<h3 id="四、link和-import区别"><a href="#四、link和-import区别" class="headerlink" title="四、link和@import区别"></a>四、link和@import区别</h3><blockquote>
+<p>link 和 @import 区别主要有哪些？</p>
+</blockquote>
+<h5 id="1、加载顺序区别"><a href="#1、加载顺序区别" class="headerlink" title="1、加载顺序区别"></a>1、加载顺序区别</h5><p>link 标签引入的 CSS 是被同时加载的；而 @import 引入的 CSS 是将页面加载完毕后才会加载。</p>
+<h5 id="2、兼容性区别"><a href="#2、兼容性区别" class="headerlink" title="2、兼容性区别"></a>2、兼容性区别</h5><p>link 作为 HTML 元素，不存在兼容性；而 @ import 是 CSS2.1 才有的语法，只有 IE5+ 才能识别。</p>
+<h5 id="3、DOM可控性区别"><a href="#3、DOM可控性区别" class="headerlink" title="3、DOM可控性区别"></a>3、DOM可控性区别</h5><p>link 标签插入样式，可以通过 JS 操作 DOM；@import 不能插入样式，因为 DOM 方法是基于文档的。</p>
+<h5 id="4、权重区别"><a href="#4、权重区别" class="headerlink" title="4、权重区别"></a>4、权重区别</h5><p><code>link</code>引入的样式权重大于<code>@import</code>引入的样式。</p>
+<h2 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h2><h3 id="一、浏览器的渲染原理"><a href="#一、浏览器的渲染原理" class="headerlink" title="一、浏览器的渲染原理"></a>一、浏览器的渲染原理</h3><ul>
+<li>构建 DOM 树</li>
+<li>构建 CSSOM 树</li>
+<li>生成渲染树（DOM + CSSOM）</li>
+</ul>
+<blockquote>
+<p>浏览器的渲染原理是什么？</p>
+</blockquote>
+<h4 id="1、构建-DOM-树"><a href="#1、构建-DOM-树" class="headerlink" title="1、构建 DOM 树"></a>1、构建 DOM 树</h4><p><img src="https://user-gold-cdn.xitu.io/2018/11/27/167542b09875a74a?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p>1）在 URL 中请求服务器，服务器返回对应的 HTML、CSS、JS 文件，是通过 0,1 <strong>字节数据</strong>在网络中传输的。</p>
+<p>2）然后浏览器将接收到的<strong>字节数据转化为字符串</strong>。</p>
+<p>3）浏览器再将这些字符串通过<strong>词法分析</strong>转化为<strong>标记</strong>（token）—— 代码的最小单位，这一过程叫做<strong>标记化</strong>。</p>
+<p>4）标记化结束后，再将这些<strong>标记转化为 Node 结点</strong>，浏览器根据不同的结点构建称为<strong>一颗 DOM 树</strong>。</p>
+<h4 id="2、构建-CSSOM-树"><a href="#2、构建-CSSOM-树" class="headerlink" title="2、构建 CSSOM 树"></a>2、构建 CSSOM 树</h4><p><img src="https://user-gold-cdn.xitu.io/2018/11/27/167542a9af5f193f?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="img"></p>
+<p>1）将接受到的 <strong>CSS 文件转化为 CSSOM 树</strong>。这个过程和上述过程类似，但是有一点不同，浏览器<strong>确定结点样式</strong>，这个过程是<strong>非常耗时</strong>的。因为浏览器需要通过<strong>递归的方式</strong>寻到到 DOM 结点，然后给找到的元素设定好样式。</p>
+<p>2）通过先找到<strong>具体的标签</strong>，然后递归找到该标签的<strong>上级标签</strong>，依次递归，最后<strong>确定标签的样式</strong>。</p>
+<blockquote>
+<p>性能优化：所以应该避免写过于具体的 CSS 选择器，少加无意义的 HTML 标签，有利于提高页面的性能。</p>
+</blockquote>
+<h4 id="3、生成渲染树（DOM-CSSOM）"><a href="#3、生成渲染树（DOM-CSSOM）" class="headerlink" title="3、生成渲染树（DOM + CSSOM）"></a>3、生成渲染树（DOM + CSSOM）</h4><blockquote>
+<p>构建了 DOM 树和 CSSOM 树之后，需要将这两课树合成渲染树。</p>
+</blockquote>
+<p>1）两者合成不是简单的合成，而是渲染树只会包括需要<strong>显示的结点和样式信息</strong>，如果某个结点是 <code>display:none</code> ，那么不会在渲染树中显示。</p>
+<p>2）然后生成渲染树之后，浏览器根据渲染树<strong>进行布局</strong>（<strong>又称回流</strong>），调用 <strong>GPU 绘制</strong>，合成图层，<strong>显示在屏幕</strong>上。</p>
+<h3 id="二、为什么操作-DOM-那么慢？（框架采用虚拟DOM的原因）"><a href="#二、为什么操作-DOM-那么慢？（框架采用虚拟DOM的原因）" class="headerlink" title="二、为什么操作 DOM 那么慢？（框架采用虚拟DOM的原因）"></a>二、为什么操作 DOM 那么慢？（框架采用虚拟DOM的原因）</h3><blockquote>
+<p>为什么操作 DOM 那么慢？</p>
+</blockquote>
+<p>答：</p>
+<p>1）因为<strong>操作 DOM 是属于渲染引擎</strong>的东西，而 <strong>JS 属于 JS 引擎</strong>的东西，所以我们通过 JS 操作 DOM 的时候，这个过程涉及到<strong>两个线程的通</strong>信，如果操作 DOM 次数过多，就相当于两个线程之间一直通信，那就回带来一些性能上的损耗。</p>
+<p>2）操作 DOM <strong>会导致重绘回流</strong>的情况，性能就会有所下降。</p>
+<blockquote>
+<p>既然操作 DOM 那么慢，怎么实现插入几万 DOM 不卡顿？</p>
+</blockquote>
+<p>答：两种解决方案：</p>
+<p>1）第一种通过 <code>requestAnimationFrame</code> 的方式循环插入 DOM。</p>
+<p>2）第二种方式是通过<strong>虚拟滚动</strong>。</p>
+<ul>
+<li><strong>requestAnimationFrame 实现</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> total = <span class="number">30000</span>;              <span class="comment">// 总 DOM 数</span></span><br><span class="line"><span class="keyword">const</span> size = <span class="number">100</span>;                 <span class="comment">// 每次渲染的 DOM 数</span></span><br><span class="line"><span class="keyword">const</span> bathCount = total / size;   <span class="comment">// 一共处理 300 次</span></span><br><span class="line"><span class="keyword">var</span> countDone = <span class="number">0</span>;                <span class="comment">// 已经处理完的多少次</span></span><br><span class="line"><span class="keyword">const</span> ul = <span class="built_in">document</span>.querySelector(<span class="string">'ul'</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addItems</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> fragment = <span class="built_in">document</span>.createDocumentFragment();</span><br><span class="line">    <span class="comment">// 一次渲染 100 个DOM </span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> li = <span class="built_in">document</span>.createElement(<span class="string">'li'</span>);</span><br><span class="line">        li.innerText = <span class="string">'item '</span> + (countDone * size + i);</span><br><span class="line">        fragment.appendChild(li);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 每次插入 100 个结点就修改 DOM 一次</span></span><br><span class="line">    ul.appendChild(fragment);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 已经完成插入的次数</span></span><br><span class="line">    countDone++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断是否处理完成</span></span><br><span class="line">    <span class="keyword">if</span>(countDone &lt; bathCount)&#123;</span><br><span class="line">        <span class="built_in">window</span>.requestAnimationFrame(addItems);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">addItems();</span><br></pre></td></tr></table></figure>
+<h3 id="三、浏览器阻塞页面渲染"><a href="#三、浏览器阻塞页面渲染" class="headerlink" title="三、浏览器阻塞页面渲染"></a>三、浏览器阻塞页面渲染</h3><blockquote>
+<p>什么情况下阻塞页面渲染？</p>
+</blockquote>
+<p>答：</p>
+<p>1） 因为浏览器首先生成渲染树之后才进行渲染，所以在<strong>生成 DOM 树 和 CSSOM树的时候肯定会阻塞渲染</strong>。</p>
+<p>2）在遇到 <code>script</code> 标签的时候，也会暂停构建 DOM 树，加载完文件之后，再从暂停出继续构建 DOM 树。</p>
+<blockquote>
+<p>怎样做出优化，使得首屏的渲染性能最佳？</p>
+</blockquote>
+<p>答：</p>
+<p>1）降低 HTML 和 CSS 文件的大小，优化选择器，减少构建 CSSOM 树的时间。</p>
+<p>2）首屏加载 js 文件，将script 标签放在 body 的底部。</p>
+<ul>
+<li>不是非要放底部，也可以给标签加上 <code>defer</code> (<strong>表示 js 文件会并行下载，只有当HTML解析完才顺序执行</strong>)和 <code>async</code> 属性（<strong>没有任何依赖的 JS 文件可以加上 <code>async</code> 属性，表示 JS 文件下载和解析不会阻塞渲染</strong>）。</li>
+</ul>
+<h3 id="四、回流和重绘"><a href="#四、回流和重绘" class="headerlink" title="四、回流和重绘"></a>四、回流和重绘</h3><blockquote>
+<p>什么是回流？</p>
+</blockquote>
+<p>在文档流中的位置发生改变，回流是布局或者几何属性需要改变就称为回流。</p>
+<blockquote>
+<p>什么是重绘？</p>
+</blockquote>
+<p>在文档流中并没发生位置上的改变，重绘是当结点的外观发生变化而布局没有发生改变就叫做重绘。</p>
+<blockquote>
+<p>那么如何减少回流和重绘呢？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li>使用 <code>visibility</code> 替换 <code>display: none</code> ，因为前者只会引起重绘，后者会引发回流（改变了布局）;</li>
+<li>不要把节点的属性值放在一个循环里当成循环里的变量;</li>
+</ul>
+<h2 id="性能琐碎"><a href="#性能琐碎" class="headerlink" title="性能琐碎"></a>性能琐碎</h2><h4 id="1、防抖"><a href="#1、防抖" class="headerlink" title="1、防抖"></a>1、防抖</h4><blockquote>
+<p>防抖就是设定一定的时间才执行任务，当用户在此时间内点击了，就会重新进行计时，待到用户不触发事件了，设定的任务才会去执行。</p>
+</blockquote>
+<p>应用：</p>
+<ul>
+<li>input 输入框校验</li>
+<li>输入数据出现下拉列表</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">func, delay</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> timeout;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"清除"</span>,timeout,e.target.value)</span><br><span class="line">        clearTimeout(timeout);</span><br><span class="line">        <span class="keyword">var</span> context = <span class="keyword">this</span>, args = <span class="built_in">arguments</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"新的"</span>,timeout, e.target.value)</span><br><span class="line">        timeout = setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">"----"</span>)</span><br><span class="line">          func.apply(context, args);</span><br><span class="line">        &#125;,delay)</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="2、节流"><a href="#2、节流" class="headerlink" title="2、节流"></a>2、节流</h4><blockquote>
+<p>在高频的事件触发中，为了能够减少触发的频率，让某个用户的方法某个时间段只执行一次。就是降低函数执行的频率。</p>
+</blockquote>
+<p>应用：</p>
+<ul>
+<li>resize 调整窗口大小</li>
+<li>scroll 滚动</li>
+<li>按钮保存点击</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// func是用户传入需要防抖的函数</span></span><br><span class="line"><span class="comment">// wait是等待时间</span></span><br><span class="line"><span class="keyword">const</span> throttle = <span class="function">(<span class="params">func, wait = <span class="number">50</span></span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 上一次执行该函数的时间</span></span><br><span class="line">  <span class="keyword">let</span> lastTime = <span class="number">0</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 当前时间</span></span><br><span class="line">    <span class="keyword">let</span> now = +<span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">    <span class="comment">// 将当前时间和上一次执行函数时间对比</span></span><br><span class="line">    <span class="comment">// 如果差值大于设置的等待时间就执行函数</span></span><br><span class="line">    <span class="keyword">if</span> (now - lastTime &gt; wait) &#123;</span><br><span class="line">      lastTime = now</span><br><span class="line">      func.apply(<span class="keyword">this</span>, args)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">setInterval(</span><br><span class="line">  throttle(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>)</span><br><span class="line">  &#125;, <span class="number">500</span>),</span><br><span class="line">  <span class="number">1</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h2 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h2><h4 id="1、单例设计模式"><a href="#1、单例设计模式" class="headerlink" title="1、单例设计模式"></a>1、单例设计模式</h4><blockquote>
+<p>在实际项目中用过什么设计模式？说说什么是单例设计模式？</p>
+</blockquote>
+<p>答：把实现当前区域的属性和方法放在同一个命名空间下，而多个命名空间是互补干扰的。避免了全局变量的冲突和污染。</p>
+<blockquote>
+<p>什么是高级单例模式？</p>
+</blockquote>
+<p>答: 基于 JS 高阶编程技巧 ‘惰性思想’ （保存闭包机制）来实现的单例模式，并且可以把常用的设计模式（命令模式、发布订阅模式、promise 模式等）融合进来，最后清晰的规划我们的业务逻辑代码，方便后期的开发和维护,这种设计思想综合体就是高级单例模式，也是项目中最常应用的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">补充：</span><br><span class="line"></span><br><span class="line">- 单例模式：既方便私有，也方便共有。</span><br><span class="line">- 闭包：只方便私有，不方便共有。</span><br></pre></td></tr></table></figure>
+<h2 id="Vue-框架"><a href="#Vue-框架" class="headerlink" title="Vue 框架"></a>Vue 框架</h2><h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><blockquote>
+<p>什么是 MVVM？</p>
+</blockquote>
+<p>答：Model 就用纯 JavaScript 对象表示，View 负责显示，两者做到了极大限度的分离。把 Model 和 View 关联起来就是 ViewModel。ViewModel 主要负责把 Model 的数据同步到 View 显示，还负责把 View 修改的数据同步回 Model。</p>
+<h3 id="一、生命周期八个钩子函数"><a href="#一、生命周期八个钩子函数" class="headerlink" title="一、生命周期八个钩子函数"></a>一、生命周期八个钩子函数</h3><ul>
+<li>beforeCreate</li>
+<li>created</li>
+<li>beforeMount</li>
+<li>mounted</li>
+<li>beforeUpdate</li>
+<li>updated</li>
+<li>beforeDestroy</li>
+<li>destroyed</li>
+</ul>
+<h3 id="二、生命周期每个阶段"><a href="#二、生命周期每个阶段" class="headerlink" title="二、生命周期每个阶段"></a>二、生命周期每个阶段</h3><h4 id="1、beforeCreate"><a href="#1、beforeCreate" class="headerlink" title="1、beforeCreate"></a>1、beforeCreate</h4><blockquote>
+<p>这 beforeCreate 调用的时候，是获取不到 props 和 data 中的数据的，所有的数据都在初始化在 initState 中。</p>
+</blockquote>
+<h4 id="2、Created"><a href="#2、Created" class="headerlink" title="2、Created"></a>2、Created</h4><blockquote>
+<p>可以访问之前不能够访问的数据，但是组件还没有挂载，所以看不到。</p>
+</blockquote>
+<h4 id="3、beforeMount"><a href="#3、beforeMount" class="headerlink" title="3、beforeMount"></a>3、beforeMount</h4><blockquote>
+<p>如果有元素的话就继续往下编译，如果没有则停止编译，直到在虚拟 DOM 上挂载元素。然后通过渲染元素的优先级，render 函数 &gt; template 选项 &gt;  outer HTML。</p>
+<p>DOM 绑定的数据还没有进行渲染，处于占位状态，因为此时还没有挂载到页面上，JS中的虚拟DOM形式存在的。</p>
+</blockquote>
+<h4 id="4、Mount"><a href="#4、Mount" class="headerlink" title="4、Mount"></a>4、Mount</h4><blockquote>
+<p>这一阶段将虚拟的DOM， 渲染成真实的 DOM并且渲染数据。组件中如果有子组件的话，会递归挂载子组件，只有当所有子组件全部挂载完毕，才会执行根组件的挂载钩子。</p>
+</blockquote>
+<h4 id="5、beforeUpdate-和-update"><a href="#5、beforeUpdate-和-update" class="headerlink" title="5、beforeUpdate 和 update"></a>5、beforeUpdate 和 update</h4><blockquote>
+<p>当 vue 发现data中的数据发生了改变，会<strong>触发对应组件的重新渲染</strong>，先后调用<strong>beforeUpdate</strong>和<strong>updated</strong>钩子函数。</p>
+</blockquote>
+<p>另外还有 <code>keep-alive</code> 独有的生命周期，分别为 <code>activated</code> 和 <code>deactivated</code> 。用 <code>keep-alive</code> 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 <code>deactivated</code> 钩子函数，命中缓存渲染后会执行 <code>actived</code> 钩子函数。</p>
+<h4 id="6、beforeDestroy-和-Destroy"><a href="#6、beforeDestroy-和-Destroy" class="headerlink" title="6、beforeDestroy 和 Destroy"></a>6、beforeDestroy 和 Destroy</h4><blockquote>
+<p>最后就是销毁组件的钩子函数 <code>beforeDestroy</code> 和 <code>destroyed</code>。前者适合移除事件、定时器等等，否则可能会引起内存泄露的问题。然后进行一系列的销毁操作，如果有子组件的话，也会递归销毁子组件，所有子组件都销毁完毕后才会执行根组件的 <code>destroyed</code> 钩子函数。</p>
+</blockquote>
+<h3 id="三、组件之间的通信"><a href="#三、组件之间的通信" class="headerlink" title="三、组件之间的通信"></a>三、组件之间的通信</h3><ul>
+<li>父子通信</li>
+<li>兄弟组件通信</li>
+<li>跨多层级组件通信</li>
+<li>任意组件通信</li>
+</ul>
+<h4 id="1、父子组件通信"><a href="#1、父子组件通信" class="headerlink" title="1、父子组件通信"></a>1、父子组件通信</h4><ul>
+<li><strong>方式一：静态传递数据</strong></li>
+</ul>
+<p>​         单向数据流：父组件一般通过 props 传递数据给子组件，子组件通过 emit 发送事件传递给父组件，这两种方式是最常用的父子通信实现方法。</p>
+<ul>
+<li><p><strong>方式二：动态传递数据</strong></p>
+<p>可以用 v-bind 来实现。通过 v-bind 绑定 props 的自定义的属性。</p>
+</li>
+</ul>
+<ul>
+<li><strong>方式三：通过$ref 实现通信</strong><ul>
+<li><strong>如果 ref 用在子组件上，指向的是组件实例</strong>，可以理解为对子组件的索引，<strong>通过$ref可能获取到在子组件里定义的属性和方法</strong>。</li>
+<li>如果ref在普通的 DOM 元素上使用，引用指向的就是 DOM 元素，通过$ref可能获取到该DOM 的属性集合，轻松访问到DOM元素，作用与JQ选择器类似。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 父组件 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;h1&gt;我是父组件！&lt;/h1&gt;</span><br><span class="line">    &lt;child ref=&quot;msg&quot;&gt;&lt;/child&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  import Child from &apos;../components/child.vue&apos;</span><br><span class="line">  export default &#123;</span><br><span class="line">    components: &#123;Child&#125;,</span><br><span class="line">    mounted: function () &#123;</span><br><span class="line">      console.log( this.$refs.msg);</span><br><span class="line">      this.$refs.msg.getMessage(&apos;我是子组件一！&apos;) </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"> &lt;!-- 子组件 --&gt;</span><br><span class="line"></span><br><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;h3&gt;&#123;&#123;message&#125;&#125;&lt;/h3&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    data()&#123;</span><br><span class="line">      return&#123;</span><br><span class="line">        message:&apos;&apos;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods:&#123;</span><br><span class="line">      getMessage(m)&#123;</span><br><span class="line">        this.message=m;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>方式四：</strong></p>
+<p>通过 <code>$children</code> 和  <code>$parent</code> 获取到子组件或者父组件的实例来进行通信。</p>
+</li>
+</ul>
+<h4 id="2、兄弟组件通信"><a href="#2、兄弟组件通信" class="headerlink" title="2、兄弟组件通信"></a>2、兄弟组件通信</h4><ul>
+<li><p><strong>方式一：</strong></p>
+<p>字传父，父传子</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>方式二：</strong></p>
+<p>Vuex</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>方式三：</strong></p>
+<p>可以通过查找父组件中的子组件实现， <code>this.$parent.$children</code>，在 <code>$children</code>中可以通过组件 <code>name</code> 查询到需要的组件实例，然后进行通信。</p>
+</li>
+</ul>
+<h4 id="3、跨多层次组件通信"><a href="#3、跨多层次组件通信" class="headerlink" title="3、跨多层次组件通信"></a>3、跨多层次组件通信</h4><blockquote>
+<p>可以使用 Vue 2.2 新增的 API <code>provide / inject</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">假设有父组件 A，然后有一个跨多层级的子组件 B</span><br><span class="line"></span><br><span class="line">// 父组件 A</span><br><span class="line">export default &#123;</span><br><span class="line">  provide: &#123;</span><br><span class="line">    data: 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 子组件 B</span><br><span class="line">export default &#123;</span><br><span class="line">  inject: [&apos;data&apos;],</span><br><span class="line">  mounted() &#123;</span><br><span class="line">    // 无论跨几层都能获得父组件的 data 属性</span><br><span class="line">    console.log(this.data) // =&gt; 1</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、任意组件通信"><a href="#4、任意组件通信" class="headerlink" title="4、任意组件通信"></a>4、任意组件通信</h4><blockquote>
+<p>这种方式可以通过 Vuex 或者 Event Bus 解决。</p>
+</blockquote>
+<h3 id="四、keep-alive-组件有什么作用"><a href="#四、keep-alive-组件有什么作用" class="headerlink" title="四、keep-alive 组件有什么作用"></a>四、keep-alive 组件有什么作用</h3><blockquote>
+<p>需要在组件切换的时候，保存一些组件的状态防止多次渲染，就可以使用 <code>keep-alive</code> 组件包裹需要保存的组件。</p>
+</blockquote>
+<p>对于 <code>keep-alive</code> 组件来说，它拥有两个独有的生命周期钩子函数，分别为 <code>activated</code> 和 <code>deactivated</code> 。用 <code>keep-alive</code> 包裹的组件在切换时不会进行销毁，而是缓存到内存中并执行 <code>deactivated</code> 钩子函数，命中缓存渲染后会执行 <code>actived</code> 钩子函数。</p>
+<h3 id="五、v-show-与-v-if-区别"><a href="#五、v-show-与-v-if-区别" class="headerlink" title="五、v-show 与 v-if 区别"></a>五、v-show 与 v-if 区别</h3><h4 id="1、v-show"><a href="#1、v-show" class="headerlink" title="1、v-show"></a>1、v-show</h4><blockquote>
+<p><code>v-show</code> 只是在 <code>display: none</code> 和 <code>display: block</code> 之间切换。无论初始条件是什么都会被渲染出来，后面只需要切换 CSS，DOM 还是一直保留着的。所以总的来说在切换时开销更高，更适合不经常切换的场景。</p>
+</blockquote>
+<h4 id="2、v-if"><a href="#2、v-if" class="headerlink" title="2、v-if"></a>2、v-if</h4><blockquote>
+<p>当属性初始为 <code>false</code> 时，组件就不会被渲染，直到条件为 <code>true</code>，并且切换条件时会触发销毁/挂载组件，所以总的来说在切换时开销更高，更适合不经常切换的场景。</p>
+</blockquote>
+<h3 id="六、computed-和-watch-区别"><a href="#六、computed-和-watch-区别" class="headerlink" title="六、computed 和 watch 区别"></a>六、computed 和 watch 区别</h3><h4 id="1、computed"><a href="#1、computed" class="headerlink" title="1、computed"></a>1、computed</h4><blockquote>
+<p>是计算属性，依赖其他属性计算值，并且 <code>computed</code> 的值有缓存，只有当计算值变化才会返回内容。</p>
+</blockquote>
+<h4 id="2、watch"><a href="#2、watch" class="headerlink" title="2、watch"></a>2、watch</h4><blockquote>
+<p><code>watch</code> 监听到值的变化就会执行回调，在回调中可以进行一些逻辑操作。</p>
+</blockquote>
+<h4 id="3、两者的区别"><a href="#3、两者的区别" class="headerlink" title="3、两者的区别"></a>3、两者的区别</h4><blockquote>
+<p>一般来说需要依赖别的属性来动态获得值的时候可以使用 <code>computed</code>，对于监听到值的变化需要做一些复杂业务逻辑的情况可以使用 <code>watch</code>。</p>
+</blockquote>
+<h3 id="七、data-什么时候可以使用对象？"><a href="#七、data-什么时候可以使用对象？" class="headerlink" title="七、data 什么时候可以使用对象？"></a>七、data 什么时候可以使用对象？</h3><blockquote>
+<p>组件复用时所有组件实例都会共享 <code>data</code>，如果 <code>data</code> 是对象的话，就会造成一个组件修改 <code>data</code> 以后会影响到其他所有组件，所以需要将 <code>data</code> 写成函数，每次用到就调用一次函数获得新的数据。</p>
+</blockquote>
+<p>我们使用 <code>new Vue()</code> 的方式的时候，无论我们将 <code>data</code> 设置为对象还是函数都是可以的，因为 <code>new Vue()</code> 的方式是生成一个根组件，该组件不会复用，也就不存在共享 <code>data</code> 的情况了。</p>
+<h2 id="Bootstrap"><a href="#Bootstrap" class="headerlink" title="Bootstrap"></a>Bootstrap</h2><blockquote>
+<p>什么是 Bootstrap？什么是栅格系统？</p>
+</blockquote>
+<p>答：</p>
+<p><strong>Bootstrap：</strong>Bootstrap 是一种用于快速开发 web 的应用程序和网站的前端框架。具有<strong>移动设备优先</strong>、浏览器支持良好、<strong>容易上手</strong>、<strong>响应式设计</strong>等优点。</p>
+<p><strong>栅格系统：</strong>Bootstrap 提供了一套<strong>响应式、移动设备优先</strong>的流式栅格系统，随着<strong>屏幕或视口（viewport）尺寸</strong>的增加，系统会<strong>自动分为最多12列</strong>。</p>
+<blockquote>
+<p>栅格系统的工作原理？</p>
+</blockquote>
+<p>答：</p>
+<h2 id="网络原理基础"><a href="#网络原理基础" class="headerlink" title="网络原理基础"></a>网络原理基础</h2><h3 id="一、输入-URL到页面渲染，经历了哪些过程？"><a href="#一、输入-URL到页面渲染，经历了哪些过程？" class="headerlink" title="一、输入 URL到页面渲染，经历了哪些过程？"></a>一、输入 URL到页面渲染，经历了哪些过程？</h3><blockquote>
+<p>输入 URL到页面渲染，经历了哪些过程？</p>
+</blockquote>
+<h4 id="1、浏览器端"><a href="#1、浏览器端" class="headerlink" title="1、浏览器端"></a>1、浏览器端</h4><h5 id="1-1-输入"><a href="#1-1-输入" class="headerlink" title="1.1 输入"></a>1.1 输入</h5><p>输入网址，浏览器会根据字符串匹配算法给出四五条搜索记录。</p>
+<h5 id="1-2-判断URL是否合法"><a href="#1-2-判断URL是否合法" class="headerlink" title="1.2 判断URL是否合法"></a>1.2 判断URL是否合法</h5><p>浏览器就会判断 URL 的合法性，如果不合法（采用的字符都是符合 ASCII），就要进行转义。</p>
+<h5 id="1-3-HSTS-列表"><a href="#1-3-HSTS-列表" class="headerlink" title="1.3 HSTS 列表"></a>1.3 HSTS 列表</h5><p>HSTS 就是一种安全策略的机制，是为了让浏览器强制使用 HTTPS 访问的。当你的网站均采用 HTTPS，并符合它的安全规范，就可以申请加入 <strong>HSTS 列表</strong>，之后用户不加 HTTPS 协议再去访问你的网站，浏览器都会定向到 HTTPS。无论匹配到没有，都要开始 DNS 查询工作了。</p>
+<h4 id="2、DNS-解析"><a href="#2、DNS-解析" class="headerlink" title="2、DNS 解析"></a>2、DNS 解析</h4><h5 id="1-1-为什么需要-DNS-解析"><a href="#1-1-为什么需要-DNS-解析" class="headerlink" title="1.1 为什么需要 DNS 解析"></a>1.1 为什么需要 DNS 解析</h5><p>因为 http 是基于 tcp 连接的，tcp 是需要通过 ip 地址去识别访问的。DNS 就是将域名转化成 ip 地址的过程。</p>
+<h5 id="1-2-DNS-迭代查询过程"><a href="#1-2-DNS-迭代查询过程" class="headerlink" title="1.2 DNS 迭代查询过程"></a>1.2 DNS 迭代查询过程</h5><p>检测域名是否存在于<strong>浏览器缓存</strong>中，如果有缓存直接使用，没有则下一步，查看本机浏览器的 <strong>dns 缓存</strong>。</p>
+<p><strong>1、系统缓存</strong></p>
+<p>浏览器会调用一个类似 <code>gethostbyname</code> 的库函数，此函数会先去检测本地 hosts 文件，查看是否有对应 ip。</p>
+<p><strong>2、路由器缓存、ISP 缓存</strong></p>
+<p>如果浏览器和系统缓存都没有，就会向 DNS 服务器发送请求。而网络服务一般都会先经过路由器以及网络服务商（电信），所以会先查询<strong>路由器缓存</strong>，然后再查询 <strong>ISP 的 DNS 缓存</strong>（<strong>PS：</strong>ISP缓存，本身是一种宽带接入提供商给网页批量访问加速的技术。ISP会将当前访问量较大的网页内容放到ISP服务器的缓存中，当有新的用户请求相同内容时，可以直接从缓存中发送相关信息，不必每次都去访问真正的网站，从而加快了不同用户对相同内容的访问速度，同时也能节省网间流量结算成本）。</p>
+<h5 id="3、-DNS-递归查询"><a href="#3、-DNS-递归查询" class="headerlink" title="3、 DNS 递归查询"></a>3、 DNS 递归查询</h5><p>根域服务器（.） -&gt;  顶级域名服务器（eg: .com，.org）-&gt; 主域名服务器（eg: google.com）</p>
+<h5 id="1-3-迭代查询和递归查询的区别？"><a href="#1-3-迭代查询和递归查询的区别？" class="headerlink" title="1.3 迭代查询和递归查询的区别？"></a>1.3 迭代查询和递归查询的区别？</h5><ul>
+<li><strong>迭代查询：</strong>DNS 收到请求时，而不是直接返回查询结果，而是告诉客户端另一台 DNS 服务器地址。然后客户端再向这台的 DNS 服务器提交请求，依次循环。</li>
+<li><strong>递归查询：</strong>当 DNS 服务器收到请求时，就会检查 DNS 缓存，如果没有就会询问其他服务器，并将返回的查询结果返回客户端。</li>
+</ul>
+<h5 id="1-4如何进行-DNS-优化？"><a href="#1-4如何进行-DNS-优化？" class="headerlink" title="1.4如何进行 DNS 优化？"></a>1.4如何进行 DNS 优化？</h5><p>DNS 查询经历很多步骤，查询很慢。浏览器获取到 IP 地址后，一般都会加到<strong>浏览器的缓存</strong>中，本地的 <strong>DNS 缓存</strong>服务器，也可以去记录。另外使用 <strong>DNS 负载均衡</strong>，通常我们的网站应用各种云服务，DNS 系统根据每台机器的负载量，地理位置的限制等等，去提供高效快速的 DNS 解析服务。</p>
+<h4 id="3、TCP-连接"><a href="#3、TCP-连接" class="headerlink" title="3、TCP 连接"></a>3、TCP 连接</h4><h5 id="3-1-TCP-的三次握手"><a href="#3-1-TCP-的三次握手" class="headerlink" title="3.1 TCP 的三次握手"></a>3.1 TCP 的三次握手</h5><h5 id="3-2-TCP-四次挥手"><a href="#3-2-TCP-四次挥手" class="headerlink" title="3.2 TCP 四次挥手"></a>3.2 TCP 四次挥手</h5><h4 id="4、HTTP-请求"><a href="#4、HTTP-请求" class="headerlink" title="4、HTTP 请求"></a>4、HTTP 请求</h4><h5 id="4-1-发送请求"><a href="#4-1-发送请求" class="headerlink" title="4.1 发送请求"></a>4.1 发送请求</h5><p>通过 get 或 post 发送 HTTP 请求。 </p>
+<h5 id="4-2-响应请求"><a href="#4-2-响应请求" class="headerlink" title="4.2 响应请求"></a>4.2 响应请求</h5><p>通过服务器响应码判断请求是否成功。</p>
+<h4 id="5、浏览器的渲染原理"><a href="#5、浏览器的渲染原理" class="headerlink" title="5、浏览器的渲染原理"></a>5、浏览器的渲染原理</h4><h3 id="二、OSI、TCP-IP、五层协议的体系结构"><a href="#二、OSI、TCP-IP、五层协议的体系结构" class="headerlink" title="二、OSI、TCP/IP、五层协议的体系结构"></a>二、OSI、TCP/IP、五层协议的体系结构</h3><blockquote>
+<p>说说五层模型有哪些？各自的作用是什么？每层协议有哪些？各自的作用是什么？</p>
+</blockquote>
+<p>答：从上到下分为：</p>
+<ul>
+<li><strong>应用层：</strong>FTP、HTTP、DHCP、DNS</li>
+<li><strong>传输层：</strong>UDP、TCP、</li>
+<li><strong>网络层：</strong>IP</li>
+<li><strong>数据链路层：</strong>以太网协议、ARK</li>
+<li><strong>物理层：</strong></li>
+</ul>
+<h4 id="1、物理层"><a href="#1、物理层" class="headerlink" title="1、物理层"></a>1、物理层</h4><p>物理层通过物理手段将电脑连接起来，主要负传送 0 ，1 信号来通信。但是单纯的 0、1没有任何意义，也没有规定怎么结合，那么有了链路层。</p>
+<h4 id="2、数据链路层"><a href="#2、数据链路层" class="headerlink" title="2、数据链路层"></a>2、数据链路层</h4><p>链路层诞生意味着通过规定的 “以太网” 协议规定的<strong>电信号的分组形式</strong>，不同分组代表不同的信息，双方通信都可以识别这些信息。</p>
+<h5 id="2-1-以太网协议"><a href="#2-1-以太网协议" class="headerlink" title="2.1 以太网协议"></a>2.1 以太网协议</h5><p>以太网协议规定，每一组电信号就是就是一个<strong>数据包</strong>（帧：最短 64 字节，最长 1518 字节）。每个数据包分为：</p>
+<ul>
+<li><strong>标头(Head)：</strong>数据包的说明，发送者、接受者、数据类型等。 <ul>
+<li>长度：固定为 18 字节。</li>
+</ul>
+</li>
+<li><strong>数据 (Data)：</strong>数据包的具体内容。<ul>
+<li>最短 46 字节，最长 1500 字节（<strong>数据包超过这个就要进行分割</strong>）</li>
+</ul>
+</li>
+</ul>
+<h5 id="2-2-MAC-地址"><a href="#2-2-MAC-地址" class="headerlink" title="2.2  MAC 地址"></a>2.2  MAC 地址</h5><p>MAC 地址（六个十六进制）就是作为网络中所有设备做标识的，也就是数据包的发送地址和接受地址。</p>
+<h5 id="2-3-广播"><a href="#2-3-广播" class="headerlink" title="2.3  广播"></a>2.3  广播</h5><p>一个设备怎么知道另一个设备的 MAC 地址的？</p>
+<ul>
+<li><p><strong>同一子网络：ARP 协议</strong></p>
+<ul>
+<li><strong>前提：</strong>不知道对方的 <code>MAC</code> 地址。</li>
+<li><p><strong>解决：</strong>通过 <strong><code>ARP</code> 协议</strong>得到对方的 <code>MAC</code> 地址。</p>
+</li>
+<li><p><strong>过程：</strong>将对象的 MAC 地址放到数据包的头部，通过广播的方式对同一子网的所有设备发送该数据包，每个设备都会取出数据包标头中的 MAC 地址和自身的 MAC 地址做比较，如果两者相同，就接受这个包，作进一步的处理。否则就丢弃这个包。</p>
+</li>
+</ul>
+</li>
+<li><p><strong>不同子网络：</strong></p>
+<p>如果两台主机不在同一个子网络，那么事实上没有办法得到对方的 MAC 地址，只能把数据包传送到<strong>两个子网络连接处的”网关”</strong>，<strong>让网关去处理</strong>。</p>
+</li>
+</ul>
+<h4 id="3、网络层"><a href="#3、网络层" class="headerlink" title="3、网络层"></a>3、网络层</h4><p><strong>想要进行数据通信，必须知道两个地址：IP 地址/MAC 地址。</strong>网络层的功能就是实现了<strong>主机到主机</strong>的通信（不同子网络下的通信）。</p>
+<h5 id="3-1-网络地址"><a href="#3-1-网络地址" class="headerlink" title="3.1 网络地址"></a>3.1 网络地址</h5><p>不同子网之间的通信需要通过“路由”的方式，但是怎么判断两个设备是否在同一子网络中呢？所以就有了<strong>网络地址，简称“网址”。</strong> </p>
+<h5 id="3-2-IP-协议"><a href="#3-2-IP-协议" class="headerlink" title="3.2 IP 协议"></a>3.2 IP 协议</h5><ul>
+<li><p><strong>由来：</strong>无法判断两个设备是否在同一子网中。</p>
+</li>
+<li><p><strong>组成：</strong>IP 协议规定网络地址是由 32 个二进制位组成（四个十进制位），前一部分代表<strong>网络的标识</strong>，后一部分代表<strong>主机标识</strong>。</p>
+</li>
+<li><strong>定义：</strong> 规定网络地址的协议，叫做IP协议。它所定义的地址，就被称为 <strong>IP 地址。</strong></li>
+<li><strong>作用：</strong> 是为每一台计算机分配 IP 地址，是为了确定哪些地址在同一个子网络。</li>
+</ul>
+<h5 id="3-3-子网掩码"><a href="#3-3-子网掩码" class="headerlink" title="3.3   子网掩码"></a>3.3   子网掩码</h5><ul>
+<li><strong>由来：</strong>IP 地址无法判断前多少位代表网络部分，后多少位代表主机部分，所以用<strong>子网掩码</strong>来解决。</li>
+<li><strong>组成：</strong>网络部分全部为 1 表示，主机部分全部为 0 表示。(如果已知网络部分是前 24 位，主机部分是后 8 位，那么子网络掩码就是 <code>11111111.11111111.11111111.00000000</code>，写成十进制就是 <code>255.255.255.0</code>。）</li>
+<li><strong>作用：</strong>将<strong>两个IP地址</strong>与<strong>子网掩码</strong>分别进行<strong>AND运算（</strong>两个数位都为1，运算结果为1，否则为0），然后比较结果是否相同，如果是的话，就表明它们在同一个子网络中，否则就不是。</li>
+</ul>
+<h5 id="3-4-IP-数据包"><a href="#3-4-IP-数据包" class="headerlink" title="3.4 IP 数据包"></a>3.4 IP 数据包</h5><p>把 IP 数据包直接放进以太网数据包的”数据”部分，有一个好处就是<strong>上层的变动完全不涉及下层的结构</strong>。</p>
+<ul>
+<li><strong>标头：</strong>20 ~ 60 字节，整个数据的长度最大为 65535 字节。</li>
+<li><strong>数据：</strong>最长的数据部分为 65515 字节。需要分割成几个以太网的数据包发送（规定最长为 1500 字节）。</li>
+</ul>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201205/bg2012052910.png" alt="img"></p>
+<h5 id="3-5-ARP-协议"><a href="#3-5-ARP-协议" class="headerlink" title="3.5 ARP 协议"></a>3.5 ARP 协议</h5><ul>
+<li><strong>作用：</strong>通过 <code>ARP</code> 协议获取到对方的 <code>MAC</code> 地址（通过 IP 地址得到 MAC 地址）。</li>
+<li><strong>前提：</strong>对方的 <code>IP</code> 地址是已知的（<strong>DNS 协议解析域名</strong>）。<ul>
+<li><strong>过程：</strong> <code>ARP</code> 协议发出一个数据包，包含在以太网的数据包中（其中包含对方的 <code>IP</code> 地址，对方的 <code>MAC</code> 地址栏是 <code>FF:FF:FF:FF:FF:FF</code>）。子网络中的每台主机都会收到这个包，然后从中取出 <code>IP</code> 地址与自身对比，如果两者相同，都做出回复，向对方报告自己的 <code>MAC</code> 地址，否则就丢弃这个包。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、传输层"><a href="#4、传输层" class="headerlink" title="4、传输层"></a>4、传输层</h4><p>传输层的功能就是建立<strong>“端口到端口”</strong>的通信。</p>
+<h5 id="4-1-由来"><a href="#4-1-由来" class="headerlink" title="4.1  由来"></a>4.1  由来</h5><p>不同的程序需要接收不同的数据，所以需要确定每个程序的端口和传入数据逇端口号。</p>
+<h5 id="4-2-UDP-协议"><a href="#4-2-UDP-协议" class="headerlink" title="4.2  UDP 协议"></a>4.2  UDP 协议</h5><p>加入端口号，需要 UDP 协议，将整个 UDP 的数据包放入 IP 数据包的数据部分。UDP 数据包也分为标头和数据部分：</p>
+<ul>
+<li><strong>标头：</strong>发出端口和接收端口。</li>
+<li><strong>数据：</strong>具体内容。</li>
+<li><strong>长度：</strong>65,535 字节</li>
+</ul>
+<h5 id="4-3-TCP-协议"><a href="#4-3-TCP-协议" class="headerlink" title="4.3 TCP 协议"></a>4.3 TCP 协议</h5><ul>
+<li><strong>由来：</strong>UDP 虽然能完成两个主机之间的通信，但是数据包一旦发出，无法知道对方是否收到，所以 TCP 诞生了。</li>
+<li><strong>TCP 数据包：</strong> TCP 数据包也会嵌入到 IP 数据包的数据部分。</li>
+<li><strong>长度：</strong>理论上无限长，但是为了传输效率，不能超过 IP 数据包数据部分的长度（为了确保数据包不再分割）。</li>
+</ul>
+<h4 id="5、应用层"><a href="#5、应用层" class="headerlink" title="5、应用层"></a>5、应用层</h4><p>应用层的功能就是规定了<strong>应用程序的数据格式</strong>。</p>
+<h5 id="5-1-应用层数据包"><a href="#5-1-应用层数据包" class="headerlink" title="5.1 应用层数据包"></a>5.1 应用层数据包</h5><p>应用层的数据包直接放在 TCP 数据包的 “数据” 部分。</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201205/bg2012052913.png" alt="img"></p>
+<p>不同的协议规定不同的数据格式，比如电子邮件、网页、FTP数据的格式，这些应用程序协议构成了“应用层”。</p>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>以上是自下而上的五层协议体系发送数据的过程，那么要想发送到另一台设备，必须知道对方的 IP 地址和 MAC 地址，这个过程是怎么样子的？</p>
+<h4 id="6、用户网络配置：为新计算机配置-IP-地址"><a href="#6、用户网络配置：为新计算机配置-IP-地址" class="headerlink" title="6、用户网络配置：为新计算机配置 IP 地址"></a>6、用户网络配置：为新计算机配置 IP 地址</h4><h5 id="6-1-上网参数配置"><a href="#6-1-上网参数配置" class="headerlink" title="6.1 上网参数配置"></a>6.1 上网参数配置</h5><p>一般一台新的计算机上网必须设置一下四个参数：</p>
+<ul>
+<li><strong>本机的 IP 地址</strong></li>
+<li><strong>子网掩码</strong></li>
+<li><strong>网关的 IP 地址</strong></li>
+<li><strong>DNS 的 IP 地址</strong></li>
+</ul>
+<h5 id="6-2-动态获取-IP-地址"><a href="#6-2-动态获取-IP-地址" class="headerlink" title="6.2 动态获取 IP 地址"></a>6.2 动态获取 IP 地址</h5><ul>
+<li><p>网络中新加入的计算机需要分配 IP 地址，有两种方式，<strong>静态 IP 地址和动态 IP 地址</strong>。</p>
+</li>
+<li><p>由于设置静态的 IP 地址不够灵活，需要动态的分配 IP 地址，自动分配 IP 地址的协议叫做 <code>DHCP</code>  协议。</p>
+</li>
+<li><p>DHCP 协议规定在同一子网络中，必须有一台计算机负责管理本网络中的所有 IP 地址，它叫做<code>“DHCP服务器”</code>。</p>
+</li>
+<li><p>一旦有新的计算机加入，新计算机必须向 “DHCP服务器” 发送一个 “DHCP请求” 数据包，<strong>申请IP地址</strong>。</p>
+</li>
+</ul>
+<h5 id="6-3-DHCP-协议"><a href="#6-3-DHCP-协议" class="headerlink" title="6.3 DHCP 协议"></a>6.3 DHCP 协议</h5><p><strong>1、DHCP 的数据包</strong></p>
+<p>DHCP 是建立在 UDP 协议之上的，整个数据包如下：</p>
+<p><img src="http://www.ruanyifeng.com/blogimg/asset/201206/bg2012061102.png" alt="img"></p>
+<ul>
+<li><strong>以太网标头：</strong>设置发送方和接收方的 MAC 地址。但是只知道发送方的 MAC 地址，而不知道接收方的 MAC 地址。</li>
+<li><strong>IP 标头：</strong> 设置发送方和接收方的 IP 地址。这两者本机都是不知道的，所以默认设置发送方的 IP 地址为0.0.0.0，接收方的 IP 地址设置为 255.255.255.255。</li>
+<li><strong>UDP 标头：</strong>设置发送方和接收方的端口号。这部分是 DHCP 设置好的，<strong>发送方是 68 端口号，接收方是 67 端口号。</strong></li>
+</ul>
+<p><strong>2、DHCP 过程</strong></p>
+<ul>
+<li><p>以太网以广播的方式发送这个数据包，同一个子网络中的所有计算机都会受到这个包。然后拆分数据包，接受方的 MAC 地址是 <code>FF-FF-FF-FF-FF-FF</code>，不知道是给谁发的。然后继续拆分数据包，<strong>当看到发出方 IP 地址是 <code>0.0.0.0</code>，接收方是 <code>255.255.255.255</code>，于是 DHCP 服务器知道”这个包是发给我的”，</strong>而其他计算机就可以丢弃这个包。</p>
+</li>
+<li><p>然后 DHCP 服务器读出这个包的数据内容，然后返回一个“DHCP”响应数据包。也是设置以太网标头（双方的网卡地址），IP 标头的 IP 地址是 DHCP 服务器的 IP 地址和接受方 <code>255.255.255.255</code> IP 地址，给该计算机<strong>分配的 IP 地址</strong>以及相关参数在数据包的<strong>数据部分</strong>。</p>
+</li>
+</ul>
+<h4 id="7、DNS-协议：获取接收方的-IP-地址"><a href="#7、DNS-协议：获取接收方的-IP-地址" class="headerlink" title="7、DNS 协议：获取接收方的 IP 地址"></a>7、DNS 协议：获取接收方的 IP 地址</h4><p>要想知道对方的 IP 地址，必须通过 DNS 解析域名。也是向 DNS 服务器发送 DNS 数据包，然后 DNS 服务器做出响应，返回对方的 IP 地址。</p>
+<h4 id="8、子网掩码：判断两个主机是否在同一子网落中"><a href="#8、子网掩码：判断两个主机是否在同一子网落中" class="headerlink" title="8、子网掩码：判断两个主机是否在同一子网落中"></a>8、子网掩码：判断两个主机是否在同一子网落中</h4><p>两个设备的 IP 地址分别对子网掩码进行 AND 运算。如果结果相同，则为在同一自网络中，否则不在同一自网络中。如果同一网络中，就通过 IP 地址得到对方的 MAC 发送数据包。否则通过路由转发。</p>
+<h4 id="9、HTTP-协议"><a href="#9、HTTP-协议" class="headerlink" title="9、HTTP 协议"></a>9、HTTP 协议</h4><p><img src="http://www.ruanyifeng.com/blogimg/asset/201206/bg2012061106.png" alt="img"></p>
+<p>HTTP 协议会嵌入到 TCP 协议中。</p>
+<h3 id="三、TCP-协议"><a href="#三、TCP-协议" class="headerlink" title="三、TCP 协议"></a>三、TCP 协议</h3><blockquote>
+<p>UDP 和 TCP 的区别是什么？</p>
+</blockquote>
+<p>答：UDP 对于 TCP 传输数据是高效的，但是  TCP 相对于 UDP 是可靠性传输的。</p>
+<blockquote>
+<p>TCP 握手的作用是什么？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li>TCP 是<strong>面向连接</strong>的并保证了数据<strong>可靠性传输</strong>。</li>
+<li>TCP 三次握手客户端和服务端进行<strong>相互确认</strong>的过程。</li>
+</ul>
+<blockquote>
+<p>TCP 为什么要进行三次握手，为什么不是一次、两次？</p>
+</blockquote>
+<p><strong>防止了服务器端的一直等待而浪费资源。</strong></p>
+<p>答：为了防止已失效的连接请求报文段突然又传送到了服务端，因而产生错误。如果此时客户端发送的延迟的握手信息服务器收到，然后服务器进行响应，认为客户端要和它建立连接，此时客户端并没有这个意思，但server却以为新的运输连接已经建立，并一直等待client发来数据。这样，server的很多资源就白白浪费掉了。</p>
+<blockquote>
+<p>TCP 三次握手的过程是怎么样的？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li><strong>初始状态：</strong> 客户端处于 <code>closed(关闭)</code> 状态，服务器处于 <code>listen(监听)</code> 状态。</li>
+<li><strong>第一次握手：</strong>客户端发送请求报文将 <code>SYN = j（1）</code> 初始化序列号发送给客户端，发送完之后客户端处于 <code>SYN_Send</code> 状态。</li>
+<li><strong>第二次握手：</strong>服务端受到 <code>SYN</code> 请求报文之后，如果同意连接，会以自己的 <code>SYN(服务端) = K（0）</code> 和 <code>ack（1） = SYN(客户端) + 1(ACK = 1)</code> 报文作为应答，服务器为 <code>SYN_Receive</code>  状态。</li>
+<li><strong>第三次握手：</strong> 客户端接收到服务端的 <code>SYN + ACK</code> ，然后发送 <code>ack = SYN(服务端) + 1(ACK = 1)</code>确认包作为应答，客户端转为 <code>established</code> 状态。</li>
+</ul>
+<blockquote>
+<p>TCP 断开连接四次挥手过程是怎么样的？</p>
+</blockquote>
+<p><strong>1、初始化状态：</strong>刚开始双方都处于 <strong>establised</strong> 状态，客户端发起关闭请求。</p>
+<p><strong>2、第一次挥手：</strong>客户端发送一个 <code>FIN = 1</code> 报文，指定序列号<code>seq = u</code>。此时客户端处于<strong>CLOSED_WAIT</strong>状态。</p>
+<p><strong>3、第二次挥手：</strong>服务端收到 <code>FIN</code>之后，确定客户端请求释放连接，不再发送数据，但是还会接受数据。会发送 <strong>(ACK = 1)ack = seq(客户端) + 1</strong> (客户端的序列号加一)报文和指定一个序列号  <strong>seq = v</strong>，此时服务端处于 <strong>CLOSE_WAIT</strong> 状态。客户端收到服务端的确认之后进入等待状态。</p>
+<p><strong>4、第三次挥手：</strong>如果服务端发送完数据也想断开连接了，也会发送一个 <code>FIN = 1</code> 报文，且指定一个序列号 <code>seq = w</code>  和 <strong>(ACK =  0)ack = u + 1</strong>，此时服务端处于 <strong>LAST_ACK</strong> 的状态。</p>
+<p><strong>5、第四次挥手：</strong>客户端收到并回复一个确认信息<strong>(ACK = 1)ack=seq(服务端)+1</strong>，指定序列号<strong>seq = seq(第一次挥手的 u) + 1</strong>，此时客户端处于 <strong>TIME_WAIT(2MSL)</strong> 状态。需要过一阵子以确保服务端收到自己的 ACK 报文之后才会进入 <strong>CLOSED</strong> 状态。</p>
+<p><strong>6、</strong>服务端收到 ACK 报文之后，就处于关闭连接了，处于 <strong>CLOSED（有个保活时间）</strong> 状态。</p>
+<blockquote>
+<p>为什么要等待 2MSL?</p>
+</blockquote>
+<p>答： 是客户端向服务端确认的时候，包丢失了，导致服务端再次向 客户端发送 FIN = 1 的释放连接请求，这时 客户端 在 WAIT_TIME 还能够接收到这个请求，这时再回复一个确认就行了。</p>
+<blockquote>
+<p>保活时间？</p>
+</blockquote>
+<p>答：另外服务器B存在一个保活状态，即如果A突然故障死机了，那B那边的连接资源什么时候能释放呢？  就是保活时间到了后，B会发送探测信息， 以决定是否释放连接。</p>
+<h3 id="四、ARQ-协议"><a href="#四、ARQ-协议" class="headerlink" title="四、ARQ 协议"></a>四、ARQ 协议</h3><blockquote>
+<p>什么是 ARQ 协议？它的作用是什么？</p>
+</blockquote>
+<p>ARQ 是超时重传机制，通过<strong>确认</strong>和<strong>超时机制</strong>确保了数据正确送达，ARQ 协议包含两种协议：</p>
+<ul>
+<li>停止等待 ARQ </li>
+<li>连续 ARQ </li>
+</ul>
+<h4 id="4-1-停止等待-ARQ"><a href="#4-1-停止等待-ARQ" class="headerlink" title="4.1 停止等待 ARQ"></a>4.1 停止等待 ARQ</h4><h5 id="1、正常传输过程"><a href="#1、正常传输过程" class="headerlink" title="1、正常传输过程"></a>1、正常传输过程</h5><p>客户端向服务端发送一段报文，此时会启动一个定时器，等待对方的回应，在定时器设定的时间内，如果接受方应答了，那么就取消定时器并发送下一个报文。</p>
+<h5 id="2、报文丢失或出错"><a href="#2、报文丢失或出错" class="headerlink" title="2、报文丢失或出错"></a>2、报文丢失或出错</h5><p>在传输中，报文可能出现丢包的情况，这时候定时器设定的时间就会再次发送丢失的报文数据，直到服务端接收位置，所以每次都要备份发送的数据。</p>
+<p>即使接收端接收成功，但是报文在传输中出现错误，此时服务端会抛弃该报文，等待客户端的重传。</p>
+<blockquote>
+<p>PS：一般定时器设定的时间会大于一个 RTT（往返时延：从发送端发送到发送端接受响应的延时时间） 的平均时间。</p>
+</blockquote>
+<h5 id="3、ACK-超时或丢失"><a href="#3、ACK-超时或丢失" class="headerlink" title="3、ACK 超时或丢失"></a>3、ACK 超时或丢失</h5><p>即使发送端传输过程中没有出现丢包问题，但是在服务器返回数据的时候可能出现丢包问题，这时候客户端会重新发送报文，服务端收到相同序列号的报文会丢弃该报文重新应答，直到客户端发送下一序号的报文为止。</p>
+<p>在超时的情况下也可能出现应答很迟到达，这时 A 端会判断该序号是否已经接收过，如果接收过只需要丢弃应答即可。</p>
+<h4 id="4-2-连续-ARQ"><a href="#4-2-连续-ARQ" class="headerlink" title="4.2 连续 ARQ"></a>4.2 连续 ARQ</h4><h5 id="1、由来"><a href="#1、由来" class="headerlink" title="1、由来"></a>1、由来</h5><p>上边的停止等到 ARQ协议，即使在网络好的情况下也使用的话，每次发送数据都要等待，效率很低，所以就有了连续 ARQ 协议。</p>
+<h5 id="2、连续发送"><a href="#2、连续发送" class="headerlink" title="2、连续发送"></a>2、连续发送</h5><p>在连续 ARQ 中，发送端拥有一个<strong>发送窗口</strong>，可以在没有收到应答的情况下持续发送窗口内的数据，这样相比停止等待 ARQ 协议来说减少了等待时间，提高了效率。</p>
+<h5 id="3、累积确认"><a href="#3、累积确认" class="headerlink" title="3、累积确认"></a>3、累积确认</h5><p>连续 ARQ 中，接收端会持续不断收到报文。如果和停止等待 ARQ 中接收一个报文就发送一个应答一样，就太浪费资源了。通过累计确认，可以在收到多个报文以后统一回复一个应答报文。报文中的 ACK 标志位可以用来告诉发送端这个序号之前的数据已经全部接收到了，下次请发送这个序号后的数据。</p>
+<h5 id="4、累积确认的弊端"><a href="#4、累积确认的弊端" class="headerlink" title="4、累积确认的弊端"></a>4、累积确认的弊端</h5><p>在连续接收报文时，可能会遇到接收到序号 5 的报文后，并未接收到序号 6 的报文，然而序号 7 以后的报文已经接收。遇到这种情况时，ACK 只能回复 6，这样就会造成发送端重复发送数据的情况。</p>
+<h3 id="五、滑动窗口"><a href="#五、滑动窗口" class="headerlink" title="五、滑动窗口"></a>五、滑动窗口</h3><p>在 TCP 中，发送端和接收端都维护着窗口：分别为发送端窗口和接收端窗口。</p>
+<ul>
+<li>发送端窗口：包含已发送未应答的数据和未发送的数据。</li>
+<li>接收端窗口：包含已经接收的数据。</li>
+</ul>
+<h5 id="5-1滑动窗口的基本概念"><a href="#5-1滑动窗口的基本概念" class="headerlink" title="5.1滑动窗口的基本概念"></a>5.1滑动窗口的基本概念</h5><blockquote>
+<p>为什么实现滑动窗口？</p>
+</blockquote>
+<p>答：滑动窗口是一个很重要的概念，它帮助 TCP 实现了流量控制的功能。接收方通过报文告知发送方还可以发送多少数据，从而保证接收方能够来得及接收数据，防止出现接收方带宽已满，但是发送方还一直发送数据的情况（PS：发送端一直发送就会导致拥塞）。</p>
+<blockquote>
+<p>TCP 滑动窗口是如何对流量进行控制的？</p>
+</blockquote>
+<p>答：</p>
+<p>1、发送端的窗口是由接收端窗口剩余大小决定的，接收方会把当前接收窗口的剩余大小写入应答报文，发送端收到应答后根据该值和当前网络拥塞情况设置发送窗口的大小，所以发送窗口的大小是不断变化的。</p>
+<p>2、当发送端接收到应答报文后，会随之将窗口进行滑动</p>
+<h5 id="5-2-Zero-窗口"><a href="#5-2-Zero-窗口" class="headerlink" title="5.2 Zero 窗口"></a>5.2 Zero 窗口</h5><p>在发送报文的过程中，可能会遇到对端出现零窗口的情况。在该情况下，发送端会停止发送数据，并启动 persistent timer 。该定时器会定时发送请求给对端，让对端告知窗口大小。在重试次数超过一定次数后，可能会中断 TCP 链接。</p>
+<h3 id="六、拥塞处理"><a href="#六、拥塞处理" class="headerlink" title="六、拥塞处理"></a>六、拥塞处理</h3><p>拥塞处理主要作用域接收方，保证接收方及时及接受数据。拥塞处理的四个算法：</p>
+<ul>
+<li><strong>慢开始算法</strong></li>
+<li><strong>拥塞避免算法</strong></li>
+<li><strong>快速重传算法</strong></li>
+<li><strong>快速恢复算法</strong></li>
+</ul>
+<blockquote>
+<p>说一下 TCP 的拥塞处理处理？</p>
+</blockquote>
+<h5 id="6-1-慢开始算法"><a href="#6-1-慢开始算法" class="headerlink" title="6.1 慢开始算法"></a>6.1 慢开始算法</h5><p><strong>1、作用：</strong>慢开始算法，顾名思义，就是在传输开始时将发送窗口慢慢指数级扩大，从而避免一开始就传输大量数据导致网络拥塞。（下载文件）</p>
+<p><strong>2、步骤：</strong></p>
+<ul>
+<li>创建连接之后，初始设置拥塞窗口为 1 MSS（一个分段的最大数据量）</li>
+<li>每过一个 RTT（往返时间）就将窗口大小乘以 2 。</li>
+<li>指数级增长肯定不能没有限制的，所以有一个阈值限制，当窗口大小大于阈值时就会启动拥塞避免算法。</li>
+</ul>
+<h5 id="6-2-拥塞避免算法"><a href="#6-2-拥塞避免算法" class="headerlink" title="6.2 拥塞避免算法"></a>6.2 拥塞避免算法</h5><p><strong>1、设计：</strong>拥塞避免算法相比简单点，每过一个 RTT 窗口大小只加一，这样能够避免指数级增长导致网络拥塞，慢慢将大小调整到最佳值。</p>
+<p><strong>2、定时器超时处理：</strong>在传输过程中可能定时器超时的情况，这时候 TCP 会认为网络拥塞了。</p>
+<ul>
+<li>将阈值设为当前拥塞窗口的一半；</li>
+<li>将拥塞窗口设为 1 MSS；</li>
+<li>启动拥塞避免算法；</li>
+</ul>
+<h5 id="6-3-快速重传算法和快速恢复算法"><a href="#6-3-快速重传算法和快速恢复算法" class="headerlink" title="6.3 快速重传算法和快速恢复算法"></a>6.3 快速重传算法和快速恢复算法</h5><p>1、一旦接收端报文出现失去顺序的情况，接收端只会回复最后一个顺序正确的报文序号。如果发送端收到三个重复的 ACK，无序等待定时器超时而是直接启动快速重传算法。具体分为两种：</p>
+<p><strong>2、TCP Taho 实现如下</strong></p>
+<ul>
+<li>将阈值设为当前拥塞窗口的一半</li>
+<li>将拥塞窗口设为 1 MSS</li>
+<li>重新开始慢开始算法</li>
+</ul>
+<p><strong>3、TCP Reno 实现如下</strong></p>
+<ul>
+<li>拥塞窗口减半</li>
+<li>将阈值设为当前拥塞窗口</li>
+<li>进入快恢复阶段（重发对端需要的包，一旦收到一个新的 ACK 答复就退出该阶段），这种方式在丢失多个包的情况下就不那么好了</li>
+<li>使用拥塞避免算法</li>
+</ul>
+<h5 id="4、TCP-New-Ren-改进后的快恢复"><a href="#4、TCP-New-Ren-改进后的快恢复" class="headerlink" title="4、TCP New Ren 改进后的快恢复"></a>4、TCP New Ren 改进后的快恢复</h5><p><strong>TCP New Reno</strong> 算法改进了之前 <strong>TCP Reno</strong> 算法的缺陷。在之前，快恢复中只要收到一个新的 ACK 包，就会退出快恢复。</p>
+<p>在 <strong>TCP New Reno</strong> 中，TCP 发送方先记下三个重复 ACK 的分段的最大序号。</p>
+<p>假如我有一个分段数据是 1 ~ 10 这十个序号的报文，其中丢失了序号为 3 和 7 的报文，那么该分段的最大序号就是 10。发送端只会收到 ACK 序号为 3 的应答。这时候重发序号为 3 的报文，接收方顺利接收的话就会发送 ACK 序号为 7 的应答。这时候 TCP 知道对端是有多个包未收到，会继续发送序号为 7 的报文，接收方顺利接收并会发送 ACK 序号为 11 的应答，这时发送端认为这个分段接收端已经顺利接收，接下来会退出快恢复阶段。</p>
+<h3 id="七、HTTP-TLS-协议"><a href="#七、HTTP-TLS-协议" class="headerlink" title="七、HTTP/TLS 协议"></a>七、HTTP/TLS 协议</h3><blockquote>
+<p>HTTP 请求首部的组成及其作用是什么？</p>
+</blockquote>
+<p>答：组成：</p>
+<ul>
+<li><strong>请求行：</strong>请求方法、URI、HTTP版本。</li>
+<li><strong>请求首部：</strong>主要传递重要信息，如：为浏览器和服务器提供报文主题大小、所使用的语言、内容信息大小。</li>
+<li><strong>实体：</strong>传递的信息内容。</li>
+</ul>
+<blockquote>
+<p>Post 和 Get 请求的区别？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li><strong>大小区别:</strong></li>
+</ul>
+<p>Get 传递内容给服务器存在大小限制的，而POST理论上是没有限制的。</p>
+<p>原因:每个浏览器对于 URL 的长度是存在限制的，谷歌:8kb, 火狐:7KB, IE:2kb 的长度。如果超过URL 的长度，就会对 URL 字段进行截取。</p>
+<ul>
+<li><strong>缓存问题:</strong></li>
+</ul>
+<p>Get 请求会出现缓存(这个缓存不一定是304),POST 是没有缓存的。</p>
+<p>在项目中，一般不让其出现缓存”清除缓存”（URL一样）:在 URL 的末尾追加一个随机数。</p>
+<p>xhr.open(“get”,”/getList?num=2&amp;_=” + Math.random())</p>
+<ul>
+<li><strong>安全问题:</strong></li>
+</ul>
+<p>一般来说GET不安全，而POST相对安全一些。（URL劫持）</p>
+<blockquote>
+<p>常见的状态码有哪些？分别代表什么？</p>
+</blockquote>
+<p>答：</p>
+<ul>
+<li>1XX（信息性状态码） :  服务器正在处理请求中。</li>
+<li>2XX （成功状态码）:  请求处理完毕。</li>
+<li>3XX （重定向状态码）:  需要附加操作以完成请求。<ul>
+<li>301：永久性重定向。该状态码表示请求的资源已被分配了新的 URI，以后使用该资源，使用现在所指 URI。</li>
+<li>302：临时性重定向。表示该状态码被分配了新的 URI，希望用户本次能够使用新的 URI 访问。</li>
+<li>304：服务器资源未改变，可直接使用客户端未过期的缓存。</li>
+</ul>
+</li>
+<li>4XX （客户端错误状态码）:  服务器无法处理请求。<ul>
+<li>400：该请求报文中有语法错误。</li>
+<li>403：没有资源的访问权限。</li>
+<li>404：找不到资源。</li>
+</ul>
+</li>
+<li>5XX （服务端错误状态码）:  服务器处理请求出错。<ul>
+<li>500：服务器发生错误</li>
+<li>503：服务器超荷载或正在维护。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>什么是TLS？</p>
+</blockquote>
+<p>答：</p>
+<p>HTTPS 还是通过了 HTTP 来传输信息，但是信息通过 TLS 协议进行了加密。</p>
+<p>TLS 协议位于<strong>传输层之上，应用层</strong>之下。首次进行 TLS 协议传输需要两个 RTT ，接下来可以通过 <code>Session Resumption</code> 减少到一个 RTT。</p>
+<blockquote>
+<p>TLS 的两种加密方式？</p>
+</blockquote>
+<p>答：两种加密方式：</p>
+<ul>
+<li><p><strong>对称加密：</strong>对称加密就是两边拥有相同的秘钥，两边都知道如何将密文加密解密。</p>
+<blockquote>
+<p>这种加密虽然好，但是问题就是如何让对方知道你的秘钥？传输数据是在网络中进行的，如果秘钥通过网络传输，一旦被截取，就是去了意义。</p>
+</blockquote>
+</li>
+<li><p><strong>非对称加密</strong>：有两种秘钥，公钥和私钥，公钥所有人都知道，可以用公钥加，但是数据的解密需要私钥，私钥只有分发公钥的一方才知道。</p>
+<blockquote>
+<p>非对称加密解决了对称加密的问题，在进行对称加密之前，进行一个非对称加密。</p>
+</blockquote>
+<p><strong>流程：</strong></p>
+<p>首先服务端将公钥公布出去，那么客户端也就知道公钥了。接下来客户端创建一个秘钥，然后通过公钥加密并发送给服务端，服务端接收到密文以后通过私钥解密出正确的秘钥，这时候两端就都知道秘钥是什么了。</p>
+</li>
+</ul>
+<blockquote>
+<p>TLS 的握手流程？</p>
+</blockquote>
+<p>答：</p>
+<p>1、客户端发送一个随机值以及需要的协议和加密方式。</p>
+<p>2、服务端收到客户端的随机值，自己也产生一个随机值，并根据客户端需求的协议和加密方式来使用对应的方式，并且发送自己的证书（如果需要验证客户端证书需要说明）</p>
+<p>3、客户端收到服务端的证书并验证是否有效，验证通过会再生成一个随机值，通过服务端证书的公钥去加密这个随机值并发送给服务端，如果服务端需要验证客户端证书的话会附带证书</p>
+<p>4、服务端收到加密过的随机值并使用私钥解密获得第三个随机值，这时候两端都拥有了三个随机值，可以通过这三个随机值按照之前约定的加密方式生成密钥，接下来的通信就可以通过该密钥来加密解密</p>
+<p>5、通过以上步骤可知，在 TLS 握手阶段，两端使用非对称加密的方式来通信，但是因为非对称加密损耗的性能比对称加密大，所以在正式传输数据时，两端使用对称加密的方式通信。</p>
+<blockquote>
+<p>PS：以上说明的都是 TLS 1.2 协议的握手情况，在 1.3 协议中，首次建立连接只需要一个 RTT，后面恢复连接不需要 RTT 了。</p>
+</blockquote>
+<h2 id="如何正确的向面试官提问？"><a href="#如何正确的向面试官提问？" class="headerlink" title="如何正确的向面试官提问？"></a>如何正确的向面试官提问？</h2><p><strong>1、问题一：你们为什么要招聘这个职位？</strong></p>
+<p>这个问题会使得面试官开始谈论当前的项目，或者谈论前一位离职人员。无论哪种情况，都会让你了解，一些与你最密切相关的公司情况。</p>
+<p><strong>2、问题二：你们的新员工多吗？</strong></p>
+<p>这个问题起一个过渡作用，使得谈话导向公司内部的情况。但是，它本身也能说明一些问题。如果公司成立已经超过四年，又没有新项目，但是新员工却很多，这往往说明公司文化不是很健康。</p>
+<p><strong>3、问题三：你们公司（团队）目前面临的最大挑战是什么？</strong></p>
+<p>如果面试官开始谈论一些具体的技术问题，这很好；如果他的回答是项目时间紧迫，或者需要更多的资金，那你就要小心一点了，公司管理上面可能有问题。</p>
+<p><strong>4、问题四：什么新技术（编程语言）是你们未来希望采用的？</strong></p>
+<p>如果你申请的是技术职位，面试官恰巧又是技术负责人，那么这个问题将会非常合适。你会对公司的技术路线有所了解和准备，一旦入职，就能更好地适应公司的需要。</p>
+<p><strong>5、问题五：在业务方面，有没有什么地方是你们不满意的，未来想要改进的？</strong></p>
+<p>很少有公司，会百分之百满意自身的现状，即使那些状况很良好的公司也是如此。这个问题可以让你对公司管理层的关注重点和担忧之处，有所了解。</p>
+<p><strong>6、问题六：我申请的这个职位，对公司的业务有何影响？</strong></p>
+<p>这个问题会让你了解自己在公司的角色，以及你的岗位对公司是否重要。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/前端/" rel="tag"># 前端</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/07/前端设计模式之【单例模式】/" rel="next" title="前端设计模式之【单例模式】">
+                <i class="fa fa-chevron-left"></i> 前端设计模式之【单例模式】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/14/前端框架项目之Vue【去哪儿网】/" rel="prev" title="前端框架之【去哪网APP】">
+                前端框架之【去哪网APP】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS基础知识点"><span class="nav-number">2.</span> <span class="nav-text">JS基础知识点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、JS中的基本类型问题"><span class="nav-number">2.1.</span> <span class="nav-text">一、JS中的基本类型问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、JS-中的类型转换问题（笔试）"><span class="nav-number">2.2.</span> <span class="nav-text">二、JS 中的类型转换问题（笔试）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、转化为-Boolean-类型"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、转化为 Boolean 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、对象转原始类型"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、对象转原始类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、四则运算符"><span class="nav-number">2.2.3.</span> <span class="nav-text">3、四则运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、比较运算符"><span class="nav-number">2.2.4.</span> <span class="nav-text">4、比较运算符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、逻辑运算符"><span class="nav-number">2.2.5.</span> <span class="nav-text">5、逻辑运算符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、类型判断（typeOf-VS-instanceof）"><span class="nav-number">2.3.</span> <span class="nav-text">三、类型判断（typeOf  VS instanceof）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、JS-中的相关-this-问题"><span class="nav-number">2.4.</span> <span class="nav-text">四、JS 中的相关 this 问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、判断-this"><span class="nav-number">2.4.1.</span> <span class="nav-text">1、判断 this</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、改变-this-的值"><span class="nav-number">2.4.2.</span> <span class="nav-text">2、改变 this 的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、闭包"><span class="nav-number">2.5.</span> <span class="nav-text">五、闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、原型和原型链"><span class="nav-number">2.6.</span> <span class="nav-text">六、原型和原型链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、深拷贝和浅拷贝"><span class="nav-number">2.7.</span> <span class="nav-text">七、深拷贝和浅拷贝</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-知识点及常考面试题"><span class="nav-number">3.</span> <span class="nav-text">ES6 知识点及常考面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、var、Let、Const"><span class="nav-number">3.1.</span> <span class="nav-text">一、var、Let、Const</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、rem-和其他单位之间的区别"><span class="nav-number">3.1.1.</span> <span class="nav-text">1、rem 和其他单位之间的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-定义"><span class="nav-number">3.1.1.0.1.</span> <span class="nav-text">▉ 定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-计算关系"><span class="nav-number">3.1.1.0.2.</span> <span class="nav-text">▉ 计算关系</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-区别"><span class="nav-number">3.1.1.0.3.</span> <span class="nav-text">▉ 区别</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-使用"><span class="nav-number">3.1.1.0.4.</span> <span class="nav-text">▉ 使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Flex布局和传统布局有什么区别？"><span class="nav-number">3.1.2.</span> <span class="nav-text">2、Flex布局和传统布局有什么区别？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、圣杯布局和双飞翼布局"><span class="nav-number">3.1.3.</span> <span class="nav-text">3、圣杯布局和双飞翼布局</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-为什么使用圣杯布局？"><span class="nav-number">3.1.3.0.1.</span> <span class="nav-text">▉ 为什么使用圣杯布局？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、模块化"><span class="nav-number">3.2.</span> <span class="nav-text">二、模块化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、循环遍历"><span class="nav-number">3.3.</span> <span class="nav-text">三、循环遍历</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、普通-for-循环"><span class="nav-number">3.3.1.</span> <span class="nav-text">1、普通 for 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、foreach-循环"><span class="nav-number">3.3.2.</span> <span class="nav-text">2、foreach 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、for…in-循环"><span class="nav-number">3.3.3.</span> <span class="nav-text">3、for…in 循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、for…of-循环"><span class="nav-number">3.3.4.</span> <span class="nav-text">4、for…of 循环</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、link和-import区别"><span class="nav-number">3.4.</span> <span class="nav-text">四、link和@import区别</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、加载顺序区别"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">1、加载顺序区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、兼容性区别"><span class="nav-number">3.4.0.2.</span> <span class="nav-text">2、兼容性区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、DOM可控性区别"><span class="nav-number">3.4.0.3.</span> <span class="nav-text">3、DOM可控性区别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、权重区别"><span class="nav-number">3.4.0.4.</span> <span class="nav-text">4、权重区别</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器"><span class="nav-number">4.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、浏览器的渲染原理"><span class="nav-number">4.1.</span> <span class="nav-text">一、浏览器的渲染原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、构建-DOM-树"><span class="nav-number">4.1.1.</span> <span class="nav-text">1、构建 DOM 树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、构建-CSSOM-树"><span class="nav-number">4.1.2.</span> <span class="nav-text">2、构建 CSSOM 树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、生成渲染树（DOM-CSSOM）"><span class="nav-number">4.1.3.</span> <span class="nav-text">3、生成渲染树（DOM + CSSOM）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、为什么操作-DOM-那么慢？（框架采用虚拟DOM的原因）"><span class="nav-number">4.2.</span> <span class="nav-text">二、为什么操作 DOM 那么慢？（框架采用虚拟DOM的原因）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、浏览器阻塞页面渲染"><span class="nav-number">4.3.</span> <span class="nav-text">三、浏览器阻塞页面渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、回流和重绘"><span class="nav-number">4.4.</span> <span class="nav-text">四、回流和重绘</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能琐碎"><span class="nav-number">5.</span> <span class="nav-text">性能琐碎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、防抖"><span class="nav-number">5.0.1.</span> <span class="nav-text">1、防抖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、节流"><span class="nav-number">5.0.2.</span> <span class="nav-text">2、节流</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">6.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、单例设计模式"><span class="nav-number">6.0.1.</span> <span class="nav-text">1、单例设计模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue-框架"><span class="nav-number">7.</span> <span class="nav-text">Vue 框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM"><span class="nav-number">7.1.</span> <span class="nav-text">MVVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、生命周期八个钩子函数"><span class="nav-number">7.2.</span> <span class="nav-text">一、生命周期八个钩子函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、生命周期每个阶段"><span class="nav-number">7.3.</span> <span class="nav-text">二、生命周期每个阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、beforeCreate"><span class="nav-number">7.3.1.</span> <span class="nav-text">1、beforeCreate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Created"><span class="nav-number">7.3.2.</span> <span class="nav-text">2、Created</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、beforeMount"><span class="nav-number">7.3.3.</span> <span class="nav-text">3、beforeMount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Mount"><span class="nav-number">7.3.4.</span> <span class="nav-text">4、Mount</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、beforeUpdate-和-update"><span class="nav-number">7.3.5.</span> <span class="nav-text">5、beforeUpdate 和 update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、beforeDestroy-和-Destroy"><span class="nav-number">7.3.6.</span> <span class="nav-text">6、beforeDestroy 和 Destroy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、组件之间的通信"><span class="nav-number">7.4.</span> <span class="nav-text">三、组件之间的通信</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、父子组件通信"><span class="nav-number">7.4.1.</span> <span class="nav-text">1、父子组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、兄弟组件通信"><span class="nav-number">7.4.2.</span> <span class="nav-text">2、兄弟组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、跨多层次组件通信"><span class="nav-number">7.4.3.</span> <span class="nav-text">3、跨多层次组件通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、任意组件通信"><span class="nav-number">7.4.4.</span> <span class="nav-text">4、任意组件通信</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、keep-alive-组件有什么作用"><span class="nav-number">7.5.</span> <span class="nav-text">四、keep-alive 组件有什么作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、v-show-与-v-if-区别"><span class="nav-number">7.6.</span> <span class="nav-text">五、v-show 与 v-if 区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、v-show"><span class="nav-number">7.6.1.</span> <span class="nav-text">1、v-show</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、v-if"><span class="nav-number">7.6.2.</span> <span class="nav-text">2、v-if</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、computed-和-watch-区别"><span class="nav-number">7.7.</span> <span class="nav-text">六、computed 和 watch 区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、computed"><span class="nav-number">7.7.1.</span> <span class="nav-text">1、computed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、watch"><span class="nav-number">7.7.2.</span> <span class="nav-text">2、watch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、两者的区别"><span class="nav-number">7.7.3.</span> <span class="nav-text">3、两者的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、data-什么时候可以使用对象？"><span class="nav-number">7.8.</span> <span class="nav-text">七、data 什么时候可以使用对象？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bootstrap"><span class="nav-number">8.</span> <span class="nav-text">Bootstrap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络原理基础"><span class="nav-number">9.</span> <span class="nav-text">网络原理基础</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、输入-URL到页面渲染，经历了哪些过程？"><span class="nav-number">9.1.</span> <span class="nav-text">一、输入 URL到页面渲染，经历了哪些过程？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、浏览器端"><span class="nav-number">9.1.1.</span> <span class="nav-text">1、浏览器端</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-输入"><span class="nav-number">9.1.1.1.</span> <span class="nav-text">1.1 输入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-判断URL是否合法"><span class="nav-number">9.1.1.2.</span> <span class="nav-text">1.2 判断URL是否合法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-HSTS-列表"><span class="nav-number">9.1.1.3.</span> <span class="nav-text">1.3 HSTS 列表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、DNS-解析"><span class="nav-number">9.1.2.</span> <span class="nav-text">2、DNS 解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-为什么需要-DNS-解析"><span class="nav-number">9.1.2.1.</span> <span class="nav-text">1.1 为什么需要 DNS 解析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-DNS-迭代查询过程"><span class="nav-number">9.1.2.2.</span> <span class="nav-text">1.2 DNS 迭代查询过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、-DNS-递归查询"><span class="nav-number">9.1.2.3.</span> <span class="nav-text">3、 DNS 递归查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-迭代查询和递归查询的区别？"><span class="nav-number">9.1.2.4.</span> <span class="nav-text">1.3 迭代查询和递归查询的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4如何进行-DNS-优化？"><span class="nav-number">9.1.2.5.</span> <span class="nav-text">1.4如何进行 DNS 优化？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、TCP-连接"><span class="nav-number">9.1.3.</span> <span class="nav-text">3、TCP 连接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-TCP-的三次握手"><span class="nav-number">9.1.3.1.</span> <span class="nav-text">3.1 TCP 的三次握手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-TCP-四次挥手"><span class="nav-number">9.1.3.2.</span> <span class="nav-text">3.2 TCP 四次挥手</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、HTTP-请求"><span class="nav-number">9.1.4.</span> <span class="nav-text">4、HTTP 请求</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-发送请求"><span class="nav-number">9.1.4.1.</span> <span class="nav-text">4.1 发送请求</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-响应请求"><span class="nav-number">9.1.4.2.</span> <span class="nav-text">4.2 响应请求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、浏览器的渲染原理"><span class="nav-number">9.1.5.</span> <span class="nav-text">5、浏览器的渲染原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、OSI、TCP-IP、五层协议的体系结构"><span class="nav-number">9.2.</span> <span class="nav-text">二、OSI、TCP/IP、五层协议的体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、物理层"><span class="nav-number">9.2.1.</span> <span class="nav-text">1、物理层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、数据链路层"><span class="nav-number">9.2.2.</span> <span class="nav-text">2、数据链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-以太网协议"><span class="nav-number">9.2.2.1.</span> <span class="nav-text">2.1 以太网协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-MAC-地址"><span class="nav-number">9.2.2.2.</span> <span class="nav-text">2.2  MAC 地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-广播"><span class="nav-number">9.2.2.3.</span> <span class="nav-text">2.3  广播</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、网络层"><span class="nav-number">9.2.3.</span> <span class="nav-text">3、网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-网络地址"><span class="nav-number">9.2.3.1.</span> <span class="nav-text">3.1 网络地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-IP-协议"><span class="nav-number">9.2.3.2.</span> <span class="nav-text">3.2 IP 协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-子网掩码"><span class="nav-number">9.2.3.3.</span> <span class="nav-text">3.3   子网掩码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-IP-数据包"><span class="nav-number">9.2.3.4.</span> <span class="nav-text">3.4 IP 数据包</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-ARP-协议"><span class="nav-number">9.2.3.5.</span> <span class="nav-text">3.5 ARP 协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、传输层"><span class="nav-number">9.2.4.</span> <span class="nav-text">4、传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-由来"><span class="nav-number">9.2.4.1.</span> <span class="nav-text">4.1  由来</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-UDP-协议"><span class="nav-number">9.2.4.2.</span> <span class="nav-text">4.2  UDP 协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-TCP-协议"><span class="nav-number">9.2.4.3.</span> <span class="nav-text">4.3 TCP 协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、应用层"><span class="nav-number">9.2.5.</span> <span class="nav-text">5、应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-应用层数据包"><span class="nav-number">9.2.5.1.</span> <span class="nav-text">5.1 应用层数据包</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">9.2.6.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、用户网络配置：为新计算机配置-IP-地址"><span class="nav-number">9.2.7.</span> <span class="nav-text">6、用户网络配置：为新计算机配置 IP 地址</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-上网参数配置"><span class="nav-number">9.2.7.1.</span> <span class="nav-text">6.1 上网参数配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-动态获取-IP-地址"><span class="nav-number">9.2.7.2.</span> <span class="nav-text">6.2 动态获取 IP 地址</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-DHCP-协议"><span class="nav-number">9.2.7.3.</span> <span class="nav-text">6.3 DHCP 协议</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、DNS-协议：获取接收方的-IP-地址"><span class="nav-number">9.2.8.</span> <span class="nav-text">7、DNS 协议：获取接收方的 IP 地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8、子网掩码：判断两个主机是否在同一子网落中"><span class="nav-number">9.2.9.</span> <span class="nav-text">8、子网掩码：判断两个主机是否在同一子网落中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9、HTTP-协议"><span class="nav-number">9.2.10.</span> <span class="nav-text">9、HTTP 协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、TCP-协议"><span class="nav-number">9.3.</span> <span class="nav-text">三、TCP 协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、ARQ-协议"><span class="nav-number">9.4.</span> <span class="nav-text">四、ARQ 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-停止等待-ARQ"><span class="nav-number">9.4.1.</span> <span class="nav-text">4.1 停止等待 ARQ</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、正常传输过程"><span class="nav-number">9.4.1.1.</span> <span class="nav-text">1、正常传输过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、报文丢失或出错"><span class="nav-number">9.4.1.2.</span> <span class="nav-text">2、报文丢失或出错</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、ACK-超时或丢失"><span class="nav-number">9.4.1.3.</span> <span class="nav-text">3、ACK 超时或丢失</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-连续-ARQ"><span class="nav-number">9.4.2.</span> <span class="nav-text">4.2 连续 ARQ</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、由来"><span class="nav-number">9.4.2.1.</span> <span class="nav-text">1、由来</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、连续发送"><span class="nav-number">9.4.2.2.</span> <span class="nav-text">2、连续发送</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、累积确认"><span class="nav-number">9.4.2.3.</span> <span class="nav-text">3、累积确认</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、累积确认的弊端"><span class="nav-number">9.4.2.4.</span> <span class="nav-text">4、累积确认的弊端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、滑动窗口"><span class="nav-number">9.5.</span> <span class="nav-text">五、滑动窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1滑动窗口的基本概念"><span class="nav-number">9.5.0.1.</span> <span class="nav-text">5.1滑动窗口的基本概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-Zero-窗口"><span class="nav-number">9.5.0.2.</span> <span class="nav-text">5.2 Zero 窗口</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、拥塞处理"><span class="nav-number">9.6.</span> <span class="nav-text">六、拥塞处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#6-1-慢开始算法"><span class="nav-number">9.6.0.1.</span> <span class="nav-text">6.1 慢开始算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-2-拥塞避免算法"><span class="nav-number">9.6.0.2.</span> <span class="nav-text">6.2 拥塞避免算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-3-快速重传算法和快速恢复算法"><span class="nav-number">9.6.0.3.</span> <span class="nav-text">6.3 快速重传算法和快速恢复算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、TCP-New-Ren-改进后的快恢复"><span class="nav-number">9.6.0.4.</span> <span class="nav-text">4、TCP New Ren 改进后的快恢复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、HTTP-TLS-协议"><span class="nav-number">9.7.</span> <span class="nav-text">七、HTTP/TLS 协议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何正确的向面试官提问？"><span class="nav-number">10.</span> <span class="nav-text">如何正确的向面试官提问？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/08/13/前端面试之总结【知识树】/';
+          this.page.identifier = '2019/08/13/前端面试之总结【知识树】/';
+          this.page.title = '前端面试知识体系树';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

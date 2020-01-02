@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网络原理," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="网络协议是每个工程师必须要掌握的知识。">
+<meta name="keywords" content="网络原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络原理之【五层协议】">
+<meta property="og:url" content="http://yoursite.com/2019/03/25/计算机网络原理之【互联网协议入门】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="网络协议是每个工程师必须要掌握的知识。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/网络中五层协议.png">
+<meta property="og:updated_time" content="2019-07-31T04:22:54.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="计算机网络原理之【五层协议】">
+<meta name="twitter:description" content="网络协议是每个工程师必须要掌握的知识。">
+<meta name="twitter:image" content="http://yoursite.com/images/网络中五层协议.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/25/计算机网络原理之【互联网协议入门】/"/>
+
+
+
+
+
+  <title>计算机网络原理之【五层协议】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/计算机网络原理之【互联网协议入门】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">计算机网络原理之【五层协议】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-25T07:50:58+08:00">
+                2019-03-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/网络原理/" itemprop="url" rel="index">
+                    <span itemprop="name">网络原理</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/25/计算机网络原理之【互联网协议入门】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/25/计算机网络原理之【互联网协议入门】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,592
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/网络中五层协议.png" alt=""></p>
+<p>网络协议是每个工程师必须要掌握的知识。</p>
+<a id="more"></a>
+<h2 id="从底层到高层看网络协议（从下到上）"><a href="#从底层到高层看网络协议（从下到上）" class="headerlink" title="从底层到高层看网络协议（从下到上）"></a>从底层到高层看网络协议（从下到上）</h2><h4 id="一、物理层"><a href="#一、物理层" class="headerlink" title="一、物理层"></a><strong>一、物理层</strong></h4><p>1、物理层通过物理手段将电脑连接起来，主要负传送 0 ，1 信号来通信。但是单纯的 0 1 没有任何意义，也没有规定怎么结合，那么有了链路层。</p>
+<h4 id="二、链路层"><a href="#二、链路层" class="headerlink" title="二、链路层"></a>二、<strong>链路层</strong></h4><p>2、链路层诞生意味着通过规定的“以太网”协议规定的电信号的分组形式，不同分组代表不同的信息，双方通信都可以识别这些信息。发送方和接受方怎么确定对方是谁的？（要有个标识才行）</p>
+<p>3、每台计算机都要有“网卡”，数据包都是通过网卡传输的，每个网卡都有一个地址，叫做 MAC 地址（每台计算机一出生在厂商就确定的），也就明确了数据包的发送地址和接收地址。有了标识了，发送方怎么才能知道接收方的 MAC 地址呢？（ARK协议）                                       </p>
+<p>4 只能通过连接两个子网络的网关去处理；具体过程是：</p>
+<ul>
+<li>首先判断两个设备是否在同一子网中，如果不在，发送方就将数据包发送到子网的网关，首先要通过 ARK 协议知道网关的 MAC 地址，然后该网关通过路由发送到接收方的网关，然后送达接收方。</li>
+</ul>
+<p>如果在同一网络中，我们就通过 ARK 协议得到对方的 MAC 地址。因为每台设备都有一个 IP 地址，所以我们想着通过 IP 地址去确定对方的 MAC 地址。该发送方通过 ARP 协议广播的形式发送一个带有对方 IP 的数据包，子网中的每个计算机都收到了该数据包，就取出头部的IP地址信息对比，如果和自己的一样，接收方就给发送方报告自己的 MAC 地址，否则就丢弃这个包。通过 ARP 协议我们就知道了同一子网中的 MAC 地址，可随意发送信息。</p>
+<p>既然知道了对方的 MAC 地址，怎么准确的将数据发送过去呢？</p>
+<p>5、并不是我们所想的直接送达，而是通过广播的方式，向网络的所有计算机发送，让每台计算机通过读取数据包的标头看看和自己的 MAC 地址是否一样，如果一样就接受数据呗。</p>
+<h4 id="三、网络层"><a href="#三、网络层" class="headerlink" title="三、网络层"></a><strong>三、网络层</strong></h4><p>6、链路层的兄弟，每人都要送一个包，你这发送消息效率太低了，而且只能在一个子网络中发送，如果别人不在这个网络中是发送不出去的，太 Low，给我改进。</p>
+<p>7、那行，我改，那找我路由朋友来帮忙，如果路由朋友来帮忙，如果两个计算机不在子网络中，那么让我朋友路由去发送，如果在同一子网络中，那么我自己来负责，省的整天给我瞎BB。</p>
+<p>8、链路兄弟，两台计算机不在同一子网络中的通信你怎么甩给我了？真不够哥们，我只能通过 “网络地址” 来识别不同子网中的通信了。</p>
+<p>9、网络地址需要有规矩，不能瞎规定，规定网络地址的协议叫做 IP 协议，定义的地址叫做 IP 地址。通常是由四段的十进制表示（32个二进制），从 0.0.0.0 到 255.255.255.255（每段由 8 位二进制组成 2^8）。</p>
+<p>10、每台计算机都会分配一个 IP 地址，每个 IP 地址分为两部分，一部分是代表网络地址，另一部分代表主机地址。若网络部分地址相同，这两台计算机必处于同一子网中。那怎么区分这个IP的前多少位代表的是网络地址，后多少位代表的是主机地址呢？这个在 IP 地址上看不出来。</p>
+<p>11、那么我们用另一个 32 位的二进制值来专门来代表。形式和 IP 地址的形式完全一样的，1 代表网络地址部分，0 代表主机部分（11111111.11111111.11111111.00000000 十进制为 255.255.255.0，前24位代表网络部分，后8位代表主机部分）</p>
+<p>12、判断两个 IP 是否在同一网络中方法就是两个 IP 地址与子网掩码进行 AND 运算（两数为1，结果为1，其他为0）。最后的比较结果相同就处在同一子网络中。</p>
+<p>13、当两台计算机不在同一子网时，就通过 IP 协议发送数据包了。IP 数据包要有 IP 地址的信息呀，那么就将 IP 数据包放到以太网数据包的数据部分，这样一来，就体现出了互联网分层的好处。上层变动，和上层变动没有什么太大关系。</p>
+<p><strong>网络层的通信是主机到主机的通信。</strong></p>
+<h4 id="四、传输层"><a href="#四、传输层" class="headerlink" title="四、传输层"></a>四、<strong>传输层</strong></h4><p>14、虽然通过上述的 IP 地址和 MAC 地址可以进行通信了，但是计算机打开多个软件，怎么才能知道网络传来的信息那是哪个软件的？</p>
+<p>15、那么我们就规定不同的程序数据要走不同的端口。<strong>传输层的功能就是建立“端口到端口”的通信</strong>。主机和端口确认了，就可以正常的进行通信了。</p>
+<p>16、在数据包中加入端口信息，就需要新的协议，就用 UDP 协议来实现。将端口信息打包之后，将放入到 IP 数据包中。但是 UDP 简单，但是可靠性差，一旦发出数据包，无法知道对方是否收到？</p>
+<p>17、那么具有验证功能的 UDP 协议 TCP 协议诞生了，TCP也是内嵌在 IP 数据包中的。每个发送的数据包都要确认一下对方是否收到，如果               收到没收到的确认，就重新发送该数据包，但是 TCP 的实现非常复杂。</p>
+<h4 id="五、应用层"><a href="#五、应用层" class="headerlink" title="五、应用层"></a>五、<strong>应用层</strong></h4><p>18、应用层主要对数据进行读取，因为数据包的数据来自有不同的程序，格式各不相同，所以要规定好格式再进行解读，否则无法解读。应用层的作用就是<strong>规定应用程序的数据格式</strong>。应用层规定格式的数据包在 TCP 数据包中。</p>
+<h2 id="从高层到底层看网络协议（从上到下）"><a href="#从高层到底层看网络协议（从上到下）" class="headerlink" title="从高层到底层看网络协议（从上到下）"></a>从高层到底层看网络协议（从上到下）</h2><h4 id="一、配置上网参数"><a href="#一、配置上网参数" class="headerlink" title="一、配置上网参数"></a>一、配置上网参数</h4><ul>
+<li>本机 IP 地址</li>
+<li>子网掩码</li>
+<li>网关的 IP 地址</li>
+<li>DNS 的 IP 地址</li>
+</ul>
+<p>1、计算机上网必须设置 IP 地址、子网掩码、网关地址以及 DNS，这样计算机每次开机都会设置这样的地址，这种地址叫做“静态IP地址“。不过有一个缺点，如果这台计算机不上网总是占用这个IP地址，所以必须设置动态获取IP。</p>
+<p>2、每次开启计算机都要动态分配一个 IP 地址，所使用的协议为 DHCP 协议，在每一个子网络中都会有一台计算机专门负责分配 IP 地址，这个机器叫做“DHCP服务器”。</p>
+<p>3、每次计算机开机，都会向 DHCP 服务器发送一个请求申请IP地址等信息。发送请求必须知道对方的IP地址和MAC地址，起初的两台计算机都没有设置，应该怎么办？</p>
+<p>4、这时用到 DHCP 的巧妙设计，DHCP 是基于 UDP 协议的。因为发送方不知道对方的 MAC 地址，所以在数据包中设置 FF-FF-FF-FF-FF-FF，将其封装到以太网的数据包中。由于计算机也不知道自己的IP地址，所以发送方的 IP 地址为 0.0.0.0。DHCP 服务器的 IP 地址为255.255.255.255，将信息封装到 IP 头部。然后将端口号信息进行封装到 UDP 的头部，发送方的端口号为 68 端口，接收方的端口号为 67 端口。</p>
+<p>5、发送方开始进行广播发送，子网络中的计算机接收到数据包，首先查看以太网数据包中的 MAC 地址为 FF-FF-FF-FF-FF-FF，不能确认是谁发送的数据，然后查看 IP 头部发现地址为 0.0.0.0，于是 DHCP 知道了这个包是给自己发的，其他计算机将会丢弃这个包。</p>
+<p>6、然后 DHCP 服务器读取这个包的数据内容，分配好 IP 地址，然后发送回去一个 DHCP  响应，新加入的计算机接收到响应包之后，就会进行配置。</p>
+<h4 id="二、网页请求过程"><a href="#二、网页请求过程" class="headerlink" title="二、网页请求过程"></a>二、网页请求过程</h4><p>1、首先在浏览器输入一个域名，是没有 IP 地址的，先要将域名传到 DNS 服务器进行解析，DNS 服务器会返回一个锁清秋服务器的 IP 地址。</p>
+<p>2、然后判断两个计算机是否在同一个子网络中，就会用到子网掩码，两台计算机的 IP 地址分别对子网掩码进行 AND 运算，发现不在同一子网络中，所以必须通过网关发送数据包，此时接受方的 MAC 地址是网关的 MAC 地址。</p>
+<p>3、浏览网页所用的是 HTTP 协议，将其嵌入在 TCP 数据包中，TCP 数据包需要设置端口，将信息嵌入在 IP 数据包中，IP数据包需要设置双方的 IP 地址，然后将 IP 数据包嵌入在以太网的数据包中，以太网数据包需要设置双方的 MAC 地址，然后将数据包在网络中传输。</p>
+<p>（<strong>注意：</strong>如果 IP 数据包过长，需要分割发送）</p>
+<p>4、经过多个网关的转发，服务器收到数据包，将其多个数据包进行拼接，取出完整的 TCP 数据包，然后读出 HTTP 的请求，做出 HTTP 响应，然后再用 TCP 协议发回来。</p>
+<h3 id="一、网络层中协议"><a href="#一、网络层中协议" class="headerlink" title="一、网络层中协议"></a>一、网络层中协议</h3><h4 id="1、五层模型"><a href="#1、五层模型" class="headerlink" title="1、五层模型"></a>1、五层模型</h4><blockquote>
+<p>越最下层越靠近硬件，越最上方的层，越靠近用户。</p>
+</blockquote>
+<ul>
+<li>应用层</li>
+<li>传输层</li>
+<li>网络层</li>
+<li>数据链路层</li>
+<li>物理层</li>
+</ul>
+<h4 id="2、层与协议"><a href="#2、层与协议" class="headerlink" title="2、层与协议"></a>2、层与协议</h4><blockquote>
+<p>互联网分为若干层，每一层都有特定的功能和规则。大家都要遵守的规则叫做 “协议”。每次层都有很多协议，总起来叫做“互联网协议”。</p>
+</blockquote>
+<h4 id="3、物理层"><a href="#3、物理层" class="headerlink" title="3、物理层"></a>3、物理层</h4><blockquote>
+<p>物理层主要是通过光缆、电缆、双绞线、无线电波等方式把电脑连起来，它就是把电脑连接起来的物理手段。它主要规定了网络的一些电气特性，作用是<strong>负责传送0和1的电信号。</strong></p>
+</blockquote>
+<h4 id="4、链路层"><a href="#4、链路层" class="headerlink" title="4、链路层"></a>4、链路层</h4><h6 id="▉-定义"><a href="#▉-定义" class="headerlink" title="▉ 定义"></a>▉ 定义</h6><blockquote>
+<p><strong>问题</strong>：单纯的 0 和 1 没有任何意义，必须规定解读方式：多少个电信号算一组？每个信号位有何意义？</p>
+<p><strong>解决：</strong>这就是”链接层”的功能，它在”实体层”的上方，确定了0和1的分组方式。</p>
+</blockquote>
+<h6 id="▉以太网协议（数据包的定义）"><a href="#▉以太网协议（数据包的定义）" class="headerlink" title="▉以太网协议（数据包的定义）"></a>▉以太网协议（数据包的定义）</h6><blockquote>
+<p><strong>一组电信号</strong>构成一个<strong>数据包</strong>，叫做”帧”（Frame）。每一帧分成两个部分：<strong>标头（Head）和数据（Data）</strong>。 </p>
+</blockquote>
+<ul>
+<li><strong>标头：</strong>包含数据包的一些说明项，比如发送者、接受者、数据类型等等 。</li>
+<li><strong>数据： </strong>数据包的具体内容 。</li>
+</ul>
+<h6 id="▉MAC地址"><a href="#▉MAC地址" class="headerlink" title="▉MAC地址"></a>▉MAC地址</h6><blockquote>
+<p><strong>问题</strong>：发送者和接受者是如何标识呢？</p>
+<p><strong>解决：</strong>以太网规定，连入网络的所有设备，都必须具有”<strong>网卡</strong>“接口。数据包必须是从一块网卡，传送到另一块网卡。网卡的地址，就是数据包的发送地址和接收地址，这叫做MAC地址。 </p>
+</blockquote>
+<h6 id="▉广播"><a href="#▉广播" class="headerlink" title="▉广播"></a>▉广播</h6><blockquote>
+<p><strong>1、问题：</strong>一块网卡怎么会知道另一块网卡的MAC地址？以太网数据包必须知道接收方的MAC地址，然后才能发送。 </p>
+<p><strong>解决：通过 ARP 协议知道对方的 MAC 地址。</strong></p>
+<p><strong>2、问题：</strong>知道MAC地址了，系统怎样才能把数据包准确送到接收方 ？</p>
+<p><strong>解决：</strong></p>
+<p>发送方并不是准确的发送到接受方，而是向本网络内所有计算机发送，每台计算机判断是否接收？它们读取这个包的”标头”，找到接收方的 MAC 地址，然后与自身的 MAC 地址相比较，如果两者相同，就接受这个包，做进一步处理，否则就丢弃这个包。这种发送方式就叫做”广播”（broadcasting）。 </p>
+</blockquote>
+<h4 id="5、网络层"><a href="#5、网络层" class="headerlink" title="5、网络层"></a>5、网络层</h4><h6 id="▉-由来"><a href="#▉-由来" class="headerlink" title="▉ 由来"></a>▉ 由来</h6><blockquote>
+<p>上述虽然可以实现通信，存在一下弊端：</p>
+<p>1）局限在发送者所在的子网络 。</p>
+<p>2）以广播发送效率低下。</p>
+<p>3）两台机器不在子网络。广播是传不过去的。</p>
+</blockquote>
+<h6 id="▉-网络层的定义"><a href="#▉-网络层的定义" class="headerlink" title="▉ 网络层的定义"></a>▉ 网络层的定义</h6><blockquote>
+<p><strong>问题：</strong>怎么做到如果是同一个子网络，就采用广播方式发送，否则就采用”路由”方式发送？</p>
+<p><strong>解决:</strong> 这就导致了”网络层”的诞生。它的作用是引进一套新的地址，使得我们能够区分不同的计算机是否属于同一个子网络。<strong>这套地址就叫做”网络地址”，简称”网址”</strong>。</p>
+</blockquote>
+<h6 id="▉-网络地址和MAC地址的区别？"><a href="#▉-网络地址和MAC地址的区别？" class="headerlink" title="▉ 网络地址和MAC地址的区别？"></a>▉ 网络地址和MAC地址的区别？</h6><blockquote>
+<p>1、两种地址之间没有任何联系，MAC地址是绑定在网卡上的，网络地址则是管理员分配的，它们只是随机组合在一起。</p>
+<p>2、网络在确定所在子网络的时候，先处理网络地址，然后在处理MAC地址。 </p>
+</blockquote>
+<h6 id="▉-IP-协议"><a href="#▉-IP-协议" class="headerlink" title="▉ IP 协议"></a>▉ IP 协议</h6><blockquote>
+<p><strong>作用： </strong>一个是为每一台计算机分配IP地址，另一个是确定哪些地址在同一个子网络。 </p>
+<p><strong>定义：</strong>规定网络地址的协议，叫做IP协议。它所定义的地址，就被称 为IP地址。 </p>
+<p><strong>组成： </strong>地址分成两个部分，前一部分代表<strong>网络</strong>，后一部分代表<strong>主机 </strong>。可以判断两台计算机是否处于同一网络中。</p>
+</blockquote>
+<h6 id="▉-子网掩码"><a href="#▉-子网掩码" class="headerlink" title="▉ 子网掩码"></a>▉ 子网掩码</h6><blockquote>
+<p><strong>问题： </strong>对于 IP 地址无法判断网络部分，到底是前16位还是前24位代表网络地址？</p>
+<p><strong>解决：</strong>子网掩码</p>
+<p><strong>组成: </strong> 它的网络部分全部为1，主机部分全部为0。 </p>
+<p>比如，比如，IP地址172.16.254.1，如果已知网络部分是前24位，主机部分是后8位，那么子网络掩码就是11111111.11111111.11111111.00000000，写成十进制就是255.255.255.0。 </p>
+</blockquote>
+<h6 id="▉-判断是否处于同一网络"><a href="#▉-判断是否处于同一网络" class="headerlink" title="▉ 判断是否处于同一网络"></a>▉ 判断是否处于同一网络</h6><blockquote>
+<p>将两个IP地址与子网掩码分别进行<strong>AND运算（</strong>两个数位都为1，运算结果为1，否则为0），然后比较结果是否相同，如果是的话，就表明它们在同一个子网络中，否则就不是。 </p>
+</blockquote>
+<h6 id="▉-IP-数据包"><a href="#▉-IP-数据包" class="headerlink" title="▉ IP 数据包"></a>▉ IP 数据包</h6><blockquote>
+<p>之前的以太网数据包只包含 MAC 地址，没有 IP 地址的栏位。并不需要添加 IP 栏位，我们直接将 IP 数据包添加到以太网数据包的数据部分。这就是互联网分层的好处，上层的变动完全不涉及下层的结构。</p>
+</blockquote>
+<p><strong>IP 数据包：</strong></p>
+<ul>
+<li>标头：包括版本、长度、IP地址等信息。</li>
+<li>数据：IP 数据包的具体内容。</li>
+</ul>
+<h6 id="▉-ARP-协议"><a href="#▉-ARP-协议" class="headerlink" title="▉ ARP 协议"></a>▉ ARP 协议</h6><blockquote>
+<p><strong>问题：</strong>IP 数据包是放在以太网数据包里发送的，所以同时知道 IP 地址和 MAC 地址，IP 地址是已知的，但是不知道 MAC 地址。我们需要从 IP 地址中的到 MAC 地址。</p>
+<p><strong>解决：</strong></p>
+<p>两种情况：是否在同一子网络。</p>
+<p>第一种情况，不在同一子网络，将数据包扔给两个子网络连接处网关处理。</p>
+<p>第二种情况，同一子网络中，通过 ARP协议。ARP协议也是发出一个数据包（包含在以太网数据包中），其中包含它所要查询主机的IP地址，在对方的MAC地址这一栏，填的是FF:FF:FF:FF:FF:FF，表示这是一个”广播”地址。它所在子网络的每一台主机，都会收到这个数据包，从中取出IP地址，与自身的IP地址进行比较。如果两者相同，都做出回复，向对方报告自己的MAC地址，否则就丢弃这个包 。</p>
+</blockquote>
+<h4 id="6、传输层"><a href="#6、传输层" class="headerlink" title="6、传输层"></a>6、传输层</h4><blockquote>
+<p><strong>问题：</strong>计算机很多程序同时运行，那一个数据包传过来怎么区分知道是哪个程序的内容呢？</p>
+<p><strong>解决：</strong>提供一个参数，用来表示数据包对应的程序，这个参数叫做“端口（port）”。每个数据包发送到特定的端口，不同的程序就能取到自己所需要的数据。</p>
+</blockquote>
+<h6 id="▉-端口"><a href="#▉-端口" class="headerlink" title="▉ 端口"></a>▉ 端口</h6><blockquote>
+<p>“端口”是0到65535之间的一个整数，正好16个二进制位。应用程序会随机选用一个端口，然后与服务器的相应端口联系。</p>
+</blockquote>
+<h6 id="▉-功能"><a href="#▉-功能" class="headerlink" title="▉ 功能"></a>▉ 功能</h6><blockquote>
+<p><strong>“传输层”的功能，就是建立”端口到端口”的通信。相比之下，”网络层”的功能是建立”主机到主机”的通信。只要确定主机和端口，我们就能实现程序之间的交流。</strong></p>
+</blockquote>
+<h6 id="▉-UDP-协议"><a href="#▉-UDP-协议" class="headerlink" title="▉ UDP 协议"></a>▉ UDP 协议</h6><blockquote>
+<p>在数据包中加入端口号，就实现了新的协议叫 UDP 协议。将数据包存放到 IP 数据包中。</p>
+<p><strong>优点：</strong>比较简单，容易实现。</p>
+<p><strong>缺点：</strong>可靠性较差，一旦数据包发出，无法知道对方是否收到。</p>
+</blockquote>
+<h6 id="▉-TCP-协议"><a href="#▉-TCP-协议" class="headerlink" title="▉ TCP 协议"></a>▉ TCP 协议</h6><blockquote>
+<p>为了提高网络的可靠性，就诞生了新的协议叫做 TCP 协议（有确认机制的 UDP 协议）。将数据包存放到 IP 数据包中。</p>
+<p>每发出一个数据包都要求确认。如果有一个数据包遗失，就收不到确认，发出方就知道有必要重发这个数据包了。</p>
+<p>优点：可靠性好，稳定性好。</p>
+<p>缺点：过程复杂、实现困难、消耗较多的资源。</p>
+</blockquote>
+<h4 id="7、应用层"><a href="#7、应用层" class="headerlink" title="7、应用层"></a>7、应用层</h4><blockquote>
+<p>应用层接收到“传输层”的数据，然后进行读取数据。读取前必须规定好格式，否则无法读取。TCP 通过各种各样的程序传输数据，不同的协议规定了不同数据的格式，这些程序协议就构成了“应用层”。</p>
+</blockquote>
+<h6 id="▉-作用"><a href="#▉-作用" class="headerlink" title="▉ 作用"></a>▉ 作用</h6><blockquote>
+<p>规定应用程序的数据格式。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网络原理/" rel="tag"># 网络原理</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/23/数据分析之 Python 【NumPy库】/" rel="next" title="数据分析之 Python 【NumPy库】">
+                <i class="fa fa-chevron-left"></i> 数据分析之 Python 【NumPy库】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/25/前端 CSS3 之基础篇【边框与阴影】/" rel="prev" title="前端 CSS3 之基础篇【选择器】">
+                前端 CSS3 之基础篇【选择器】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#从底层到高层看网络协议（从下到上）"><span class="nav-number">1.</span> <span class="nav-text">从底层到高层看网络协议（从下到上）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、物理层"><span class="nav-number">1.0.1.</span> <span class="nav-text">一、物理层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、链路层"><span class="nav-number">1.0.2.</span> <span class="nav-text">二、链路层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、网络层"><span class="nav-number">1.0.3.</span> <span class="nav-text">三、网络层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、传输层"><span class="nav-number">1.0.4.</span> <span class="nav-text">四、传输层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、应用层"><span class="nav-number">1.0.5.</span> <span class="nav-text">五、应用层</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从高层到底层看网络协议（从上到下）"><span class="nav-number">2.</span> <span class="nav-text">从高层到底层看网络协议（从上到下）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、配置上网参数"><span class="nav-number">2.0.1.</span> <span class="nav-text">一、配置上网参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、网页请求过程"><span class="nav-number">2.0.2.</span> <span class="nav-text">二、网页请求过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一、网络层中协议"><span class="nav-number">2.1.</span> <span class="nav-text">一、网络层中协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、五层模型"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、五层模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、层与协议"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、层与协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、物理层"><span class="nav-number">2.1.3.</span> <span class="nav-text">3、物理层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、链路层"><span class="nav-number">2.1.4.</span> <span class="nav-text">4、链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-定义"><span class="nav-number">2.1.4.0.1.</span> <span class="nav-text">▉ 定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉以太网协议（数据包的定义）"><span class="nav-number">2.1.4.0.2.</span> <span class="nav-text">▉以太网协议（数据包的定义）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉MAC地址"><span class="nav-number">2.1.4.0.3.</span> <span class="nav-text">▉MAC地址</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉广播"><span class="nav-number">2.1.4.0.4.</span> <span class="nav-text">▉广播</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、网络层"><span class="nav-number">2.1.5.</span> <span class="nav-text">5、网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-由来"><span class="nav-number">2.1.5.0.1.</span> <span class="nav-text">▉ 由来</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-网络层的定义"><span class="nav-number">2.1.5.0.2.</span> <span class="nav-text">▉ 网络层的定义</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-网络地址和MAC地址的区别？"><span class="nav-number">2.1.5.0.3.</span> <span class="nav-text">▉ 网络地址和MAC地址的区别？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-IP-协议"><span class="nav-number">2.1.5.0.4.</span> <span class="nav-text">▉ IP 协议</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-子网掩码"><span class="nav-number">2.1.5.0.5.</span> <span class="nav-text">▉ 子网掩码</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-判断是否处于同一网络"><span class="nav-number">2.1.5.0.6.</span> <span class="nav-text">▉ 判断是否处于同一网络</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-IP-数据包"><span class="nav-number">2.1.5.0.7.</span> <span class="nav-text">▉ IP 数据包</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-ARP-协议"><span class="nav-number">2.1.5.0.8.</span> <span class="nav-text">▉ ARP 协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6、传输层"><span class="nav-number">2.1.6.</span> <span class="nav-text">6、传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-端口"><span class="nav-number">2.1.6.0.1.</span> <span class="nav-text">▉ 端口</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-功能"><span class="nav-number">2.1.6.0.2.</span> <span class="nav-text">▉ 功能</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-UDP-协议"><span class="nav-number">2.1.6.0.3.</span> <span class="nav-text">▉ UDP 协议</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-TCP-协议"><span class="nav-number">2.1.6.0.4.</span> <span class="nav-text">▉ TCP 协议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7、应用层"><span class="nav-number">2.1.7.</span> <span class="nav-text">7、应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▉-作用"><span class="nav-number">2.1.7.0.1.</span> <span class="nav-text">▉ 作用</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/03/25/计算机网络原理之【互联网协议入门】/';
+          this.page.identifier = '2019/03/25/计算机网络原理之【互联网协议入门】/';
+          this.page.title = '计算机网络原理之【五层协议】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Reach," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="小鹿带你一起学 React。">
+<meta name="keywords" content="Reach">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Reach">
+<meta property="og:url" content="http://yoursite.com/2018/09/14/前端框架之React【基础入门】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="小鹿带你一起学 React。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/react.png">
+<meta property="og:updated_time" content="2018-09-25T12:56:46.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Reach">
+<meta name="twitter:description" content="小鹿带你一起学 React。">
+<meta name="twitter:image" content="http://yoursite.com/images/react.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/09/14/前端框架之React【基础入门】/"/>
+
+
+
+
+
+  <title>Reach | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/14/前端框架之React【基础入门】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Reach</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-14T15:57:06+08:00">
+                2018-09-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reach/" itemprop="url" rel="index">
+                    <span itemprop="name">Reach</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/09/14/前端框架之React【基础入门】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/09/14/前端框架之React【基础入门】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,506
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  17
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/react.png" alt=""></p>
+<p>小鹿带你一起学 React。</p>
+<a id="more"></a>
+<h1 id="React-详细教程"><a href="#React-详细教程" class="headerlink" title="React 详细教程"></a>React 详细教程</h1><h2 id="React-安装"><a href="#React-安装" class="headerlink" title="React 安装"></a>React 安装</h2><h3 id="首先安装-Node-js"><a href="#首先安装-Node-js" class="headerlink" title="首先安装 Node.js"></a>首先安装 Node.js</h3><h3 id="在Node-js-使用-npm-包管理工具来安装React"><a href="#在Node-js-使用-npm-包管理工具来安装React" class="headerlink" title="在Node.js 使用 npm 包管理工具来安装React"></a>在Node.js 使用 npm 包管理工具来安装React</h3><h4 id="步骤一：安装全局的-React-，在哪里都可以创建-React-文件"><a href="#步骤一：安装全局的-React-，在哪里都可以创建-React-文件" class="headerlink" title="步骤一：安装全局的 React ，在哪里都可以创建 React 文件"></a>步骤一：安装全局的 React ，在哪里都可以创建 React 文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-app</span><br></pre></td></tr></table></figure>
+<p><strong>注意：如果是 max 系统 在命令前增加 sudo 全局。</strong></p>
+<h4 id="步骤二：在你的文件夹中创建项目（脚手架）"><a href="#步骤二：在你的文件夹中创建项目（脚手架）" class="headerlink" title="步骤二：在你的文件夹中创建项目（脚手架）"></a>步骤二：在你的文件夹中创建项目（脚手架）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app  项目名</span><br></pre></td></tr></table></figure>
+<h4 id="步骤三：切换到该目录下，可以启动该项目"><a href="#步骤三：切换到该目录下，可以启动该项目" class="headerlink" title="步骤三：切换到该目录下，可以启动该项目"></a>步骤三：切换到该目录下，可以启动该项目</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
+<h2 id="Rect基础入门"><a href="#Rect基础入门" class="headerlink" title="Rect基础入门"></a>Rect基础入门</h2><h3 id="文件结构和-JSX-语法"><a href="#文件结构和-JSX-语法" class="headerlink" title="文件结构和 JSX 语法"></a>文件结构和 JSX 语法</h3><h4 id="React的目录结构"><a href="#React的目录结构" class="headerlink" title="React的目录结构"></a>React的目录结构</h4><p>在 <code>Package.json</code> 配置文件中的一些依赖包。</p>
+<ul>
+<li><code>&quot;react&quot;: &quot;^16.5.2&quot;</code> 为 React 库</li>
+<li><code>&quot;react-dom&quot;: &quot;^16.5.2&quot;</code>将一些 JSX 语法渲染到 DOM中</li>
+<li><code>&quot;react-scripts&quot;: &quot;1.1.5&quot;</code> </li>
+</ul>
+<h4 id="JSX-语法"><a href="#JSX-语法" class="headerlink" title="JSX 语法"></a>JSX 语法</h4><blockquote>
+<p>React 使用 JSX 来替代常规的 JavaScript，JSX 是一个看起来很像 XML 的 JavaScript 语法扩展。</p>
+</blockquote>
+<p>优点：</p>
+<ul>
+<li>JSX 执行更快，因为它在编译为 JavaScript 代码后进行了优化。</li>
+<li>它是类型安全的，在编译过程中就能发现错误。</li>
+<li>使用 JSX 编写模板更加简单快速。</li>
+</ul>
+<h3 id="使用-JSX"><a href="#使用-JSX" class="headerlink" title="使用 JSX"></a>使用 JSX</h3><p>JSX 看起来类似 HTML ，我们可以看下实例: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;h1&gt;Hello, world!&lt;/h1&gt;,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>添加自定义属性需要使用 <strong>data-</strong> 前缀。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h2&gt;欢迎学习 React&lt;/h2&gt;</span><br><span class="line">    &lt;p data-myattribute = &quot;somevalue&quot;&gt;这是一个很不错的 JavaScript 库!&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">,</span><br><span class="line">document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="React-组件的作用"><a href="#React-组件的作用" class="headerlink" title="React 组件的作用"></a>React 组件的作用</h3><p>自定义组件名：<strong>HelloMessage</strong></p>
+<p>方法一：用函数来自定义创建组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function HelloMessage(props) &#123;</span><br><span class="line">    return &lt;h1&gt;Hello World!&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//ES6语法函数定义</span><br><span class="line">//const HelloMessage = () =&gt; &#123;</span><br><span class="line">//    return &lt;h1&gt;Hello World!&lt;/h1&gt;;</span><br><span class="line">//&#125;</span><br><span class="line"> </span><br><span class="line">const element = &lt;HelloMessage /&gt;;</span><br><span class="line"> </span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>方法二：使用 ES6 class 来定义一个组件: </p>
+<p>创建一个模块 Person</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &apos;./Person.css&apos;;</span><br><span class="line"></span><br><span class="line">const person = ( ) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&quot;Person&quot;&gt;</span><br><span class="line">            &lt;h1&gt;你好，我是,我已经拥有本书&lt;/h1&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default person;//暴露接口</span><br></pre></td></tr></table></figure>
+<p>其他文件调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import Person from &apos;./Person/Person&apos;;//导入</span><br><span class="line"></span><br><span class="line">class App extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">		&lt;div&gt;</span><br><span class="line">			 &lt;Person /&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<p>调用自定义组件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">import App from &apos;./App&apos;;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;App /&gt;,</span><br><span class="line">    document.getElementById(&apos;root&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong>原生 <strong>HTML</strong> 元素名<strong>以小写字母开</strong>头，而自定义的 <strong>React</strong> 类名以<strong>大写字母开</strong>头，比如 <strong>HelloMessage</strong> 不能写成 <strong>helloMessage</strong>。除此之外还需要注意组件类只能包含一个顶层标签，否则也会报错。 </p>
+<h3 id="组件-模块间通信"><a href="#组件-模块间通信" class="headerlink" title="组件 - 模块间通信"></a>组件 - 模块间通信</h3><p>在创建组件的 render（）函数中，调用模块函数的同时加入传值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">		&lt;div&gt;</span><br><span class="line">			 &lt;Person  name=&quot;张三&quot;/&gt;</span><br><span class="line">			 &lt;Person&gt;我是闭合标签，可以通过props.children获取&lt;/Person&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &apos;./Person.css&apos;;</span><br><span class="line"></span><br><span class="line">const person = (props) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&quot;Person&quot;&gt;</span><br><span class="line">            &lt;h1&gt;你好，我是&#123;props.name&#125;,我已经拥有本书&lt;/h1&gt;</span><br><span class="line">            &lt;p&gt;&#123;props.children&#125;&lt;/p&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default person;//暴露接口</span><br></pre></td></tr></table></figure>
+<h3 id="State-状态"><a href="#State-状态" class="headerlink" title="State 状态"></a>State 状态</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">state = &#123;</span><br><span class="line">  persons:[</span><br><span class="line">    &#123;name:&quot;逯相强&quot;,count:1&#125;,</span><br><span class="line">    &#123;name:&quot;Heimal&quot;,count:2&#125;,</span><br><span class="line">    &#123;name:&quot;Aim&quot;,count:3&#125;,</span><br><span class="line">  ],</span><br><span class="line">  anything:&quot;张三&quot;,</span><br><span class="line">  showPersons:false</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//定义一个函数</span><br><span class="line">switchNmmeHandle = (newName) =&gt;&#123;</span><br><span class="line">  // console.log(&quot;你好&quot;);</span><br><span class="line">  this.setState(&#123;</span><br><span class="line">    persons:[</span><br><span class="line">      &#123;name:newName,count:1&#125;,</span><br><span class="line">      &#123;name:&quot;Heimal&quot;,count:222&#125;,</span><br><span class="line">      &#123;name:&quot;Aim&quot;,count:3&#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;)	</span><br><span class="line">&#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">    &lt;button onClick=&#123;() =&gt; this.switchNmmeHandle(&quot;米修&quot;)&#125;&gt;更改&lt;/button&gt;</span><br><span class="line">		&lt;div&gt;</span><br><span class="line">			&lt;Person name=&#123;this.state.persons[0].name&#125; /&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<h4 id="state-与-props-的区别："><a href="#state-与-props-的区别：" class="headerlink" title="state 与 props 的区别："></a>state 与 props 的区别：</h4><p><strong>state </strong> ：用于改变组件内容状态的值（动态）</p>
+<p><strong>props</strong>：用于组件通信进行传值</p>
+<h3 id="属性传值"><a href="#属性传值" class="headerlink" title="属性传值"></a>属性传值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> class App extends Component &#123;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"> render() &#123;</span><br><span class="line">		&lt;div&gt;</span><br><span class="line">			&lt;Person </span><br><span class="line">				myClick=&#123;this.switchNmmeHandle.bind(this,&quot;米修missu&quot;)&#125; /&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const person = ( props) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div className=&quot;Person&quot;&gt;</span><br><span class="line">            &lt;h1 onClick=&#123;props.myClick&#125;&gt;你好，我是&#123;props.name&#125;,我已经拥有&#123;props.count&#125;本书&lt;/h1&gt;</span><br><span class="line">            &lt;p&gt;&#123;props.children&#125;&lt;/p&gt;</span><br><span class="line">          </span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default person;</span><br></pre></td></tr></table></figure>
+<h3 id="双向数据绑定"><a href="#双向数据绑定" class="headerlink" title="双向数据绑定"></a>双向数据绑定</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import React from &apos;react&apos;;</span><br><span class="line">import &apos;./Person.css&apos;;</span><br><span class="line"></span><br><span class="line">const person = ( props) =&gt; &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;input type=&quot;test&quot; onChange=&#123;props.changed&#125; defaultValue=&#123;props.name&#125;&gt;&lt;/input&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default person;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">  class App extends Component &#123;</span><br><span class="line">  </span><br><span class="line"> changedNameHandler = (event)=&gt;&#123;</span><br><span class="line">  this.setState(&#123;</span><br><span class="line">    persons:[</span><br><span class="line">      &#123;name:event.target.value,count:1&#125;,</span><br><span class="line">      &#123;name:&quot;Heimal&quot;,count:222&#125;,</span><br><span class="line">      &#123;name:&quot;Aim&quot;,count:3&#125;,</span><br><span class="line">    ]</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> render() &#123;</span><br><span class="line">		&lt;div&gt;</span><br><span class="line">			 &lt;Person </span><br><span class="line">                  changed=&#123;this.changedNameHandler&#125;</span><br><span class="line">                  name=&#123;this.state.persons[0].name&#125;</span><br><span class="line">                  count=&#123;this.state.persons[0].count&#125; /&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">export default App;</span><br></pre></td></tr></table></figure>
+<h3 id="组件样式的两种方式"><a href="#组件样式的两种方式" class="headerlink" title="组件样式的两种方式"></a>组件样式的两种方式</h3><h4 id="方式一："><a href="#方式一：" class="headerlink" title="方式一："></a>方式一：</h4><blockquote>
+<p>在 CSS 文件中设置，然后倒入引用</p>
+</blockquote>
+<p>Person.css:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.Person&#123;</span><br><span class="line">    width: 60%;</span><br><span class="line">    margin: 16px auto;</span><br><span class="line">    border: 1px solid #eee;</span><br><span class="line">    box-shadow: 0 2px 3px #ccc;</span><br><span class="line">    padding: 16px;</span><br><span class="line">    text-align: center;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Person.js引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import &apos;./Person.css&apos;;</span><br><span class="line"></span><br><span class="line">//用 className</span><br><span class="line"> &lt;div className=&quot;Person&quot;&gt;</span><br><span class="line">            &lt;h1 onClick=&#123;props.myClick&#125;&gt;你好，我是&#123;props.name&#125;,我已经拥有&#123;props.count&#125;本书&lt;/h1&gt;</span><br><span class="line">            &lt;p&gt;&#123;props.children&#125;&lt;/p&gt;</span><br><span class="line">            &lt;input type=&quot;test&quot; onChange=&#123;props.changed&#125; defaultValue=&#123;props.name&#125;&gt;&lt;/input&gt;</span><br><span class="line">        &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="方式二："><a href="#方式二：" class="headerlink" title="方式二："></a>方式二：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">state = &#123;</span><br><span class="line">  persons:[</span><br><span class="line">    &#123;name:&quot;逯相强&quot;,count:1&#125;,</span><br><span class="line">    &#123;name:&quot;Heimal&quot;,count:2&#125;,</span><br><span class="line">    &#123;name:&quot;Aim&quot;,count:3&#125;,</span><br><span class="line">  ],</span><br><span class="line">  anything:&quot;张三&quot;,</span><br><span class="line">  showPersons:false</span><br><span class="line">&#125;</span><br><span class="line">render(</span><br><span class="line">    return(</span><br><span class="line">    //引用样式</span><br><span class="line">    &lt;button style=&#123;style&#125; onClick=&#123;this.switchNmmeHandle.bind(this,&quot;missu&quot;)&#125;&gt;更改&lt;/button&gt; </span><br><span class="line">    )</span><br><span class="line">)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="React的-if-分支"><a href="#React的-if-分支" class="headerlink" title="React的 if 分支"></a>React的 if 分支</h3><blockquote>
+<p>在React中的if判断使用的三元运算符</p>
+</blockquote>
+<p>使用代码抽离，大大减少代码的冗余度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">class App extends Component &#123;</span><br><span class="line">    render (</span><br><span class="line">        let person = null;</span><br><span class="line">        if(this.state.showPersons)&#123;</span><br><span class="line">          person = (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;Person </span><br><span class="line">                  changed=&#123;this.changedNameHandler&#125;</span><br><span class="line">                  name=&#123;this.state.persons[0].name&#125;</span><br><span class="line">                  count=&#123;this.state.persons[0].count&#125; /&gt;</span><br><span class="line">                &lt;Person</span><br><span class="line">                  myClick=&#123;this.switchNmmeHandle.bind(this,&quot;米修missu&quot;)&#125;</span><br><span class="line">                  name=&#123;this.state.persons[1].name&#125;</span><br><span class="line">                  count=&#123;this.state.persons[1].count&#125; /&gt;</span><br><span class="line">                &lt;Person </span><br><span class="line">                  name=&#123;this.state.persons[2].name&#125;</span><br><span class="line">                  count=&#123;this.state.persons[2].count&#125; &gt;你们好，欢迎购买书籍&lt;/Person&gt;</span><br><span class="line">          &lt;/div&gt;</span><br><span class="line">     	 )</span><br><span class="line">      </span><br><span class="line">      return (</span><br><span class="line">      	&lt;div className=&quot;App&quot;&gt;</span><br><span class="line">      	//调用</span><br><span class="line">      	    &#123;person&#125;</span><br><span class="line">      	&lt;/div&gt;</span><br><span class="line">      )</span><br><span class="line">  </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="React-使用循环"><a href="#React-使用循环" class="headerlink" title="React - 使用循环"></a>React - 使用循环</h3><blockquote>
+<p>使用ES6语法</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        this.state.persons.map((person,index) =&gt;&#123;</span><br><span class="line">            return &lt;Person </span><br><span class="line">                myClick=&#123;() =&gt; this.delectPersonHandler(index)&#125;</span><br><span class="line">                key=&#123;person.id&#125;</span><br><span class="line">                name=&#123;person.name&#125; </span><br><span class="line">                count=&#123;person.count&#125;/&gt;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"> &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p> React 使用循环输出每个值都要有一个 key 与之对应，要映射到虚拟的 DOM 上，虚拟的DOM和真实的DOM通过key对应起来。</p>
+<h3 id="React-动态改变样式和添加类名"><a href="#React-动态改变样式和添加类名" class="headerlink" title="React 动态改变样式和添加类名"></a>React 动态改变样式和添加类名</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style.backgroundColor = &apos;red&apos;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// const classes = [&quot;red&quot;,&quot;bold&quot;].join(&quot; &quot;);</span><br><span class="line">    const classes = [];</span><br><span class="line"></span><br><span class="line">    if(this.state.persons.length &lt;= 2 )&#123;</span><br><span class="line">        classes.push(&quot;red&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if(this.state.persons.length &lt;= 1 )&#123;</span><br><span class="line">      classes.push(&quot;bold&quot;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">    return (</span><br><span class="line">      &lt;h1&gt;Hello Word!&lt;/h1&gt;</span><br><span class="line">      &lt;p className=&#123;classes.join(&quot; &quot;)&#125;&gt;Hello React&lt;/p&gt;//通过数组来动态改变值</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<p>定义的css样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.red&#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.bold&#123;</span><br><span class="line">    font-weight: bold;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="React-的项目目录结构"><a href="#React-的项目目录结构" class="headerlink" title="React 的项目目录结构"></a>React 的项目目录结构</h1><h2 id="React元素渲染"><a href="#React元素渲染" class="headerlink" title="React元素渲染"></a>React元素渲染</h2><blockquote>
+<p>元素是构成 React 应用的最小单位，它用于描述屏幕上输出的内容。 </p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;</span><br></pre></td></tr></table></figure>
+<p>与浏览器的 DOM 元素不同，React 当中的元素事实上是普通的对象，React DOM 可以确保 浏览器 DOM 的数据内容与 React 元素保持一致。 </p>
+<h3 id="将元素渲染到-DOM-中"><a href="#将元素渲染到-DOM-中" class="headerlink" title="将元素渲染到 DOM 中"></a>将元素渲染到 DOM 中</h3><p>首先我们在一个 HTML 页面中添加一个 id=”example” 的 <div>: </div></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;example&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>要将React元素渲染到根DOM节点中，我们通过把它们都传递给 ReactDOM.render() 的方法来将其渲染到页面上： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">element,</span><br><span class="line">document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="更新元素渲染"><a href="#更新元素渲染" class="headerlink" title="更新元素渲染"></a>更新元素渲染</h3><p>React 元素都是不可变的。当元素被创建之后，你是无法改变其内容或属性的。</p>
+<p>目前更新界面的唯一办法是创建一个新的元素，然后将它传入 ReactDOM.render() 方法：</p>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function tick() &#123;</span><br><span class="line">    const element = (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Hello, world!&lt;/h1&gt;</span><br><span class="line">            &lt;h2&gt;现在是 &#123;new Date().toLocaleTimeString()&#125;.&lt;/h2&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        element,</span><br><span class="line">        document.getElementById(&apos;example&apos;)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+<p>以上实例通过 setInterval() 方法，每秒钟调用一次 ReactDOM.render()。 </p>
+<p>我们可以将要展示的部分封装起来，以下实例用一个函数来表示： </p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Clock(props) &#123;</span><br><span class="line">    return (</span><br><span class="line">       </span><br><span class="line">	);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function tick() &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">       </span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Clock(props) &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;div&gt;</span><br><span class="line">            &lt;h1&gt;Hello, world!&lt;/h1&gt;</span><br><span class="line">            &lt;h2&gt;现在是 &#123;props.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</span><br><span class="line">        &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">function tick() &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        &lt;Clock date=&#123;new Date()&#125; /&gt;,</span><br><span class="line">        document.getElementById(&apos;example&apos;)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+<p>除了函数外我们还可以创建一个 React.Component 的 ES6 类（需要使用 this.props 替换 props ）</p>
+<p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Clock extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">           </span><br><span class="line">        );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function tick() &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">       </span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+<p><strong>实例：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Clock extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h1&gt;Hello, world!&lt;/h1&gt;</span><br><span class="line">                &lt;h2&gt;现在是 &#123;this.props.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        );</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">function tick() &#123;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        &lt;Clock date=&#123;new Date()&#125; /&gt;,</span><br><span class="line">        document.getElementById(&apos;example&apos;)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line">setInterval(tick, 1000);</span><br></pre></td></tr></table></figure>
+<h3 id="独立文件"><a href="#独立文件" class="headerlink" title="独立文件"></a>独立文件</h3><p>你的 React JSX 代码可以放在一个独立文件上，例如我们创建一个 <code>helloworld_react.js</code> 文件，代码如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;example&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;script type=&quot;text/babel&quot; src=&quot;helloworld_react.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="JavaScript-表达式"><a href="#JavaScript-表达式" class="headerlink" title="JavaScript 表达式"></a>JavaScript 表达式</h3><p>们可以在 JSX 中使用 JavaScript 表达式。表达式写在花括号 <strong>{}</strong> 中。实例如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;&#123;1+1&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">,</span><br><span class="line">document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>在 JSX 中不能使用 <strong>if else</strong> 语句，但可以使用 <strong>conditional (三元运算)</strong> 表达式来替代。以下实例中如果变量 <strong>i</strong> 等于 <strong>1</strong> 浏览器将输出 <strong>true</strong>, 如果修改 i 的值，则会输出 <strong>false</strong>. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;h1&gt;&#123;i == 1 ? &apos;True!&apos; : &apos;False&apos;&#125;&lt;/h1&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">,</span><br><span class="line">document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="样式"><a href="#样式" class="headerlink" title="样式"></a>样式</h3><blockquote>
+<p>React 推荐使用内联样式。,我们可以使用 <strong>camelCase</strong> 语法来设置内联样式. React 会在指定元素数字后自动添加 <strong>px</strong> 。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var myStyle = &#123;</span><br><span class="line">    fontSize: 100,</span><br><span class="line">    color: &apos;#FF0000&apos;</span><br><span class="line">&#125;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;h1 style = &#123;myStyle&#125;&gt;菜鸟教程&lt;/h1&gt;,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h3><p>注释需要写在花括号中，实例如下： </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;h1&gt;哈哈哈&lt;/h1&gt;</span><br><span class="line">&#123;/*注释...*/&#125;</span><br><span class="line">&lt;/div&gt;,</span><br><span class="line">document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var arr = [</span><br><span class="line">    &lt;h1&gt;react&lt;/h1&gt;,</span><br><span class="line">    &lt;h2&gt;学的不仅是技术，更是梦想！&lt;/h2&gt;,</span><br><span class="line">];</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;div&gt;&#123;arr&#125;&lt;/div&gt;,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h3><p>函数定义的组件：<strong>props.name</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function HelloMessage(props) &#123;</span><br><span class="line">    return &lt;h1&gt;Hello &#123;props.name&#125;!&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">const element = &lt;HelloMessage name=&quot;Runoob&quot;/&gt;;</span><br><span class="line"> </span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>ES6创建的组件：<strong>this.props.name</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class HelloMessage extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;h1&gt;Hello, &#123;this.props.name&#125;&lt;/h1&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;	</span><br><span class="line">    HelloMessage.defaultProps = &#123;</span><br><span class="line">        name: &apos;Runoob&apos;</span><br><span class="line">    &#125;;	</span><br><span class="line">const element = &lt;HelloMessage/&gt;;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        element,</span><br><span class="line">        document.getElementById(&apos;example&apos;)</span><br><span class="line">    );</span><br></pre></td></tr></table></figure>
+<h3 id="复合组件"><a href="#复合组件" class="headerlink" title="复合组件"></a>复合组件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function Name(props) &#123;</span><br><span class="line">    return &lt;h1&gt;网站名称：&#123;props.name&#125;&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br><span class="line">function Url(props) &#123;</span><br><span class="line">    return &lt;h1&gt;网站地址：&#123;props.url&#125;&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br><span class="line">function Nickname(props) &#123;</span><br><span class="line">    return &lt;h1&gt;网站小名：&#123;props.nickname&#125;&lt;/h1&gt;;</span><br><span class="line">&#125;</span><br><span class="line">function App() &#123;</span><br><span class="line">    return (</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">        &lt;Name name=&quot;菜鸟教程&quot; /&gt;</span><br><span class="line">        &lt;Url url=&quot;http://www.runoob.com&quot; /&gt;</span><br><span class="line">        &lt;Nickname nickname=&quot;Runoob&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">ReactDOM.render(</span><br><span class="line">     &lt;App /&gt;,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="React-State-状态"><a href="#React-State-状态" class="headerlink" title="React State(状态)"></a>React State(状态)</h2><blockquote>
+<p>React 把组件看成是一个状态机（State Machines）。通过与用户的交互，实现不同状态，然后渲染 UI，让用户界面和数据保持一致。React 里，只需更新组件的 state，然后根据新的 state 重新渲染用户界面（不要操作 DOM）。</p>
+</blockquote>
+<p>以下实例创建一个名称扩展为 React.Component 的 ES6 类，在 render() 方法中使用 this.state 来修改当前的时间。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Clock extends React.Component &#123;</span><br><span class="line">//构造函数</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;date: new Date()&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                &lt;h1&gt;Hello, world!&lt;/h1&gt;</span><br><span class="line">                &lt;h2&gt;现在是 &#123;this.state.date.toLocaleTimeString()&#125;.&lt;/h2&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    &lt;Clock /&gt;,</span><br><span class="line">    document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="将生命周期方法添加到类中"><a href="#将生命周期方法添加到类中" class="headerlink" title="将生命周期方法添加到类中"></a>将生命周期方法添加到类中</h3><blockquote>
+<p>在具有许多组件的应用程序中，在销毁时释放组件所占用的资源非常重要。 </p>
+</blockquote>
+<p>① 每当 Clock 组件第一次加载到 DOM 中的时候，我们都想生成定时器，这在 React 中被称为<strong>挂载</strong>。</p>
+<p>② 每当 Clock 生成的这个 DOM 被移除的时候，我们也会想要清除定时器，这在 React 中被称为<strong>卸载</strong>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Clock extends React.Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props);</span><br><span class="line">        this.state = &#123;date: new Date()&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    //生成定时器</span><br><span class="line">    componentDidMount() &#123;</span><br><span class="line">        this.timerID = setInterval(</span><br><span class="line">        () =&gt; this.tick(),</span><br><span class="line">        1000</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">    //卸载定时器</span><br><span class="line">    componentWillUnmount() &#123;</span><br><span class="line">        clearInterval(this.timerID);</span><br><span class="line">    &#125;</span><br><span class="line">    //给stata赋值</span><br><span class="line">    tick() &#123;</span><br><span class="line">        this.setState(&#123;	</span><br><span class="line">            date: new Date()</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>实例解析：</strong></p>
+<p>① <code>componentDidMount()</code>与 <code>componentWillUnmount()</code>方法被称作<strong>生命周期钩子。</strong></p>
+<p>② 在组件输出到 <code>DOM</code> 后会执行 <code>componentDidMount()</code>钩子，我们就可以在这个钩子上设置一个定时器。</p>
+<p>③ <code>this.timerID</code>为计算器的 <code>ID</code>，我们可以在 <code>componentWillUnmount()</code>钩子中卸载计算器。</p>
+<p><strong>代码执行顺序：</strong></p>
+<ol>
+<li>当 <code>&lt;Clock /&gt;</code> 被传递给 <code>ReactDOM.render()</code> 时，React 调用 <code>Clock</code> 组件的构造函数。 由于 <code>Clock</code> 需要显示当前时间，所以使用包含当前时间的对象来初始化 <code>this.state</code> 。 我们稍后会更新此状态。</li>
+<li>React 然后调用 <code>Clock</code> 组件的 <code>render()</code> 方法。这是 React 了解屏幕上应该显示什么内容，然后 React 更新 DOM 以匹配 <code>Clock</code> 的渲染输出。</li>
+<li>当 <code>Clock</code> 的输出插入到 DOM 中时，React 调用 <code>componentDidMount()</code> 生命周期钩子。 在其中，<code>Clock</code> 组件要求浏览器设置一个定时器，每秒钟调用一次 <code>tick()</code>。</li>
+<li>浏览器每秒钟调用 <code>tick()</code> 方法。 在其中，<code>Clock</code> 组件通过使用包含当前时间的对象调用 <code>setState()</code> 来调度UI更新。 通过调用 <code>setState()</code>，React 知道状态已经改变，并再次调用 <code>render()</code> 方法来确定屏幕上应当显示什么。 这一次，<code>render()</code> 方法中的 <code>this.state.date</code> 将不同，所以渲染输出将包含更新的时间，并相应地更新 DOM。</li>
+<li>一旦 <code>Clock</code> 组件被从 DOM 中移除，React 会调用 <code>componentWillUnmount()</code> 这个钩子函数，定时器也就会被清除。</li>
+</ol>
+<h3 id="State-和-Props"><a href="#State-和-Props" class="headerlink" title="State 和 Props"></a>State 和 Props</h3><p>以下实例演示了如何在应用中组合使用 state 和 props 。我们可以在父组件中设置 state， 并通过在子组件上使用 props 将其传递到子组件上。在 render 函数中, 我们设置 name 和 site 来获取父组件传递过来的数据。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class WebSite extends React.Component &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">      super();</span><br><span class="line"> </span><br><span class="line">      this.state = &#123;</span><br><span class="line">        name: &quot;菜鸟教程&quot;,</span><br><span class="line">        site: &quot;https://www.runoob.com&quot;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Name name=&#123;this.state.name&#125; /&gt;</span><br><span class="line">        &lt;Link site=&#123;this.state.site&#125; /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">class Name extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;h1&gt;&#123;this.props.name&#125;&lt;/h1&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">class Link extends React.Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;a href=&#123;this.props.site&#125;&gt;</span><br><span class="line">        &#123;this.props.site&#125;</span><br><span class="line">      &lt;/a&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;WebSite /&gt;,</span><br><span class="line">  document.getElementById(&apos;example&apos;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Reach/" rel="tag"># Reach</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/05/Oracel 高级数据库/" rel="next" title="Oracel 高级数据库">
+                <i class="fa fa-chevron-left"></i> Oracel 高级数据库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/09/25/数据结构与算法之美【如何学习】/" rel="prev" title="数据结构与算法之美|【复杂度分析】">
+                数据结构与算法之美|【复杂度分析】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#React-详细教程"><span class="nav-number">1.</span> <span class="nav-text">React 详细教程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React-安装"><span class="nav-number">1.1.</span> <span class="nav-text">React 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首先安装-Node-js"><span class="nav-number">1.1.1.</span> <span class="nav-text">首先安装 Node.js</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在Node-js-使用-npm-包管理工具来安装React"><span class="nav-number">1.1.2.</span> <span class="nav-text">在Node.js 使用 npm 包管理工具来安装React</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤一：安装全局的-React-，在哪里都可以创建-React-文件"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">步骤一：安装全局的 React ，在哪里都可以创建 React 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤二：在你的文件夹中创建项目（脚手架）"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">步骤二：在你的文件夹中创建项目（脚手架）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤三：切换到该目录下，可以启动该项目"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">步骤三：切换到该目录下，可以启动该项目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rect基础入门"><span class="nav-number">1.2.</span> <span class="nav-text">Rect基础入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件结构和-JSX-语法"><span class="nav-number">1.2.1.</span> <span class="nav-text">文件结构和 JSX 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React的目录结构"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">React的目录结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JSX-语法"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">JSX 语法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-JSX"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用 JSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-组件的作用"><span class="nav-number">1.2.3.</span> <span class="nav-text">React 组件的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件-模块间通信"><span class="nav-number">1.2.4.</span> <span class="nav-text">组件 - 模块间通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-状态"><span class="nav-number">1.2.5.</span> <span class="nav-text">State 状态</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#state-与-props-的区别："><span class="nav-number">1.2.5.1.</span> <span class="nav-text">state 与 props 的区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#属性传值"><span class="nav-number">1.2.6.</span> <span class="nav-text">属性传值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#双向数据绑定"><span class="nav-number">1.2.7.</span> <span class="nav-text">双向数据绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件样式的两种方式"><span class="nav-number">1.2.8.</span> <span class="nav-text">组件样式的两种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式一："><span class="nav-number">1.2.8.1.</span> <span class="nav-text">方式一：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方式二："><span class="nav-number">1.2.8.2.</span> <span class="nav-text">方式二：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React的-if-分支"><span class="nav-number">1.2.9.</span> <span class="nav-text">React的 if 分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-使用循环"><span class="nav-number">1.2.10.</span> <span class="nav-text">React - 使用循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#React-动态改变样式和添加类名"><span class="nav-number">1.2.11.</span> <span class="nav-text">React 动态改变样式和添加类名</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#React-的项目目录结构"><span class="nav-number">2.</span> <span class="nav-text">React 的项目目录结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#React元素渲染"><span class="nav-number">2.1.</span> <span class="nav-text">React元素渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将元素渲染到-DOM-中"><span class="nav-number">2.1.1.</span> <span class="nav-text">将元素渲染到 DOM 中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新元素渲染"><span class="nav-number">2.1.2.</span> <span class="nav-text">更新元素渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#独立文件"><span class="nav-number">2.1.3.</span> <span class="nav-text">独立文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-表达式"><span class="nav-number">2.1.4.</span> <span class="nav-text">JavaScript 表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#样式"><span class="nav-number">2.1.5.</span> <span class="nav-text">样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注释"><span class="nav-number">2.1.6.</span> <span class="nav-text">注释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">2.1.7.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数传递"><span class="nav-number">2.1.8.</span> <span class="nav-text">参数传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复合组件"><span class="nav-number">2.1.9.</span> <span class="nav-text">复合组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React-State-状态"><span class="nav-number">2.2.</span> <span class="nav-text">React State(状态)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#将生命周期方法添加到类中"><span class="nav-number">2.2.1.</span> <span class="nav-text">将生命周期方法添加到类中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State-和-Props"><span class="nav-number">2.2.2.</span> <span class="nav-text">State 和 Props</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/09/14/前端框架之React【基础入门】/';
+          this.page.identifier = '2018/09/14/前端框架之React【基础入门】/';
+          this.page.title = 'Reach';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

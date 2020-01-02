@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在 Android 应用开发中，打造良好的用户体验是非常重要的。 Android 系统中的 Activity 可以说一件很赞的设计，它在内存管理上良好的设计，使得多任务管理在Android系统中运行游刃有余。下面小鹿带你全面解析 Android 的四大启动模式">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 深入剖析四种启动模式">
+<meta property="og:url" content="http://yoursite.com/2018/08/08/Android 深入剖析四种启动模式/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="在 Android 应用开发中，打造良好的用户体验是非常重要的。 Android 系统中的 Activity 可以说一件很赞的设计，它在内存管理上良好的设计，使得多任务管理在Android系统中运行游刃有余。下面小鹿带你全面解析 Android 的四大启动模式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/启动模式.jpg">
+<meta property="og:image" content="http://yoursite.com/images/standard.png">
+<meta property="og:image" content="http://yoursite.com/images/c1.png">
+<meta property="og:image" content="http://yoursite.com/images/c2.png">
+<meta property="og:image" content="http://yoursite.com/images/c3.png">
+<meta property="og:image" content="http://yoursite.com/images/standard1.png">
+<meta property="og:image" content="http://yoursite.com/images/s1.png">
+<meta property="og:image" content="http://yoursite.com/images/s2.png">
+<meta property="og:image" content="http://yoursite.com/images/s3.png">
+<meta property="og:image" content="http://yoursite.com/images/singleTop.png">
+<meta property="og:image" content="http://yoursite.com/images/singleTask.png">
+<meta property="og:image" content="http://yoursite.com/images/singleIntance.png">
+<meta property="og:updated_time" content="2018-08-26T00:18:40.460Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 深入剖析四种启动模式">
+<meta name="twitter:description" content="在 Android 应用开发中，打造良好的用户体验是非常重要的。 Android 系统中的 Activity 可以说一件很赞的设计，它在内存管理上良好的设计，使得多任务管理在Android系统中运行游刃有余。下面小鹿带你全面解析 Android 的四大启动模式">
+<meta name="twitter:image" content="http://yoursite.com/images/启动模式.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/08/08/Android 深入剖析四种启动模式/"/>
+
+
+
+
+
+  <title>Android 深入剖析四种启动模式 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/08/Android 深入剖析四种启动模式/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 深入剖析四种启动模式</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-08T20:40:17+08:00">
+                2018-08-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-高级进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 高级进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/08/Android 深入剖析四种启动模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/08/08/Android 深入剖析四种启动模式/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,497
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="\images\启动模式.jpg" alt="standard"></p>
+<p>在 Android 应用开发中，打造良好的用户体验是非常重要的。 Android 系统中的 Activity 可以说一件很赞的设计，它在内存管理上良好的设计，使得多任务管理在Android系统中运行游刃有余。下面小鹿带你全面解析 Android 的四大启动模式</p>
+<a id="more"></a>
+<h1 id="Android-深入剖析四种启动模式"><a href="#Android-深入剖析四种启动模式" class="headerlink" title="Android 深入剖析四种启动模式"></a>Android 深入剖析四种启动模式</h1><h2 id="一、四大启动模式"><a href="#一、四大启动模式" class="headerlink" title="一、四大启动模式"></a>一、四大启动模式</h2><blockquote>
+<p>​    在实际项目中，根据特定的需求需要对每个活动指定恰当的启动模式。<strong>Android</strong> 页面的启动模式分为四种：<strong>standard</strong>、<strong>singleTop</strong>、<strong>singleTask</strong>和<strong>singleInstance</strong>，可以通过 AndroidManifest.xml 中通过给<activity>标签指定 <strong>android:launchMode</strong> 属性来选择启动模式。</activity></p>
+</blockquote>
+<h3 id="1、standard"><a href="#1、standard" class="headerlink" title="1、standard"></a>1、standard</h3><p>​     <strong>standard 是活动默认的启动模式。</strong>在不进行设置的情况下，所有的活动都是自动使用这种启动模式。在这里讲启动模式之前，先说一下 <strong>Android</strong> 是利用返回栈来管理活动的。对于基础差的开发者还不理解 <strong>Android</strong> 活动（页面）是怎么进行管理的，就是用到刚刚上边说到的返回栈来管理活动的。</p>
+<p>​    我们详细来看一下，根据我自己对任务的理解来详细说一下，<strong>Android</strong> 是使用任务（<strong>Task</strong>）来管理活动的，一个任务就是存放到栈里的活动（页面）的集合，这个栈也成为返回栈（<strong>Back Stack</strong>）,栈是一种先进后出的的数据结构，在默认的情况下，每当启动一个活动，它会在返回栈中入栈，并位于栈的顶端位置，每当用户按Back键或调用finish()方法去毁掉一个活动时，处于栈顶的活动就会出栈，这时，前一个入栈的活动就会处于栈顶位置。也就是说，用户可以看到的活动（页面）就是处于栈顶的活动！（<strong>为了更好的理解我的给大家大体画了个图</strong>）</p>
+<p><img src="\images\standard.png" alt="standard"></p>
+<p><strong>我新建了一个项目，代码如下，我启动三次第一个页面进行测试：</strong> </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">    <span class="comment">//控制台打印本页面的存标识</span></span><br><span class="line">    Log.d(<span class="string">"FirstActivity"</span>,<span class="keyword">this</span>.toString());</span><br><span class="line">    setContentView(R.layout.activity_first);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//启动本页面</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Start_Intent</span><span class="params">(View v)</span></span>&#123;</span><br><span class="line">    Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>,FirstActivity.class);</span><br><span class="line">    startActivity(intent);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>控制台打印信息为：</strong> </p>
+<p><img src="\images\c1.png" alt="standard"></p>
+<p><img src="\images\c2.png" alt="standard"></p>
+<p><img src="\images\c3.png" alt="standard"></p>
+<p>从控制台打印信息可以看到，每点击一下按钮都会创建一个 <strong>FirstActivity</strong> 实例，这时，返回栈中也有三个实例，当我们按 <strong>Back</strong> 键退出时需要按三下才能退出程序！<strong>（如图）:</strong> </p>
+<p><img src="\images\standard1.png" alt="standard"></p>
+<h3 id="2、singleTop"><a href="#2、singleTop" class="headerlink" title="2、singleTop"></a>2、singleTop</h3><blockquote>
+<p>当活动的启动模式指定为 <strong>singleTop</strong>，在启动活动如果发现返回栈栈顶已经是该活动时，就直接去使用它，不会创建新的活动实例。</p>
+</blockquote>
+<p>代码如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name=<span class="string">".FirstActivity"</span></span><br><span class="line">    android:launchMode=<span class="string">"singleTop"</span>&gt;<span class="comment">//启动模式singleTop</span></span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span><br><span class="line"></span><br><span class="line">        &lt;category android:name=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FirstActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        <span class="comment">//控制台打印本页面的存标识</span></span><br><span class="line">        Log.d(<span class="string">"FirstActivity"</span>,<span class="keyword">this</span>.toString());</span><br><span class="line">        setContentView(R.layout.activity_first);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//启动本页面</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Start_Intent</span><span class="params">(View v)</span></span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>,SecondActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SecondActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_second);</span><br><span class="line">        Log.d(<span class="string">"SecondActivity"</span>,<span class="keyword">this</span>.toString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//启动本页面</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Start_Intent</span><span class="params">(View v)</span></span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent(SecondActivity.<span class="keyword">this</span>,FirstActivity.class);</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="\images\s1.png" alt="singleTop"></p>
+<p><img src="\images\s2.png" alt="singleTop"></p>
+<p><img src="\images\s3.png" alt="singleTop"></p>
+<p>从打印信息可以看出，创建了两个 <strong>FirstActivity</strong> 实例，因为我们在 <strong>FirstActivity</strong> 跳转到 <strong>SecondActivity</strong> 时，位于栈顶的是 <strong>SecondActivity</strong> ,因此会再创建一个新的实例  <strong>FirstActivity</strong> .当用户按下 <strong>Back</strong> 三次才可以退出程序。<strong>下面看示意图</strong>： </p>
+<p><img src="\images\singleTop.png" alt="singleTop"></p>
+<h3 id="3、singleTask"><a href="#3、singleTask" class="headerlink" title="3、singleTask"></a>3、singleTask</h3><p>​    开发者使用 <strong>singleTask</strong> 可以解决上边 <strong>singleTop</strong> 模式重复创建栈顶活动的问题，为了避免活动不处于栈顶重复创建活动实例的情况，我们可以使用 <strong>singleTask</strong> 的模式。这个模式的特点是什么呢？当每次用户启动一个活动时，系统先检查返回栈的是否存在该活动，如果不存在就创建一个新的实例，如果存在该活动，位于该活动顶部的活动全部出栈，使该活动处于栈顶！代码改一下上方的 <strong>android：launchMode=”singleTask”</strong> 可以自己试一下！示意图如下： </p>
+<p><img src="\images\singleTask.png" alt="singleTask"></p>
+<h3 id="4、singleInstance"><a href="#4、singleInstance" class="headerlink" title="4、singleInstance"></a>4、singleInstance</h3><p>​    singleInstance模式比前边的三种模式要复杂一些，与前边的三个模式不同的是指定为 <strong>singleIntance</strong> 模式的活动会启动一个新的返回栈来管理这个活动，什么时候可以用到这个模式呢？当我们这个程序的活动允许其他程序调用时，要实现这个程序和其他程序共享这个活动的话，前边的三种模式都实现不了，因为每个程序都有自己的返回栈，同一个活动在不同的返回栈中入栈的时候会创建一个新的实例。而 <strong>singleIntance</strong> 模式可以解决这个问题，以为这个模式有一个独立的返回栈来管理这个活动，无论有多少程序来调用这个活动，都共用同一个返回栈。</p>
+<p>​    举个例子：我们建立三个页面，分别为<strong>FirstActivity</strong>、<strong>SecondActivity</strong>、<strong>ThirdActivity</strong> 每个页面都要分别用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Log.d(&quot;FirstActivity&quot;,&quot;getTaskId()&quot;);</span><br><span class="line">Log.d(&quot;SecondActivity&quot;,&quot;getTaskId()&quot;);</span><br><span class="line">Log.d(&quot;ThirdActivity&quot;,&quot;getTaskId()&quot;);</span><br></pre></td></tr></table></figure>
+<p>来查看创建返回栈的 <strong>id</strong>,我们将 <strong>singleIntance</strong> 模式指定为 <strong>SecondActivity</strong> 页面，我们实现三个页面的连续跳转，控制台打印出信息为：<strong>121</strong>、<strong>122</strong>、<strong>121</strong>。可以很明白的看出 <strong>SecondActivity</strong> 单独位于一个返回栈中。</p>
+<p>​        FirstActivity*页面跳转到 <strong>SecondActivity</strong> 页面，我来解释一下，因为 <strong>FirstActivity</strong> 和 <strong>ThirdActivity</strong> 位于同一个返回栈中，所以 <strong>ThirdActivity</strong> 位于栈顶出栈，<strong>FirstActivity</strong> 页面位于栈顶，所以 <strong>ThirdActivity</strong> 页面直接跳转到 <strong>FirstActivity</strong> 页面，再按 <strong>Back</strong> 键时，<strong>FirstActivity</strong> 和 <strong>ThirdActivity</strong> 的返回栈为空，就会显示另一个返回栈的活动，当另一个返回栈的活动出栈时，程序才会退出！</p>
+<p><strong>示意图如下：</strong></p>
+<p><img src="\images\singleIntance.png" alt="singleInstance"></p>
+<h2 id="二、四大启动模式深入剖析"><a href="#二、四大启动模式深入剖析" class="headerlink" title="二、四大启动模式深入剖析"></a>二、四大启动模式深入剖析</h2><blockquote>
+<p><strong>Activity</strong> 的启动模式也是一个难点，原因是形形色色的启动模式和标志位太容易混淆，但是 <strong>Activity</strong> 作为四大组件之首，它的确非常重要，为了满足项目的需求，必须使用 <strong>Activity</strong> 的启动模式。 </p>
+</blockquote>
+<h3 id="1、Activity-的-LaunchMode"><a href="#1、Activity-的-LaunchMode" class="headerlink" title="1、Activity 的 LaunchMode"></a>1、Activity 的 LaunchMode</h3><h4 id="1-1-启动模式"><a href="#1-1-启动模式" class="headerlink" title="1.1  启动模式"></a>1.1  启动模式</h4><p>​    之所以 <strong>Activity</strong> 使用启动模式，因为 <strong>Activity</strong> 的创建是在任务栈中的，当我们启动同一个 <strong>Activity</strong> 时，系统就会创建多个 <strong>Activity</strong> 实例放入任务栈中，当我们按 <strong>back</strong> 键时，任务栈中的实例就会一一出栈。栈我想并不陌生，具有的特点：先进先出。如果我们不允许系统重复创建相同的 Activity ，我们就会用到 <strong>Activity</strong> 的启动模式进行设置。<strong>Activity</strong> 的启动模式分为四种 <strong>standard、singleTop、singleTask</strong>和 <strong>singleInstance,</strong>之前的那篇文章也有相关介绍，下面就简单提一下。</p>
+<h5 id="（1）standard-标准模式"><a href="#（1）standard-标准模式" class="headerlink" title="（1）standard 标准模式 :"></a>（1）standard 标准模式 :</h5><p>​    这是系统默认的启动模式，每次启动一个 <strong>Activity</strong> 都会创建一个新的实例，不管这个实例是否存在。如果 <strong>A</strong> 启动了 <strong>B</strong>，<strong>B</strong> 的活动就会进入到 <strong>A</strong> 的任务栈中。</p>
+<h5 id="（2）singleTop-栈顶复用模式"><a href="#（2）singleTop-栈顶复用模式" class="headerlink" title="（2）singleTop 栈顶复用模式 :"></a>（2）singleTop 栈顶复用模式 :</h5><p>​    在这种启动模式下，新的 Activity 已经位于栈顶，如果再次启动该 <strong>Activity</strong> ，此 <strong>Activity</strong> 不会被重新创建。同时系统的 <strong>onNewIntent</strong> 方法被回调，通过此方法的参数我们可以取出当前的请求信息。当然 <strong>Activity</strong> 的 <strong>onCreate</strong>、<strong>onStart</strong> 和 <strong>onResume</strong> 方法不会重新被调用。如果该 <strong>Activity</strong> 没有位于栈顶，该活动就会重新被创建。</p>
+<h5 id="（3）singleTask-栈内复用模式"><a href="#（3）singleTask-栈内复用模式" class="headerlink" title="（3）singleTask 栈内复用模式 :"></a>（3）singleTask 栈内复用模式 :</h5><p>​    这是一种单例模式，在这种模式下，只要栈中存在该实例，该实例不会被重新创建。比如：我们想要创建一个实例 <strong>A</strong>，系统就会先判断任务栈中是否存在和 <strong>A</strong> 同样的实例。如果实例存在任务栈中，系统就会把 A 调用到栈顶并调用它的 <strong>onNewIntent</strong> 方法，同时 <strong>A</strong> 以上的 <strong>Activity</strong> 实例都会被移除出栈直到 A 位于栈顶位置；如果实例不存在，系统就会创新创建一个新的实例 <strong>A</strong> 并将其压入栈顶。</p>
+<h5 id="（3）singleInstance-单实例模式"><a href="#（3）singleInstance-单实例模式" class="headerlink" title="（3）singleInstance 单实例模式 :"></a>（3）singleInstance 单实例模式 :</h5><p>​    我通常把这种模式的 <strong>Activity</strong> 称为 <strong>singleTask</strong> 模式的加强版，除了具有 <strong>singleTask</strong> 模式具有的特点外，以 <strong>singleInstance</strong> 启动的 <strong>Activity</strong> 实例单独存在一个任务栈中，后续的请求不会创建新的实例。</p>
+<h4 id="1-2-任务栈"><a href="#1-2-任务栈" class="headerlink" title="1.2 任务栈"></a>1.2 任务栈</h4><p>什么是任务栈？各个 <strong>Activity</strong> 是怎么样分配到各个任务栈的？以下情况都是在 <strong>singleTask</strong> 模式情况下来说的。 </p>
+<blockquote>
+<p>从一个参数说起，<strong>TaskAffinity</strong> ，翻译为任务的相关性，这个参数标识了一个 <strong>Activity</strong> 所需要得任务栈的名字，默认情况下，<strong>Activity</strong> 所需要的任务栈的名字为应用的包名。任务栈分为前台任务栈和后台任务栈，后台任务栈中的 Activity 处于暂停状态，用户可以将后台任务栈切换到前台。                                ——任务栈 </p>
+</blockquote>
+<h4 id="1-3-设置启动模式的两种方式"><a href="#1-3-设置启动模式的两种方式" class="headerlink" title="1.3 设置启动模式的两种方式"></a>1.3 设置启动模式的两种方式</h4><ul>
+<li><p><strong>第一种方式 :</strong> 通过 AndroidMenifest 配置文件设置启动模式</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity</span><br><span class="line">      android:name=<span class="string">".MonitoringActivitys.MonitorActivity"</span></span><br><span class="line">       android:label=<span class="string">"@string/title_activity_monitor"</span></span><br><span class="line">       android:theme=<span class="string">"@style/AppTheme.NoActionBar"</span></span><br><span class="line">       android:launchMode=<span class="string">"singleTask"</span>&gt;</span><br><span class="line">       &lt;intent-filter&gt;</span><br><span class="line">           &lt;action android:name=<span class="string">"android.intent.action.MAIN"</span> /&gt;</span><br><span class="line">           &lt;category android:name=<span class="string">"android.intent.category.LAUNCHER"</span> /&gt;</span><br><span class="line">       &lt;/intent-filter&gt;</span><br><span class="line"> &lt;/activity&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>第二种方式 :</strong> 通过 Intent 中设置标志位来设置启动模式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(FirstActivity.<span class="keyword">this</span>, SecondActivity.class);</span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+<p><strong>区别：</strong></p>
+<p><strong>①</strong> 第二种优先级要高于第一种 </p>
+<p><strong>②</strong> 第一种无法给 <strong>Activity</strong> 设定 <strong>FLAG_ACTIVITY_CLEAR_TOP</strong> 标识，第二种无法为 <strong>Activity</strong> 指定 <strong>singleInstance</strong> 模式。 </p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/08/Android 深入剖析生命周期/" rel="next" title="Android 深入剖析生命周期">
+                <i class="fa fa-chevron-left"></i> Android 深入剖析生命周期
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/12/Android 进阶之 Okhttp 与服务器通信/" rel="prev" title="Android 进阶之 OKHttp 与服务器通信">
+                Android 进阶之 OKHttp 与服务器通信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-深入剖析四种启动模式"><span class="nav-number">1.</span> <span class="nav-text">Android 深入剖析四种启动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、四大启动模式"><span class="nav-number">1.1.</span> <span class="nav-text">一、四大启动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、standard"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、standard</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、singleTop"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、singleTop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、singleTask"><span class="nav-number">1.1.3.</span> <span class="nav-text">3、singleTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、singleInstance"><span class="nav-number">1.1.4.</span> <span class="nav-text">4、singleInstance</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、四大启动模式深入剖析"><span class="nav-number">1.2.</span> <span class="nav-text">二、四大启动模式深入剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Activity-的-LaunchMode"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、Activity 的 LaunchMode</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-启动模式"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">1.1  启动模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（1）standard-标准模式"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">（1）standard 标准模式 :</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（2）singleTop-栈顶复用模式"><span class="nav-number">1.2.1.1.2.</span> <span class="nav-text">（2）singleTop 栈顶复用模式 :</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）singleTask-栈内复用模式"><span class="nav-number">1.2.1.1.3.</span> <span class="nav-text">（3）singleTask 栈内复用模式 :</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（3）singleInstance-单实例模式"><span class="nav-number">1.2.1.1.4.</span> <span class="nav-text">（3）singleInstance 单实例模式 :</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-任务栈"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">1.2 任务栈</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-设置启动模式的两种方式"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">1.3 设置启动模式的两种方式</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/08/08/Android 深入剖析四种启动模式/';
+          this.page.identifier = '2018/08/08/Android 深入剖析四种启动模式/';
+          this.page.title = 'Android 深入剖析四种启动模式';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

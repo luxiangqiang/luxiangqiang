@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据库,MongDB," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="MongDB 的安装、基本增删改查的命令以及 mongoose 模块操作 MongoDB。">
+<meta name="keywords" content="数据库,MongDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端数据库之MongoDB【入门及Mongoose模块】">
+<meta property="og:url" content="http://yoursite.com/2019/09/08/前端数据库之MongoDB【入门】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="MongDB 的安装、基本增删改查的命令以及 mongoose 模块操作 MongoDB。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-22T14:11:12.348Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端数据库之MongoDB【入门及Mongoose模块】">
+<meta name="twitter:description" content="MongDB 的安装、基本增删改查的命令以及 mongoose 模块操作 MongoDB。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/09/08/前端数据库之MongoDB【入门】/"/>
+
+
+
+
+
+  <title>前端数据库之MongoDB【入门及Mongoose模块】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/08/前端数据库之MongoDB【入门】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">前端数据库之MongoDB【入门及Mongoose模块】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-08T16:15:02+08:00">
+                2019-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/MongDB/" itemprop="url" rel="index">
+                    <span itemprop="name">MongDB</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/09/08/前端数据库之MongoDB【入门】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/09/08/前端数据库之MongoDB【入门】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,546
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MongDB 的安装、基本增删改查的命令以及 mongoose 模块操作 MongoDB。</p>
+<a id="more"></a>
+<h2 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h2><ul>
+<li>MongoDB 是一种非关系型的数据库，也是一种 “NoSQL” 数据库。</li>
+<li>MongoDB是一个基于分布式文件存储的数据库。</li>
+<li>在关系型的数据库中有着 “表” 和 “行” 的概念，每个表都是一种数据结构。而 MongoDB 呢，没有表和行的概念。但是对应的是 “集合” 和 “文档”。</li>
+</ul>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>[TOC]</p>
+<h3 id="一、基本使用"><a href="#一、基本使用" class="headerlink" title="一、基本使用"></a>一、基本使用</h3><h4 id="1、特点"><a href="#1、特点" class="headerlink" title="1、特点"></a>1、特点</h4><ul>
+<li>使用 BSON 存储数据：BSON 是一种二进制的 JSON，相对于 JSON 在空间和性能上有一定的优势。</li>
+<li>支持相对丰富的查询操作：以键值对为中心，其他的 NoSQL 操作查询相对较差。</li>
+<li>支持索引：优化</li>
+<li>副本集：支持多个服务器运行一个数据库。</li>
+<li>分片：数据量大，分到不同的服务器，实现服务器的</li>
+<li>无模式：每个文档的数据结构都是不相同的，所以数据之间互不相关，这就是无模式</li>
+<li>部署简单方便：注意，涉及到安全问题，MongoDB 下载加载文件就能使用，但是需要配置验证用户使用，不然任何人都会访问到你的数据库。</li>
+</ul>
+<h4 id="2、创建-MongoDB"><a href="#2、创建-MongoDB" class="headerlink" title="2、创建 MongoDB"></a>2、创建 MongoDB</h4><p>使用之前必须创建 MongoDB 的存储目录（创建在根目录下，且不能低于 4 个 G）。<strong>每个数据库的启动都是 MongoDB 的一个实例。</strong></p>
+<h5 id="2-1-指定数据目录（启动mongoDB）"><a href="#2-1-指定数据目录（启动mongoDB）" class="headerlink" title="2.1 指定数据目录（启动mongoDB）"></a>2.1 指定数据目录（启动mongoDB）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=data/db --port=27017 // 指定目录和端口号</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-关闭-mongoDB"><a href="#2-2-关闭-mongoDB" class="headerlink" title="2.2 关闭 mongoDB"></a>2.2 关闭 mongoDB</h5><p>关闭后台 mongodb 服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongoDB --shutdown</span><br></pre></td></tr></table></figure>
+<h5 id="2-3-指定日志目录"><a href="#2-3-指定日志目录" class="headerlink" title="2.3 指定日志目录"></a>2.3 指定日志目录</h5><p>为了检查错误和系统的日志分开，便于查看。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=data/db --port=27017 --fork --log=/data/log/mongd.log</span><br></pre></td></tr></table></figure>
+<h4 id="3、MongoDB-的-shell-使用"><a href="#3、MongoDB-的-shell-使用" class="headerlink" title="3、MongoDB 的 shell 使用"></a>3、MongoDB 的 shell 使用</h4><p>mongodb 没有专门创建数据库的语句，当你真正的使用了一个数据库，并插入一条语句的时候，就创建了。</p>
+<h5 id="3-1-先指定数据库的目录，然后连接数据库。"><a href="#3-1-先指定数据库的目录，然后连接数据库。" class="headerlink" title="3.1 先指定数据库的目录，然后连接数据库。"></a>3.1 先指定数据库的目录，然后连接数据库。</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 启动数据库</span><br><span class="line">mongod --dbpath D:\data\db --port=27017</span><br><span class="line">// 连接数据库</span><br><span class="line">mongo</span><br></pre></td></tr></table></figure>
+<p>设置用户名和密码连接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h5 id="3-2-查看已经存在的数据库"><a href="#3-2-查看已经存在的数据库" class="headerlink" title="3.2 查看已经存在的数据库"></a>3.2 查看已经存在的数据库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show dbs</span><br></pre></td></tr></table></figure>
+<h5 id="3-3-显示当前数据库的对象或集合"><a href="#3-3-显示当前数据库的对象或集合" class="headerlink" title="3.3 显示当前数据库的对象或集合"></a>3.3 显示当前数据库的对象或集合</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db</span><br></pre></td></tr></table></figure>
+<h5 id="3-4-使用-use-连接到一个数据库"><a href="#3-4-使用-use-连接到一个数据库" class="headerlink" title="3.4 使用 use 连接到一个数据库"></a>3.4 使用 use 连接到一个数据库</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use admin</span><br></pre></td></tr></table></figure>
+<h5 id="4-4-插入数据"><a href="#4-4-插入数据" class="headerlink" title="4.4 插入数据"></a>4.4 插入数据</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.admin.insert(&#123;&quot;name&quot;:&quot;小鹿&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="5-5-查询"><a href="#5-5-查询" class="headerlink" title="5.5 查询"></a>5.5 查询</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.admin.find()// 集合查询</span><br><span class="line">db.admin.find().count() //返回集合的数量</span><br><span class="line">db.admin.find(“name”:&quot;小鹿&quot;)// 条件查询</span><br></pre></td></tr></table></figure>
+<h5 id="5-6-更新数据"><a href="#5-6-更新数据" class="headerlink" title="5.6 更新数据"></a>5.6 更新数据</h5><p><code>update</code> 三个参数：</p>
+<ul>
+<li>指定修改的数据</li>
+<li>要修改的值</li>
+<li><code>multi</code> 是否满足全部修改</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 默认更改一条数据</span><br><span class="line">db.admin.update(&#123;“name”:&quot;小鹿&quot;&#125;,&#123;$set&#123;&quot;name&quot;:&quot;小明&quot;&#125;&#125;);</span><br><span class="line">// 修改多行数据(满足条件的都被修改)</span><br><span class="line">db.admin.update(&#123;“name”:&quot;小鹿&quot;&#125;,&#123;$set&#123;&quot;name&quot;:&quot;小明&quot;&#125;&#125;,&#123;multi:true&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>save</code> 方法照样可以修改，但是必须传入ID(<strong>注意：</strong>修改后的存在的字段只有修改的字段)</p>
+<ul>
+<li>Id 和 修改的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.admin.save(&#123;&quot;_id&quot;:ObjectId(&quot;55sdfdfasd34dsf44tgb&quot;),&quot;age&quot;:70&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="5-7-删除语句"><a href="#5-7-删除语句" class="headerlink" title="5.7 删除语句"></a>5.7 删除语句</h5><p><code>remove</code> 参数：</p>
+<ul>
+<li>删除条件</li>
+<li>是否指定一行删除</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db.admin.remove(&#123;&#125;) // 删除集合中所有的数据</span><br><span class="line">db.admin.remove(&#123;“name”:&quot;小明&quot;&#125;) // 删除所有满足条件的数据</span><br><span class="line">db.admin.remove(&#123;“name”:&quot;小明&quot;&#125;,true) // 删除满足条件的第一条数据</span><br></pre></td></tr></table></figure>
+<h5 id="5-8-删除集合"><a href="#5-8-删除集合" class="headerlink" title="5.8 删除集合"></a>5.8 删除集合</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db.admin.drop()</span><br></pre></td></tr></table></figure>
+<h4 id="4、使用-Mongooes-模块操作-MongoDB"><a href="#4、使用-Mongooes-模块操作-MongoDB" class="headerlink" title="4、使用 Mongooes 模块操作 MongoDB"></a>4、使用 Mongooes 模块操作 MongoDB</h4><p>有些开发中使用到的文档结构不是无模式的，所有使用第三方模块 mongooes ，既可以用到强关系，也可以使用到强类型。</p>
+<h5 id="4-1-什么是-Mongooes-模块？"><a href="#4-1-什么是-Mongooes-模块？" class="headerlink" title="4.1 什么是 Mongooes 模块？"></a>4.1 什么是 Mongooes 模块？</h5><p>将 <code>Node.js</code> 对象与 <code>MongoDB</code> 的文档对应起来的模块。</p>
+<h5 id="4-2-安装-Mongooes-模块"><a href="#4-2-安装-Mongooes-模块" class="headerlink" title="4.2 安装 Mongooes 模块"></a>4.2 安装 Mongooes 模块</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install mongoose --save</span><br></pre></td></tr></table></figure>
+<h5 id="4-3-在-Node-中导入-mongooes"><a href="#4-3-在-Node-中导入-mongooes" class="headerlink" title="4.3 在 Node 中导入 mongooes"></a>4.3 在 Node 中导入 mongooes</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongooes = <span class="built_in">require</span>(<span class="string">'mongooes'</span>) <span class="comment">//导入模块</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> uri = <span class="string">'mongodb://username:password@hostname:port/databasename'</span></span><br><span class="line">uri = <span class="string">"mongooes://localhost/part1"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 连接 mongooes</span></span><br><span class="line">mongooes.connect(uri)</span><br></pre></td></tr></table></figure>
+<h5 id="4-4-Model-与-Schema"><a href="#4-4-Model-与-Schema" class="headerlink" title="4.4 Model 与 Schema"></a>4.4 Model 与 Schema</h5><ul>
+<li><code>Model：</code> 主要建立 <code>JS</code> 对象与 <code>Mongooes</code> 对应的文档关系。通过 <code>Model</code> 可以对文档进行增、删、改、查。</li>
+<li><code>Schema：</code> 主要对 Model 中<strong>数据类型的定义</strong>，使其在 MongoDB 无模式中实现模式化的存储。</li>
+</ul>
+<h5 id="4-5-创建-Schema-和-Model"><a href="#4-5-创建-Schema-和-Model" class="headerlink" title="4.5 创建 Schema 和 Model"></a>4.5 创建 Schema 和 Model</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义 Model 的数据类型</span></span><br><span class="line"><span class="keyword">var</span> BookSchema = <span class="keyword">new</span> mongooes.Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span>,</span><br><span class="line">    author: <span class="built_in">String</span>,</span><br><span class="line">    publishTime: <span class="built_in">Date</span></span><br><span class="line">&#125;)</span><br><span class="line">mongooes.model(<span class="string">'Book'</span>, BookSchema)</span><br></pre></td></tr></table></figure>
+<h5 id="4-6-插入数据（insert-js）"><a href="#4-6-插入数据（insert-js）" class="headerlink" title="4.6  插入数据（insert.js）"></a>4.6  插入数据（insert.js）</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">// 引入模块(执行)</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./model.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成 Model</span></span><br><span class="line"><span class="keyword">var</span> Book = mongoose.model(<span class="string">'Book'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 Model 的实例</span></span><br><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> Book(&#123;</span><br><span class="line">    name: <span class="string">'JavaScript 高级程序设计'</span>,</span><br><span class="line">    author: <span class="string">'阮一峰'</span>,</span><br><span class="line">    publishTime: <span class="keyword">new</span> <span class="built_in">Date</span>()</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">book.author = <span class="string">'小鹿'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 保存进数据库</span></span><br><span class="line">book.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'save status:'</span>, err ? <span class="string">'failed'</span> : <span class="string">'success'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h5 id="4-7-查找数据"><a href="#4-7-查找数据" class="headerlink" title="4.7 查找数据"></a>4.7 查找数据</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="comment">// 引入模块(执行)</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./model.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Book = mongoose.model(<span class="string">'Book'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回满足数据的所有数据</span></span><br><span class="line">Book.find(&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err, docs</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'err'</span>,err)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(docs)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./model.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Book = mongoose.model(<span class="string">'Book'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回满足条件的第一条数据</span></span><br><span class="line">Book.findOne(&#123;<span class="attr">author</span>:<span class="string">'小鹿'</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, docs</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'err'</span>,err)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(docs)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./model.js'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Book = mongoose.model(<span class="string">'Book'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 满足条件查询</span></span><br><span class="line"><span class="comment">// or: 满足其中一个条件就会查出</span></span><br><span class="line"><span class="comment">// and: 同时满足两个条件就会查出</span></span><br><span class="line"><span class="keyword">var</span> cond = &#123;</span><br><span class="line">    $or: [</span><br><span class="line">        &#123;<span class="attr">author</span>: <span class="string">'Jame'</span>&#125;,</span><br><span class="line">        &#123;<span class="attr">author</span>: <span class="string">'Jim'</span>&#125;,</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回满足数据的所有数据</span></span><br><span class="line">Book.find(cond,<span class="function"><span class="keyword">function</span>(<span class="params">err, docs</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'err'</span>,err)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(docs)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="4-8-删除数据"><a href="#4-8-删除数据" class="headerlink" title="4.8 删除数据"></a>4.8 删除数据</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var mongoose = require(&apos;mongoose&apos;)</span><br><span class="line"></span><br><span class="line">require(&apos;./model.js&apos;)</span><br><span class="line"></span><br><span class="line">var Book = mongoose.model(&apos;Book&apos;);</span><br><span class="line"></span><br><span class="line">// 返回满足条件的第一条数据</span><br><span class="line">Book.findOne(&#123;author:&apos;小鹿&apos;&#125;, function(err, docs)&#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        console.log(&apos;err&apos;,err)</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    if(docs)&#123;</span><br><span class="line">        docs.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="5、在-Express-项目中使用-Mongoose"><a href="#5、在-Express-项目中使用-Mongoose" class="headerlink" title="5、在 Express 项目中使用 Mongoose"></a>5、在 Express 项目中使用 Mongoose</h4><h5 id="5-1-安装-Express-和-Express-generator"><a href="#5-1-安装-Express-和-Express-generator" class="headerlink" title="5.1 安装 Express 和 Express-generator"></a>5.1 安装 Express 和 Express-generator</h5><blockquote>
+<p>区别：express 只是一个框架，是在被引入项目中使用的，而非工具。而 express-generator 则是一个工具，此工具的作用是生成express项目。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install express-generator -g</span><br></pre></td></tr></table></figure>
+<h5 id="5-2-新建配置文件（config-config-js）"><a href="#5-2-新建配置文件（config-config-js）" class="headerlink" title="5.2 新建配置文件（config/config.js）"></a>5.2 新建配置文件（config/config.js）</h5><p>配置连接数据库等相关信息并以模块的形式导出。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 存放与配置文件相关的文件 —— 连接数据等相关信息</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    mongodb: <span class="string">"mongdb://localhost/part1"</span> <span class="comment">// 连接数据库的 uri</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-3-新建-mongoose-配置文件（config-mongoose-js）"><a href="#5-3-新建-mongoose-配置文件（config-mongoose-js）" class="headerlink" title="5.3 新建 mongoose 配置文件（config/mongoose.js）"></a>5.3 新建 mongoose 配置文件（config/mongoose.js）</h5><p>用来连接数据库，并以模块形式返回连接数据库的实例。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置 mongoose 配置文件 —— 连接数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'./config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 连接数据逯</span></span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connect(config.mongodb) </span><br><span class="line">    <span class="comment">// 返回实例</span></span><br><span class="line">    <span class="keyword">return</span> db; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-4-创建-Moudel-与-Schema"><a href="#5-4-创建-Moudel-与-Schema" class="headerlink" title="5.4 创建 Moudel 与 Schema"></a>5.4 创建 Moudel 与 Schema</h5><p>新建文件夹moudels，新建文件 user.server.moudel.js 命名为了能够与客户端框架代码区分开。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义 Schema 数据类型结构</span></span><br><span class="line"><span class="keyword">var</span> UserSchema = mongoose.Schema(&#123;</span><br><span class="line">    uid: <span class="built_in">Number</span>,</span><br><span class="line">    usernmame:<span class="built_in">String</span>,</span><br><span class="line">    createTime: <span class="built_in">Date</span>,</span><br><span class="line">    loastLogin: <span class="built_in">Date</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 生成模型 Model</span></span><br><span class="line">mongoose.model(<span class="string">'User'</span>,UserSchema)</span><br></pre></td></tr></table></figure>
+<h5 id="5-5-将-model-引入到配置文件中"><a href="#5-5-将-model-引入到配置文件中" class="headerlink" title="5.5 将 model 引入到配置文件中"></a>5.5 将 model 引入到配置文件中</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 配置 mongoose 配置文件 —— 连接数据库</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">'./config.js'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">// 连接数据库</span></span><br><span class="line">    <span class="keyword">var</span> db = mongoose.connect(config.mongodb) </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 加载 Model</span></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'../moudels/user.server.moudel.js'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回实例</span></span><br><span class="line">    <span class="keyword">return</span> db; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5-6-在-app-js-中配置启动时自动加载"><a href="#5-6-在-app-js-中配置启动时自动加载" class="headerlink" title="5.6 在 app.js 中配置启动时自动加载"></a>5.6 在 app.js 中配置启动时自动加载</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 加载 mongose 配置文件</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'./config/mongoose.js'</span>)</span><br><span class="line"><span class="comment">// 执行配置文件</span></span><br><span class="line">db = mongoose();</span><br></pre></td></tr></table></figure>
+<h5 id="5-7-安装-express-依赖的模块"><a href="#5-7-安装-express-依赖的模块" class="headerlink" title="5.7 安装 express 依赖的模块"></a>5.7 安装 express 依赖的模块</h5><p>不要忘了单独安装 mongoose 模块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<h5 id="5-8-启动服务器"><a href="#5-8-启动服务器" class="headerlink" title="5.8 启动服务器"></a>5.8 启动服务器</h5><p>启动服务器前要启动数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node ./bin/www</span><br></pre></td></tr></table></figure>
+<h5 id="5-9-访问服务器"><a href="#5-9-访问服务器" class="headerlink" title="5.9 访问服务器"></a>5.9 访问服务器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 打开浏览器访问 3000 端口</span><br><span class="line">locahost:3000</span><br></pre></td></tr></table></figure>
+<h5 id="5-10-访问数据库"><a href="#5-10-访问数据库" class="headerlink" title="5.10 访问数据库"></a>5.10 访问数据库</h5><p>在 router 的 users 中定义一个路由地址，并插入数据，查询数据。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 mongoose</span></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入 Model</span></span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 写上访问路由(请求对象、响应对象、继续执行)</span></span><br><span class="line">router.get(<span class="string">'/test'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 存储数据</span></span><br><span class="line">  <span class="keyword">var</span> user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">    uid: <span class="number">1</span>,</span><br><span class="line">    username: <span class="string">'Sid'</span></span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 执行存储</span></span><br><span class="line">  user.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">      res.end(<span class="string">'Error'</span>)</span><br><span class="line">      <span class="keyword">return</span> next();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    User.find(&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err, docs</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        res.end(<span class="string">'Error'</span>)</span><br><span class="line">        <span class="keyword">return</span> next();</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      res.json(docs)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="5-11-启动服务器"><a href="#5-11-启动服务器" class="headerlink" title="5.11 启动服务器"></a>5.11 启动服务器</h5><p>访问路由，看路由挂载到哪个路径下进行访问。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">访问 http://localhost:3000/users/test</span><br></pre></td></tr></table></figure>
+<h3 id="二、Mongoose-使用进阶"><a href="#二、Mongoose-使用进阶" class="headerlink" title="二、Mongoose 使用进阶"></a>二、Mongoose 使用进阶</h3><h4 id="1、模式的扩展"><a href="#1、模式的扩展" class="headerlink" title="1、模式的扩展"></a>1、模式的扩展</h4><h5 id="1-1-默认值"><a href="#1-1-默认值" class="headerlink" title="1.1 默认值"></a>1.1 默认值</h5><p>当基于的模型初始化的时候，不给它的值，默认的值。</p>
+<ul>
+<li>固定值</li>
+<li>即时生成</li>
+</ul>
+<h5 id="1-2-固定值"><a href="#1-2-固定值" class="headerlink" title="1.2 固定值"></a>1.2 固定值</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"><span class="comment">// 连接数据库</span></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>)</span><br><span class="line"><span class="comment">// 定义数据类型</span></span><br><span class="line"><span class="keyword">var</span> UserSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    nickname: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        <span class="keyword">default</span>: <span class="string">'new user'</span>   <span class="comment">//默认盒子</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 导入模型</span></span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>,UserSchema)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建实例</span></span><br><span class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User();</span><br><span class="line"><span class="comment">// 打印</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'user:'</span>, user)</span><br></pre></td></tr></table></figure>
+<h5 id="1-3-即时生成"><a href="#1-3-即时生成" class="headerlink" title="1.3 即时生成"></a>1.3 即时生成</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time: &#123;</span><br><span class="line">    type: <span class="built_in">Date</span>,</span><br><span class="line">    <span class="keyword">default</span>: <span class="built_in">Date</span>.now</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1-4-模式修饰符"><a href="#1-4-模式修饰符" class="headerlink" title="1.4 模式修饰符"></a>1.4 模式修饰符</h5><blockquote>
+<p>数据库存储数据或者取出数据的时候进行数据设置设置。</p>
+</blockquote>
+<ul>
+<li>预定义的模式修饰符：大写、小写</li>
+<li>自定义 setter 修饰符</li>
+<li>自定义 getter 修饰符</li>
+</ul>
+<h5 id="1-5-预定义修饰符"><a href="#1-5-预定义修饰符" class="headerlink" title="1.5 预定义修饰符"></a>1.5 预定义修饰符</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>, &#123;</span><br><span class="line">    nickName: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        trim: <span class="literal">true</span>   <span class="comment">// 去掉空格</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;) </span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">    nickName: <span class="string">"  Sid  "</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'User'</span>, user)</span><br></pre></td></tr></table></figure>
+<h5 id="1-6-setter"><a href="#1-6-setter" class="headerlink" title="1.6 setter"></a>1.6 setter</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">blog: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">        set: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;   <span class="comment">// 判断输入的值，然后回调函数进行处理</span></span><br><span class="line">            <span class="keyword">if</span>(!url) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(url.indexOf(<span class="string">'http://'</span>) !== <span class="number">0</span> &amp;&amp; url.indexOf(<span class="string">'https://'</span>) !== <span class="number">0</span>)&#123;</span><br><span class="line">                url = <span class="string">'http://'</span> + url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="1-7-getter"><a href="#1-7-getter" class="headerlink" title="1.7 getter"></a>1.7 getter</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>)</span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>, &#123;</span><br><span class="line">    blog: &#123;</span><br><span class="line">        type: <span class="built_in">String</span>,</span><br><span class="line">        get: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(!url) <span class="keyword">return</span> url;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(url.indexOf(<span class="string">'http://'</span>) !== <span class="number">0</span> &amp;&amp; url.indexOf(<span class="string">'https://'</span>) !== <span class="number">0</span>)&#123;</span><br><span class="line">                url = <span class="string">'http://'</span> + url;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> url;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">    blog: <span class="string">'xiaolu.com'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">user.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'block '</span> + user.blog)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="1-8-虚拟属性"><a href="#1-8-虚拟属性" class="headerlink" title="1.8 虚拟属性"></a>1.8 虚拟属性</h5><p>设置一个不真实存在的值，用来存储计算属性的结果。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> PersonSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    fristName: <span class="built_in">String</span>,</span><br><span class="line">    lastName: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 设置虚拟属性</span></span><br><span class="line">PersonSchema.virtual(<span class="string">'fullName'</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.fristName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, PersonSchema)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person(&#123;</span><br><span class="line">    fristName: <span class="string">'Sid'</span>,</span><br><span class="line">    lastName: <span class="string">'Chen'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'user fullNmae'</span>, person.fullName)</span><br></pre></td></tr></table></figure>
+<p>注意：模式实例转 Json 一般是不包含虚拟属性的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="string">'JSON: '</span> + <span class="built_in">JSON</span>.stringify(person))</span><br></pre></td></tr></table></figure>
+<p>改一下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 设置当转 JSON 时，虚拟属性也转换</span><br><span class="line">PersonSchema.set(&apos;toJSON&apos;, &#123;getters: true, virtual: true&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="1-9-索引"><a href="#1-9-索引" class="headerlink" title="1.9 索引"></a>1.9 索引</h5><ul>
+<li>唯一索引：是否唯一</li>
+<li>辅助索引：增加查询速度</li>
+</ul>
+<h4 id="2、模型的方法"><a href="#2、模型的方法" class="headerlink" title="2、模型的方法"></a>2、模型的方法</h4><ul>
+<li>静态方法</li>
+<li>实例方法</li>
+</ul>
+<h5 id="2-1-静态方法"><a href="#2-1-静态方法" class="headerlink" title="2.1 静态方法"></a>2.1 静态方法</h5><p>静态方法一般用于数据的查询。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mongoose  = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line"></span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>, &#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Schema 数据结构</span></span><br><span class="line"><span class="keyword">var</span> BookSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span>,</span><br><span class="line">    isbn: <span class="built_in">Number</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 静态方法一般做查询辅助</span></span><br><span class="line">BookSchema.statics.findByISBN = <span class="function"><span class="keyword">function</span>(<span class="params">isbn, cb</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.findOne(&#123;<span class="attr">isbn</span>: isbn&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>)</span>&#123;</span><br><span class="line">        cb(err, doc)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建模型</span></span><br><span class="line"><span class="keyword">var</span> Book = mongoose.model(<span class="string">'Book'</span>, BookSchema)</span><br><span class="line"><span class="comment">// 生成实例 —— 存储数据 </span></span><br><span class="line"><span class="keyword">var</span> book = <span class="keyword">new</span> Book(&#123;</span><br><span class="line">    name: <span class="string">'MEAN Web Development'</span>,</span><br><span class="line">    isbn: <span class="number">9787100</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">book.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">'save Book failed'</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 调用静态方法</span></span><br><span class="line">    Book.findByISBN(<span class="number">9787100</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'findByISBN err: doc'</span>, err, doc)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="2-2-实例方法"><a href="#2-2-实例方法" class="headerlink" title="2.2 实例方法"></a>2.2 实例方法</h5><p>查询是异步的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实例方法</span></span><br><span class="line">BookSchema.methods.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Book Information'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'\t Title:'</span>, <span class="keyword">this</span>.name);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'\t ISBN:'</span>, <span class="keyword">this</span>.isbn);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="comment">// 调用实例方法</span></span><br><span class="line">book.print()</span><br></pre></td></tr></table></figure>
+<h4 id="3、数据校验"><a href="#3、数据校验" class="headerlink" title="3、数据校验"></a>3、数据校验</h4><p>对将存储的数据进行校验，如果符号设定的格式才会存储，否则报错。</p>
+<h5 id="3-1-验证必须字段"><a href="#3-1-验证必须字段" class="headerlink" title="3.1 验证必须字段"></a>3.1 验证必须字段</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据校验</span></span><br><span class="line"><span class="keyword">var</span> OrderSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    count: &#123;</span><br><span class="line">        type:<span class="built_in">Number</span>,</span><br><span class="line">        required: <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="3-2-验证最大值和最小值"><a href="#3-2-验证最大值和最小值" class="headerlink" title="3.2 验证最大值和最小值"></a>3.2 验证最大值和最小值</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 数据校验</span></span><br><span class="line"><span class="keyword">var</span> OrderSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    count: &#123;</span><br><span class="line">        type:<span class="built_in">Number</span>,</span><br><span class="line">        required: <span class="literal">true</span>,</span><br><span class="line">        max: <span class="number">1000</span>,</span><br><span class="line">        min:<span class="number">10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="3-3-验证是否是枚举类型的值"><a href="#3-3-验证是否是枚举类型的值" class="headerlink" title="3.3 验证是否是枚举类型的值"></a>3.3 验证是否是枚举类型的值</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">status: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    enum: [<span class="string">'create'</span>, <span class="string">'success'</span>, <span class="string">'failed'</span>]</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h5 id="3-4-验证正则匹配"><a href="#3-4-验证正则匹配" class="headerlink" title="3.4 验证正则匹配"></a>3.4 验证正则匹配</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">desc: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    match: <span class="regexp">/book/g</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="3-5-自定义验证器"><a href="#3-5-自定义验证器" class="headerlink" title="3.5 自定义验证器"></a>3.5 自定义验证器</h5><p>加一个 <code>validate</code> 属性。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">desc: &#123;</span><br><span class="line">    type: <span class="built_in">String</span>,</span><br><span class="line">    match: <span class="regexp">/book/g</span>,</span><br><span class="line">    validate: <span class="function"><span class="keyword">function</span>(<span class="params">desc</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> desc.length &lt; <span class="number">10</span>;</span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4、中间件"><a href="#4、中间件" class="headerlink" title="4、中间件"></a>4、中间件</h4><p>在执行某些特定的代码之前要执行的事情。</p>
+<h5 id="4-1-串行操作"><a href="#4-1-串行操作" class="headerlink" title="4.1 串行操作"></a>4.1 串行操作</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 串行的操作</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>,&#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="keyword">var</span> ResellerSchema = <span class="keyword">new</span> mongoose.Schema(&#123;</span><br><span class="line">    address: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后置处理中间件(在保存之后处理)</span></span><br><span class="line">ResellerSchema.post(<span class="string">'save'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'保存之后调用的中间件！'</span>)</span><br><span class="line">    next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Reseller = <span class="keyword">new</span> mongoose.model(<span class="string">'Reseller'</span>, ResellerSchema)</span><br><span class="line"><span class="keyword">var</span> reseller = <span class="keyword">new</span> Reseller();</span><br><span class="line">reseller.address = <span class="string">'人们路'</span></span><br><span class="line">reseller.save()</span><br></pre></td></tr></table></figure>
+<h5 id="4-2-并行操作"><a href="#4-2-并行操作" class="headerlink" title="4.2 并行操作"></a>4.2 并行操作</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 并行操作</span></span><br><span class="line"><span class="comment">// 参数一：会函数执行的回调函数</span></span><br><span class="line"><span class="comment">// 参数二: done: 是另外一个需要并行任务的回调函数</span></span><br><span class="line">ResellerSchema.pre(<span class="string">'save'</span>, <span class="literal">true</span>, <span class="function"><span class="keyword">function</span>(<span class="params">next, done</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'并行中间件已经调用！'</span>);</span><br><span class="line">    next();</span><br><span class="line">    done();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h5 id="4-3-实际用途"><a href="#4-3-实际用途" class="headerlink" title="4.3 实际用途"></a>4.3 实际用途</h5><ul>
+<li>保存文档：处理用户最后保存的时间。最后保存预处理中间件，修改字段就是保存的时间。</li>
+<li>删除文档：删除处理中间件，写一个删除日志进行处理。</li>
+</ul>
+<h4 id="5、DBRef"><a href="#5、DBRef" class="headerlink" title="5、DBRef"></a>5、DBRef</h4><p>用来实现不同“集合”之间的交叉引用。（联表查询）</p>
+<ul>
+<li>DBRef 定义</li>
+<li>populate()</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 联表查询</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>)</span><br><span class="line">mongoose.connect(<span class="string">'mongodb://localhost/part2'</span>,&#123; <span class="attr">useNewUrlParser</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="keyword">var</span> User = mongoose.model(<span class="string">'User'</span>, &#123;</span><br><span class="line">    username: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> News = mongoose.model(<span class="string">'News'</span>, &#123;</span><br><span class="line">    title: <span class="built_in">String</span>,</span><br><span class="line">    author: &#123;</span><br><span class="line">        type: mongoose.Schema.ObjectId,</span><br><span class="line">        ref: <span class="string">'User'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> user = <span class="keyword">new</span> User(&#123;</span><br><span class="line">    username: <span class="string">'Sid'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> news = <span class="keyword">new</span> News(&#123;</span><br><span class="line">    title: <span class="string">'今日新闻'</span>,</span><br><span class="line">    author: user</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 先保存用户</span></span><br><span class="line">user.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">'save user failed:'</span>, err)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    news.save(<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(err)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">'save news failes'</span>, err)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 查询</span></span><br><span class="line">        News.findOne().populate(<span class="string">'author'</span>).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, doc</span>)</span>&#123;</span><br><span class="line">           <span class="keyword">return</span> <span class="built_in">console</span>.log(<span class="string">'查询结构：'</span>, err, doc)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+            <a href="/tags/MongDB/" rel="tag"># MongDB</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/27/计算机网络原理之【OSITCPIP 七层、四层、五层协议】/" rel="next" title="计算机网络原理之【OSI/TCP/IP七层、四层、五层分层协议】">
+                <i class="fa fa-chevron-left"></i> 计算机网络原理之【OSI/TCP/IP七层、四层、五层分层协议】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/10/08/前端 Vue 之内部运行机制【全局概览】/" rel="prev" title="前端 Vue 之内部运行机制【全局概览】">
+                前端 Vue 之内部运行机制【全局概览】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MongoDB"><span class="nav-number">1.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录"><span class="nav-number">2.</span> <span class="nav-text">目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、基本使用"><span class="nav-number">2.1.</span> <span class="nav-text">一、基本使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、特点"><span class="nav-number">2.1.1.</span> <span class="nav-text">1、特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、创建-MongoDB"><span class="nav-number">2.1.2.</span> <span class="nav-text">2、创建 MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-指定数据目录（启动mongoDB）"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">2.1 指定数据目录（启动mongoDB）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-关闭-mongoDB"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">2.2 关闭 mongoDB</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-指定日志目录"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">2.3 指定日志目录</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、MongoDB-的-shell-使用"><span class="nav-number">2.1.3.</span> <span class="nav-text">3、MongoDB 的 shell 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-先指定数据库的目录，然后连接数据库。"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">3.1 先指定数据库的目录，然后连接数据库。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-查看已经存在的数据库"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">3.2 查看已经存在的数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-显示当前数据库的对象或集合"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">3.3 显示当前数据库的对象或集合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-使用-use-连接到一个数据库"><span class="nav-number">2.1.3.4.</span> <span class="nav-text">3.4 使用 use 连接到一个数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-插入数据"><span class="nav-number">2.1.3.5.</span> <span class="nav-text">4.4 插入数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-5-查询"><span class="nav-number">2.1.3.6.</span> <span class="nav-text">5.5 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-更新数据"><span class="nav-number">2.1.3.7.</span> <span class="nav-text">5.6 更新数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-删除语句"><span class="nav-number">2.1.3.8.</span> <span class="nav-text">5.7 删除语句</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-8-删除集合"><span class="nav-number">2.1.3.9.</span> <span class="nav-text">5.8 删除集合</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、使用-Mongooes-模块操作-MongoDB"><span class="nav-number">2.1.4.</span> <span class="nav-text">4、使用 Mongooes 模块操作 MongoDB</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-什么是-Mongooes-模块？"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">4.1 什么是 Mongooes 模块？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-安装-Mongooes-模块"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">4.2 安装 Mongooes 模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-在-Node-中导入-mongooes"><span class="nav-number">2.1.4.3.</span> <span class="nav-text">4.3 在 Node 中导入 mongooes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-4-Model-与-Schema"><span class="nav-number">2.1.4.4.</span> <span class="nav-text">4.4 Model 与 Schema</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-5-创建-Schema-和-Model"><span class="nav-number">2.1.4.5.</span> <span class="nav-text">4.5 创建 Schema 和 Model</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-6-插入数据（insert-js）"><span class="nav-number">2.1.4.6.</span> <span class="nav-text">4.6  插入数据（insert.js）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-7-查找数据"><span class="nav-number">2.1.4.7.</span> <span class="nav-text">4.7 查找数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-8-删除数据"><span class="nav-number">2.1.4.8.</span> <span class="nav-text">4.8 删除数据</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、在-Express-项目中使用-Mongoose"><span class="nav-number">2.1.5.</span> <span class="nav-text">5、在 Express 项目中使用 Mongoose</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-1-安装-Express-和-Express-generator"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">5.1 安装 Express 和 Express-generator</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-2-新建配置文件（config-config-js）"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">5.2 新建配置文件（config/config.js）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-新建-mongoose-配置文件（config-mongoose-js）"><span class="nav-number">2.1.5.3.</span> <span class="nav-text">5.3 新建 mongoose 配置文件（config/mongoose.js）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-4-创建-Moudel-与-Schema"><span class="nav-number">2.1.5.4.</span> <span class="nav-text">5.4 创建 Moudel 与 Schema</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-5-将-model-引入到配置文件中"><span class="nav-number">2.1.5.5.</span> <span class="nav-text">5.5 将 model 引入到配置文件中</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-6-在-app-js-中配置启动时自动加载"><span class="nav-number">2.1.5.6.</span> <span class="nav-text">5.6 在 app.js 中配置启动时自动加载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-7-安装-express-依赖的模块"><span class="nav-number">2.1.5.7.</span> <span class="nav-text">5.7 安装 express 依赖的模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-8-启动服务器"><span class="nav-number">2.1.5.8.</span> <span class="nav-text">5.8 启动服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-9-访问服务器"><span class="nav-number">2.1.5.9.</span> <span class="nav-text">5.9 访问服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-10-访问数据库"><span class="nav-number">2.1.5.10.</span> <span class="nav-text">5.10 访问数据库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-11-启动服务器"><span class="nav-number">2.1.5.11.</span> <span class="nav-text">5.11 启动服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、Mongoose-使用进阶"><span class="nav-number">2.2.</span> <span class="nav-text">二、Mongoose 使用进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、模式的扩展"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、模式的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-默认值"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">1.1 默认值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-固定值"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">1.2 固定值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-即时生成"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">1.3 即时生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-4-模式修饰符"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">1.4 模式修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-5-预定义修饰符"><span class="nav-number">2.2.1.5.</span> <span class="nav-text">1.5 预定义修饰符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-6-setter"><span class="nav-number">2.2.1.6.</span> <span class="nav-text">1.6 setter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-7-getter"><span class="nav-number">2.2.1.7.</span> <span class="nav-text">1.7 getter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-8-虚拟属性"><span class="nav-number">2.2.1.8.</span> <span class="nav-text">1.8 虚拟属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-9-索引"><span class="nav-number">2.2.1.9.</span> <span class="nav-text">1.9 索引</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、模型的方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、模型的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-静态方法"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">2.1 静态方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-实例方法"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">2.2 实例方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、数据校验"><span class="nav-number">2.2.3.</span> <span class="nav-text">3、数据校验</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-验证必须字段"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">3.1 验证必须字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-验证最大值和最小值"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">3.2 验证最大值和最小值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-验证是否是枚举类型的值"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">3.3 验证是否是枚举类型的值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-验证正则匹配"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">3.4 验证正则匹配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-自定义验证器"><span class="nav-number">2.2.3.5.</span> <span class="nav-text">3.5 自定义验证器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、中间件"><span class="nav-number">2.2.4.</span> <span class="nav-text">4、中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-1-串行操作"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">4.1 串行操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-并行操作"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">4.2 并行操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-3-实际用途"><span class="nav-number">2.2.4.3.</span> <span class="nav-text">4.3 实际用途</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、DBRef"><span class="nav-number">2.2.5.</span> <span class="nav-text">5、DBRef</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/09/08/前端数据库之MongoDB【入门】/';
+          this.page.identifier = '2019/09/08/前端数据库之MongoDB【入门】/';
+          this.page.title = '前端数据库之MongoDB【入门及Mongoose模块】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

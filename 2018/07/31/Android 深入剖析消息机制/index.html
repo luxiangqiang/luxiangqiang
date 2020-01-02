@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Handler," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="Android 的消息机制主要是指 Handler 的运行机制，对于大家来说Handler已经是轻车熟路了，可是真的掌握了Handler？本文主要通过几个问题围绕着Handler展开深入并拓展的了解。 小鹿带你全面深入了解 Android 消息机制。">
+<meta name="keywords" content="Android,Handler">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 深入剖析消息机制">
+<meta property="og:url" content="http://yoursite.com/2018/07/31/Android 深入剖析消息机制/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="Android 的消息机制主要是指 Handler 的运行机制，对于大家来说Handler已经是轻车熟路了，可是真的掌握了Handler？本文主要通过几个问题围绕着Handler展开深入并拓展的了解。 小鹿带你全面深入了解 Android 消息机制。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/消息机制.jpg">
+<meta property="og:image" content="http://yoursite.com/images/siweidaotu.jpg">
+<meta property="og:image" content="http://yoursite.com/images/handler.png">
+<meta property="og:image" content="https://img-blog.csdn.net/20180805112505780?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTAzMDQy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
+<meta property="og:updated_time" content="2018-08-26T00:18:46.515Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 深入剖析消息机制">
+<meta name="twitter:description" content="Android 的消息机制主要是指 Handler 的运行机制，对于大家来说Handler已经是轻车熟路了，可是真的掌握了Handler？本文主要通过几个问题围绕着Handler展开深入并拓展的了解。 小鹿带你全面深入了解 Android 消息机制。">
+<meta name="twitter:image" content="http://yoursite.com/images/消息机制.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/31/Android 深入剖析消息机制/"/>
+
+
+
+
+
+  <title>Android 深入剖析消息机制 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/31/Android 深入剖析消息机制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android 深入剖析消息机制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-31T20:38:10+08:00">
+                2018-07-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android-高级进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">Android 高级进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/07/31/Android 深入剖析消息机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/07/31/Android 深入剖析消息机制/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,476
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/images/消息机制.jpg" alt="siweidaotu"></p>
+<p>Android 的消息机制主要是指 Handler 的运行机制，对于大家来说Handler已经是轻车熟路了，可是真的掌握了Handler？本文主要通过几个问题围绕着Handler展开深入并拓展的了解。 小鹿带你全面深入了解 Android 消息机制。</p>
+<a id="more"></a>
+<h1 id="Android-的消息机制深入剖析"><a href="#Android-的消息机制深入剖析" class="headerlink" title="Android 的消息机制深入剖析"></a>Android 的消息机制深入剖析</h1><p>Android 的消息机制主要是指 Handlerr 的运行需要底层的 MessageQueue 和 Looper 的支撑。</p>
+<p><strong>（1）MessageQueue 的中文翻译是消息队列。</strong>以队列的形式对外提供插入和删除工作。虽然叫做消息队列，但是内部存储结构并不是真正的队列，而是以单链表的数据结构来存储消息列表。</p>
+<p><strong>（2）Looper 的中文翻译为循环，我们叫它消息循环。</strong>由于 MessageQueue 只是一个存储单元，不会去处理消息。而 Looper 确弥补了这个功能，Looper 会以无限无限循环的形式去查找是否有新的消息，有的话就去处理消息，否则就一直等待。</p>
+<h3 id="学习思维导图："><a href="#学习思维导图：" class="headerlink" title="学习思维导图："></a>学习思维导图：</h3><p><img src="/images/siweidaotu.jpg" alt="siweidaotu"></p>
+<h2 id="一、Android-消息机制概述"><a href="#一、Android-消息机制概述" class="headerlink" title="一、Android 消息机制概述"></a>一、Android 消息机制概述</h2><blockquote>
+<p>Android 消息机制主要是指 Handler 的运行机制以及 Handler 所附带的 MessageQueue 和 Looper<br>的工作过程。Handler 的主要作用就是将一个任务切换到某个指定的线程中去执行。</p>
+</blockquote>
+<h3 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h3><p><strong>（1）、思考：</strong>为什么 Android 要提供这个功能呢？<br><strong>答：</strong>因为 Android 规定访问 UI 线程只能在主线程中进行的，如果在子线程中访问 UI ，那么程序就会抛出异常。</p>
+<p><strong>（2）、源码：</strong>经过查看看源码的 checkThread（）方法对更新 UI 是否在主线程中更新，进行抛出异常信息提示开发者（相信在开发中都遇到过这个种情况）。</p>
+<p><strong>（3)、过程：</strong>由于以上限制，这就要求开发者必须在主线程中更新 UI，但是 Android 又建议不要在主线程中进行过于耗时的工作，否则会产生应用程序无响应 ANR。考虑到这种情况，当我们在服务器拉去一些信息并显示到 UI 上时，拉去工作我们将在子线程中进行，拉取完毕之后不能再子线程中直接更新 UI ，没有 Handler ，那我们的确没有办法将访问 UI 的工作切换到主线程去执行。因此，系统之所以给我们提供 Handler，<strong>主要原因是为了解决在子线程中无法访问 UI 的矛盾。</strong></p>
+<p><strong>（4)、问题：</strong></p>
+<p><strong>① 为什么不能再子线程中更新 UI？</strong><br><strong>答 ： </strong>因为 Android 的 UI 控件不是线性安全的。如果在多线程中并发的访问可能会导致 UI 控件处于不可预期的状态。</p>
+<p><strong>② 为什么不对 UI 控件的访问加上锁机制呢？</strong><br><strong>答 ：</strong>首先，加上锁机制会让访问 UI 变的复杂，其次锁机制会降低 UI 的访问效率，因为锁机制会阻塞某些线程的执行。</p>
+<p>最简单最高效的就是采用单线程模型来处理 UI 操作，只需通过 Handlerr 切换一下 UI 访问的执行线程即可。</p>
+<h3 id="2、Handler-的工作原理"><a href="#2、Handler-的工作原理" class="headerlink" title="2、Handler 的工作原理"></a>2、Handler 的工作原理</h3><blockquote>
+<p><strong>Handler</strong> 创建时就会采用当前的 <strong>Looper</strong> 来构建内部的消息循环系统，如果当前没有 <strong>Looper</strong> ,那么就会报错。</p>
+</blockquote>
+<p><strong>怎么解决上述问题？两个方法：</strong></p>
+<p>① 为当前线程创建 Looper 即可。<br>② 在 Looper 的线程中创建 Handler 也可以。</p>
+<h4 id="工作原理："><a href="#工作原理：" class="headerlink" title="工作原理："></a><strong>工作原理：</strong></h4><p>（1）<strong>Handler 创建过程：</strong> <strong>Handler</strong> 被创建之后，内部的 <strong>MessageQueue</strong> 和 <strong>Looper</strong> 就与 <strong>Handler</strong> 一起工作协同工作了， 然后通过 <strong>Handler</strong>  的 <strong>post</strong> 方法将一个 <strong>Runnable</strong> 投递给 <strong>Handler</strong> 内部的 <strong>Looper</strong> 去处理；也可以通过 <strong>Handler</strong> 的 <strong>send</strong> 方法发送一个消息，也是通过 <strong>Looper</strong> 去处理的，其实 <strong>Post</strong> 方法最终也是通过 <strong>send</strong> 方法来完成的..</p>
+<p>（2）<strong>send 方法的工作过程：</strong>当 <strong>Handler</strong> 的 <strong>send</strong> 方法被调用时，它会调用 <strong>MessageQueue</strong> 的 <strong>enqueueMessage</strong> 方法将这个消息放到消息队列中，然后 <strong>Looper</strong> 发现新消息，就会处理这个消息，最终消息的 <strong>Runnable</strong> 或者 <strong>Handler</strong> 的 <strong>handlerMessage</strong> 方法就会被调用。</p>
+<p><img src="/images/handler.png" alt="handler"></p>
+<h2 id="二、-Android-的消息机制分析"><a href="#二、-Android-的消息机制分析" class="headerlink" title="二、 Android 的消息机制分析"></a>二、 Android 的消息机制分析</h2><h3 id="1、消息队列的工作原理"><a href="#1、消息队列的工作原理" class="headerlink" title="1、消息队列的工作原理"></a>1、消息队列的工作原理</h3><blockquote>
+<p>消息队列在 <strong>Android</strong> 主要是指 <strong>MessageQueue</strong> ，<strong>MessageQueue</strong> 主要包括两个操作：插入和删除。消息队列的内部实现并不是队列，实际上通过一条单链表的数据结构来维护消息队列，单链表在插入删除上很有优势。</p>
+</blockquote>
+<p><strong>① 插入（enqueueMessage）：</strong>往消息队列中插入一条消息。（源码实现就是单链表的插入）</p>
+<p><strong>② 删除（next）：</strong>从消息队列中取出一条消息并将其从消息队列中移除。（next 是一个无限循环的方法，消息队列没有信息就处于阻塞状态，有新消息到来就执行单链表的删除）</p>
+<h3 id="2、Lopper-的工作原理"><a href="#2、Lopper-的工作原理" class="headerlink" title="2、Lopper 的工作原理"></a>2、Lopper 的工作原理</h3><blockquote>
+<p><strong>Looper</strong> 在 <strong>Android</strong> 消息机制中扮演着消息循环的角色，作用：不停地从 <strong>MessageQueue</strong> 中查看是否有新的消息，如果有消息就会立刻处理，如果没有消息就会处于阻塞状态。</p>
+</blockquote>
+<h4 id="（1-Looper-的构造方法"><a href="#（1-Looper-的构造方法" class="headerlink" title="（1) Looper 的构造方法"></a>（1) Looper 的构造方法</h4><p>① 创建一个 <strong>MessageQueue</strong> 消息队列。</p>
+<p>② 将当前线程的对象保存起来。</p>
+<h4 id="（2）如何为一个线程创建-Looper"><a href="#（2）如何为一个线程创建-Looper" class="headerlink" title="（2）如何为一个线程创建 Looper"></a>（2）如何为一个线程创建 Looper</h4><p>（Handle 的工作需要 Looper，没有 Looper 就会报错）</p>
+<p>① 通过 <strong>Looper.prepare()</strong> 方法为线程创建一个 <strong>Looper</strong> 。</p>
+<p>② 通过 <strong>Looper.loop()</strong> 方法来开启消息循环。</p>
+<h4 id="（3）创建线程的另一种方法"><a href="#（3）创建线程的另一种方法" class="headerlink" title="（3）创建线程的另一种方法"></a>（3）创建线程的另一种方法</h4><p><strong>① 主线程 Looper 的获取。</strong> <strong>Looper</strong> 这个方法主要给线程也就是 <strong>ActivityThread</strong> 创建 <strong>Looper</strong> 使用的，本质也是通过 <strong>prepare</strong> 来实现的，由于主线程的 <strong>Looper</strong> 比较特殊，所以 <strong>Looper</strong> 提供了一个 <strong>getMainLopper</strong> 的方法获取主线程的 <strong>Looper</strong>。</p>
+<p><strong>② Looper 的退出。**</strong> Looper <strong> 提供了两个方法：</strong>quit<strong> 方法和 </strong>quitSafely** 方法。</p>
+<p><strong>两者区别：</strong></p>
+<ul>
+<li><strong>quite</strong> 直接退出 <strong>Looper</strong>。</li>
+<li>而 <strong>quitSafely</strong> 只是设定一个退出标记，先把消息队列中的消息处理完之后再退出<h4 id="（4）Looper-loop-方法实现原理"><a href="#（4）Looper-loop-方法实现原理" class="headerlink" title="（4）Looper.loop() 方法实现原理"></a>（4）Looper.loop() 方法实现原理</h4><strong>loop</strong> 是一个死循环，唯一能跳出循环的方法就是 <strong>MessageQueue</strong> 的 <strong>next</strong> 方法返回了 <strong>null</strong>。当 <strong>Looper</strong> 的 <strong>quit</strong> 方法被调用时，<strong>MessageQueue</strong> 的 <strong>quit</strong> 方法或者 <strong>quitSafely</strong> 方法就会通知消息队列退出，当消息队列被标记为退出状态时，<strong>next</strong> 就会返回一个 <strong>null</strong>。<strong>Looper</strong> 是必须退出的，否则 <strong>loop</strong> 会永远循环下去。<br><strong>loop</strong> 方法会调用 <strong>MessageQueue</strong> 的 <strong>next</strong> 方法获取消息，如果 <strong>MessageQueue</strong> 没有消息，<strong>next</strong> 就会处于阻塞状态，<strong>loop</strong> 方法也会处于阻塞状态。</li>
+</ul>
+<h3 id="3、详解-Handler-的工作原理"><a href="#3、详解-Handler-的工作原理" class="headerlink" title="3、详解 Handler 的工作原理"></a>3、详解 Handler 的工作原理</h3><blockquote>
+<p><strong>Handler</strong> 的主要工作就是发送和接收消息。消息的发送可以通过 <strong>post</strong> 一系列方法以及 <strong>send</strong> 的一系列方法来实现，<strong>post</strong> 的一系列方法最终都是通过 <strong>send</strong> 一系列方法来实现的。</p>
+</blockquote>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">public class HandlerActivity extends Activity &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onCreate(@Nullable Bundle savedInstanceState) &#123;</span><br><span class="line">        super.onCreate(savedInstanceState);</span><br><span class="line">        setContentView(R.layout.activity_main);</span><br><span class="line"></span><br><span class="line">        //开启线程</span><br><span class="line">        handler();</span><br><span class="line">    &#125;</span><br><span class="line">    //主线程</span><br><span class="line">    Handler handler = new Handler()&#123;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public void handleMessage(Message msg) &#123;</span><br><span class="line">            super.handleMessage(msg);</span><br><span class="line">            switch (msg.what) &#123;</span><br><span class="line">                case 1:</span><br><span class="line">                    // 获取Message里面的复杂数据</span><br><span class="line">                    Bundle date = new Bundle();</span><br><span class="line">                    date = msg.getData();</span><br><span class="line">                    String name = date.getString(&quot;name&quot;);</span><br><span class="line">                    int age = date.getInt(&quot;age&quot;);</span><br><span class="line">                    String sex = date.getString(&quot;sex&quot;);</span><br><span class="line">                    //这里是主线程，可进行对UI的更新</span><br><span class="line">                    textView.setText(name)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    //子线程</span><br><span class="line">    public void handler()&#123;</span><br><span class="line">        new Thread(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                Message message = new Message();</span><br><span class="line">                message.what = 1;</span><br><span class="line"></span><br><span class="line">                // Message对象保存的数据是Bundle类型的</span><br><span class="line">                Bundle data = new Bundle();</span><br><span class="line">                data.putString(&quot;name&quot;, &quot;李文志&quot;);</span><br><span class="line">                data.putInt(&quot;age&quot;, 18);</span><br><span class="line">                data.putString(&quot;sex&quot;, &quot;男&quot;);</span><br><span class="line">                // 把数据保存到Message对象中</span><br><span class="line">                message.setData(data);</span><br><span class="line">                // 使用Handler对象发送消息</span><br><span class="line">                handler.sendMessage(message);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="（1）发送消息"><a href="#（1）发送消息" class="headerlink" title="（1）发送消息"></a>（1）发送消息</h4><p>通过对源码分析，<strong>Handler</strong> 发送消息的过程仅仅是向消息队列中插入一条信息，<strong>MessageQueue</strong> 的 <strong>next</strong> 方法就会返回这条信息给 <strong>Looper</strong> ,<strong>Looper</strong> 接收到消息之后就立即处理，由 <strong>Looper</strong> 交给 <strong>Handler</strong> 去处理消息，<strong>Handler</strong> 的 <strong>dispatchMessage</strong> 方法就会被调用，这时候 <strong>Handler</strong> 就进入了消息处理阶段。</p>
+<h4 id="（2）消息处理"><a href="#（2）消息处理" class="headerlink" title="（2）消息处理"></a>（2）消息处理</h4><p><img src="https://img-blog.csdn.net/20180805112505780?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2OTAzMDQy/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="这里写图片描述"><br><strong>深入 dispatchMessage 的源代码进行分析，Handler 处理消息如下：</strong></p>
+<p>① 首先检查 Message 的 callback 是否为 null, 不为 null 就通过 handlerCallback 来处理消息。（Message的 callback 是一个 Runnable d 对象，实际上就是 post 方法所递的 Runnable 参数）</p>
+<p>②  其次检查 <strong>mCallback</strong> 是否为 <strong>null</strong>，不为 <strong>null</strong> 就调用 <strong>mCallback</strong> 的 <strong>handlerMessage</strong> 方法来处理消息。<strong>Callback</strong> 是个接口。</p>
+<p>③ 我们通过 Callback 可以采用如下的方式来创建 Handle 对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Handler handler = new Handler(callback);</span><br></pre></td></tr></table></figure>
+<p>这样创建的意义就是创建一个实例但是并不需要派生 Handler 的子类。</p>
+<p>③ 但是，在我们的日常开发中，经常派生一个 Handler 的子类并重写其 handleMessage 方法来处理具体的消息，如果不想创建派生子类，就可以通过 Callback 来实现。</p>
+<h3 id="4、主线程的消息循环"><a href="#4、主线程的消息循环" class="headerlink" title="4、主线程的消息循环"></a>4、主线程的消息循环</h3><blockquote>
+<p><strong>Android</strong> 的主线程就是 <strong>ActivityThread</strong>，主线程的入口方法为 <strong>main</strong> ，在 <strong>main</strong> 方法中系统会通过 <strong>Looper.prepareMainLooper()</strong> ；来创建主线程的 <strong>Looper</strong> 以及 <strong>MessageQueue</strong> ，并通过 <strong>Looper.loop()</strong> 来开启主线程的消息循环。</p>
+</blockquote>
+<p>主线程的消息循环开始了以后，<strong>ActivityThread</strong> 还需要一个 <strong>Handler</strong> 来和消息队列进行交互，这个 <strong>Handler</strong> 就是 <strong>ActivityThread.H</strong> 。<strong>ActivityThread</strong> 通过 <strong>ApplicationThread</strong> 和 <strong>AMS</strong> 进行进程间通信，<strong>AMS</strong> 以进程间通信的方式完成 <strong>ActvityThread</strong> 的请求后会回调 <strong>ApplicationThread</strong> 中的 <strong>Binder</strong> 方法，然后 <strong>ApplicationThread</strong> 向 <strong>H</strong> 发送消息，H 收到消息会将 <strong>ApplicationThread</strong> 中的逻辑切换到 <strong>ActivityThread</strong> 中去执行，即切换到主线程中去执行，这个过程就是主线程的消息循环模型。  </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Handler/" rel="tag"># Handler</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/08/Android 深入剖析生命周期/" rel="prev" title="Android 深入剖析生命周期">
+                Android 深入剖析生命周期 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-的消息机制深入剖析"><span class="nav-number">1.</span> <span class="nav-text">Android 的消息机制深入剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#学习思维导图："><span class="nav-number">1.0.1.</span> <span class="nav-text">学习思维导图：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、Android-消息机制概述"><span class="nav-number">1.1.</span> <span class="nav-text">一、Android 消息机制概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、概述"><span class="nav-number">1.1.1.</span> <span class="nav-text">1、概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Handler-的工作原理"><span class="nav-number">1.1.2.</span> <span class="nav-text">2、Handler 的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#工作原理："><span class="nav-number">1.1.2.1.</span> <span class="nav-text">工作原理：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、-Android-的消息机制分析"><span class="nav-number">1.2.</span> <span class="nav-text">二、 Android 的消息机制分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、消息队列的工作原理"><span class="nav-number">1.2.1.</span> <span class="nav-text">1、消息队列的工作原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、Lopper-的工作原理"><span class="nav-number">1.2.2.</span> <span class="nav-text">2、Lopper 的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1-Looper-的构造方法"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">（1) Looper 的构造方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）如何为一个线程创建-Looper"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">（2）如何为一个线程创建 Looper</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）创建线程的另一种方法"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">（3）创建线程的另一种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（4）Looper-loop-方法实现原理"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">（4）Looper.loop() 方法实现原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、详解-Handler-的工作原理"><span class="nav-number">1.2.3.</span> <span class="nav-text">3、详解 Handler 的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）发送消息"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">（1）发送消息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）消息处理"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">（2）消息处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、主线程的消息循环"><span class="nav-number">1.2.4.</span> <span class="nav-text">4、主线程的消息循环</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2018/07/31/Android 深入剖析消息机制/';
+          this.page.identifier = '2018/07/31/Android 深入剖析消息机制/';
+          this.page.title = 'Android 深入剖析消息机制';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>

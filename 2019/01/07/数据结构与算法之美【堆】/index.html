@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+
+<script>
+    (function(){
+        if(''){
+            if (prompt('��������������') !== ''){
+                alert('�������');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*��������ɫ*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*��Ӱ��ɫ*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*�ϱ߿���ɫ*/
+        border-left-color: #1E92FB;    /*��߿���ɫ*/
+    }
+</style>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小鹿的博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="为什么说堆排序没有快速排序快？">
+<meta name="keywords" content="数据结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法之美【堆】">
+<meta property="og:url" content="http://yoursite.com/2019/01/07/数据结构与算法之美【堆】/index.html">
+<meta property="og:site_name" content="小鹿的博客">
+<meta property="og:description" content="为什么说堆排序没有快速排序快？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/建堆从上到下.png">
+<meta property="og:image" content="http://yoursite.com/images/建堆时间复杂度.png">
+<meta property="og:image" content="http://yoursite.com/images/堆求中位数.png">
+<meta property="og:updated_time" content="2019-04-17T07:43:28.874Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法之美【堆】">
+<meta name="twitter:description" content="为什么说堆排序没有快速排序快？">
+<meta name="twitter:image" content="http://yoursite.com/images/建堆从上到下.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/07/数据结构与算法之美【堆】/"/>
+
+
+
+
+
+  <title>数据结构与算法之美【堆】 | 小鹿的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+    <a href="https://github.com/luxiangqiang"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_darkblue_121621.png" alt="Fork me on GitHub"></a>
+    
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小鹿的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Ordinary life , Unwilling to be ordinary code farmers</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="https://luxiangqiang.github.io/2018/08/16/%E5%85%B3%E4%BA%8E%E6%88%91/#more" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/07/数据结构与算法之美【堆】/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小鹿">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小鹿的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法之美【堆】</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-07T18:34:18+08:00">
+                2019-01-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据结构/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/07/数据结构与算法之美【堆】/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/01/07/数据结构与算法之美【堆】/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,258
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  16
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为什么说堆排序没有快速排序快？</p>
+<a id="more"></a>
+<h3 id="一、什么是堆？"><a href="#一、什么是堆？" class="headerlink" title="一、什么是堆？"></a>一、什么是堆？</h3><blockquote>
+<p>堆是一个完全二叉树；堆中的每一个节点的值都必须大于等于（或小于等于）其子树中每个节点的值。</p>
+</blockquote>
+<h4 id="1、堆的分类"><a href="#1、堆的分类" class="headerlink" title="1、堆的分类"></a>1、堆的分类</h4><blockquote>
+<p>大顶堆：每个节点的值<strong>大于等于</strong>子树每个节点值的堆。</p>
+<p>小顶堆：每个节点的值<strong>小于等于</strong>子树中每个节点值的堆。</p>
+</blockquote>
+<h4 id="2、堆的特点"><a href="#2、堆的特点" class="headerlink" title="2、堆的特点"></a>2、堆的特点</h4><blockquote>
+<ul>
+<li>堆是一个完全二叉树；</li>
+<li>堆中的每一个节点的值都必须大于等于（或小于等于）其子树中每个节点的值。</li>
+</ul>
+</blockquote>
+<h3 id="二、如何实现一个堆？"><a href="#二、如何实现一个堆？" class="headerlink" title="二、如何实现一个堆？"></a>二、如何实现一个堆？</h3><h4 id="1、堆的存储"><a href="#1、堆的存储" class="headerlink" title="1、堆的存储"></a>1、堆的存储</h4><blockquote>
+<p>数组中下标为 <strong>i</strong> 的节点的左子节点就是下标为 <strong>i*2</strong> 的节点，右子节点就是下标为 <strong>i * 2+1</strong> 的节点，父节点就是下标为 <strong>i/2</strong> 的节点。</p>
+</blockquote>
+<h4 id="2、堆中插入一个数据"><a href="#2、堆中插入一个数据" class="headerlink" title="2、堆中插入一个数据"></a>2、堆中插入一个数据</h4><blockquote>
+<p>从下往上进行堆化。</p>
+</blockquote>
+<h5 id="■-代码实现"><a href="#■-代码实现" class="headerlink" title="■ 代码实现"></a>■ 代码实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 时间:2019/2/28</span></span><br><span class="line"><span class="comment"> * 功能:插入数据</span></span><br><span class="line"><span class="comment"> * 分析:</span></span><br><span class="line"><span class="comment"> * 1)插入到数组尾部(堆最后的节点)</span></span><br><span class="line"><span class="comment"> * 2)自下而上堆化(比较和交换)</span></span><br><span class="line"><span class="comment"> * 边界条件:</span></span><br><span class="line"><span class="comment"> * 1)判断是否已经堆满</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data 插入的数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> data)</span> </span>&#123;</span><br><span class="line">    <span class="comment">//判断堆是否已满</span></span><br><span class="line">    <span class="keyword">if</span>(count &gt;= n) <span class="keyword">return</span>;</span><br><span class="line">    <span class="comment">//计数+1(下标 0 不存储数据)</span></span><br><span class="line">    count++;</span><br><span class="line">    <span class="comment">//将数据插入最后节点</span></span><br><span class="line">    a[count] = data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//自下往上堆化</span></span><br><span class="line">    <span class="keyword">int</span> i = count;</span><br><span class="line">    <span class="comment">//判断插入数据的根节点是否大于 0 且插入的数据是否大于根节点数据</span></span><br><span class="line">    <span class="keyword">while</span>(i/<span class="number">2</span> &gt; <span class="number">0</span> &amp;&amp; a[i] &gt; a[i/<span class="number">2</span>]) &#123;</span><br><span class="line">        <span class="comment">//交换下标为 i 和 i/2 的元素</span></span><br><span class="line">        swap(a,i,i/<span class="number">2</span>);</span><br><span class="line">        <span class="comment">//继续堆化比较交换</span></span><br><span class="line">        i = i/<span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2、堆中删除一个数据"><a href="#2、堆中删除一个数据" class="headerlink" title="2、堆中删除一个数据"></a>2、堆中删除一个数据</h4><blockquote>
+<p>把堆顶的元素删除之后，将最后一个节点放到堆顶，然后按照上边的方法进行交换，直到父子节点满足大小关系为止，从上往下堆化方法。</p>
+</blockquote>
+<h5 id="■-代码实现-1"><a href="#■-代码实现-1" class="headerlink" title="■ 代码实现"></a>■ 代码实现</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 时间:2019/2/28</span></span><br><span class="line"><span class="comment"> * 功能:删除堆顶数据</span></span><br><span class="line"><span class="comment"> * 分析:</span></span><br><span class="line"><span class="comment"> * 1)判断堆是否为空</span></span><br><span class="line"><span class="comment"> * 2)数组长度 -1</span></span><br><span class="line"><span class="comment"> * 3)从下标为 1 的数据从上到下进行堆化</span></span><br><span class="line"><span class="comment"> * 4)在左右节点中选出最大元素进行交换</span></span><br><span class="line"><span class="comment"> * 边界分析:</span></span><br><span class="line"><span class="comment"> * 1)判断堆是否为空</span></span><br><span class="line"><span class="comment"> * 2)堆中是否只有一个元素</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> data 要删除的数据</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeMax</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="comment">//如果堆中无数据,则返回</span></span><br><span class="line">	<span class="keyword">if</span>(count == <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">	<span class="comment">//删除堆顶的第一个元素,与最后一个元素进行交换</span></span><br><span class="line">	a[<span class="number">1</span>] = a[count];</span><br><span class="line">	<span class="comment">//数组长度-1</span></span><br><span class="line">	count--;</span><br><span class="line">	<span class="comment">//从上到下进行堆化</span></span><br><span class="line">	heapify(a,count,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能:从上自下堆化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> a 堆化的数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> count 当前堆中的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> maxPos = i;</span><br><span class="line">		<span class="comment">//选择子节点中最大的数据作交换</span></span><br><span class="line">		<span class="keyword">if</span>(i*<span class="number">2</span> &lt; n &amp;&amp; a[i] &lt; a[i*<span class="number">2</span>]) maxPos = i*<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(i*<span class="number">2</span>+<span class="number">1</span> &lt;= n &amp;&amp; a[maxPos] &lt; a[i*<span class="number">2</span>+<span class="number">1</span>]) maxPos = i*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//如果堆顶只剩一个元素,break</span></span><br><span class="line">		<span class="keyword">if</span>(maxPos == i) <span class="keyword">break</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//进行交换</span></span><br><span class="line">		swap(a, i, maxPos);</span><br><span class="line">		<span class="comment">//继续往下堆化</span></span><br><span class="line">		i = maxPos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="三、堆插入、删除的时间复杂度分析"><a href="#三、堆插入、删除的时间复杂度分析" class="headerlink" title="三、堆插入、删除的时间复杂度分析"></a>三、堆插入、删除的时间复杂度分析</h3><blockquote>
+<p> n 个节点的完全二叉树，树的高度不会超过 log2n，堆化的过程就是顺着路径进行交换的过程，时间复杂度与树的高度成正比，也就是 <strong>O(logn)</strong>。</p>
+</blockquote>
+<h3 id="四、堆排序"><a href="#四、堆排序" class="headerlink" title="四、堆排序"></a>四、堆排序</h3><blockquote>
+<p>借助于堆这种数据结构实现的排序算法，就叫作<strong>堆排序</strong>。这种排序方法的时间复杂度非常稳定，是 <strong>O(nlogn)</strong>，并且是原地排序算法。</p>
+</blockquote>
+<h4 id="1、-建堆"><a href="#1、-建堆" class="headerlink" title="1、 建堆"></a>1、 建堆</h4><h6 id="■-方法一："><a href="#■-方法一：" class="headerlink" title="■ 方法一："></a><strong>■ 方法一：</strong></h6><blockquote>
+<p>借助前边讲的堆插入一个数据元素，就好比从1到n ，插入n个数据。数组操作就是<strong>从前到后</strong>处理数据，堆排序需要<strong>从下向上堆化</strong>。</p>
+</blockquote>
+<h6 id="■-方法二：（最常用的方法）"><a href="#■-方法二：（最常用的方法）" class="headerlink" title="■ 方法二：（最常用的方法）"></a>■ 方法二：（最常用的方法）</h6><blockquote>
+<p>与第一种截然相反，数组从后向前处理（数组的中间位置），堆排序是<strong>从上到下堆化</strong>。</p>
+</blockquote>
+<p><img src="/images/建堆从上到下.png" alt=""></p>
+<h6 id="■-代码实现-2"><a href="#■-代码实现-2" class="headerlink" title="■ 代码实现"></a>■ <strong>代码实现</strong></h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 时间:2019/2/28</span></span><br><span class="line"><span class="comment"> * 功能:建堆</span></span><br><span class="line"><span class="comment"> * 1)取数组中间从后往前</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> a 数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n 数组的大小</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildHeap</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n/<span class="number">2</span>; i &gt;= <span class="number">1</span>; i++) &#123;</span><br><span class="line">		heapify(a,n,i);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能:从上自下堆化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> a 堆化的数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> count 当前堆中的数据</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> i </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">heapify</span><span class="params">(<span class="keyword">int</span>[] a,<span class="keyword">int</span> n,<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="keyword">true</span>) &#123;</span><br><span class="line">		<span class="keyword">int</span> maxPos = i;</span><br><span class="line">		<span class="comment">//选择子节点中最大的数据作交换</span></span><br><span class="line">		<span class="keyword">if</span>(i*<span class="number">2</span> &lt; n &amp;&amp; a[i] &lt; a[i*<span class="number">2</span>]) maxPos = i*<span class="number">2</span>;</span><br><span class="line">		<span class="keyword">if</span>(i*<span class="number">2</span>+<span class="number">1</span> &lt;= n &amp;&amp; a[maxPos] &lt; a[i*<span class="number">2</span>+<span class="number">1</span>]) maxPos = i*<span class="number">2</span>+<span class="number">1</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//如果堆顶只剩一个元素,break</span></span><br><span class="line">		<span class="keyword">if</span>(maxPos == i) <span class="keyword">break</span>;</span><br><span class="line">		</span><br><span class="line">		<span class="comment">//进行交换</span></span><br><span class="line">		swap(a, i, maxPos);</span><br><span class="line">		<span class="comment">//继续往下堆化</span></span><br><span class="line">		i = maxPos;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>注意：</strong></p>
+<p>从 n/2 开始堆化，下标是 n/2 +1 到 n 的结点都是叶子节点，不需要堆化。<strong>对于完全二叉树来说，下标从</strong> </p>
+<p>n/2+1到n的节点都是叶子节点<strong>。</strong></p>
+</blockquote>
+<h6 id="■-建堆的时间复杂度分析"><a href="#■-建堆的时间复杂度分析" class="headerlink" title="■ 建堆的时间复杂度分析"></a>■ <strong>建堆的时间复杂度分析</strong></h6><p><img src="/images/建堆时间复杂度.png" alt=""></p>
+<blockquote>
+<p>1、堆化的时间复杂度为 O(logn)，需要堆化 n/2 + 1个结点，时间复杂度为 O(nlogn)，不够精确，叶子节点并没有参与堆化。</p>
+<p>2、需要在倒数第二层进行堆化，所以将每层堆化的结点数和每层的高度相乘总体相加得出时间复杂度。</p>
+<p>3、<strong>建堆的时间复杂度为 O(n)。 </strong></p>
+</blockquote>
+<h4 id="2、排序"><a href="#2、排序" class="headerlink" title="2、排序"></a>2、排序</h4><blockquote>
+<p>借助删除堆顶元素的方法来对堆元素进行排序。</p>
+</blockquote>
+<h6 id="■-代码实现-3"><a href="#■-代码实现-3" class="headerlink" title="■ 代码实现"></a>■ <strong>代码实现</strong></h6><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 功能:排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> a 数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> n 数据的个数</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">  <span class="comment">//建堆</span></span><br><span class="line">  buildHeap(a, n);</span><br><span class="line">  <span class="comment">//堆排序</span></span><br><span class="line">  <span class="keyword">int</span> k = n-<span class="number">1</span>;</span><br><span class="line">  <span class="keyword">while</span> (k &gt; <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="comment">//交换堆顶元素和最后一个元素</span></span><br><span class="line">    swap(a, <span class="number">1</span>, k);</span><br><span class="line">    <span class="comment">//堆元素减一</span></span><br><span class="line">    --k;</span><br><span class="line">    <span class="comment">//从上向下进行堆化</span></span><br><span class="line">    heapify(a, k, <span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="■-堆排序的时间复杂度分析"><a href="#■-堆排序的时间复杂度分析" class="headerlink" title="■ 堆排序的时间复杂度分析"></a>■ 堆排序的时间复杂度分析</h6><blockquote>
+<p>建堆的时间复杂度为  O(logn) ，n 个结点排序的<strong>时间复杂度为 O(nlogn)</strong>。</p>
+</blockquote>
+<h4 id="3、堆排序的性能"><a href="#3、堆排序的性能" class="headerlink" title="3、堆排序的性能"></a>3、堆排序的性能</h4><h6 id="▍堆排序是否为原地排序算法？"><a href="#▍堆排序是否为原地排序算法？" class="headerlink" title="▍堆排序是否为原地排序算法？"></a><strong>▍堆排序是否为原地排序算法？</strong></h6><blockquote>
+<p><strong>答：是</strong></p>
+<p><strong>分析：</strong>数据交换只需要变量级别的临时空间，所以空间复杂度为 O(1)。</p>
+</blockquote>
+<h6 id="▍堆排序是否为稳定排序算法？"><a href="#▍堆排序是否为稳定排序算法？" class="headerlink" title="▍堆排序是否为稳定排序算法？"></a><strong>▍堆排序是否为稳定排序算法？</strong></h6><blockquote>
+<p><strong>答：不是</strong></p>
+<p><strong>分析：</strong>在整个堆排序的过程中，存在将堆的最后一个节点和堆顶节点的互换的操作，所以有可能改变相同数据的原始相对顺序。所以堆排序不是稳定排序。</p>
+</blockquote>
+<h6 id="▍堆排序的时间复杂度？"><a href="#▍堆排序的时间复杂度？" class="headerlink" title="▍堆排序的时间复杂度？"></a>▍堆排序的时间复杂度？</h6><blockquote>
+<p><strong>答：O(nlogn)</strong></p>
+<p><strong>分析：</strong>建堆的时间复杂度为 O(n)，堆排序的时间复杂度为 O(nlogn)，所以总的<strong>时间复杂度为 O(nlogn);</strong></p>
+</blockquote>
+<h3 id="五、为什么快速排序比堆排序性能好？"><a href="#五、为什么快速排序比堆排序性能好？" class="headerlink" title="五、为什么快速排序比堆排序性能好？"></a>五、为什么快速排序比堆排序性能好？</h3><h6 id="1、堆排序数据访问的方式没有快速排序友好"><a href="#1、堆排序数据访问的方式没有快速排序友好" class="headerlink" title="1、堆排序数据访问的方式没有快速排序友好"></a>1、堆排序数据访问的方式没有快速排序友好</h6><blockquote>
+<p>对于快速排序来说，数据是顺序访问的。而对于堆排序来说，数据是跳着访问的。比如，堆排序中，最重要的一个操作就是数据的堆化。堆排序访问元素会跳这访问，不像快速排序一样局部顺序访问，这样对 CPU 缓存不友好。</p>
+</blockquote>
+<h6 id="2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。"><a href="#2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。" class="headerlink" title="2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。"></a>2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。</h6><blockquote>
+<p>堆排序经过建堆，会将数据的逆序度降低，本来一组数据是有序的，经过建堆之后就会变得无序。而快速排序整个排序过程中，数据交换的次数不会比逆序度多。</p>
+</blockquote>
+<h3 id="六、扩展思考"><a href="#六、扩展思考" class="headerlink" title="六、扩展思考"></a>六、扩展思考</h3><h6 id="1、对于完全二叉树来说，下标从-n-2-1-到-n的都是叶子节点，怎么推导出出来的？"><a href="#1、对于完全二叉树来说，下标从-n-2-1-到-n的都是叶子节点，怎么推导出出来的？" class="headerlink" title="1、对于完全二叉树来说，下标从 n/2 + 1 到 n的都是叶子节点，怎么推导出出来的？"></a>1、对于完全二叉树来说，下标从 n/2 + 1 到 n的都是叶子节点，怎么推导出出来的？</h6><blockquote>
+</blockquote>
+<h3 id="七、堆的应用"><a href="#七、堆的应用" class="headerlink" title="七、堆的应用"></a>七、堆的应用</h3><h4 id="1、应用一：优先级队列"><a href="#1、应用一：优先级队列" class="headerlink" title="1、应用一：优先级队列"></a>1、应用一：优先级队列</h4><h5 id="■-定义"><a href="#■-定义" class="headerlink" title="■ 定义"></a>■ <strong>定义</strong></h5><blockquote>
+<p>顾名思义，队列是先进先出，而这里的优先级队列的出队顺序不是先进先出，而是按照优先级来的，优先级越高就先出队。</p>
+</blockquote>
+<h5 id="■-思路"><a href="#■-思路" class="headerlink" title="■ 思路"></a>■ <strong>思路</strong></h5><blockquote>
+<p>用堆实现优先级队列是最直接、最高效的一种方式，因为堆和优先级队列最为相似。一个堆可以看成一个优先级队列，往优先级队列中插入一个元素，就相当于往堆中插入一个元素；从优先级队列删除一个元素，就相当于取出一个堆顶元素。</p>
+</blockquote>
+<h5 id="■-优先级队列一：合并有序小文件"><a href="#■-优先级队列一：合并有序小文件" class="headerlink" title="■ 优先级队列一：合并有序小文件"></a>■ 优先级队列一：合并有序小文件</h5><h6 id="▍问题："><a href="#▍问题：" class="headerlink" title="▍问题："></a>▍问题：</h6><blockquote>
+<p>假设有 100 个小文件，每个文件的大小是 100 MB，每个文件存储的都是有序的字符串。希望将这些 100 小文件合并成一个有序的大文件。</p>
+</blockquote>
+<h6 id="▍解决："><a href="#▍解决：" class="headerlink" title="▍解决："></a>▍解决：</h6><blockquote>
+<p>归并排序中的合并函数，先分别从 100 个文件中各提取一个字符串，放入数组中，然后比较大小，选择最小的字符串合并到大文件中，然后在数组中删除改元素，从该文件中重新选择一个字符串放到数组中重新比较。</p>
+</blockquote>
+<h6 id="▍不足"><a href="#▍不足" class="headerlink" title="▍不足;"></a>▍不足;</h6><blockquote>
+<p>用数组其实不是最高效的方法，我们需要在数组中遍历所有元素进行比较，比较耗时。</p>
+</blockquote>
+<h6 id="▍优化："><a href="#▍优化：" class="headerlink" title="▍优化："></a>▍优化：</h6><blockquote>
+<p>利用小顶堆来实现。</p>
+</blockquote>
+<h6 id="▍时间复杂度分析："><a href="#▍时间复杂度分析：" class="headerlink" title="▍时间复杂度分析："></a>▍时间复杂度分析：</h6><blockquote>
+<p>1、数组的实现方式：对数组删除、插入以及比较取出最小值操作时间复杂度为 O(n)。</p>
+<p>2、小顶堆实现方式：每个堆总数据为 100 ，删除堆顶、往堆中插入数据的<strong>时间复杂度为 O(logn)</strong>。</p>
+</blockquote>
+<h5 id="■-优先级队列二：高性能定时器"><a href="#■-优先级队列二：高性能定时器" class="headerlink" title="■ 优先级队列二：高性能定时器"></a>■ 优先级队列二：高性能定时器</h5><h6 id="▍问题：-1"><a href="#▍问题：-1" class="headerlink" title="▍问题："></a>▍问题：</h6><blockquote>
+<p>假设有一个定时器，定时器维护了很多任务，每个任务都设定了出发的时间点，定时器每过一秒都要扫描一下任务，判断当前的任务有没有达到执行时间的，如果达到了，就拿出来执行。</p>
+</blockquote>
+<h6 id="▍解决：-1"><a href="#▍解决：-1" class="headerlink" title="▍解决："></a>▍解决：</h6><blockquote>
+<p>小顶堆来解决，小顶堆存放的数据就是任务时间和当前时间差。</p>
+<p>1、堆顶元素就是最先执行的任务。</p>
+<p>2、堆顶的任务执行完毕之后，然后重新计算差值，得出首任务。</p>
+</blockquote>
+<h4 id="2、应用二：利用堆求-Top-K"><a href="#2、应用二：利用堆求-Top-K" class="headerlink" title="2、应用二：利用堆求 Top K"></a>2、应用二：利用堆求 Top K</h4><h6 id="▍问题：-2"><a href="#▍问题：-2" class="headerlink" title="▍问题："></a>▍问题：</h6><blockquote>
+<p>如何在包含 n 个数据的数组中，查找前 K 大数据呢？1、静态数据；2、动态数据。</p>
+</blockquote>
+<h6 id="▍-静态数据："><a href="#▍-静态数据：" class="headerlink" title="▍ 静态数据："></a>▍ 静态数据：</h6><blockquote>
+<p>1、首先维护一个大小为 K 的小顶堆，顺序遍历数组，从数组中取出数据与堆顶元素比较。</p>
+<p>2、如果取出的数据比堆顶大，我们呢就将堆顶元素删除，然后将数据进行插入。</p>
+<p>3、如果比堆顶的元素小，我们就不做处理。</p>
+<p>4、将数组全部遍历完成之后，堆中的数据就是前K大数据**。</p>
+</blockquote>
+<h6 id="▍静态数据复杂度"><a href="#▍静态数据复杂度" class="headerlink" title="▍静态数据复杂度"></a>▍静态数据复杂度</h6><blockquote>
+<p>遍历数组时间复杂度为 O(n)，一次堆化时间复杂度为 O(logK) 。</p>
+<p>1、最坏的情况下：数据从小到大排列，时间复杂度为 O(nlogK) 。</p>
+<p>2、最好的情况下：数据从大到小排列，时间复杂度为 O(n)。</p>
+</blockquote>
+<h6 id="▍动态数据复杂度"><a href="#▍动态数据复杂度" class="headerlink" title="▍动态数据复杂度"></a>▍动态数据复杂度</h6><blockquote>
+<p>实时的求前 k 大数据。</p>
+<p>1、一直维护一个 K 大小的小顶堆，<strong>当有数据被添加进来的时候</strong>，就拿着它与堆顶的元素对比。如果比堆顶元素大，我们就删除堆顶元素，将此元素进行插入，如果比堆顶小，我们就不做任何处理。</p>
+</blockquote>
+<h4 id="3、堆的应用三：利用堆求中位数"><a href="#3、堆的应用三：利用堆求中位数" class="headerlink" title="3、堆的应用三：利用堆求中位数"></a>3、堆的应用三：利用堆求中位数</h4><h6 id="▍问题：-3"><a href="#▍问题：-3" class="headerlink" title="▍问题："></a>▍问题：</h6><blockquote>
+<p>如果数据的个数是奇数的时候，中位数为 n/2 + 1。如果是偶数的话，中位数有两个，分别为  n/2  和  n/2 + 1。如何求动态数据集合的中位数?</p>
+</blockquote>
+<h6 id="▍静态数据求中位数："><a href="#▍静态数据求中位数：" class="headerlink" title="▍静态数据求中位数："></a>▍静态数据求中位数：</h6><blockquote>
+<p>关于静态数据，中位数是固定的，我们先可以进行排序，第 n/2 个数据就是中位数。</p>
+<p><strong>缺点：</strong>排序的代价有点大。</p>
+<p><strong>优点：</strong>边际成本会很小。</p>
+</blockquote>
+<h6 id="▍动态数据求中位数："><a href="#▍动态数据求中位数：" class="headerlink" title="▍动态数据求中位数："></a>▍动态数据求中位数：</h6><p><img src="/images/堆求中位数.png" alt=""></p>
+<blockquote>
+<p>1、需要维护两个堆，一个大顶堆，一个是小顶堆。大顶堆存储前半部分数据，小顶堆存储后半部分数据。且小顶堆的数据都大于大顶堆的数据。</p>
+<p>2、如果有 n 个数据，n 是偶数，从小到大排序，那前 n/2 个数据存储在大顶堆中,也就是<strong>堆顶就是中位数</strong>。如果 n 是奇数，大顶堆就存储 n/2 + 1个数据，小顶堆就存储 n/2 个数据。</p>
+<p>3、如果新加入的数据<strong>小于等于</strong>大顶堆的堆顶元素，就将这个新数据插入到大顶堆；如果新加入的数据<strong>大于等于</strong>小顶堆的堆顶元素，就将这个新数据插入到小顶堆。</p>
+<p>4、插入新数据会导致两个堆的数据不符合前边约定的情况，导致 n 是偶数的时候，两个堆的数据都是 n/2 个数据。奇数大顶堆有 n/2 + 1 个数据，小顶堆有 n/2 个数据。</p>
+<p>5、可以不停的移动一个堆顶的元素向另一个堆顶移动，这样就可以调整了。</p>
+</blockquote>
+<h6 id="▍时间复杂度分析"><a href="#▍时间复杂度分析" class="headerlink" title="▍时间复杂度分析"></a>▍时间复杂度分析</h6><blockquote>
+<p>1、插入数据需要涉及到堆化，时间复杂度为O(logn) 。</p>
+<p>2、求中位数直接返回堆顶元素就行了，所以时间复杂度为 O(1)。</p>
+</blockquote>
+<h3 id="八、本节思考：如何快速获取到Top-10最热门的搜索关键词？"><a href="#八、本节思考：如何快速获取到Top-10最热门的搜索关键词？" class="headerlink" title="八、本节思考：如何快速获取到Top 10最热门的搜索关键词？"></a>八、本节思考：如何快速获取到Top 10最热门的搜索关键词？</h3><h6 id="▍问题：-4"><a href="#▍问题：-4" class="headerlink" title="▍问题："></a>▍问题：</h6><blockquote>
+<p>有 10 亿个搜索关键字的日志文件，如何快速获取 Top 10 的搜索关键词呢？</p>
+</blockquote>
+<h6 id="▍方法选择"><a href="#▍方法选择" class="headerlink" title="▍方法选择"></a><strong>▍方法选择</strong></h6><blockquote>
+<p>1、一般用 MapReduce 去解决，解决思想：<a href="">请跳转《哈希算法》中的数据分片的应用解决方法。</a></p>
+<p>2、如果是单机操作，上述方法就不能使用了。</p>
+</blockquote>
+<h6 id="▍分析："><a href="#▍分析：" class="headerlink" title="▍分析："></a>▍分析：</h6><blockquote>
+<p>1、关键词是用户重复输入搜索的，首先要统计关键词出现的次数，选用一些支持快速实现增、删、改、查的数据结构（散列表、平衡二叉树等）。</p>
+<p>2、散列表来实现，顺序遍历 10 亿关键词。散列表中不存在插入数据计数1，存在关键字就+1.</p>
+<p>3、建立一个大小为 10 的小顶堆，遍历散列表，关键词出现的次数和顶堆进行比较，如大于顶堆元素，删除顶堆元素，插入这条数据。</p>
+</blockquote>
+<h6 id="▍附加条件："><a href="#▍附加条件：" class="headerlink" title="▍附加条件："></a>▍附加条件：</h6><blockquote>
+<p>10 亿的关键词很多，假如我们不重复的关键词为 1 个亿，每个搜索关键词的长度为 50 个字节，需要 5 G 的内存空间，散列表需要避免冲突，不会选择太大的装载因子，所以消耗内存空间更多。假设机器只有 1 G 的存储空间，无法一次性将数据加载到内存中。</p>
+</blockquote>
+<h6 id="▍改进："><a href="#▍改进：" class="headerlink" title="▍改进："></a>▍改进：</h6><blockquote>
+<p>1、使用<strong>哈希算法</strong>的相同数据经过哈希算法得到相同的哈希值一样的特性，通过这一个特性，将 10 亿个关键词通过哈希算法分片到 10 个文件中。</p>
+<p>2、创建 10 个空文件，00,01,02…09，遍历 10 亿个关键词，并且通过某个哈希算法对其求哈希值，然后同 10 取模，</p>
+<p>3、每个文件只有 1 亿个关键词，去掉重复的也就是 1000 万个，每个关键词平均 50 字节，所以总的大小为 500 MB，1 G的内存空间完全可以容下。</p>
+<p>4、每个文件利用散列表和堆进行求 Top 10,然后将十个文件中的 Top10 放在一起，然后取 100 个关键词中的前十个。</p>
+</blockquote>
+<h3 id="九、扩展思考"><a href="#九、扩展思考" class="headerlink" title="九、扩展思考"></a>九、扩展思考</h3><p>▍<strong>问题：</strong></p>
+<blockquote>
+<p>有一个访问量非常大的新闻网站，我们希望将点击量排名 Top 10 的新闻摘要，滚动显示在网站首页 banner 上，并且每1 小时更新一次。如果你是负责开发这个功能的工程师，你会如何来实现呢？</p>
+</blockquote>
+<p>▍<strong>解答：</strong></p>
+<blockquote>
+<p>1、首先，用户每点击一个新闻摘要的关键字，就通散列函数进行计数。</p>
+<p>2、每过一个小时就遍历计算出散列表中的点击次数。</p>
+<p>3、维护一个大小为 10 的小顶堆，遍历散列表中所有关键词出现的次数，与小顶堆的堆顶进行比较，如果大于堆顶元素就删除，将数据插入堆顶，否则就忽略，直到所有数据遍历完成。</p>
+</blockquote>
+<p><strong>▍时间复杂度分析：</strong></p>
+<blockquote>
+<p>1、遍历所有新闻关键词，时间复杂度为 O(n)。</p>
+<p>2、插入堆数据最坏时间复杂度为 O(klog2(10))——这里的 k 应该小于 n 的。</p>
+<p>3、总体的时间复杂度为 O(n)。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/03/数据结构与算法之美【红黑树】/" rel="next" title="数据结构与算法之美【红黑树】">
+                <i class="fa fa-chevron-left"></i> 数据结构与算法之美【红黑树】
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/13/数据结构与算法之美【图】/" rel="prev" title="数据结构与算法之美【图的表示】">
+                数据结构与算法之美【图的表示】 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="小鹿" />
+            
+              <p class="site-author-name" itemprop="name">小鹿</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">166</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">49</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/luxiangqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5667224360/home?wvr=5&sudaref=graph.qq.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-globe"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/qq_36903042" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="tencent://message/?Menu=yes&uin=1040500646&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank" title="QQ">
+                      
+                        <i class="fa fa-fw fa-globe"></i>QQ</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、什么是堆？"><span class="nav-number">1.</span> <span class="nav-text">一、什么是堆？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、堆的分类"><span class="nav-number">1.1.</span> <span class="nav-text">1、堆的分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、堆的特点"><span class="nav-number">1.2.</span> <span class="nav-text">2、堆的特点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、如何实现一个堆？"><span class="nav-number">2.</span> <span class="nav-text">二、如何实现一个堆？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、堆的存储"><span class="nav-number">2.1.</span> <span class="nav-text">1、堆的存储</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、堆中插入一个数据"><span class="nav-number">2.2.</span> <span class="nav-text">2、堆中插入一个数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#■-代码实现"><span class="nav-number">2.2.1.</span> <span class="nav-text">■ 代码实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、堆中删除一个数据"><span class="nav-number">2.3.</span> <span class="nav-text">2、堆中删除一个数据</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#■-代码实现-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">■ 代码实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、堆插入、删除的时间复杂度分析"><span class="nav-number">3.</span> <span class="nav-text">三、堆插入、删除的时间复杂度分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、堆排序"><span class="nav-number">4.</span> <span class="nav-text">四、堆排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、-建堆"><span class="nav-number">4.1.</span> <span class="nav-text">1、 建堆</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#■-方法一："><span class="nav-number">4.1.0.1.</span> <span class="nav-text">■ 方法一：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#■-方法二：（最常用的方法）"><span class="nav-number">4.1.0.2.</span> <span class="nav-text">■ 方法二：（最常用的方法）</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#■-代码实现-2"><span class="nav-number">4.1.0.3.</span> <span class="nav-text">■ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#■-建堆的时间复杂度分析"><span class="nav-number">4.1.0.4.</span> <span class="nav-text">■ 建堆的时间复杂度分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、排序"><span class="nav-number">4.2.</span> <span class="nav-text">2、排序</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#■-代码实现-3"><span class="nav-number">4.2.0.1.</span> <span class="nav-text">■ 代码实现</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#■-堆排序的时间复杂度分析"><span class="nav-number">4.2.0.2.</span> <span class="nav-text">■ 堆排序的时间复杂度分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、堆排序的性能"><span class="nav-number">4.3.</span> <span class="nav-text">3、堆排序的性能</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍堆排序是否为原地排序算法？"><span class="nav-number">4.3.0.1.</span> <span class="nav-text">▍堆排序是否为原地排序算法？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍堆排序是否为稳定排序算法？"><span class="nav-number">4.3.0.2.</span> <span class="nav-text">▍堆排序是否为稳定排序算法？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍堆排序的时间复杂度？"><span class="nav-number">4.3.0.3.</span> <span class="nav-text">▍堆排序的时间复杂度？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、为什么快速排序比堆排序性能好？"><span class="nav-number">5.</span> <span class="nav-text">五、为什么快速排序比堆排序性能好？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、堆排序数据访问的方式没有快速排序友好"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">1、堆排序数据访问的方式没有快速排序友好</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。"><span class="nav-number">5.0.0.2.</span> <span class="nav-text">2、对于同样的数据，在排序过程中，堆排序算法的数据交换次数要多于快速排序。</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、扩展思考"><span class="nav-number">6.</span> <span class="nav-text">六、扩展思考</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1、对于完全二叉树来说，下标从-n-2-1-到-n的都是叶子节点，怎么推导出出来的？"><span class="nav-number">6.0.0.1.</span> <span class="nav-text">1、对于完全二叉树来说，下标从 n/2 + 1 到 n的都是叶子节点，怎么推导出出来的？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、堆的应用"><span class="nav-number">7.</span> <span class="nav-text">七、堆的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、应用一：优先级队列"><span class="nav-number">7.1.</span> <span class="nav-text">1、应用一：优先级队列</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#■-定义"><span class="nav-number">7.1.1.</span> <span class="nav-text">■ 定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#■-思路"><span class="nav-number">7.1.2.</span> <span class="nav-text">■ 思路</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#■-优先级队列一：合并有序小文件"><span class="nav-number">7.1.3.</span> <span class="nav-text">■ 优先级队列一：合并有序小文件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍问题："><span class="nav-number">7.1.3.1.</span> <span class="nav-text">▍问题：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍解决："><span class="nav-number">7.1.3.2.</span> <span class="nav-text">▍解决：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍不足"><span class="nav-number">7.1.3.3.</span> <span class="nav-text">▍不足;</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍优化："><span class="nav-number">7.1.3.4.</span> <span class="nav-text">▍优化：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍时间复杂度分析："><span class="nav-number">7.1.3.5.</span> <span class="nav-text">▍时间复杂度分析：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#■-优先级队列二：高性能定时器"><span class="nav-number">7.1.4.</span> <span class="nav-text">■ 优先级队列二：高性能定时器</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍问题：-1"><span class="nav-number">7.1.4.1.</span> <span class="nav-text">▍问题：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍解决：-1"><span class="nav-number">7.1.4.2.</span> <span class="nav-text">▍解决：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、应用二：利用堆求-Top-K"><span class="nav-number">7.2.</span> <span class="nav-text">2、应用二：利用堆求 Top K</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍问题：-2"><span class="nav-number">7.2.0.1.</span> <span class="nav-text">▍问题：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍-静态数据："><span class="nav-number">7.2.0.2.</span> <span class="nav-text">▍ 静态数据：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍静态数据复杂度"><span class="nav-number">7.2.0.3.</span> <span class="nav-text">▍静态数据复杂度</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍动态数据复杂度"><span class="nav-number">7.2.0.4.</span> <span class="nav-text">▍动态数据复杂度</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、堆的应用三：利用堆求中位数"><span class="nav-number">7.3.</span> <span class="nav-text">3、堆的应用三：利用堆求中位数</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍问题：-3"><span class="nav-number">7.3.0.1.</span> <span class="nav-text">▍问题：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍静态数据求中位数："><span class="nav-number">7.3.0.2.</span> <span class="nav-text">▍静态数据求中位数：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍动态数据求中位数："><span class="nav-number">7.3.0.3.</span> <span class="nav-text">▍动态数据求中位数：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍时间复杂度分析"><span class="nav-number">7.3.0.4.</span> <span class="nav-text">▍时间复杂度分析</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、本节思考：如何快速获取到Top-10最热门的搜索关键词？"><span class="nav-number">8.</span> <span class="nav-text">八、本节思考：如何快速获取到Top 10最热门的搜索关键词？</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#▍问题：-4"><span class="nav-number">8.0.0.1.</span> <span class="nav-text">▍问题：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍方法选择"><span class="nav-number">8.0.0.2.</span> <span class="nav-text">▍方法选择</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍分析："><span class="nav-number">8.0.0.3.</span> <span class="nav-text">▍分析：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍附加条件："><span class="nav-number">8.0.0.4.</span> <span class="nav-text">▍附加条件：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#▍改进："><span class="nav-number">8.0.0.5.</span> <span class="nav-text">▍改进：</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#九、扩展思考"><span class="nav-number">9.</span> <span class="nav-text">九、扩展思考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        ﻿<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fab fa-android"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小鹿</span>
+
+  
+</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv">3443</span>
+</span>
+</div>
+
+  <!--<div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>-->
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+
+  <!--<div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>-->
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共265.1k字</span>
+</div>
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/01/07/数据结构与算法之美【堆】/';
+          this.page.identifier = '2019/01/07/数据结构与算法之美【堆】/';
+          this.page.title = '数据结构与算法之美【堆】';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'm76p6ARzXTmtu8Rr0OHb1xXF-gzGzoHsz',
+        appKey: 'R6Ph6fuUQ3tXXodI0w6Qa3fc',
+        placeholder: 'Just go go',
+        avatar:'��������!',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 13176,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
+<!-- ҳ����С���� -->
+<script type="text/javascript" src="/js/src/love.js"></script>
